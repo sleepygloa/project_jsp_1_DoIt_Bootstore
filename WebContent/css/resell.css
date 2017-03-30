@@ -1,0 +1,124 @@
+@CHARSET "UTF-8";
+
+/*--------------reWriteForm-----------------------------------------*/
+#reWrite_title , #reList_title{
+	font-size:26px;
+	text-align:center;
+	font-weight:bold;
+	margin:0 0 34px 0;
+}
+#reWrite_line , #reList_line{
+	width:750px;
+	box-sizing: border-box;
+	border:1px solid #000;
+	margin:0 auto;
+}
+#reWrite_wrap{
+	width:750px;
+	margin:0 auto;
+}
+#reWrite_con{
+	font-size:18px;
+}
+#reWrite_con td{
+	height:70px;
+}
+
+#reWrite_con .reWrite_left{
+	width:250px;
+	box-sizing: border-box;
+	padding-left:60px;
+	background-color:#f4f4f4;
+	
+}
+#reWrite_con .reWrite_right{
+	box-sizing: border-box;
+	padding-left:30px;
+}
+
+#reWrite_con .reWrite .input_box{
+	width:400px;
+	height:40px;
+	border:1px solid #C9C9C9;
+}
+
+#reWrite_con .reWrite_right select{
+	width:400px;
+	height:40px;
+	border:1px solid #C9C9C9;
+}
+
+#reWrite_wrap .reWrite_btn{
+	width:150px;
+	height:40px;
+	
+
+}
+
+/*--------------reContent-----------------------------------------*/
+#reContent_boxtop{
+	width:800px;
+	height:70px;
+	border:1px solid #000;
+}
+#reContent_boxtop p{
+	padding:18px 0 0 50px;
+	font-size:25px;
+	font-weight:bold;
+}
+#reContent_boxleft{
+	width:300px;
+	height:400px;
+	border:1px solid #000;
+	float:left;
+	text-align: center;
+}
+#reContent_boxleft img{
+	width:250px;
+	margin:0 auto;
+	padding-top: 30px;
+}
+#reContent_boxright{
+	width:500px;
+	height:400px;
+	border:1px solid #000;
+	float:left;
+}
+.reContent_inner{
+	padding:40px;
+}
+.content_name{
+	color:#3a60df;
+	font-size:24px;
+	font-weight:bold;
+	margin-bottom:10px;
+}
+.content_line{
+	width:400px;
+	border:1px solid #e2e2e2;
+	margin:20px 0 40px 0;
+}
+.content_price{
+	font-size:26px;
+}
+.reConten_btn{width: 100px;
+    height: 40px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #777;
+}
+#reContent_boxbottom{
+	width:800px;
+	height:400px;
+	border:1px solid #000;
+	clear:both;
+}
+#reContent_boxbottom .content_title{
+	font-size:20px;
+	padding:20px 0 0 20px;
+}
+.content_more{
+	
+	padding:30px;
+}
+/*--------re--------------------------------------------------------------------*/

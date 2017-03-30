@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+/* reset.css */
+
+html,body{paddig:0px; margin:0px; width:100%; height:100%;}
+ul,ol,p,div{padding:0px; margin:0px; list-style:none; text-decoration:none;}
+a,span,li,td,tr,th{list-style:none; text-decoration:none; color:black}
+h1,h2,h3,h4,h5,h6{display:none;}
+
+
+/* 공통 사용 css정의 */
+.fl_le{float:left; overflow:hidden;}
+.fl_ri{float:right; overflow:hidden;}
+.ov_hi{overflow:hidden;}
+
+.mar_0{margin:0 auto;}
+
+/* font 관련 */
+
+
+

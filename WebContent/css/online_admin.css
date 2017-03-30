@@ -1,0 +1,259 @@
+/*-------------------------admin_lList------------------------------*/
+#AdminList_title{
+	font-size:22px;
+	text-align:center;
+	padding-bottom:38px;
+}
+
+#AdminList_wrap{
+	width:100%;
+	border-collapse: collapse;
+}
+#AdminList_line{
+	width:100%;
+	height:2px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+}
+#AdminList_wrap .AdminList_tr{
+	width:100%;
+	height:50px;
+	box-sizing: border-box;
+	border-bottom: 1px solid #E0E0E0;
+}
+.Admin_txtCen{
+	text-align: center;
+}
+.Admin_RightLine{
+	box-sizing: border-box;
+	border-right: 1px solid #E0E0E0;
+}
+.Admin_RightLine2{
+
+	border-right: 1px solid #E0E0E0;
+}
+#AdminList_wrap .AdminList_num{
+	width:100px;
+	
+}
+#AdminList_wrap .AdminList_pic{
+	width:200px;
+	text-align:center;
+	
+}
+#AdminList_wrap .AdminList_pic img{
+	margin:40px auto;
+}
+#AdminList_wrap .AdminList_con{
+	width:450px;
+}
+
+.AdminList_con .AdminList_con_list{
+	width:100%;
+	box-sizing:border-box;
+	padding:0 25px;
+	line-height: 170%;
+}
+#AdminList_wrap .AdminList_Ins{
+	width:110px;
+}
+.AdminList_btn{
+	width:110px;
+	height:50px;
+	
+	background-color:rgba(0,0,0,0);
+	border:1px solid #E0E0E0;
+}
+
+.AdminList_btn:hover{
+	background-color:#E0E0E0;
+	border:1px solid #E0E0E0;
+	
+}
+#AdminList_PageNum{
+	
+	text-align: center;
+	padding:50px 10px 0 10px;
+}
+
+
+
+
+/*----------------------- // admin_OnSellList------------------------------*/
+
+
+/*----------------------admin_OnBook_detail------------------------------*/
+
+#detail_wrap{
+	width:100%;
+}
+#OnBook_detail_title{
+	font-size: 24px;
+	text-align: center;
+	margin: 0 0 15px 0;
+}
+.detail_line{
+	width:100%;
+	height:1px;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+}
+#detail_con{
+	width:100%;
+	
+}
+#detail_left{
+	width:35%;
+	margin:40px 0 0 0;
+	float: left;
+	
+}
+#detail_left .detail_img{
+	width:240px;
+	height:300px;
+	margin: 0 20px;
+	float:left;
+}
+#detail_left .detail_img img{
+	width:100%;
+	margin:0 auto;
+}
+#detail_left .detail_left_line{
+	display:inline-block;
+	width:1px;
+	height:100%;
+	box-sizing: border-box;
+	border:1px solid #ddd;
+	float:right;
+	
+}
+#detail_right{
+	width:65%;
+	box-sizing:border-box;
+	margin:40px 0 0 0;
+	float: right;
+	height: 700px;
+}
+#detail_right .detail_right_txt	{
+	font-size: 18px;
+	margin: 0 0 10px 0;
+}
+
+#detail_right .detail_right_txtBox{
+	width:100%;	
+	height:250px;
+	
+}
+#detail_right .detail_right_txtBox p{
+	margin:7px 0;
+}
+.detail_right_txtBox_L{
+	width:60%;
+	float:left;
+}
+.detail_right_txtBox_R{
+	width:40%;
+	float: right;
+}
+.detail_right_txtBox .txtBox_spanTxt_1{
+	display: inline-block;
+	letter-spacing: 3px;
+	width:90px;
+}
+.detail_right_txtBox .txtBox_spanTxt_2{
+	display: inline-block;
+	letter-spacing: 2px;
+	padding-left:15px;
+}
+
+.detail_line_2{
+	width:100%;
+	height:1px;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+}
+#detail_right .detail_right_txt2{
+	font-size: 18px;
+	margin: 30px 0 15px 0;
+	clear: both;
+}
+.detail_right_txtBox_2{
+	display:inline-block;
+	width:50%;	
+}
+.detail_right_txtBox .txtBox_spanTxt_3{
+	display: inline-block;
+	letter-spacing: 3px;
+	width:95px;
+	float: left;
+}
+
+.detail_right_txtBox .txtBox_spanTxt_4{
+	display: inline-block;
+	letter-spacing: 3px;
+	width:120px;
+
+}
+.detail_right_txtBox .txtBox_spanTxt_5{
+	display: inline-block;
+	letter-spacing: 3px;
+	width:140px;
+
+}
+#detail_btn_box{
+	width:250px;
+	margin: 0 auto;
+	margin-bottom:50px;
+	
+}
+.detail_btn_modi{
+	width:120px;
+	height:60px;
+	margin: 0 auto;
+}
+
+.detail_btn_del{
+	width:120px;
+	height:60px;
+}
+
+#detail_order_wrap{
+	width:100%;
+	margin: 40px 20px;
+	
+}
+#detail_order_title, #detail_intro_title{
+	font-size: 18px;
+	margin:30px 0;
+}
+#detail_intro_wrap{
+	width:100%;
+	margin: 40px 20px;
+	
+}
+
+.detail_line_3{
+	width:100%;
+	height:1px;
+	box-sizing: border-box;
+	border: 1px solid #E8E8E8;
+	margin: 0 20px;
+}
+
+
+
+/*--------------------- // admin_OnBook_detail------------------------------*/
+
+
+
+
+/*-------------------------admin_OnBook_modify------------------------------*/
+
+.onIns_quality_check{
+	display: inline-block;
+	width:100px;
+}
+
+
+
+/*---------------------- //admin_OnBook_modify------------------------------*/

@@ -1,0 +1,75 @@
+@CHARSET "UTF-8";
+
+.L_title{ margin-top:30px; font-weight:bold; font-size:1.1em; }
+
+/* 마이페이지 - mypage.jsp */
+#mypage_wrap{ max-width:1100px; min-width:1050px; margin:0 auto; overflow:hidden; }
+.my_cont_wrap{ min-width:860px; max-width:67%; float:right; overflow:hidden; }
+.my_title{ font-size:2em;  }
+.my_sub_title{ font-size:1em; margin-top:25px; border-top:2px solid #283444; padding-top:10px;}
+.my_sub_title span{ display:block; font-size:0.9em; line-height:20px; color:#737373}
+
+
+/* 회원정보 수정 - mem_mody.jsp */
+
+
+
+/* 회원 탈퇴 */
+.del_cl{ width:100%; margin-top:20px; }
+.del_cl li{ max-width:100%; height:60px;}
+.del_cl li:nth-child(1) a{display:block}
+.del_cl li:nth-child(1){ line-height:30px; }
+.del_cl li:nth-child(2){ line-height:60px; }
+.del_cl li:nth-child(2) a input{ width:600px; height:55%; padding-left:15px;}
+
+
+
+/* 회원 조회 */
+.back_img{ width:17%; height:159px; box-sizing:border-box; float:left; overflow:hidden; }
+.info_ta1{ width:83%; float:right; overflow:hidden;}
+.info_ta2{ width:100%; border-top:solid 2px #3DB7CC; margin-top:10px;}
+.info_ta1 td,.info_ta2 td{padding-left:15px; border-bottom:solid 1px #EAEAEA; height:50px;}
+.info_ta1 td:nth-child(1),.info_ta1 td:nth-child(3){ width:20%;  background:#f4f4f4; }
+.info_ta1 td:nth-child(2),.info_ta1 td:nth-child(4){ width:30%; }
+
+.info_ta2 td:nth-child(1){ background:#f4f4f4; width:20%; }
+
+
+
+
+
+/* 아이디 비밀번호 찾기 */
+.search_wrap{ width:100%; overflow:hidden; margin-top:30px; border-bottom:1px solid #283444; padding-bottom:30px;}
+.search_wrap .sear_t{ height:300px; position:relative; }
+.top_po{ position:absolute; top:10px; }
+.bot_po{ position:absolute; top:80px; }
+.po_bot{ margin-top:40px;}
+.sear_title{ font-size:18px; color:#283444; padding-bottom:5px; }
+.sear_title2{ color:#6e6e6e; overflowt:hidden; font-size:12px; margin-bottom:8px; }
+.input_se{ width: 427px; height:30px; }
+.sear_mail1{width:40%; height:30px; }
+.input_ses{ width:40%; height:35px; }
+.sear_id_ta{ max-width:100%; min-width:99%; }
+.sear_id_ta td:nth-child(1){ width:20%;  color:#6d6e72; font-size:0.9em}
+.sear_id_ta td:nth-child(2){ width:80%; }
+.sear_id_ta td:nth-child(2) input,.sear_id_ta td:nth-child(2) select {border:1px solid #ececec }
+.inp_name{ width:90%; height:30px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

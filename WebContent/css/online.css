@@ -1,0 +1,102 @@
+@CHARSET "UTF-8";
+
+/*------------------------on.jsp -------------------------*/
+#on_wrap{
+	width:1100px;
+	text-align:center;
+	font-size:24px;
+}
+#on_wrap #on_left{
+	width:550px;
+	height:550px;
+	background-color:skyblue;
+	display: inline-block;
+	float:left;
+		
+}
+#on_wrap #on_right{
+	width:550px;
+	height:550px;
+	background-color:#ccc;
+	float:left;
+	
+}
+.on_wrap_txt{
+	width:130px;
+	height:30px;
+	margin:50% 0;
+
+}
+
+
+/*------------------------onSellForm, onInspection -------------------------*/
+#onForm_title{
+	font-size:26px;
+	text-align:center;
+	font-weight:bold;
+	margin:0 0 34px 0;
+}
+#onForm_line{
+	width:750px;
+	box-sizing: border-box;
+	border:1px solid #000;
+	margin:0 auto;
+}
+#onForm_wrap{
+	width:750px;
+	margin:0 auto;
+}
+#onForm_con{
+	font-size:18px;
+
+}
+#onForm_con td{
+	height:70px;
+}
+
+#onForm_con .onForm_left{
+	width:250px;
+	box-sizing: border-box;
+	padding-left:60px;
+	background-color:#f4f4f4;
+}
+#onForm_con .onForm_left1{
+	width:250px;
+	box-sizing: border-box;
+	
+	background-color:#f4f4f4;
+}
+
+#onForm_con .onForm_right{
+	box-sizing: border-box;
+	padding-left:30px;
+}
+
+#onForm_con .onForm_right .input_box{
+	width:400px;
+	height:40px;
+	border:1px solid #C9C9C9;
+}
+
+#onForm_con .onForm_right select{
+	width:400px;
+	height:40px;
+	border:1px solid #C9C9C9;
+}
+
+#onForm_wrap .onForm_btn{
+	width:200px;
+	height:40px;
+	margin:50px auto;
+
+}
+
+/*------------------------onInspection -------------------------*/
+.onForm_right .onIns_quality_check{
+	display: inline-block;
+	width:100px;
+}
+.onIns_img{
+	width:750px;
+	margin:40px 0 0 0;	
+}

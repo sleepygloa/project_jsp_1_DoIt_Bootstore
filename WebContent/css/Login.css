@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+/* login.css */
+
+/* 공동 작업 파트*/
+.login_lay_wrap{  width:100%; height:100%; overflow:hidden;}
+
+.login_wrap{max-width:500px; min-width:350px; margin:0 auto; margin-top:5%; overflow:hidden;}
+.login_head, .login_sec, .login_foot{max-width:90%; min-width:85%; margin:0 auto; margin-bottom:25px;}
+
+
+/* login 제목 */
+.Top_Title{font-size:2em; color:black; width:90%; margin-bottom:100px; margin:0 auto;}
+
+.login_title{font-size:2.5em; color:black; font-weight:bold;}
+
+
+/* login 내용 */
+.login_title1{font-size:1em; color:black; margin-bottom:10px;}
+.login_con input{width:100%; height:50px; background:white; border:none; text-indent:10px; font-size:0.8em; margin-bottom:25px; 
+border:solid 3px #cccccc;}
+.login_sub button{ width:100%; height:60px; background:#00C6ED; color:white; font-size:1.1em; margin-top:15px;}
+
+/* login 하단 내용 */
+.login_foot_ul li{float:left; overflow:hidden; margin-right:20px;}
+.login_foot_ul li a{font-size:0.9em; color:black;}
+
+.bot_title{font-size:0.8em; color:black; width:90%; margin:0 auto; padding-top:60px}
+

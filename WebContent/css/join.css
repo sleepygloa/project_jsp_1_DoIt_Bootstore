@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+
+
+/* 회원가입 전체 */
+.join_sec{ max-width:1100px; min-width:880px; margin:0 auto; overflow:hidden; }
+
+
+/* 테이블 스타일 지정 01 */
+.join_01_ta{ width:100%;  margin-top: 10px; border-top: solid 2px #3DB7CC; border-bottom: solid 1px #151515; margin-bottom: 30px; }
+.join_01_ta td{ padding:10px 20px; border-bottom:solid 1px white}
+.join_01_ta td:nth-child(1){ width:25%; font-size:1em; background:#f4f4f4; font-weight:bold}
+.join_01_ta td:nth-child(2){ width:75%; }
+
+.input_01{width:200px; height:30px; text-indent:10px; }
+ .input_04{width:200px; height:35px; text-indent:10px; }
+.input_02{width:150px; height:30px; text-indent:10px; }
+.input_03{ width:600px; height:30px; text-indent:10px;}
+.input_011{ width:50px; height:30px; text-indent:10px;}
+
+.up_ta td{ height:50px; }
+.up_title{ width:100%; margin-top:30px; }
+.up_title a{ display:block; line-height:30px;}
+.up_title a:nth-child(1){ font-size:1.1em }
+.up_title a:nth-child(2){ color:red; font-size:0.9em }
+
+/* 서브 설명 */
+.La_title{ font-size: 40px; font-weight: bold; margin: 40px 0px 20px 0px; max-width:1100px; min-width:880px; margin:0 auto;}
+.sub_title{ font-size:1em; color:#20212;}
+.sub_con{ font-size: 13px; color: #909090; margin: 10px; }
+.co_red{ color:#da0b85  }
+.mid_title{ margin-top:30px; }
+
+/* 버튼 모음 */
+.button_cell{ margin-top:50px; margin-bottom:100px;}
+.sub_button{ width:200px; height:50px; background-color:#283442; color:white; font-size:1em; border:solid 2px #283442; }
+.sub_button:hover{ background:black; cursor:pointer}
+
+.re_button{ width:200px; height:50px; border:solid 2px #283442; font-size:1em;  background:white}
+.re_button:hover{ background:solid 2px #283442; color:white; background:#283442; cursor:pointer}
+
+
