@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -122,7 +123,7 @@
 					<ul class="l_list_ma">
 
 						<li><a href="#">회사소개</a></li>
-						<li><a href="/DoIt/d_online/on.jsp">온라인중고서점</a></li>
+						<li><a href="/DoIt/d_online/onSellBook.do">온라인중고서점</a></li>
 						<li><a href="#">DOIT 도서관</a></li>
 						<li><a href="#">직거래게시판</a></li>
 						<li><a href="#">고객센터</a></li>
@@ -138,16 +139,7 @@
 							<li><a href="#">찾아오시는 길</a></li>
 						</ul>
 						<ul>
-<!-- 							
-							<li><a href="#">어린이 서적</a></li>
-							<li><a href="#">참고 / 전문서적</a></li>
-							<li><a href="#">소설 / 시 / 에세이</a></li>
-							<li><a href="#">인문학 서적</a></li>
-							<li><a href="#">과학 전문서적</a></li>
-							<li><a href="#">기타 서적 </a></li>
-							 -->
-							<li><a href="#">온라인 판매</a></li>
-							<li><a href="#">온라인 구매</a></li>
+							<li><a></a></li>	
 						</ul>
 						<ul>
 							<li><a href="#">DoIt 도서관</a></li>

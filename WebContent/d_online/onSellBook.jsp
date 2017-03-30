@@ -12,59 +12,22 @@
 <!-- main contents ------------------------------------------------------------------------------ -->
 <article class="my_cont_wrap ">
 
-<!-- 오늘들어온 책의 수 공간 -->
-<div class="d-w-80 d-left20 d-border d-center">
-	오늘 들어온 책 : 
-	<span>
-		<c:choose>
-		    <c:when test="${todayPurchaseCountArray[0] == null}"><img src="/DoIt/images/0.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[0] == 0}"><img src="/DoIt/images/0.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[0] == 1}"><img src="/DoIt/images/1.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[0] == 2}"><img src="/DoIt/images/2.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[0] == 3}"><img src="/DoIt/images/3.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[0] == 4}"><img src="/DoIt/images/4.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[0] == 5}"><img src="/DoIt/images/5.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[0] == 6}"><img src="/DoIt/images/6.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[0] == 7}"><img src="/DoIt/images/7.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[0] == 8}"><img src="/DoIt/images/8.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[0] == 9}"><img src="/DoIt/images/9.png" width="100px" /></c:when>
-		</c:choose>
-		<c:choose>
-			<c:when test="${todayPurchaseCountArray[0] == null}"><img src="/DoIt/images/0.png" width="100px" /></c:when>   
-			<c:when test="${todayPurchaseCountArray[1] == 0}"><img src="/DoIt/images/0.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[1] == 1}"><img src="/DoIt/images/1.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[1] == 2}"><img src="/DoIt/images/2.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[1] == 3}"><img src="/DoIt/images/3.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[1] == 4}"><img src="/DoIt/images/4.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[1] == 5}"><img src="/DoIt/images/5.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[1] == 6}"><img src="/DoIt/images/6.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[1] == 7}"><img src="/DoIt/images/7.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[1] == 8}"><img src="/DoIt/images/8.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[1] == 9}"><img src="/DoIt/images/9.png" width="100px" /></c:when>
-		</c:choose>					
-		<c:choose>
-			<c:when test="${todayPurchaseCountArray[0] == null}"><img src="/DoIt/images/0.png" width="100px" /></c:when>   
-			<c:when test="${todayPurchaseCountArray[2] == 0}"><img src="/DoIt/images/0.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[2] == 1}"><img src="/DoIt/images/1.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[2] == 2}"><img src="/DoIt/images/2.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[2] == 3}"><img src="/DoIt/images/3.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[2] == 4}"><img src="/DoIt/images/4.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[2] == 5}"><img src="/DoIt/images/5.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[2] == 6}"><img src="/DoIt/images/6.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[2] == 7}"><img src="/DoIt/images/7.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[2] == 8}"><img src="/DoIt/images/8.png" width="100px" /></c:when>
-			<c:when test="${todayPurchaseCountArray[2] == 9}"><img src="/DoIt/images/9.png" width="100px" /></c:when>
-		</c:choose>	
-	</span> 권
-</div>
 
 <div class="d-space10"></div>
 
 <!-- 1. 검색 박스와 새 책을 파는 button (2. list)--------------------------------------------------------- -->	
 <div class="grid-box d-center d-margin">
 	
-	<!-- page message text----- -->
-<div class="alert alert-info"><small>*. 판매 하실 때엔 먼저 책을 검색하여 판매하실 책을 선택 해 주세요.</small></div>
+<div class="jumbotron">
+	<div class="d-left-fl d-l-padding10"><p>이 책을 갖고 있다면? ---></p></div>
+	<div class="d-right-fl d-r-padding10">
+		<!-- 신규 책 판매, 클릭시 판매신청서 페이지로 이동-- -->
+		<button class="ghost-btn" 
+		onclick="window.location='/DoIt/d_online/onSellForm.do?d_bno=0&s=sellpage'">책 판매</button>
+	</div>
+</div>
+
+<div class="d-space10"></div>	
 
 	<!-- select box ----------- -->
 	<div class="grid-w2 d-center">
@@ -74,14 +37,7 @@
 		</form>
 	</div>
 
-	<!-- 신규 책 판매, 클릭시 판매신청서 페이지로 이동------------------------------------------------------------------------ -->
-	<div class="grid-w2" >
-		<button type="button" class="btn btn-default btn-lg-t btn-block"
-		onclick="window.location='/DoIt/d_online/onSellForm.do?d_bno=0&s=sellpage'">
-			 <span class="btn-lg-t big-font25">신규 책 판매</span>
-		 </button>
-	</div>
-	
+
 </div>	<!-- page message text-----  끝 --->
 
 

@@ -11,7 +11,10 @@
 		<hr />
 		<li><a href="/DoIt/d_login/mySellingList.do">판매신청 중인 책 보기</a></li>
 		<li><a href="/DoIt/d_login/mySellingFinishList.do">판매신청 완료 책 보기</a></li>
-		<li><a href="/DoIt/d_login/delete.do">회원탈퇴</a></li>		
+		
+		<hr />
+		<li><a href="/DoIt/d_login/myPurchaseInfo.jsp">책 주문내역 보기</a></li>
+				
 		
 		
 		

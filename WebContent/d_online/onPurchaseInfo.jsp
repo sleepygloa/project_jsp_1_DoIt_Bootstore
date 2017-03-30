@@ -7,7 +7,9 @@
 <%--------------- 사이드 메뉴 include --------------%>
 <%-- <jsp:include page="/d_online/onBookSide.jsp"></jsp:include> --%>
 
-<form action ="/DoIt/d_online/onPurchaseInfo.jsp?d_bno=${d_bno}" method="post">
+
+<!-- 1. 선택된 책에 대한 상세 내용이 이 페이지에서 해결된다. -->
+<form action ="/DoIt/d_login/myPurchaseInfo.jsp?d_bno=${d_bno}" method="post">
 	<table border="1 solid black" width="1000px">
 		<tr>
 			<td colspan="2" width="1000px" height="80px">
@@ -17,23 +19,33 @@
 			</td>
 		</tr>		
 		<tr>
-			<td width="300px">
+			<td width="300px" rowspan="2">
 				<img src="\DoIt\d_bpic/${article.d_bpic}" width="300px" />
 			</td>
 			<td>
-				정가 : ${article.d_bvalue}<br />
-				판매가 : ${article.d_bsellvalue}<br /> 
-				배송료 : 무료<br />
-				수령 예상일 : 0<br />
-				주문 수량 : 1개<br />
+				작가:<br />
+				출판사:<br />
+				장르:<br />
+				종류:<br />
+				국내외:<br />
+				책등급:<br />
 			</td>
+
 		</tr>
 		<tr>
-			<td colspan="2"><div class="jumbotron">
-				<span>이 책을 갖고 있다면?</span><br />
-				<div><input class="ghost-btn" type="button" value="책  판매"
-				onclick="window.location='/DoIt/d_online/onSellForm.do?d_bno=${d_bno}&s=sellpage'" /></div>
-				</div></td>
+			<td>
+				새상품 정보 : (s등급 책 보여주기)
+				정가 : ${article.d_bvalue}<br />
+				판매가 : ${article.d_bsellvalue} (정가대비 얼마할인)<br /> 
+				마일리지 : 결제 Db의 결제 금액의 10% 적립 <br />
+				<br />
+				-중고 상품 최저가 //알라딘 중고 // 회원 중고<br />
+				--<br />
+				<br />
+				두잇에 팔기 예상가<br />
+				s   /a   b /<br />
+				0 / 0 / 0<br />
+			</td>
 		</tr>
 		<tr>
 			<td class="d-center" colspan="2">
@@ -43,29 +55,7 @@
 					onclick="window.location='/DoIt/d_online/onSellBook.do'" /> 
 			</td>
 		</tr>
-		<tr></tr>
-		<tr>
-			<td colspan="2"><p class="big-font30 d-left20">목차</p>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				${obiDto.d_norder}
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2"><p class="big-font30 d-left20">내용</p>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				${obiDto.d_nintro}
-			</td>
-		</tr>		
 
-
-		
-		
 	</table>
 
 
@@ -73,8 +63,16 @@
 </form>
 
 
-
-
+<!-- 2. 이 페이지의 책과 관련된 책의 list가 정렬된다. -->
+<table>
+	<tr>
+		<td>상품 정보, 등급  배송비  판매자 , 버튼</td>
+	</tr>
+	반복구문.
+	<tr>
+		<td></td>
+	</tr>
+</table>
 
 
 

@@ -9,8 +9,6 @@ td tr th{border-style:1px solid #000000;border:1px solid #000000;}
 
 .btn-lg,
 .btn-group-lg > .btn {
-  padding: 10px 16px;
-  font-size: 30px;
   line-height: 1.3333333;
   border-radius: 6px;
   
@@ -403,6 +401,8 @@ small,.small { font-size: 85%;};
 .rl100{position:relative; height:100px; width:100%;}
 .rl150{position:relative; height:150px; width:100%;}
 .bgc{background-color:#d2d2d2;}
+.bgc1{background-color:#e33f33;}
+.bgc2{background-color:#a2c2d2;}
 /* 큰 글자 ------------------------------------------------------------------------*/
 .big-font75{font-size:75px;}
 .big-font50{font-size:50px;}
@@ -434,24 +434,33 @@ small,.small { font-size: 85%;};
 .d-l-padding20{padding-left:20;};
 .d-l-padding30{padding-left:30;};
 
+.d-r-padding10{padding-right:10;};
+.d-r-padding20{padding-right:20;};
+.d-r-padding30{padding-right:30;};
 
 /* div */
+.dgrid-article{overflow: hidden;float:left;};
+.d-w-100 .d-w-90 .d-w-80 .d-w-60 .d-w-50 .d-w-40 .d-w-33 .d-w-30 .d-w-20{float:left; display:inline-block;}
 .d-w-100{width:100%;}
-.d-w-90{width:90%;}
-.d-w-80{width:80%;}
-.d-w-60{width:60%;}
-.d-w-40{width:40%;}
-.d-w-33{width:33%;}
-.d-w-30{width:30%;}
-.d-w-20{width:20%;}
-.d-h-250{hegith:250px;}
-.d-h-200{hegith:200px;}
-.d-h-150{hegith:150px;}
-.d-h-120{hegith:120px;}
-.d-h-100{hegith:100px;background-color:#a1a1a1;}
-.d-h-80{hegith:80px;background-color:#a1a1a1;}
-.d-h-50{hegith:50px;background-color:#a1a1a1;}
-.d-f-100{width:100%; height:100%;};
+.d-w-90{width:89.9999%;}
+.d-w-80{width:79.9999;}
+.d-w-60{width:59.9999%;}
+.d-w-40{width:39.9999%;}
+.d-w-33{width:32.9999%;}
+.d-w-30{width:29.9999%;}
+.d-w-20{width:19.9999%;}
+.d-h-550{height:550px;}
+.d-h-500{height:500px;}
+.d-h-450{height:450px;}
+.d-h-350{height:350px;}
+.d-h-250{height:250px;}
+.d-h-200{height:200px;}
+.d-h-150{height:150px;}
+.d-h-120{height:120px;}
+.d-h-100{height:100px;}
+.d-h-80{height:80px;}
+.d-h-50{height:50px;}
+.d-f-100{width:100%;height:100%;};
 .d-f-80{width:80%; height:100%;};
 .d-f-60{width:60%; height:100%;};
 .d-f-40{width:40%; height:100%;};
@@ -516,8 +525,9 @@ a.text-success:hover,a.text-success:focus {color: #356635;}
 .grid-w2{
 	float:left;
 	position:relation;
-	width:48.555%;
-}.grid-w2-btn{width:92%;}
+	width:98%;
+}
+.grid-w2-btn{width:88.7%;}
 
 
 /* fillter hover */
@@ -530,4 +540,56 @@ a.text-success:hover,a.text-success:focus {color: #356635;}
 
 	font-size:0.95em;
 	background-color:#fff0f5;
+}
+
+.jumbotron {
+  position: relative;
+  padding: 40px 0;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+   background: #020031; /* Old browsers */
+  background: -moz-linear-gradient(45deg,  #ffffff 0%, #00373A 100%); /* FF3.6+ */ 
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#ffffff), color-stop(100%,#00373A)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg,  #ffffff 0%,#00373A 100%); /* Chrome10+,Safari5.1+ */  
+  background: -o-linear-gradient(45deg,  #ffffff 0%,#00373A 100%); //* * Opera 11.10+ */
+  background: -ms-linear-gradient(45deg,  #ffffff 0%,#00373A 100%); /* IE10+ */
+  background: linear-gradient(45deg,  #ffffff 0%,#00373A 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#dcdcdc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+     -moz-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+          box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+}
+.jumbotron h1 {
+  font-size: 80px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.jumbotron p {
+color:#000;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.25;
+  margin-bottom: 30px;
+}
+
+.ghost-btn {
+  display: inline-block;
+  width: 200px;
+  padding: 8px;
+  color: #fff;
+  border: 2px solid #fff;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+  transition: background-color 0.2s ease-out,
+              color 0.2s ease-out;
+}
+.ghost-btn:hover,
+.ghost-btn:active {
+  background-color: #fff;
+  color: #000;
+  transition: background-color 0.3s ease-in,
+              color 0.3s ease-in;
 }
