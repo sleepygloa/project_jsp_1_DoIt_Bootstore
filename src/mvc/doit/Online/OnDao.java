@@ -1335,7 +1335,6 @@ public OnBookDto FindRandomArticle(String d_bname) throws Exception{
 
 
 
-
 //메인 메소드 괄호임   
 }
     

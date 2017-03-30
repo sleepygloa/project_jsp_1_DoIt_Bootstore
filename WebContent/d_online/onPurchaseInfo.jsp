@@ -23,12 +23,12 @@
 				<img src="\DoIt\d_bpic/${article.d_bpic}" width="300px" />
 			</td>
 			<td>
-				작가:<br />
-				출판사:<br />
-				장르:<br />
-				종류:<br />
-				국내외:<br />
-				책등급:<br />
+				작가:${article.d_bauthor}<br />
+				출판사:${article.d_bpublisher}<br />
+				장르:${article.d_bgenre}<br />
+				종류:${article.d_bgenre2}<br />
+				국내외:${article.d_blocation}<br />
+				책등급:${article.d_bgrade}<br />
 			</td>
 
 		</tr>

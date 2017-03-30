@@ -7,7 +7,7 @@
 <%--------------- 사이드 메뉴 include --------------%>
 <%-- <jsp:include page="/d_online/onBookSide.jsp"></jsp:include> --%>
 
-<form action ="/DoIt/d_online/onPurchaseInfo.jsp?d_bno=${d_bno}" method="post">
+<form action ="/DoIt/d_online/onPurchaseInfo.do?d_bno=${d_bno}" method="post">
 	<table border="1 solid black" width="1000px">
 		<tr>
 			<td colspan="2" width="1000px" height="80px">
