@@ -19,7 +19,6 @@ public class OnBookDto {
 	   private int d_bvalue;            //정가 
 	   private int d_bsellvalue;         //판매가
 	   private int d_bpurchasevalue;      //구입가
-
 	   private String d_id;            //판매자코드 //회원정보와 공유
 	   private int d_bdeliverycode;         //배달코드
 	   private Timestamp d_bdate;            //DB 등록일시(검수 완료 후)
@@ -41,34 +40,72 @@ public class OnBookDto {
 		//책 목차 , 소개글
 		private String d_norder;		//목차
 		private String d_nintro;		//소개글
+		
+		//배송
+		
+		private int d_bdelibery;			// 배송상태
+		private String d_bbuyer;			// 구매자 아이디
+		private String d_brecipient;		// 받는사람
+		private String d_brequested;		// 배송요청사항
+		private Timestamp d_bdeldate;		// 주문등록날짜
 		   
-   
+		
 
 		
+public int getD_bdelibery() {
+			return d_bdelibery;
+		}
+		public void setD_bdelibery(int d_bdelibery) {
+			this.d_bdelibery = d_bdelibery;
+		}
+		public String getD_bbuyer() {
+			return d_bbuyer;
+		}
+		public void setD_bbuyer(String d_bbuyer) {
+			this.d_bbuyer = d_bbuyer;
+		}
+		public String getD_brecipient() {
+			return d_brecipient;
+		}
+		public void setD_brecipient(String d_brecipient) {
+			this.d_brecipient = d_brecipient;
+		}
+		public String getD_brequested() {
+			return d_brequested;
+		}
+		public void setD_brequested(String d_brequested) {
+			this.d_brequested = d_brequested;
+		}
+		public Timestamp getD_bdeldate() {
+			return d_bdeldate;
+		}
+		public void setD_bdeldate(Timestamp d_bdeldate) {
+			this.d_bdeldate = d_bdeldate;
+		}
 public int getD_iold() {
 			return d_iold;
 		}
-	public void setD_iold(int d_iold) {
-		this.d_iold = d_iold;
-	}
-	public int getD_icover() {
-		return d_icover;
-	}
-	public void setD_icover(int d_icover) {
-		this.d_icover = d_icover;
-	}
-	public int getD_ispine() {
-		return d_ispine;
-	}
-	public void setD_ispine(int d_ispine) {
-		this.d_ispine = d_ispine;
-	}
-	public int getD_ibind() {
-		return d_ibind;
-	}
-	public void setD_ibind(int d_ibind) {
-		this.d_ibind = d_ibind;
-	}
+		public void setD_iold(int d_iold) {
+			this.d_iold = d_iold;
+		}
+		public int getD_icover() {
+			return d_icover;
+		}
+		public void setD_icover(int d_icover) {
+			this.d_icover = d_icover;
+		}
+		public int getD_ispine() {
+			return d_ispine;
+		}
+		public void setD_ispine(int d_ispine) {
+			this.d_ispine = d_ispine;
+		}
+		public int getD_ibind() {
+			return d_ibind;
+		}
+		public void setD_ibind(int d_ibind) {
+			this.d_ibind = d_ibind;
+		}
 public String getD_norder() {
 			return d_norder;
 }

@@ -116,6 +116,10 @@ fieldset[disabled] .btn-default.active {
   color: #fff;
   background-color: #333;
 }
+
+.btn-checked{
+	background:#87f5f5;
+}
 /* 검색 버튼(인풋창) -------------------------------------------------------------*/
 .form-control {
   display: block;
@@ -349,6 +353,8 @@ small,.small { font-size: 85%;};
 .d-center-bl{display: block;margin:0 auto;}
 .d-center-in{display: inline;margin:0 auto;}
 .d-center{text-align:center;margin:0 auto;}
+.d-left{margin:clear;text-align:left;}
+.d-right{text-align:right;}
 .d-left20{float:left;margin-left:20px;}
 .d-right20{float:right; margin-right:20px;}
 .d-left10{float:left;margin-left:10px;}

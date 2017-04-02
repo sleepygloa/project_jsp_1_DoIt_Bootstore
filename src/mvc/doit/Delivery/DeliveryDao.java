@@ -9,6 +9,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import mvc.doit.Online.OnBookDto;
+
 
 public class DeliveryDao {
 
@@ -64,5 +66,121 @@ private static DeliveryDao instance = new DeliveryDao();
 	      return d_bdeliverycode;
     }
     
+  //----------------관리자 구매신청리스트 주문확인-> 구매완료----------------관리자 구매신청리스트 주문확인-> 구매완료---------------관리자 구매신청리스트 주문확인-> 구매완료--------------관리자 구매신청리스트 주문확인-> 구매완료ㄴ
+    public void Admin_OnBuyBook_finish(int d_bcode){
+
+
+    		try{
+    			conn = getConnection();
+    			pstmt = conn.prepareStatement("update d_bdelivery set d_bdelibery = 1 where d_bcode=?  ");
+    			
+    			pstmt.setInt(1, d_bcode);
+
+    			pstmt.executeUpdate();
+    			    			
+
+    		}catch(Exception e){
+    			e.printStackTrace();
+    		}finally{
+    			 if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+    			if(pstmt != null){ try{pstmt.close();}catch(SQLException s){}}
+    			if(conn != null){ try{conn.close();}catch(SQLException s){}}
+    		}
+    		
+    	}
     
-}
+  //----------------관리자 구매신청리스트 구매완료-> 배송시작----------------관리자 구매신청리스트 구매완료-> 배송시작---------------관리자 구매신청리스트 구매완료-> 배송시작--------------관리자 구매신청리스트 구매완료-> 배송시작
+    public void Admin_OnBuyBook_delivertStart(int d_bcode){
+
+
+    		try{
+    			conn = getConnection();
+    			pstmt = conn.prepareStatement("update d_bdelivery set d_bdelibery = 2 where d_bcode=?  ");
+    			
+    			pstmt.setInt(1, d_bcode);
+
+    			pstmt.executeUpdate();
+    			    			
+
+    		}catch(Exception e){
+    			e.printStackTrace();
+    		}finally{
+    			 if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+    			if(pstmt != null){ try{pstmt.close();}catch(SQLException s){}}
+    			if(conn != null){ try{conn.close();}catch(SQLException s){}}
+    		}
+    		
+    	}
+    
+  //----------------관리자 구매신청리스트 배송완료----------------관리자 구매신청리스트 배송완료---------------관리자 구매신청리스트 배송완료--------------관리자 구매신청리스트 배송완료
+    public void Admin_OnBuyBook_delivertEnd(int d_bcode){
+
+
+    		try{
+    			conn = getConnection();
+    			pstmt = conn.prepareStatement("update d_bdelivery set d_bdelibery = 3 where d_bcode=?  ");
+    			
+    			pstmt.setInt(1, d_bcode);
+
+    			pstmt.executeUpdate();
+    			    			
+
+    		}catch(Exception e){
+    			e.printStackTrace();
+    		}finally{
+    			 if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+    			if(pstmt != null){ try{pstmt.close();}catch(SQLException s){}}
+    			if(conn != null){ try{conn.close();}catch(SQLException s){}}
+    		}
+    		
+    	}
+    
+  //-----------------사용자 취소신청----------------사용자 취소신청----------------사용자 취소신청---------------사용자 취소신청---------------사용자 취소신청
+    public void Admin_OnBuyBook_Cancel(int d_bcode){
+
+
+    		try{
+    			conn = getConnection();
+    			pstmt = conn.prepareStatement("update d_bdelivery set d_bdelibery = 4 where d_bcode=?  ");
+    			
+    			pstmt.setInt(1, d_bcode);
+
+    			pstmt.executeUpdate();
+    			    			
+
+    		}catch(Exception e){
+    			e.printStackTrace();
+    		}finally{
+    			 if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+    			if(pstmt != null){ try{pstmt.close();}catch(SQLException s){}}
+    			if(conn != null){ try{conn.close();}catch(SQLException s){}}
+    		}
+    		
+    	}
+    
+    //----------------관리자 취소 승인----------------관리자 취소 승인---------------관리자 취소 승인--------------관리자 취소 승인
+    public void Admin_OnBuyBook_CancelCheck(int d_bcode){
+
+
+    		try{
+    			conn = getConnection();
+    			pstmt = conn.prepareStatement("update d_bdelivery set d_bdelibery = 5 where d_bcode=?  ");
+    			
+    			pstmt.setInt(1, d_bcode);
+
+    			pstmt.executeUpdate();
+    			    			
+
+    		}catch(Exception e){
+    			e.printStackTrace();
+    		}finally{
+    			 if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+    			if(pstmt != null){ try{pstmt.close();}catch(SQLException s){}}
+    			if(conn != null){ try{conn.close();}catch(SQLException s){}}
+    		}
+    		
+    	}
+    
+    
+    
+}//

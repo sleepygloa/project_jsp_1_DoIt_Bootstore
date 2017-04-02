@@ -60,8 +60,9 @@ public class OnPurchaseInfoAction implements SuperAction {
 		//최저가 검색
 		int MinD_bsellvalue = dao.getFindNameToMinSellValue(d_bname);
 		
-		
-		
+		//정가대비 할인 되는 비율		
+		int valueToSellvaluePercent = 
+(int)(100 - 	((double)article.getD_bsellvalue() / (double)article.getD_bvalue() * 100));
 		
         //해당 뷰에서 사용할 속성
 	    request.setAttribute("currentPage", new Integer(currentPage));
@@ -74,6 +75,7 @@ public class OnPurchaseInfoAction implements SuperAction {
 		request.setAttribute("articleList", articleList);
 		
 		request.setAttribute("MinD_bsellvalue",MinD_bsellvalue);
+		request.setAttribute("valueToSellvaluePercent", valueToSellvaluePercent);
 		
 	return "/d_online/onPurchaseInfo.jsp";
 	

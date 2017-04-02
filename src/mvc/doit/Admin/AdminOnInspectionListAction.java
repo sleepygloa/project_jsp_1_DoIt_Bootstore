@@ -30,7 +30,8 @@ public class AdminOnInspectionListAction implements SuperAction {
 	    
 	    List articleList = null;
         OnDao article = OnDao.getInstance();//DB연동
-        count = article.Admin_SellCount();//전체 글의 수 
+//        count = article.Admin_SellCount();//전체 글의 수 
+        count = article.Admin_InspectionCount();//전체 글의 수 
 
         if(count > 0){
             articleList = article.Admin_InspectionList(startRow,endRow);//현재 페이지에 해당하는 글 목록

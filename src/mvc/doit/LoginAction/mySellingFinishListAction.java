@@ -21,10 +21,10 @@ public class mySellingFinishListAction implements SuperAction {
         if (pageNum == null) {
             pageNum = "1"; //1페이지당 5권의 책 보여줌
         }
-        int pageSize = 10;//한 페이지의 글의 개수 //한번에 판매중인 책의 갯수가 많지 않다고 생각하여 5개로 지정
+        int pageSize = 5;//한 페이지의 글의 개수 //한번에 판매중인 책의 갯수가 많지 않다고 생각하여 5개로 지정
         int currentPage = Integer.parseInt(pageNum); //페이지번호를 Int 로 저장한 값
         int startRow = (currentPage - 1) * pageSize + 1;//한 페이지의 시작글 번호, 시작 글 번호 1
-        int endRow = currentPage * pageSize;//한 페이지의 마지막 글번호, 마지막 등록글번호 10
+        int endRow = currentPage * pageSize;//한 페이지의 마지막 글번호, 마지막 등록글번호 5
         int count = 0; //변수 초기화
         int number = 0; //변수 초기화
 
@@ -32,8 +32,8 @@ public class mySellingFinishListAction implements SuperAction {
         List articleList = null; //리스트 초기화
         OnDao manager = OnDao.getInstance();//DB연동
         
-        
-        count = manager.getD_bmySellingFinishCount(d_id);//전체 글의 수 
+        count = manager.getD_bmySellingCount(d_id);//전체 글의 수 
+//        count = manager.getD_bmySellingFinishCount(d_id);//전체 글의 수 
 
         //책의 링크를 타지않고, 신규로 판매신청양식을 작성했을때
 //        if(count>0){

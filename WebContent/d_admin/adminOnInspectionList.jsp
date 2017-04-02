@@ -22,7 +22,7 @@
 				<td class="AdminList_con Admin_txtCen">책 내용</td>
 			</tr>
 			<tr>
-				<td>판매 신청 리스트가 없습니다.</td>
+				<td class="Admin_txtCen" colspan="3">판매 신청 리스트가 없습니다.</td>
 			</tr>
 		</table>
 	</c:if>
@@ -66,7 +66,7 @@
 						</div>
 					</td>
 		 				<td class="AdminList_Ins Admin_txtCen"> 
-		 					<input type="submit" value="검수하기" class="AdminList_btn"/>
+		 					<input type="submit" value="책 등록" class="AdminList_btn"/>
 		 				</td>
 					
 						 
@@ -112,6 +112,6 @@
 
 		
 <!-- footer import -->
-<%@include file="../footer.jsp" %>
+<jsp:include page="/footer.jsp" />
 		
 		

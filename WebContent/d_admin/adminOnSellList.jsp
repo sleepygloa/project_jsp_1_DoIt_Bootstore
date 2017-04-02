@@ -19,7 +19,7 @@
 					<td class="AdminList_con Admin_txtCen">책 내용</td>
 				</tr>
 				<tr>
-					<td>판매 신청 리스트가 없습니다.</td>
+					<td class="Admin_txtCen" colspan="3">판매 신청 리스트가 없습니다.</td>
 				</tr>
 			</table>
 		</c:if>
@@ -109,6 +109,6 @@
 
 		
 <!-- footer import -->
-<%@include file="../footer.jsp" %>
+<jsp:include page="/footer.jsp" />
 		
 		

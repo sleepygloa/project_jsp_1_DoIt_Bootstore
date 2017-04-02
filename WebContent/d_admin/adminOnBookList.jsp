@@ -3,7 +3,7 @@
 
 <link rel="stylesheet" type="text/css"  href="/DoIt/css/online_admin.css?ver=2">
 <!-- header import -->
-<%@include file="../header.jsp" %>
+<jsp:include page="/header.jsp" />
 <%--------------- 사이드 메뉴 include --------------%>
 <jsp:include page="/d_admin/adminSide.jsp" />
 	<article class="my_cont_wrap">
@@ -19,7 +19,7 @@
 				<td class="AdminList_con Admin_txtCen">책 내용</td>
 			</tr>
 			<tr>
-				<td>판매 신청 리스트가 없습니다.</td>
+				<td class="Admin_txtCen" colspan="3">등록된 책 리스트가 없습니다.</td>
 			</tr>
 		</table>
 	</c:if>

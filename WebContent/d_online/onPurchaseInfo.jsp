@@ -9,8 +9,8 @@
 
 
 <!-- 1. 선택된 책에 대한 상세 내용이 이 페이지에서 해결된다. -->
-<form action ="/DoIt/d_login/myPurchaseInfo.jsp?d_bno=${d_bno}" method="post">
-	<table border="1 solid black" width="1000px">
+<form action ="/DoIt/d_online/user_onBuyBook.do?d_bcode=${article.d_bcode}" method="post">
+	<table border="1 solid black" width="1000px" class="d-center">
 		<tr>
 			<td colspan="2" width="1000px" height="80px">
 				<span class="big-font35 d-bold d-left20">
@@ -22,7 +22,7 @@
 			<td width="300px" rowspan="2">
 				<img src="\DoIt\d_bpic/${article.d_bpic}" width="300px" />
 			</td>
-			<td>
+			<td class="d-left">
 				작가:${article.d_bauthor}<br />
 				출판사:${article.d_bpublisher}<br />
 				장르:${article.d_bgenre}<br />
@@ -36,7 +36,7 @@
 			<td>
 				새상품 정보 : (s등급 책 보여주기)
 				정가 : ${article.d_bvalue}<br />
-				판매가 : ${article.d_bsellvalue} (정가대비 얼마할인)<br /> 
+				판매가 : ${article.d_bsellvalue} (정가대비 : ${valueToSellvaluePercent}% 할인)<br /> 
 				마일리지 : 결제 Db의 결제 금액의 10% 적립 <br />
 				<br />
 				
@@ -71,15 +71,15 @@
 
 </form>
 
+<div class="d-space20"></div>
 			
 <!-- 2. 이 페이지의 책과 관련된 책의 list가 정렬된다. -->
-<table style="width:1000px" border="1 solid black">	
+<table style="width:1000px" border="1 solid black" class="d-center">	
 		<tr>
 			<td colspan="2" width="600px">상품정보</td>
 			<td class="d-center">등급</td>
 			<td class="d-center">배송비</td>
 			<td class="d-center">판매자</td>
-			<td class="d-center">버튼</td>
 		</tr>	
 <!-- -------등록된 책이 없을 때----------------------------- -->		
 <c:if test="${count==0}">
@@ -104,7 +104,7 @@
 					"\DoIt\d_bpic/${articleList.getD_bpic()}" width="100px" height="150px"  class="thumbnail" />
 				</c:if>
 			</td>
-			<td width="500px" class="d-w80 ">
+			<td width="600px" class="d-w80 ">
 <!--  책제목을 눌렀을 때 상세 페이지로 이동 ------------------------------------------------------------------------------ -->
  				
  				<span class="big-font25 d-bold d-l-padding10">
@@ -124,10 +124,6 @@
 			<td width="100px">${articleList.getD_bgrade()}</td>
 			<td width="100px">무료</td>
 			<td width="100px">${articleList.getD_id()}</td>
-			<td width="100px">
-				<button	onclick="window.location='/DoIt/d_online/onSellForm.do'"><small>장바구니</small></button>
-				<button	onclick="window.location='/DoIt/d_online/onSellForm.do?d_bcode=${articleList.getD_bcode()}'"><small>책 구매</small></button>
-			</td>
 		</tr>
 	 
 	</c:forEach>

@@ -60,12 +60,14 @@
 		<li><a href="/DoIt/d_online/onSellBook.do?d_bonFillter=04">인문학 서적</a></li>
 		<li><a href="/DoIt/d_online/onSellBook.do?d_bonFillter=05">과학 전문서적</a></li>
 		<li><a href="/DoIt/d_online/onSellBook.do?d_bonFillter=06">기타 서적</a></li>
-		<li>---------------</li>
+	</ul>
+	<ul class="my_side_ul">	
 		<li><a href="/DoIt/d_online/onSellBook.do?d_bonFillter=07">아트지</a></li>
 		<li><a href="/DoIt/d_online/onSellBook.do?d_bonFillter=08">레자크지</a></li>
 		<li><a href="/DoIt/d_online/onSellBook.do?d_bonFillter=09">스노우지</a></li>
 		<li><a href="/DoIt/d_online/onSellBook.do?d_bonFillter=10">모조지</a></li>
-		<li>---------------</li>
+	</ul>
+	<ul class="my_side_ul">
 		<li><a href="/DoIt/d_online/onSellBook.do?d_bonFillter=11">국내도서</a></li>
 		<li><a href="/DoIt/d_online/onSellBook.do?d_bonFillter=12">국외도서</a></li>
 	</ul>
