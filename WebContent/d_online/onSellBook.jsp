@@ -68,7 +68,6 @@
 
 	<!-- ------순번 및 전체선택, 장바구니, (구매하기 )-------------버튼 -->
 		<div class="d-in d-right10">
-<%-- 			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1"></c:forEach> --%>
 				<a href="/DoIt/d_online/onSellBook.do?pageNum=1">${20}↑</a>
 				<a href="/DoIt/d_online/onSellBook.do?pageNum=2">${40}↑</a>
 				<a href="/DoIt/d_online/onSellBook.do?pageNum=3">${60}↑</a>

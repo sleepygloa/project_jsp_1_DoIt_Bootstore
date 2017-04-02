@@ -112,7 +112,7 @@
 							<li><a href="/DoIt/d_login/myInfo.do">마이페이지</a></li>
 							<li><a href="#">장바구니</a></li>
 						</c:if>
-						<c:if test="${ sessionScope.memId != null && sessionScope.memMG == 2 }">
+						<c:if test="${ sessionScope.memId != null && sessionScope.memMG == 0 }">
 							<li><a href="/DoIt/d_admin/admin.do">관리자 페이지</a></li>
 						</c:if>
 					</ul>

@@ -18,10 +18,8 @@ import mvc.doit.SuperAction.SuperAction;
 
 public class OnSellFormProAction implements SuperAction {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		//판매양식을 작성하면, 배송테이블의 배송코드를 1개 받게 되어 배송상태를 확인 할 수 있고
-		//양식에 저장된 정보는 판매신청 리스트로 볼 수 있다.
-		
+	
+//1. 변수저장----------------------------------------------------------------------------------		
 	 	request.setCharacterEncoding("UTF-8");
 	 	
 	 	//로그인한 회원의 회원코드를 불러옵니다.
@@ -62,7 +60,9 @@ public class OnSellFormProAction implements SuperAction {
 	//1.d_onBook 테이블에서 책코드만 부여합니다.
 	//2.d_bdelivery 테이블에서 배송코드만 부여합니다.
 	//3.d_onSellList 테이블에서 전체리스트를 작성해줍니다.
-	
+
+ 	
+//2.Dto 저장 --------------------------------------------------------------------------------------------------- 	
 	//onbookdto에 넣어 DB에 저장하지만, 검수에 필요한 값과 배송에 필요한 값은 초기화를 시켜줍니다.
 	OnBookDto onbookdto = new OnBookDto();
 	onbookdto.setD_id(d_id);
@@ -86,6 +86,7 @@ public class OnSellFormProAction implements SuperAction {
 	obiDto.setD_norder(d_norder);
 	obiDto.setD_nintro(d_nintro);
 	
+//3.dao 실행---------------------------------------------------------------------------------------------------	
 	//dao 연결
 		OnDao dao = OnDao.getInstance();		
 		//책 전체 DB에 레코드를 추가, 책코드부여와 전달된 값을 삽입하며, 다시 책코드를 반환합니다. //D_bcode를 이용하여 다른 테이블과 연결을 함.

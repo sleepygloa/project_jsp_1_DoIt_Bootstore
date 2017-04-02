@@ -39,12 +39,21 @@
 				판매가 : ${article.d_bsellvalue} (정가대비 얼마할인)<br /> 
 				마일리지 : 결제 Db의 결제 금액의 10% 적립 <br />
 				<br />
-				-중고 상품 최저가 //알라딘 중고 // 회원 중고<br />
-				--<br />
+				
+				
+				<table class="d-center" border="1px solid black" width="80%">
+					<tr>
+						<td width="50%">DoIt 중고(${count})</td>
+						<td width="50%">직거래 중고</td>
+					</tr>
+					<tr>
+						<td>${MinD_bsellvalue}원</td>
+						<td>성준이네 연동</td>
+					</tr>
+				</table>
 				<br />
-				두잇에 팔기 예상가<br />
-				s   /a   b /<br />
-				0 / 0 / 0<br />
+
+
 			</td>
 		</tr>
 		<tr>
@@ -62,17 +71,68 @@
 
 </form>
 
-
+			
 <!-- 2. 이 페이지의 책과 관련된 책의 list가 정렬된다. -->
-<table>
+<table style="width:1000px" border="1 solid black">	
+		<tr>
+			<td colspan="2" width="600px">상품정보</td>
+			<td class="d-center">등급</td>
+			<td class="d-center">배송비</td>
+			<td class="d-center">판매자</td>
+			<td class="d-center">버튼</td>
+		</tr>	
+<!-- -------등록된 책이 없을 때----------------------------- -->		
+<c:if test="${count==0}">
 	<tr>
-		<td>상품 정보, 등급  배송비  판매자 , 버튼</td>
+		<td colspan="6">
+			<div class="d-center">
+				보유한 책이 없습니다! <span class="code">도서관서비스</span>와 <span class="code">직접거래서비스</span>를 이용해주세요!!
+			</div>
+		</td>
 	</tr>
-	반복구문.
-	<tr>
-		<td></td>
-	</tr>
-</table>
+</c:if>
+<!-- -------등록된 책이 있을 때----------------------------- -->
+<c:if test="${count!=0}">
+	<c:forEach var="articleList" begin="0" end="${articleList.size()}" step="1" items="${articleList}">	
+		<tr>
+			<td width="100px"  height="160px">
+ 				<c:if test="${articleList.getD_bpic() == null}">
+					<img src="/DoIt/images/ma_img.jpg"  width="100px" height="150px" class="thumbnail" />
+				</c:if>
+				<c:if test="${articleList.getD_bpic() != null}">
+					<img src=
+					"\DoIt\d_bpic/${articleList.getD_bpic()}" width="100px" height="150px"  class="thumbnail" />
+				</c:if>
+			</td>
+			<td width="500px" class="d-w80 ">
+<!--  책제목을 눌렀을 때 상세 페이지로 이동 ------------------------------------------------------------------------------ -->
+ 				
+ 				<span class="big-font25 d-bold d-l-padding10">
+ 				<a href="/DoIt/d_online/onPurchaseInfo.do?d_bcode=${articleList.getD_bcode()}">
+ 					<c:if test="${article.d_bcode == articleList.getD_bcode()}"><p class="red">
+ 						${articleList.getD_bname()}
+ 					</p><span class="code">현재보시는상품</span></c:if>
+ 					<c:if test="${article.d_bcode != articleList.getD_bcode()}">${articleList.getD_bname()}</c:if>
+ 				</a>	
+ 				</span><br /><br />
+ 				<small>
+				판매가 : <span class="code">${articleList.getD_bsellvalue()}</span> 원 <br />
+				출고기간 : 주문 접수 후 3일 이내에 출고<br /> (토/일 공휴일 제외)
+				
+				</small> 
+			</td>
+			<td width="100px">${articleList.getD_bgrade()}</td>
+			<td width="100px">무료</td>
+			<td width="100px">${articleList.getD_id()}</td>
+			<td width="100px">
+				<button	onclick="window.location='/DoIt/d_online/onSellForm.do'"><small>장바구니</small></button>
+				<button	onclick="window.location='/DoIt/d_online/onSellForm.do?d_bcode=${articleList.getD_bcode()}'"><small>책 구매</small></button>
+			</td>
+		</tr>
+	 
+	</c:forEach>
 
+</table>
+</c:if>	
 
 

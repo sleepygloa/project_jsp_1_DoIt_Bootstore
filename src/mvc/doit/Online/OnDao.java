@@ -68,7 +68,7 @@ public class OnDao {
         conn = getConnection();
         pstmt = conn.prepareStatement(
 //       		 "select count(*) from d_onBook b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2"
-        		"select count(*) from (select b.* from d_onBook b, (SELECT max(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
+        		"select count(*) from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
                 "where b.d_bcode = s.d_bcode) b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2"
        		 );
         rs = pstmt.executeQuery();
@@ -101,7 +101,7 @@ public class OnDao {
 "select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,r "+
 "from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
 "from (select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate "+
-"from (select b.* from d_onBook b, (SELECT max(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
+"from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
 "where b.d_bcode = s.d_bcode) b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 )) where r >= "+startRow+" and r <= "+endRow        		
         		);
        		 
@@ -156,17 +156,17 @@ public class OnDao {
 if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 1 & d_bonFillterReturn <= 6){
 //	sql += "select count(*) from d_onBook b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and "+ 
 //			 " d_bgenre = '" +d_bonFillter+ "'"	;
-	sql += "select count(*) from (select b.* from d_onBook b, (SELECT max(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
+	sql += "select count(*) from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
 		    "where b.d_bcode = s.d_bcode and d_bgenre = '" +d_bonFillter+ "') b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2";	
 }else if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 7 & d_bonFillterReturn <= 10){
 //	sql += "select count(*) from d_onBook b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and "+ 
 //			 " d_bgenre2 = '" +d_bonFillter+ "'"	;
-	sql += "select count(*) from (select b.* from d_onBook b, (SELECT max(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
+	sql += "select count(*) from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
 		    "where b.d_bcode = s.d_bcode and d_bgenre2 = '" +d_bonFillter+ "') b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2";
 }else if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 11 & d_bonFillterReturn <= 12){
 //	sql += "select count(*) from d_onBook b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and "+ 
 //			 " d_bLocation = '" +d_bonFillter+ "'"	;
-	sql += "select count(*) from (select b.* from d_onBook b, (SELECT max(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
+	sql += "select count(*) from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
 		    "where b.d_bcode = s.d_bcode and d_bLocation = '" +d_bonFillter+ "') b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2";	
 
 }else{};
@@ -204,7 +204,7 @@ if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 1 & d_bonFillterReturn <= 6)
 	sql += "select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,r "+
 			"from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
 			"from (select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate "+
-			"from (select b.* from d_onBook b, (SELECT max(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
+			"from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
 			"where b.d_bcode = s.d_bcode and d_bgenre = '" +d_bonFillter+ "') b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 )) where r >= "+startRow+" and r <= "+endRow;	
 }else if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 7 & d_bonFillterReturn <= 10){
 //	sql += "select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,r "+
@@ -214,7 +214,7 @@ if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 1 & d_bonFillterReturn <= 6)
 	sql += "select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,r "+
 			"from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
 			"from (select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate "+
-			"from (select b.* from d_onBook b, (SELECT max(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
+			"from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
 			"where b.d_bcode = s.d_bcode and d_bgenre2 = '" +d_bonFillter+ "') b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 )) where r >= "+startRow+" and r <= "+endRow;	
 }else if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 11 & d_bonFillterReturn <= 12){
 //	sql += "select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,r "+
@@ -224,7 +224,7 @@ if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 1 & d_bonFillterReturn <= 6)
 	sql += "select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,r "+
 			"from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
 			"from (select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate "+
-			"from (select b.* from d_onBook b, (SELECT max(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
+			"from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
 			"where b.d_bcode = s.d_bcode and d_bLocation = '" +d_bonFillter+ "') b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 )) where r >= "+startRow+" and r <= "+endRow;	
 
 }else{};        
@@ -403,6 +403,50 @@ public List getD_BSelectList(String select, int startRow, int endRow) throws Exc
        }
        return article;
     }
+//-------------d_bcode로 부르는 책 상세정보
+    public OnBookDto getOnBookArticleD_bcode(int d_bcode) throws Exception{
+        OnBookDto article = null;
+        
+        try{
+           conn = getConnection();
+           pstmt = conn.prepareStatement(
+                 "select * from d_onBook where d_bcode = "+d_bcode);
+
+           rs = pstmt.executeQuery();
+           
+           if(rs.next()){
+              article = new OnBookDto();
+             article.setD_bno(rs.getInt("d_bno"));
+             article.setD_bcode(rs.getInt("d_bcode"));
+             article.setD_bname(rs.getString("d_bname"));
+             article.setD_bgrade(rs.getString("d_bgrade"));
+             article.setD_bpublisher(rs.getString("d_bpublisher"));
+             article.setD_bauthor(rs.getString("d_bauthor"));
+             article.setD_bgenre(rs.getString("d_bgenre"));
+             article.setD_bgenre2(rs.getString("d_bgenre2"));
+             article.setD_blocation(rs.getString("d_blocation"));
+             article.setD_bregistdate(rs.getString("d_bregistdate"));
+             article.setD_bpic(rs.getString("d_bpic"));
+             article.setD_bcount(rs.getInt("d_bcount"));
+             article.setD_bvalue(rs.getInt("d_bvalue"));
+             article.setD_bsellvalue(rs.getInt("d_bsellvalue"));
+             article.setD_bpurchasevalue(rs.getInt("d_bpurchasevalue"));
+             article.setD_icode(rs.getInt("D_icode"));
+             article.setD_id(rs.getString("d_id"));                
+             article.setD_bdeliverycode(rs.getInt("d_bdeliverycode"));
+             article.setD_bdate(rs.getTimestamp("d_bdate"));
+
+                              
+           }          
+        }catch(Exception e){
+           e.printStackTrace();
+        }finally{ 
+              if( rs != null ){ try{ rs.close(); }catch( SQLException se ){}};
+              if( pstmt != null ){ try{ pstmt.close(); }catch( SQLException se ){}};
+              if( conn != null ){ try{ conn.close(); }catch( SQLException se ){}};
+        }
+        return article;
+     }
     
 
 //-----중고 판매가격 List-----중고 판매가 List-----중고 판매가 List-----중고 판매가 List-----중고 판매가 List-----중고 판매가 List
@@ -442,7 +486,6 @@ public List getD_BSelectList(String select, int startRow, int endRow) throws Exc
 //-----------d_onBook에 책 코드만 추가-----------d_onBook에 책 코드만 추가-----------d_onBook에 책 코드만 추가-----------d_onBook에 책 코드만 추가
     public int setD_bcode(String d_id, OnBookDto onbookdto){
     	int d_bcode = 0;
-    	int d_bno = 0;
 	      try{
 	        conn=getConnection();
 	        pstmt = conn.prepareStatement(
@@ -1325,7 +1368,122 @@ public OnBookDto FindRandomArticle(String d_bname) throws Exception{
  
 
 
+//------------------이름이 같은 이름을 찾는Dao, 구매 상세 페이지 List count------------------이름이 같은 이름을 찾는Dao, 구매 상세 페이지 List count------------------이름이 같은 이름을 찾는Dao, 구매 상세 페이지 List count------------------이름이 같은 이름을 찾는Dao, 구매 상세 페이지 List count
+public int getFindNameToNameCount(String d_bname) throws Exception{
+    int x = 0;
+    try{
+       conn = getConnection();
+       pstmt = conn.prepareStatement(
+       		"select count(*) from (select * from d_onBook where d_bname like '%"+d_bname+"%' and d_bgrade != '매입불가')"
+      		 );
+       rs = pstmt.executeQuery();
+       if(rs.next()){
+          x = rs.getInt(1); //카운트 첫번째 행의 값을 출력하여 x에 대입
+       }
+    }catch(Exception e){
+       e.printStackTrace();
+    }finally{
+       if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+       if( pstmt != null){ try{ pstmt.close(); }catch(SQLException se){} };
+       if( conn != null){ try{ conn.close(); }catch(SQLException se){} };
+    }
+    return x ;
+ }
+  
 
+//-------------------이름이 같은 이름을 찾는 Dao, 구매 상세페이지의 List-------------------이름을 같은 이름을 찾는 Dao, 구매 상세페이지의 List-------------------이름을 같은 이름을 찾는 Dao, 구매 상세페이지의 List-------------------이름을 같은 이름을 찾는 Dao, 구매 상세페이지의 List
+public List getFindNameToName(String d_bname, int startRow, int endRow) throws Exception{
+	   List articleList = null;
+	    try {
+	       conn = getConnection();
+	       pstmt = conn.prepareStatement(
+   "select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,r "+
+   "from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
+   "from (select * from d_onBook where d_bname like '%"+d_bname+"%' and d_bgrade != '매입불가')) where  r >= "+startRow+" and r <= "+endRow
+   );
+	       rs = pstmt.executeQuery();
+	       
+	       if(rs.next()){
+	          articleList = new ArrayList();
+	          do{
+	        	OnBookDto dto = new OnBookDto();
+  				dto.setD_bno(rs.getInt("d_bno"));
+				dto.setD_bcode(rs.getInt("d_bcode"));
+				dto.setD_bname(rs.getString("d_bname"));
+				dto.setD_bgrade(rs.getString("d_bgrade"));
+				dto.setD_bpublisher(rs.getString("d_bpublisher"));
+				dto.setD_bauthor(rs.getString("d_bauthor"));
+				dto.setD_bgenre(rs.getString("d_bgenre"));
+				dto.setD_bgenre2(rs.getString("d_bgenre2"));
+				dto.setD_blocation(rs.getString("d_blocation"));
+				dto.setD_bregistdate(rs.getString("d_bregistdate"));
+				dto.setD_bpic(rs.getString("d_bpic"));
+				dto.setD_bcount(rs.getInt("d_bcount"));
+				dto.setD_bvalue(rs.getInt("d_bvalue"));
+				dto.setD_bsellvalue(rs.getInt("d_bsellvalue"));
+				dto.setD_bpurchasevalue(rs.getInt("d_bpurchasevalue"));
+				dto.setD_id(rs.getString("d_id"));                
+				dto.setD_bdeliverycode(rs.getInt("d_bdeliverycode"));
+				dto.setD_bdate(rs.getTimestamp("d_bdate"));         
+				articleList.add(dto);      
+	          }while(rs.next());
+	       }
+	       
+	    }catch(Exception e){
+	       e.printStackTrace();
+	    }finally{
+	       if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+	       if( pstmt != null){ try{ pstmt.close(); }catch(SQLException se){} };
+	       if( conn != null){ try{ conn.close(); }catch(SQLException se){} };
+	    }
+	    return articleList;
+}
+
+
+//--------d_bname으로 최저가를 검색하는 dao(구매상세페이지)--------d_bname으로 최저가를 검색하는 dao(구매상세페이지)--------d_bname으로 최저가를 검색하는 dao(구매상세페이지)
+public int getFindNameToMinSellValue(String d_bname) throws Exception{
+    int x = 0;
+    try{
+       conn = getConnection();
+       pstmt = conn.prepareStatement(
+       		"select min(d_bsellvalue) from d_onBook where d_bname like '%"+d_bname+"%' and d_bgrade != '매입불가'"
+      		 );
+       rs = pstmt.executeQuery();
+       if(rs.next()){
+          x = rs.getInt(1); //카운트 첫번째 행의 값을 출력하여 x에 대입
+       }
+    }catch(Exception e){
+       e.printStackTrace();
+    }finally{
+       if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+       if( pstmt != null){ try{ pstmt.close(); }catch(SQLException se){} };
+       if( conn != null){ try{ conn.close(); }catch(SQLException se){} };
+    }
+    return x ;
+ }
+
+
+//--------d_bname으로 최저가를 검색하는 등급에 따른 판매예상금액 (책정보페이지)--------d_bname으로 최저가를 검색하는 등급에 따른 판매예상금액 (책정보페이지)--------d_bname으로 최저가를 검색하는 등급에 따른 판매예상금액 (책정보페이지)
+public int getFindNameToValue(String d_bname) throws Exception{
+  int x = 0;
+  try{
+     conn = getConnection();
+     pstmt = conn.prepareStatement(
+     		"select d_bvalue from d_onBook where d_bname like '%"+d_bname+"%' and d_bgrade != '매입불가'"
+    		 );
+     rs = pstmt.executeQuery();
+     if(rs.next()){
+        x = rs.getInt(1); //카운트 첫번째 행의 값을 출력하여 x에 대입
+     }
+  }catch(Exception e){
+     e.printStackTrace();
+  }finally{
+     if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+     if( pstmt != null){ try{ pstmt.close(); }catch(SQLException se){} };
+     if( conn != null){ try{ conn.close(); }catch(SQLException se){} };
+  }
+  return x ;
+}
 
 
 

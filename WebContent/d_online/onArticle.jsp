@@ -21,19 +21,55 @@
 				<img src="\DoIt\d_bpic/${article.d_bpic}" width="300px" />
 			</td>
 			<td>
-				정가 : ${article.d_bvalue}<br />
-				판매가 : ${article.d_bsellvalue}<br /> 
-				배송료 : 무료<br />
-				수령 예상일 : 0<br />
-				주문 수량 : 1개<br />
+				<table class="d-margin"  width="80%">
+					<tr>
+						<td>정가 : ${article.d_bvalue}</td>
+					</tr>
+					<tr>
+						<td>판매가 : ${article.d_bsellvalue}</td>
+					</tr>
+					<tr>
+						<td>배송료 : 무료</td>
+					</tr>
+					<tr>
+						<td>수령 예상일 :   (배송일로부터 3일이내)</td>
+					</tr>										
+				</table>				
+				<br />
+
+				<table class="d-center" border="1px solid black" width="80%">
+					<tr>
+						<td colspan="3">*.알라딘에 팔기 예상가</td>
+					</tr>
+					<tr>
+						<td width="30%">최상</td>
+						<td width="30%">상</td>
+						<td width="30%">중</td>
+					</tr>
+					<tr>
+						<td>${d_bpurchasevalueS} 원</td>
+						<td>${d_bpurchasevalueA} 원</td>
+						<td>${d_bpurchasevalueB} 원	</td>
+					</tr>
+				</table>
+				
+				
+				
+				
+				
+				
+				
+				
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2"><div class="jumbotron">
-				<span>이 책을 갖고 있다면?</span><br />
-				<div><input class="ghost-btn" type="button" value="책  판매"
-				onclick="window.location='/DoIt/d_online/onSellForm.do?d_bno=${d_bno}&s=sellpage'" /></div>
-				</div></td>
+			<td>
+				<span>이 책을 갖고 있다면?</span>
+			</td>
+			<td>
+				<input class="btn btn-default d-w-30" type="button" value="책  판매"
+				onclick="window.location='/DoIt/d_online/onSellForm.do?d_bno=${d_bno}&s=sellpage'" />
+			</td>
 		</tr>
 		<tr>
 			<td class="d-center" colspan="2">
@@ -50,7 +86,9 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				${obiDto.d_norder}
+				<table width="90%" class="d-margin">
+					<tr><td>${obiDto.d_norder}</td></tr>
+				</table>
 			</td>
 		</tr>
 		<tr>
@@ -59,7 +97,9 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				${obiDto.d_nintro}
+				<table width="90%" class="d-margin">
+					<tr><td>${obiDto.d_nintro}</td></tr>
+				</table>
 			</td>
 		</tr>		
 
