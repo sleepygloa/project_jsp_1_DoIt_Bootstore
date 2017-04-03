@@ -22,7 +22,7 @@ public class AdminOnBuyBookList_DetailAction implements SuperAction {
 		 		 		 	int d_bcode = Integer.parseInt(request.getParameter("d_bcode"));
 		 		 		 	
 		 		 		 	OnDao dao = OnDao.getInstance();
-		 		 			OnBookDto dto = dao.User_onBuyBook(d_bno);
+		 		 			OnBookDto dto = dao.User_onBuyBook(d_bno,d_bcode);
 		 		 			DeliveryDto DelDto = dao.User_onBuyBookList_detail(d_bcode);
 		 		 			
 		 		 			LoginDao LogDao = LoginDao.getInstance();
