@@ -45,7 +45,7 @@ public class OnDao {
     		conn = getConnection();
     		pstmt = conn.prepareStatement(
 "select count(*) from ( "+
-"select d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher,d_bauthor, d_bgenre, d_bgenre2, d_blocation, d_bregistdate, d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, D_icode, d_id, d_bdeliverycode, to_char(d_bdate, 'yyyy-mm-dd') AS d_bdate from d_onBook) b, d_onSellList s " +
+"select d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher,d_bauthor, d_bgenre, d_bgenre2, d_blocation, d_bregistdate, d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, d_icode, d_id, to_char(d_bdate, 'yyyy-mm-dd') AS d_bdate from d_onBook) b, d_onSellList s " +
 "where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and d_bdate = (select to_char(sysdate, 'yyyy-mm-dd') as d_bdate from dual)"
 );
     		rs = pstmt.executeQuery();
@@ -72,7 +72,7 @@ public class OnDao {
         pstmt = conn.prepareStatement(
 //       		 "select count(*) from d_onBook b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2"
         		"select count(*) from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
-                "where b.d_bcode = s.d_bcode) b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and b.d_bcount = 1"
+                "where b.d_bcode = s.d_bcode) b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2"
        		 );
         rs = pstmt.executeQuery();
         if(rs.next()){
@@ -101,7 +101,7 @@ public class OnDao {
 "from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
 "from (select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate "+
 "from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
-"where b.d_bcode = s.d_bcode) b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and b.d_bcount = 1)) where r >= "+startRow+" and r <= "+endRow        		
+"where b.d_bcode = s.d_bcode) b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2)) where r >= "+startRow+" and r <= "+endRow        		
         		);
        		 
         rs = pstmt.executeQuery();
@@ -154,13 +154,13 @@ public class OnDao {
         String sql = "";
 if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 1 & d_bonFillterReturn <= 6){
 	sql += "select count(*) from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
-		    "where b.d_bcode = s.d_bcode and d_bgenre = '" +d_bonFillter+ "') b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and b.d_bcount = 1";	
+		    "where b.d_bcode = s.d_bcode and d_bgenre = '" +d_bonFillter+ "') b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2";	
 }else if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 7 & d_bonFillterReturn <= 10){
 	sql += "select count(*) from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
-		    "where b.d_bcode = s.d_bcode and d_bgenre2 = '" +d_bonFillter+ "') b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and b.d_bcount = 1";
+		    "where b.d_bcode = s.d_bcode and d_bgenre2 = '" +d_bonFillter+ "') b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2";
 }else if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 11 & d_bonFillterReturn <= 12){
 	sql += "select count(*) from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
-		    "where b.d_bcode = s.d_bcode and d_bLocation = '" +d_bonFillter+ "') b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and b.d_bcount = 1";	
+		    "where b.d_bcode = s.d_bcode and d_bLocation = '" +d_bonFillter+ "') b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2";	
 
 }else{};
         
@@ -194,19 +194,19 @@ if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 1 & d_bonFillterReturn <= 6)
 			"from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
 			"from (select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate "+
 			"from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
-			"where b.d_bcode = s.d_bcode and d_bgenre = '" +d_bonFillter+ "') b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and b.d_bcount = 1 )) where r >= "+startRow+" and r <= "+endRow;	
+			"where b.d_bcode = s.d_bcode and d_bgenre = '" +d_bonFillter+ "') b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 )) where r >= "+startRow+" and r <= "+endRow;	
 }else if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 7 & d_bonFillterReturn <= 10){
 	sql += "select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,r "+
 			"from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
 			"from (select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate "+
 			"from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
-			"where b.d_bcode = s.d_bcode and d_bgenre2 = '" +d_bonFillter+ "') b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and b.d_bcount = 1 )) where r >= "+startRow+" and r <= "+endRow;	
+			"where b.d_bcode = s.d_bcode and d_bgenre2 = '" +d_bonFillter+ "') b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 )) where r >= "+startRow+" and r <= "+endRow;	
 }else if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 11 & d_bonFillterReturn <= 12){
 	sql += "select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,r "+
 			"from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
 			"from (select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate "+
 			"from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
-			"where b.d_bcode = s.d_bcode and d_bLocation = '" +d_bonFillter+ "') b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and b.d_bcount = 1 )) where r >= "+startRow+" and r <= "+endRow;	
+			"where b.d_bcode = s.d_bcode and d_bLocation = '" +d_bonFillter+ "') b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 )) where r >= "+startRow+" and r <= "+endRow;	
 
 }else{};        
         
@@ -578,8 +578,8 @@ public List getD_BSelectList(String select, int startRow, int endRow) throws Exc
            pstmt = conn.prepareStatement(
 "select *  from "+ 
 "(select b.*, s.d_sno, s.d_sdate, s.d_sfinish,  rownum r  from d_onSellList s, d_onBook b "+
-"where s.d_bcode = b.d_bcode and s.d_id = b.d_id and s.d_id = '"+d_id+"' and s.d_sfinish = 0 order by d_bno asc) "+
-"where r >= "+startRow+" and r <= "+endRow+" order by d_sno asc"
+"where s.d_bcode = b.d_bcode and s.d_id = b.d_id and s.d_id = '"+d_id+"' and s.d_sfinish = 0) "+
+"where r >= "+startRow+" and r <= "+endRow
 );
            rs = pstmt.executeQuery();
            
@@ -1101,7 +1101,7 @@ public List User_BuyBook_CancelList(int start, int end, String id) throws Except
         try {
            conn = getConnection();
            pstmt = conn.prepareStatement("SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher, d_bauthor, d_bgenre,d_bgenre2, d_blocation,"
-              		+ "d_bregistdate,d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, d_icode, d_id, d_bdeliverycode, d_bdate,"
+              		+ "d_bregistdate,d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, d_icode, d_id,d_bdeliverycode,d_bdate,"
                		+ "d_sno, d_sfinish, d_sdate , r FROM "
                		+ "(SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher, d_bauthor, d_bgenre, d_bgenre2, d_blocation,"
                		+ "d_bregistdate, d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, d_icode, d_id, d_bdeliverycode, d_bdate, "
@@ -2169,6 +2169,123 @@ public int getFindNameToValue(String d_bname) throws Exception{
   }
   return x ;
 }
+
+
+//--------------- 회원 등급 관리 Dao ---------- 책코드로 아이디를 불러오고, 아이디로 판매한 책 count 반환하는 dao-------------------------------------------
+public String getUserSellPurchaseCountToGrade(int d_bcode) throws Exception{
+	  String Check = "";
+	  int sellCount = 0;
+	  int purchaseCount = 0;
+	  String d_id = null;
+	  int d_nom_grade = 0;
+	  try{
+	     conn = getConnection();
+	     
+	     //d_onBook에서 회원이 방금 판매한 책코드로 회원의 id를 검색함
+	     pstmt = conn.prepareStatement(
+	     		"select d_id from d_onBook where d_bcode = " + d_bcode
+	    		 );
+	     rs = pstmt.executeQuery();
+	     if(rs.next()){
+	    	 d_id = rs.getString("d_id");
+	    	 
+		     //회원의 id로 d_onBook에서 구매한 수를 세어줍니다.
+		     pstmt = conn.prepareStatement(
+		    		 "select count(*) from d_onBook where d_id = '" + d_id + "'"
+		    		 );
+		     rs = pstmt.executeQuery();
+		     if(rs.next()){
+		    	 purchaseCount = rs.getInt(1); //카운트 첫번째 행의 값을 출력하여 x에 대입
+		     }else{}
+		     //회원의 id로 d_onSellList에서 판매한 수를 세어 줍니다.
+	    	 pstmt = conn.prepareStatement(
+	    			 "select count(*) from d_onSellList where d_id = '" + d_id +"'"
+					);
+	    	 rs = pstmt.executeQuery();
+	    	 if(rs.next()){
+	    		 sellCount = rs.getInt(1);
+	    	 }else{}
+	    	 //회원의 id로 d_member에서 회원의 등급을 불러옵니다.
+	    	 pstmt = conn.prepareStatement(
+	    			 "select d_nom_grade from d_member where d_id = '" + d_id + "'" 
+					);
+	    	 rs = pstmt.executeQuery();
+	    	 if(rs.next()){
+	    		 d_nom_grade = rs.getInt("d_nom_grade");
+	    		 
+	    	 }else{}
+	     }
+
+	     //회원이 20개 이상 구매하고, 10개 이상 판매했을때와 50개 이상 구매하고 30개이상 판매했을때 의 경우로 회원의 등급을 올려줍니다.
+	     //회원등급은 기본이 0, 책에 관심이 있는 책벌레 1, 책좀 읽는 책벌레 2 입니다. 
+	     switch (d_nom_grade) {
+		     case 0 :	   
+			    	 Check = "00"; //기본값입니다.
+			    	 if(purchaseCount >= 20 && sellCount >= 10){
+				    	 pstmt = conn.prepareStatement(
+				    			 "update d_member SET d_nom_grade = 1 where d_id = '" + d_id + "'"
+				    			 );
+				    	 pstmt.executeUpdate();
+				    	 Check = "01";
+				     }
+		    	 break;
+		    	 
+		     case 1 :
+		    	 	 Check = "11";
+			    	 if(purchaseCount >= 50 && sellCount >= 30 ){
+				    	 pstmt = conn.prepareStatement(
+				    			 "update d_member SET d_nom_grade = 2 where d_id = '" + d_id + "'"
+				    			 );
+				    	 pstmt.executeUpdate();	    
+				    	 Check = "12";
+				     }
+		    	 break;
+		    	 
+		     case 2 :
+		    	 	Check = "22";
+		    	 break;
+
+	     }
+	     
+	     
+	  }catch(Exception e){
+	     e.printStackTrace();
+	  }finally{
+	     if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+	     if( pstmt != null){ try{ pstmt.close(); }catch(SQLException se){} };
+	     if( conn != null){ try{ conn.close(); }catch(SQLException se){} };
+	  }
+	  return Check ;
+	}
+
+//----------------- 회원 등급 관리 Dao ---------- 회원가 적용을 위해 세션의 ID로 등급 값을 불러옴 --------------------------------------
+
+public int getIdToGrade(String d_id) throws Exception{
+	 int x = 0;
+	 try{
+	    conn = getConnection();
+	    pstmt = conn.prepareStatement(
+	    		"select d_nom_grade from d_member where d_id = '" + d_id + "'"
+	    		);
+	    
+	    rs = pstmt.executeQuery();
+	    if(rs.next()){
+	       x = rs.getInt(1); //카운트 첫번째 행의 값을 출력하여 x에 대입
+	    }
+	 }catch(Exception e){
+	    e.printStackTrace();
+	 }finally{
+	    if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+	    if( pstmt != null){ try{ pstmt.close(); }catch(SQLException se){} };
+	    if( conn != null){ try{ conn.close(); }catch(SQLException se){} };
+	 }
+	 return x ;
+} 
+
+
+
+
+
 
 
 

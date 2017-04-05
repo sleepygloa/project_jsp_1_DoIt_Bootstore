@@ -16,4 +16,7 @@
 		<li><a href="/DoIt/d_login/user_BuyBookList.do">주문/배송 조회</a></li>
 		<li><a href="/DoIt/d_login/user_BuyBook_CancelList.do">취소처리현황</a></li>
 	</ul>
+	<ul class="my_side_ul">
+		<li><a href="/DoIt/d_login/myList.do?cols=dr_rent">나의 주문 목록</a></li>
+	</ul>	
 </article>

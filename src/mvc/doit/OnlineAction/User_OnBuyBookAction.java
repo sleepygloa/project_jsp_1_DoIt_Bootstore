@@ -16,15 +16,18 @@ public class User_OnBuyBookAction  implements SuperAction {
 	 	
 	 	HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("memId");
+		int d_bgradevalue =  0 ; //변수초기화
+		if(request.getParameter("d_bgradevalue") != null){ d_bgradevalue = Integer.parseInt(request.getParameter("d_bgradevalue"));}
 	 	
 		//받아온 변수 d_bno, d_bcode 중 둘중 하나가 존재 할 때, 변수로 저장한다.
 		int d_bno = 0;
 		int d_bcode = 0;
-		if(request.getParameter("d_bno") == null && request.getParameter("d_bcode") == null){
+		if(		 	request.getParameter("d_bno") == null && request.getParameter("d_bcode") == null){
 			
-		}else if( request.getParameter("d_bcode") == null && request.getParameter("d_bno") != null){
+		}else if(	request.getParameter("d_bcode") == null && request.getParameter("d_bno") != null){
 			d_bno = Integer.parseInt(request.getParameter("d_bno"));
-		}else if(request.getParameter("d_bcode") != null){
+			
+		}else if(	request.getParameter("d_bcode") != null){
 			d_bcode = Integer.parseInt(request.getParameter("d_bcode"));
 		}
 	 	

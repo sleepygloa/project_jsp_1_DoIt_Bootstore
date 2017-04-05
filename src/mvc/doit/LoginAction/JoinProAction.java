@@ -28,24 +28,25 @@ public class JoinProAction implements SuperAction {
 		MultipartRequest multi = new MultipartRequest(request, path, size, enc, df);
 		
 		LoginDto dto = new LoginDto();
-		dto.setD_id(multi.getParameter("d_id"));
-		dto.setD_pass( multi.getParameter("d_pass"));
-		dto.setD_name(multi.getParameter("d_name"));
-		dto.setUser_phone1(multi.getParameter("user_phone1"));
-		dto.setUser_phone2(multi.getParameter("user_phone2"));
-		dto.setUser_phone3(multi.getParameter("user_phone3"));
-		dto.setD_addr(multi.getParameter("d_addr"));
-		dto.setD_person(multi.getParameter("d_person"));
-		dto.setUser_mail1(multi.getParameter("user_mail1"));
-		dto.setUser_mail2(multi.getParameter("user_mail2"));
-		dto.setUser_birth1(multi.getParameter("user_birth1"));
-		dto.setUser_birth2(multi.getParameter("user_birth2"));
-		dto.setUser_birth3(multi.getParameter("user_birth3"));		
-		dto.setD_gender(multi.getParameter("d_gender"));
-		dto.setD_pic(multi.getFilesystemName("save"));
-		dto.setD_date(new Timestamp(System.currentTimeMillis()));
-	
-		request.setAttribute("on",multi.getOriginalFileName("save"));
+		dto.setD_id(multi.getParameter("d_id")); //아이디
+		dto.setD_pass( multi.getParameter("d_pass")); //비밀번호
+		dto.setD_name(multi.getParameter("d_name")); //이름
+		dto.setUser_phone1(multi.getParameter("user_phone1")); //010
+		dto.setUser_phone2(multi.getParameter("user_phone2")); //중간자리
+		dto.setUser_phone3(multi.getParameter("user_phone3")); //끝자리
+		dto.setD_addr(multi.getParameter("d_addr")); //회원주소
+		dto.setD_person(multi.getParameter("d_person")); //개인/기업
+		dto.setUser_mail1(multi.getParameter("user_mail1")); //이메일 앞자리@
+		dto.setUser_mail2(multi.getParameter("user_mail2")); //@이메일 뒷자리
+		dto.setUser_birth1(multi.getParameter("user_birth1")); //생년월일(앞자리)년
+		dto.setUser_birth2(multi.getParameter("user_birth2")); //생년월일(중간)월
+		dto.setUser_birth3(multi.getParameter("user_birth3")); //생년월일(끝)일
+		dto.setD_gender(multi.getParameter("d_gender")); //남/녀
+		dto.setD_pic(multi.getFilesystemName("save")); //회원 사진
+		dto.setD_date(new Timestamp(System.currentTimeMillis())); //회원가입날짜
+		//여기서 없는 D_nom_grade는 기본값으로 0 입력됩니다. D_nom_grade 온라인서점의  회원등급
+		
+		request.setAttribute("on",multi.getOriginalFileName("save")); 
 		request.setAttribute("ct",multi.getContentType("ct"));
 		request.setAttribute("sn",multi.getFilesystemName("sb"));				
 		request.setAttribute("path", path);

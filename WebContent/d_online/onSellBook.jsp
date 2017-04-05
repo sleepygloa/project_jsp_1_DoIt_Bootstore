@@ -19,15 +19,14 @@
 <div class="grid-box d-center d-margin">
 	
 <div class="jumbotron">
-	<div class="d-left-fl d-l-padding10"><p>이 책을 갖고 있다면? ---></p></div>
-	<div class="d-right-fl d-r-padding10">
 		<!-- 신규 책 판매, 클릭시 판매신청서 페이지로 이동-- -->
-		<button class="ghost-btn" 
+		이 책을 갖고 있나요?&nbsp;&nbsp;&nbsp;&nbsp;
+		<button class="btn btn-default grid-w1-btn-50" 
 		onclick="window.location='/DoIt/d_online/onSellForm.do?d_bno=0&s=sellpage'">책 판매</button>
-	</div>
-</div>
 
-<div class="d-space10"></div>	
+</div>
+<hr />
+<div class="d-space20"></div>	
 
 	<!-- select box ----------- -->
 	<div class="grid-w2 d-center">

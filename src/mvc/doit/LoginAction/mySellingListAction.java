@@ -43,7 +43,7 @@ public class mySellingListAction implements SuperAction {
 //            articleList = article.getD_bSellingList(d_id);//현재 페이지에 해당하는 글 목록
 //        }        
         //책의 링크를 타고 판매신청양식을 작성했을때
-        if(count>0){
+        if(count > 0){
 
             articleList = manager.getD_bMySellingList(d_id, startRow, endRow);//현재 페이지에 해당하는 글 목록
         }

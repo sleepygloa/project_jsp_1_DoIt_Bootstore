@@ -92,11 +92,7 @@ public class OnSellFormProAction implements SuperAction {
 		//책 전체 DB에 레코드를 추가, 책코드부여와 전달된 값을 삽입하며, 다시 책코드를 반환합니다. //D_bcode를 이용하여 다른 테이블과 연결을 함.
 		int d_bcode = dao.setD_bcode(d_id, onbookdto);
 		
-		//배송코드, 배송테이블에서 세레코드를 만들어야함, 배송코드만 제외한 나머비는 기본값.
-		
-//		DeliveryDao deliveryManager = DeliveryDao.getInstance();
-//		int d_bdeliverycode = deliveryManager.setD_bdeliverycode(d_id, d_bcode);
-		
+	
 	//(위의)3.d_onSellList 테이블에서 전체리스트를 작성해줍니다.
 		OnSellListDto onSellListDto = new OnSellListDto();
 		onSellListDto.setD_bcode(d_bcode);

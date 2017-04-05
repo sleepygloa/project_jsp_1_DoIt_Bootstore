@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -10,19 +9,24 @@
 		
 		<%-- header, footer  --%>
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/he_foot.css?ver=1">
+<!-- <link rel="stylesheet" type="text/css"  href="/DoIt/css/he_foot.css"> 윤수 장바구니 20170331 버전-->
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/reset.css">
 		
 		<%-- 회원관리 css 삽입 --%>
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/join.css">
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/Login.css">
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/side_menu.css">
-		<link rel="stylesheet" type="text/css"  href="/DoIt/css/my_page.css">
+		<!-- <link rel="stylesheet" type="text/css"  href="/DoIt/css/my_page.css"> 선향  20170403 버전-->
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/my_page.css?ver=2">		
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/online.css">
 
+		<%-- 도서관 css삽입 --%>
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/d_rent.css">
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/deli_order.css">
 
-
-
+		<%-- 온라인 서점, 직접 판매 css 삽입 선호 --%>
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/bootstrap-ko.css">
+
 		
 		
 		<%-- 스크립트, Jquery  삽입 --%>
@@ -46,12 +50,76 @@
 					$(".s_list_con").slideDown().stop();
 					$(".s_list_con").slideUp();
 				})
+
 				
+				//도서관 상세보기 파트 구분
+				$("#de_cont").click(function(){
+					$(".det_bot").css("display","block");
+					$(".det_bot2").css("display","none");
+					$(".det_bot3").css("display","none");
+					$("#re_table").css("display","none");
+				})
+				$("#de_review").click(function(){
+					$(".det_bot").css("display","none");
+					$(".det_bot2").css("display","block");
+					$(".det_bot3").css("display","none");
+					$("#re_table").css("display","none");
+				})
+				$("#de_return").click(function(){
+					$(".det_bot").css("display","none");
+					$(".det_bot2").css("display","none");
+					$(".det_bot3").css("display","block");
+					$("#re_table").css("display","none");
+				})
+				
+				
+				//도서관 상세보기 - 기부자가 같은 도서 추천
+				$(".gi_prev").click(function(){
+					$(".list_book_cont").animate({
+						left : 0
+					});
+				})
+				
+				$(".gi_next").click(function(){
+					$(".list_book_cont").animate({
+						left : -964
+					});
+				})
+				
+				
+				//장바구니 제어
+				//장바구니 구분 불러오기
+				$(".cart_title").click(function(){
+					$(".cart_title_cont").slideToggle();
+				})
+				
+				//보여줄 장바구니 선택
+				$("#libr").click(function(){
+					$(".cart_lib").css("display","block");
+					$(".cart_pan").css("display","none");
+				})
+				$("#mechn").click(function(){
+					$(".cart_lib").css("display","none");
+					$(".cart_pan").css("display","block");
+				})
+				
+				//장바구니 내용(show, hide)
+				$(".jang_conb").on("mouseenter",function(){
+					$(this).children().eq(1).css("display","block");
+				})
+				$(".jang_conb").on("mouseleave",function(){
+					$(this).children().eq(1).css("display","none");
+				})				
 				
 			});
 
 		
-		
+			//현재 가지고 있지 않습니다.
+			function not_deli(){
+				alert("거래 정지 되었거나 현재 거래중인 회원이 아닙니다.");
+			}
+			
+			//한단계 뒤로 이동
 			function go_back(){
 				window.history.back();
 			}
@@ -65,8 +133,15 @@
 			//로그인이 필요하다는 알림
 			function board_se(){
 				alert("로그인이 필요합니다.");
-				window.location = "/jsp/login_board/mem_login/login.jsp";
+				window.location = "/DoIt/d_login/login.do";
 			}
+			
+			//리뷰 글쓰기 열림 제어
+			function review_go(){
+				document.getElementById("re_table").style.display="block";
+				document.getElementById("re_table").focus();
+			}
+			
 			
 			//관리자 등급이 아니라는 알림
 			function board_se2(){
@@ -110,7 +185,7 @@
 							<li><a>${ sessionScope.memId } 님 안녕하세요.</a></li>
 							<li><a href="/DoIt/d_login/logout.do">로그아웃</a></li>
 							<li><a href="/DoIt/d_login/myInfo.do">마이페이지</a></li>
-							<li><a href="#">장바구니</a></li>
+							<li><a href="/DoIt/d_cart/headCartList.do?cols=d_rent">장바구니</a></li>
 						</c:if>
 						<c:if test="${ sessionScope.memId != null && sessionScope.memMG == 0 }">
 							<li><a href="/DoIt/d_admin/admin.do">관리자 페이지</a></li>
@@ -121,10 +196,10 @@
 
  			<section class="l_list" >
 					<ul class="l_list_ma">
-
+						<li><p style="border:solid 1px red; width:220px; height:80px;">로고 삽입</p></li>
 						<li><a href="#">회사소개</a></li>
 						<li><a href="/DoIt/d_online/onSellBook.do">온라인중고서점</a></li>
-						<li><a href="#">DOIT 도서관</a></li>
+						<li><a href="/DoIt/d_rent/list_cont.do?view_type=list_cont">DOIT 도서관</a></li>
 						<li><a href="#">직거래게시판</a></li>
 						<li><a href="#">고객센터</a></li>
 					</ul>
@@ -164,6 +239,9 @@
 		</header>
 		
 		<div style="height:200px; width:100%;"></div>
+		
+		
+		<jsp:include page="/d_cart/cart_part.jsp"></jsp:include>		
 		
 		<section id="mypage_wrap">
 		

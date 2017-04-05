@@ -35,7 +35,8 @@
 						<td>수령 예상일 :   (배송일로부터 3일이내)</td>
 					</tr>										
 				</table>				
-				<br />
+				
+				<hr />
 
 				<table class="d-center" border="1px solid black" width="80%">
 					<tr>
@@ -52,34 +53,21 @@
 						<td>${d_bpurchasevalueB} 원	</td>
 					</tr>
 				</table>
-				
-				
-				
-				
-				
-				
-				
-				
+				<hr />
+				<table class="d-center" border="1px solid black" width="100%">
+					<tr>
+						<td class="d-w-33">				
+							<input class="btn btn-default d-w-100" type="button" value="책  판매"
+								onclick="window.location='/DoIt/d_online/onSellForm.do?d_bno=${d_bno}&s=sellpage'" /></td>
+						<td class="d-w-33"><input class="btn btn-default d-w-100" type="submit" value="구매하기" /></td>
+						<td class="d-w-33"><input class="btn btn-default d-w-100" type="button" value="취소"
+								onclick="window.location='/DoIt/d_online/onSellBook.do'" /> </td>
+					</tr>
+				</table>				
+		
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<span>이 책을 갖고 있다면?</span>
-			</td>
-			<td>
-				<input class="btn btn-default d-w-30" type="button" value="책  판매"
-				onclick="window.location='/DoIt/d_online/onSellForm.do?d_bno=${d_bno}&s=sellpage'" />
-			</td>
-		</tr>
-		<tr>
-			<td class="d-center" colspan="2">
-				<input class="btn btn-default d-w-30" type="button" value="장바구니" />
-				<input class="btn btn-default d-w-30" type="submit" value="구매하기" />
-				<input class="btn btn-default d-w-30" type="button" value="취소"
-					onclick="window.location='/DoIt/d_online/onSellBook.do'" /> 
-			</td>
-		</tr>
-		<tr></tr>
+
 		<tr>
 			<td colspan="2"><p class="big-font30 d-left20">목차</p>
 			</td>

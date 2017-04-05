@@ -22,25 +22,38 @@
 			<td width="300px" rowspan="2">
 				<img src="\DoIt\d_bpic/${article.d_bpic}" width="300px" />
 			</td>
-			<td class="d-left">
+			<td>
+				<table  class="d-margin"  width="80%">
+					<tr>
+						<td class="d-left">
 				작가:${article.d_bauthor}<br />
 				출판사:${article.d_bpublisher}<br />
 				장르:${article.d_bgenre}<br />
 				종류:${article.d_bgenre2}<br />
 				국내외:${article.d_blocation}<br />
 				책등급:${article.d_bgrade}<br />
+						</td>
+					</tr>
+				</table>
+
 			</td>
 
 		</tr>
 		<tr>
 			<td>
-				새상품 정보 : (s등급 책 보여주기)
-				정가 : ${article.d_bvalue}<br />
-				판매가 : ${article.d_bsellvalue} (정가대비 : ${valueToSellvaluePercent}% 할인)<br /> 
-				마일리지 : 결제 Db의 결제 금액의 10% 적립 <br />
+				<table  class="d-margin"  width="80%">
+					<tr>
+						<td class="d-left">
+				새상품 정보 : (s등급 책 보여주기)<br />
+				정가 : ${article.d_bvalue} 원<br />
+				판매가 : ${article.d_bsellvalue} 원 (정가대비 : ${valueToSellvaluePercent}% 할인)<br /> 
+				등급적용 판매가 : ${gradeToSellValue} 원 (기본등급이 아니시라면, 등급적용 판매가가 최종 구매금액입니다.) <br />
+				<input type="hidden" name="d_bgradevalue" value="${gradeToSellValue}" />
+						</td>
+					</tr>
+				</table>
 				<br />
-				
-				
+
 				<table class="d-center" border="1px solid black" width="80%">
 					<tr>
 						<td width="50%">DoIt 중고(${count})</td>

@@ -3,8 +3,8 @@
 .L_title{ margin-top:30px; font-weight:bold; font-size:1.1em; }
 
 /* 마이페이지 - mypage.jsp */
-#mypage_wrap{ max-width:1100px; min-width:1050px; margin:0 auto; overflow:hidden; }
-.my_cont_wrap{ min-width:860px; max-width:67%; float:right; overflow:hidden; }
+#mypage_wrap{ max-width:1100px; min-width:1050px; margin:0 auto; overflow:hidden; position:relative; z-index:2; margin-top:100px; }
+.my_cont_wrap{ min-width:860px; max-width:67%; float:right; overflow:hidden; z-index:3; }
 .my_title{ font-size:2em;  }
 .my_sub_title{ font-size:1em; margin-top:25px; border-top:2px solid #283444; padding-top:10px;}
 .my_sub_title span{ display:block; font-size:0.9em; line-height:20px; color:#737373}
@@ -56,20 +56,55 @@
 .inp_name{ width:90%; height:30px; }
 
 
+/* 나의 구매 / 대여 목록 */
+.my_list_tab{ width:100%; overflow:hidden; margin:15px 0px 35px 0px; }
+.my_list_tab li{ width:33.3%; box-sizing:border-box; float:left; overflow:hidden; text-align:center;}
+.my_list_tab li a{ display:block; width:100%; box-sizing:border-box;  font-size:17px; color:#3DB7CC; font-weight:bold; padding:15px 0px;  }
+.my_list_tab li:nth-child(1) a{ border: solid 2px #3DB7CC; border-bottom:none}
+.my_list_tab li:nth-child(2) a, .my_list_tab li:nth-child(3) a{ background:#f9f9f9; border:1px solid #d7d7d7; color:#333; border-bottom: solid 2px #3DB7CC; }
+
+.my_list_conte{ width:94%; margin:0 auto;  border:1px solid #cecece; box-shadow:0 2px 1px -1px rgba(0,0,0,0.1); margin-top:3%; }
+.list_con_img{ width:100%;  }
+.dasdff{ margin:0 auto; display:block; width:100px; height:115px; overflow:hidden; }
+.my_list_conte td{ padding:25px 0px;  }
+.my_list_conte td:nth-child(2){ text-indent:15px; font-size:13px; line-height:20px; }
+.my_list_conte td:nth-child(3) li:nth-child(1){ font-weight:bold; font-size:16px;}
+.my_list_conte td:nth-child(3){ font-size:14px; color:#777; border-left:1px solid #e7e7e7; box-sizing:border-box; text-align:center; }
+
+.list_con1 li:nth-child(2){ font-size:26px; line-height:45px; color:#3DB7CC; font-weight:bold; }
+
+.list_con2 li:nth-child(2),.list_con2 li:nth-child(3),.list_con2 li:nth-child(4){ height:40px; }
+.aqe_but{ width:60%; padding:8px 20px; border:solid 2px #283442; box-sizing:border-box; 
+font-size:12px; color:white; background:#283442; margin-top:15px; }
+.aqe_but:hover{ background:white; color:#283442; }
+
+.list_taa{ background:#f9f9f9; padding:20px;}
+.list_cont_taa, .list_taa{ width:100%; overflow:hidden; border:1px solid #e7e7e7; box-sizing:border-box }
+.list_cont_taa{  padding-bottom:3%; margin-bottom:300px; }
 
 
+/***************************************** 도서관 서비스 **************************************************/
+/* 나의 대여 목록 배송 조회 - my_list_deli1 */
+.my_list_tab23{ width:100%; overflow:hidden; margin:15px 0px 35px 0px; }
+.my_list_tab23 li:nth-child(1){ width:33%; box-sizing:border-box; float:left; overflow:hidden; text-align:center;}
+.my_list_tab23 li:nth-child(2){ width:67%; box-sizing:border-box; float:left; overflow:hidden}
+.my_list_tab23 li:nth-child(1) a{ display:block; width:100%; box-sizing:border-box;  font-size:17px; color:#3DB7CC; font-weight:bold; padding:15px 0px;
+border: solid 2px #3DB7CC; border-bottom:none  }
+.my_list_tab23 li:nth-child(2) a{ display:block; width:100%; height:55px; box-sizing:border-box; border-bottom:solid 2px #3DB7CC }
 
+.deli_info_wrap{ width:100%; overflow:hidden; border:solid 1px #eaeaea; box-sizing:border-box }
+.deli_info_wrap ul:nth-child(1){ border:none; }
+.deli_info2{ width:25%; height:230px; float:left; overflow:hidden; box-sizing:border-box; border-left:solid 1px #eaeaea; }
+.deli_info2 li{ width:90%; margin:0 auto; line-height:20px; font-size:12px; }
+.deli_info2 li:nth-child(1) { text-align:center; padding-top:20px; height:58px; }
+.deli_info2 li:nth-child(2) {width:100%; height:30px; margin-bottom:15px; }
+.deli_info2 li:nth-child(3) { font-size:16px; font-weight:bold; line-height:22px; margin-bottom:8px; }
 
+.deli_title{ color:#333; padding:30px 25px 5px 0px; font-weight:bold; }
+.deli_info1 li{ list-style-type:square; list-style-position:inside; padding-left:20px; line-height:24px;}
+.deli_info1 li a{ font-size:13px; color:#666; }
 
-
-
-
-
-
-
-
-
-
-
-
-
+.line_wrap{ margin:50px 0px 35px 0px; width:100%; box-sizing:border-box; border-bottom:solid 2px #333 }
+.re_deli_but{ overflow:hidden; margin-bottom:50px;}
+.re_deli_but a{ display:block; float:right; overflow:hidden; padding:12px 60px; border:solid 2px #3DB7CC; background:#3DB7CC; color:white; }
+.re_deli_but a:hover{ color:#3DB7CC; background:white; }

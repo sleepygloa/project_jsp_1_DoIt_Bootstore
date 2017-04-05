@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import mvc.doit.Login.LoginDao;
 import mvc.doit.Online.OnBookDto;
 import mvc.doit.Online.OnBookIntroDto;
 import mvc.doit.Online.OnDao;
@@ -42,10 +43,16 @@ public class OnBookProAction implements SuperAction {
 	 	OnDao dao = OnDao.getInstance();
 	 	dao.Admin_OnBook_Update(dto, d_bcode);
 	 	
-	
+	//회원의 등급을 파악하고, 유지 또는 등업 향상을 시킵니다.
+	 	String userGradeCheck = dao.getUserSellPurchaseCountToGrade(d_bcode); //d_bcode로 방금 등록한 책의 정보를 불러옴
+	//책코드 d_bcode로 회원의 아이디를 불러옵니다.
+	 	OnBookDto dto1 = new OnBookDto();
+	 	dto1 = dao.getOnBookArticleD_bcode(d_bcode);
+	 	String d_id = dto1.getD_id();
 	 	
 	 	request.setAttribute("d_bcode", d_bcode);
-
+	 	request.setAttribute("userGradeCheck",userGradeCheck);
+	 	request.setAttribute("d_id", d_id);
 
 		
 	

@@ -6,6 +6,9 @@ td tr th{border-style:1px solid #000000;border:1px solid #000000;}
 .btn-lg-t{
 	height:80px;
 }
+.btn-lg{
+	width:30%;
+}
 
 .btn-lg,
 .btn-group-lg > .btn {
@@ -457,6 +460,7 @@ a.text-success:hover,a.text-success:focus {color: #356635;}
 	position:relation;
 	width:98%;
 }
+.grid-w1-btn-50{width:50%;}
 .grid-w2-btn{width:88.7%;}
 
 
@@ -465,3 +469,21 @@ a.text-success:hover,a.text-success:focus {color: #356635;}
 .my_side_ul > li > a:hover{font-size:0.95em;background-color:#fff0f5;}
 
 .red{color:red};
+
+
+.jumbotron {
+  position: relative;
+  padding: 40px 0;
+  color: #f4fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+  background-color: #f4fff; /* Old browsers */
+
+}
+
+.jumbotron p {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.25;
+  margin-bottom: 30px;
+}

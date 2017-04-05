@@ -18,6 +18,7 @@ public class OnBookDto {
 	   private int d_bcount;            //수량
 	   private int d_bvalue;            //정가 
 	   private int d_bsellvalue;         //판매가
+	   private int d_bgradevalue;        //등급할인판매가
 	   private int d_bpurchasevalue;      //구입가
 	   private String d_id;            //판매자코드 //회원정보와 공유
 	   private int d_bdeliverycode;         //배달코드
@@ -52,6 +53,12 @@ public class OnBookDto {
 		
 
 		
+public int getD_bgradevalue() {
+			return d_bgradevalue;
+		}
+		public void setD_bgradevalue(int d_bgradevalue) {
+			this.d_bgradevalue = d_bgradevalue;
+		}
 public int getD_bdelibery() {
 			return d_bdelibery;
 		}

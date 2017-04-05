@@ -51,7 +51,7 @@ public class OnArticleAction implements SuperAction {
 			d_bname = article.getD_bname();
 			d_bvalue =  dao.getFindNameToValue(d_bname);
 
-			int d_bpurchasevalueS = (int)((double)d_bvalue * 0.8)/100 * 100; //정가의 80가격의 십원단위 까지 버림
+			int d_bpurchasevalueS = (int)((double)d_bvalue * 0.8)/100 * 100; //정가의 80%가격의 십원단위 까지 버림
 			int d_bpurchasevalueA = (int)((double)d_bvalue * 0.6)/100 * 100; //정가의 60%가격의 십원단위 까지 버림
 			int d_bpurchasevalueB = (int)((double)d_bvalue * 0.4)/100 * 100; //정가의 40%가격의 십원단위 까지 버림
 

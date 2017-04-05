@@ -35,10 +35,10 @@
 			<td class="onForm_left" rowspan="4">책 품질 판정</td>
 			<td class="onForm_right">
 				<span class="onIns_quality_check">헌 상태</span>
-				 <input type="radio" name="d_iold" value="0" class="" checked> 최상
-				 <input type="radio" name="d_iold" value="1" class=""> 상
-				 <input type="radio" name="d_iold" value="2" class=""> 중
-				 <input type="radio" name="d_iold" value="3" class=""> 매입불가
+				<label> <input type="radio" name="d_iold" value="0" class="" checked> 최상</label>
+				<label> <input type="radio" name="d_iold" value="1" class=""> 상</label>
+				<label> <input type="radio" name="d_iold" value="2" class=""> 중</label>
+				<label> <input type="radio" name="d_iold" value="3" class=""> 매입불가</label>
 				
 			</td>
 		</tr>
@@ -46,10 +46,10 @@
 			
 			<td class="onForm_right">
 				<span class="onIns_quality_check">표  지</span>
-				 <input type="radio" name="d_icover" value="0" class="" checked> 최상
-				 <input type="radio" name="d_icover" value="1" class=""> 상
-				 <input type="radio" name="d_icover" value="2" class=""> 중
-				 <input type="radio" name="d_icover" value="3" class=""> 매입불가
+				 <label><input type="radio" name="d_icover" value="0" class="" checked> 최상</label>
+				 <label><input type="radio" name="d_icover" value="1" class=""> 상</label>
+				 <label><input type="radio" name="d_icover" value="2" class=""> 중</label>
+				 <label><input type="radio" name="d_icover" value="3" class=""> 매입불가</label>
 				
 			</td>
 		</tr>
@@ -57,20 +57,20 @@
 			
 			<td class="onForm_right">
 				<span class="onIns_quality_check">책   등</span>
-				 <input type="radio" name="d_ispine" value="0" class="" checked> 최상
-				 <input type="radio" name="d_ispine" value="1" class=""> 상
-				 <input type="radio" name="d_ispine" value="2" class=""> 중
-				 <input type="radio" name="d_ispine" value="3" class=""> 매입불가
+				<label> <input type="radio" name="d_ispine" value="0" class="" checked> 최상</label>
+				<label> <input type="radio" name="d_ispine" value="1" class=""> 상</label>
+				<label> <input type="radio" name="d_ispine" value="2" class=""> 중</label>
+				<label> <input type="radio" name="d_ispine" value="3" class=""> 매입불가</label>
 			</td>
 		</tr>
 		<tr>
 			 
 			<td class="onForm_right">
 				<span class="onIns_quality_check">제본상태</span>
-				 <input type="radio" name="d_ibind" value="0" class="" checked> 최상
-				 <input type="radio" name="d_ibind" value="1" class=""> 상
-				 <input type="radio" name="d_ibind" value="2" class=""> 중
-				 <input type="radio" name="d_ibind" value="3" class=""> 매입불가
+				<label> <input type="radio" name="d_ibind" value="0" class="" checked> 최상</label>
+				<label> <input type="radio" name="d_ibind" value="1" class=""> 상</label>
+				<label> <input type="radio" name="d_ibind" value="2" class=""> 중</label>
+				<label> <input type="radio" name="d_ibind" value="3" class=""> 매입불가</label>
 			</td>
 		</tr>
 		

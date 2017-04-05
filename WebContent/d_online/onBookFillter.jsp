@@ -21,7 +21,7 @@
 			<c:when test="${todayPurchaseCountArray[0] == 9}"><img src="/DoIt/images/9.png" width="30px" /></c:when>
 		</c:choose>
 		<c:choose>
-			<c:when test="${todayPurchaseCountArray[0] == null}"><img src="/DoIt/images/0.png" width="30px" /></c:when>   
+			<c:when test="${todayPurchaseCountArray[1] == null}"><img src="/DoIt/images/0.png" width="30px" /></c:when>   
 			<c:when test="${todayPurchaseCountArray[1] == 0}"><img src="/DoIt/images/0.png" width="30px" /></c:when>
 			<c:when test="${todayPurchaseCountArray[1] == 1}"><img src="/DoIt/images/1.png" width="30px" /></c:when>
 			<c:when test="${todayPurchaseCountArray[1] == 2}"><img src="/DoIt/images/2.png" width="30px" /></c:when>
@@ -34,7 +34,7 @@
 			<c:when test="${todayPurchaseCountArray[1] == 9}"><img src="/DoIt/images/9.png" width="30px" /></c:when>
 		</c:choose>					
 		<c:choose>
-			<c:when test="${todayPurchaseCountArray[0] == null}"><img src="/DoIt/images/0.png" width="30px" /></c:when>   
+			<c:when test="${todayPurchaseCountArray[2] == null}"><img src="/DoIt/images/0.png" width="30px" /></c:when>   
 			<c:when test="${todayPurchaseCountArray[2] == 0}"><img src="/DoIt/images/0.png" width="30px" /></c:when>
 			<c:when test="${todayPurchaseCountArray[2] == 1}"><img src="/DoIt/images/1.png" width="30px" /></c:when>
 			<c:when test="${todayPurchaseCountArray[2] == 2}"><img src="/DoIt/images/2.png" width="30px" /></c:when>

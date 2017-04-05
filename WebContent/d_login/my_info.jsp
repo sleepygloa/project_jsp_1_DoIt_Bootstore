@@ -46,18 +46,21 @@
 							</tr>
 							<tr>
 								<td>판매자 권한</td>
-								<c:if test="${ lto.getD_mech_grade() == 0 }">
+								<c:if test="${ lto.getD_mech_grade() == 0  && lto.getD_mech_grade() != 10 }">
 									<td>판매자가 아닙니다.</td>
 								</c:if>
 								<c:if test="${ lto.getD_mech_grade() == 1 }">
 									<td>판매자 승인을 받았습니다.</td>
 								</c:if>
+								<c:if test="${ lto.getD_mech_grade() == 10 }">
+									<td>예외 : [ 관리자 ]</td>
+								</c:if>
 								
 								<td>관리자 등급</td>
-								<c:if test="${ lto.getD_mech_grade() != 2 }">
+								<c:if test="${ lto.getD_mech_grade() != 10 }">
 									<td >관리자 권한이 없습니다.</td>
 								</c:if>
-								<c:if test="${ lto.getD_mech_grade() == 2 }">
+								<c:if test="${ lto.getD_mech_grade() == 10 }">
 									<td >관리자 권한이 있습니다.</td>
 								</c:if>
 							</tr>
@@ -87,11 +90,14 @@
 						</tr>
 						<tr>
 							<td>회원구분</td>
-							<c:if test="${ lto.getD_person() == 0 }">
+							<c:if test="${ lto.getD_person() == 0 && lto.getD_mech_grade() != 10 }">
 								<td ><input type="radio" checked="checked">개인회원</td>
 							</c:if>
 							<c:if test="${ lto.getD_person() == 1 }">
 								<td ><input type="radio" checked="checked">기업회원</td>
+							</c:if>
+							<c:if test="${ lto.getD_mech_grade() == 10 }">
+								<td><input type="radio" checked="checked">관리자 입니다.</td>
 							</c:if>
 						</tr>
 						<tr>

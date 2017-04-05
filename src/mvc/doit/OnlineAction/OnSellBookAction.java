@@ -104,11 +104,11 @@ public class OnSellBookAction implements SuperAction {
         
         if(article.getD_BTodayCount() == 0){}else{
         	
-        	digitCheck += article.getD_BTodayCount();
+        	digitCheck = article.getD_BTodayCount();
         	
-        	if(digitCheck > 0 || digitCheck < 10){
+        	if(digitCheck >= 0 && digitCheck < 10){
         		todayPurchaseCount += Thousand + hundred + digitCheck;
-        	}else if(digitCheck > 11 || digitCheck < 100){
+        	}else if(digitCheck >= 10 && digitCheck < 100){
         		todayPurchaseCount += Thousand + digitCheck;
         	}else{
         		todayPurchaseCount += digitCheck;

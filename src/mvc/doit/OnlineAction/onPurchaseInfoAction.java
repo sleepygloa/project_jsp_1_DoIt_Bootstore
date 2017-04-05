@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import mvc.doit.Online.OnBookDto;
 import mvc.doit.Online.OnDao;
@@ -64,6 +65,20 @@ public class OnPurchaseInfoAction implements SuperAction {
 		int valueToSellvaluePercent = 
 (int)(100 - 	((double)article.getD_bsellvalue() / (double)article.getD_bvalue() * 100));
 		
+		//등급적용 판매가
+		//회원의 등급을 불러옵니다.
+		HttpSession  session = request.getSession();
+		String d_id = (String)session.getAttribute("memId");
+		int gradeToSellValue = article.getD_bsellvalue();
+		int gradeCheck = dao.getIdToGrade(d_id);
+				if(		  gradeCheck == 0) {
+					gradeToSellValue = gradeToSellValue; 
+				}else if (gradeCheck == 1) {
+					gradeToSellValue = (int)((double)gradeToSellValue * 0.95);
+				}else if (gradeCheck == 2) {
+					gradeToSellValue = (int)((double)gradeToSellValue * 0.9);
+				}else{}
+				
         //해당 뷰에서 사용할 속성
 	    request.setAttribute("currentPage", new Integer(currentPage));
         request.setAttribute("startRow", new Integer(startRow));
@@ -76,6 +91,7 @@ public class OnPurchaseInfoAction implements SuperAction {
 		
 		request.setAttribute("MinD_bsellvalue",MinD_bsellvalue);
 		request.setAttribute("valueToSellvaluePercent", valueToSellvaluePercent);
+		request.setAttribute("gradeToSellValue", gradeToSellValue);
 		
 	return "/d_online/onPurchaseInfo.jsp";
 	

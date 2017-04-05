@@ -60,10 +60,8 @@ public class LoginDao implements SuperAction{
        }
     
     /*------------------ 로그인 끝-------------------------------------------------------------------------*/
-    
-    
-    
-    
+
+     
     
     /*------------------------------- 회원 가입 ---------------------------------------------------------*/
   	public void insertMember(LoginDto dto){
@@ -133,6 +131,39 @@ public class LoginDao implements SuperAction{
 	
 	/*------------------------------- 중복 확인 끝 ---------------------------------------------*/
     
+	/*------------------------------- 회원정보 - 회원번호로 회원 id 출력 --------------------------------------------*/
+	public String getMemNo(int d_no){
+		String jo_id = null;
+		try{
+			conn = getConnection();
+			String sql = "select d_id from d_member where d_no = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, d_no);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				jo_id = rs.getString("d_id");
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{ 
+			if(conn != null){
+				try{conn.close();}catch(SQLException s){}
+			}
+			if(rs != null){
+				try{rs.close();}catch(SQLException s){}
+			}
+			if(pstmt != null){
+				try{pstmt.close();}catch(SQLException s){}
+			}
+		}
+		
+		return jo_id;
+	}
+	
+	
+	/*------------------------------- 회원정보 - 회원번호로 회원 id 출력 끝 --------------------------------------------*/
 	
 	
 	/*------------------------------- 회원정보 출력 --------------------------------------------*/
