@@ -67,7 +67,7 @@ public class OnSellFormProAction implements SuperAction {
 	OnBookDto onbookdto = new OnBookDto();
 	onbookdto.setD_id(d_id);
 	onbookdto.setD_bname(d_bname);
-	onbookdto.setD_bgrade("0"); //초기화
+	onbookdto.setD_bgrade("c"); //초기화
 	onbookdto.setD_bpublisher(d_bpublisher);
 	onbookdto.setD_bauthor(d_bauthor);
 	onbookdto.setD_bgenre(d_bgenre);

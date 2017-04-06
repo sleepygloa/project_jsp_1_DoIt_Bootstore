@@ -43,12 +43,12 @@ public class OnBookProAction implements SuperAction {
 	 	OnDao dao = OnDao.getInstance();
 	 	dao.Admin_OnBook_Update(dto, d_bcode);
 	 	
-	//회원의 등급을 파악하고, 유지 또는 등업 향상을 시킵니다.
-	 	String userGradeCheck = dao.getUserSellPurchaseCountToGrade(d_bcode); //d_bcode로 방금 등록한 책의 정보를 불러옴
+	//---- 회원의 회원의 등급을 파악하고, 유지 또는 등업 향상을 시킵니다.
+	 	String Check = "d_bcode";
+	 	String id = null;
+	 	String userGradeCheck = dao.getUserSellPurchaseCountToGrade(d_bcode, id, Check); //d_bcode로 방금 등록한 책의 정보를 불러옴
 	//책코드 d_bcode로 회원의 아이디를 불러옵니다.
-	 	OnBookDto dto1 = new OnBookDto();
-	 	dto1 = dao.getOnBookArticleD_bcode(d_bcode);
-	 	String d_id = dto1.getD_id();
+	 	String d_id = multi.getParameter("d_id");
 	 	
 	 	request.setAttribute("d_bcode", d_bcode);
 	 	request.setAttribute("userGradeCheck",userGradeCheck);

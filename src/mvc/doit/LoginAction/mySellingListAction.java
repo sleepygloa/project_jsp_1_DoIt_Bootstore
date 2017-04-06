@@ -15,12 +15,10 @@ import mvc.doit.SuperAction.SuperAction;
 public class mySellingListAction implements SuperAction {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
-		//회원의 아이디정보를 사용하기 위해 세션의 id를 불러옴
+	//---- 변수 설정 --------------------------------------------------
 		HttpSession session = request.getSession();
-		String d_id = (String)session.getAttribute("memId");
-		
+		String d_id = (String)session.getAttribute("memId"); 
 		String pageNum = request.getParameter("pageNum");//페이지 번호
-
         if (pageNum == null) {
             pageNum = "1"; //1페이지당 5권의 책 보여줌
         }
@@ -33,19 +31,14 @@ public class mySellingListAction implements SuperAction {
 
         
         List articleList = null; //리스트 초기화
-        OnDao manager = OnDao.getInstance();//DB연동
+        OnDao dao = OnDao.getInstance();//DB연동
         
-        
-        count = manager.getD_bmySellingCount(d_id);//전체 글의 수 
+        count = dao.getD_bmySellingCount(d_id);//전체 글의 수 
 
-        //책의 링크를 타지않고, 신규로 판매신청양식을 작성했을때
-//        if(count>0){
-//            articleList = article.getD_bSellingList(d_id);//현재 페이지에 해당하는 글 목록
-//        }        
         //책의 링크를 타고 판매신청양식을 작성했을때
         if(count > 0){
 
-            articleList = manager.getD_bMySellingList(d_id, startRow, endRow);//현재 페이지에 해당하는 글 목록
+            articleList = dao.getD_bMySellingList(d_id, startRow, endRow);//현재 페이지에 해당하는 글 목록
         }
         
         //게시글이 pagesize 보다 클때, 즉 1페이지보다 수량이 많을때 페이지 번호 출력

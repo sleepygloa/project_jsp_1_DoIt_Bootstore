@@ -345,8 +345,9 @@ hr.soften {
 }
 
 /* 글자 크기 작게*/
-small,.small { font-size: 85%;};
-.small70 {font-size:70%;};
+small,.small { font-size: 0.85em;};
+.small70 {font-size:0.7em};
+.small50{font-size:0.5em;};
 /*---------------------------------------*/
 .d-content{position:relative;width:100%;background-color:#b4b4b4;}
 .d-container{top:00px;}
@@ -385,14 +386,14 @@ small,.small { font-size: 85%;};
 .bgc2{background-color:#a2c2d2;}
 /* 큰 글자 ------------------------------------------------------------------------*/
 .big-font75{font-size:75px;}.big-font50{font-size:50px;}.big-font35{font-size:35px;}.big-font30{font-size:30px;}.big-font25{font-size:25px;}.big-font20{font-size:20px;}.big-font15{font-size:15px;}.big-font10{font-size:10px;}
-
+.small-font9{font-size:0.9em;}.small-font8{font-size:0.8em;}.small-font7{font-size:7px;}.small-font6{font-size:6px;}
 /* 공백 -----------------------------------------------------------------------------*/
 .d-space100{height:1px;margin-top:50px;margin-bottom:50px;}.d-space50{height:1px;margin-top:25px;margin-bottom:25px;}.d-space20{height:1px;margin-top:12.5px;margin-bottom:12.5px;}.d-space10{height:1px;margin-top:5px;margin-bottom:5px;}
 
 /* 굵게 -----------------------------------------------------------------------------*/
 .d-bold{font-weight:900;}
-
 .code {padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
+
 /* padding */
 .d-padding10{padding:10 auto;};.d-padding20{padding:20 auto;};.d-padding30{padding:30 auto;};.d-padding40{padding:40 auto;};.d-padding50{padding:50 auto;};.d-l-padding10{padding-left:10;};.d-l-padding20{padding-left:20;};.d-l-padding30{padding-left:30;};.d-r-padding10{padding-right:10;};.d-r-padding20{padding-right:20;};.d-r-padding30{padding-right:30;};
 
@@ -487,3 +488,9 @@ a.text-success:hover,a.text-success:focus {color: #356635;}
   line-height: 1.25;
   margin-bottom: 30px;
 }
+
+
+.border-round{border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;border-bottm:1px solid black;}
+
+/*글자색깔*/
+.font-color-gray{color:#d2d2d2;}

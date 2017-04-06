@@ -34,12 +34,19 @@ public class OnBookFormAction  implements SuperAction {
 			//2글번호로 지정된 이름의 책의 중 임의의 책의 정보를 불러온다.
 			
 			OnDao dao = OnDao.getInstance();
-			OnBookDto article = dao.getOnBookArticle(d_bno);
-			int d_bcode = article.getD_bcode();
-			OnBookIntroDto obiDto = dao.Admin_OnBookIntro_load(d_bcode);
+			String Check = null;
+			OnBookIntroDto obiDto = null;
+			OnBookDto Dto = null;
+			
+			if(d_bno != 0){
+				Check = "d_bno";
+				Dto = dao.getOnBookArticle(d_bno, Check);				
+			}
+			int d_bcode = Dto.getD_bcode();
+			obiDto = dao.Admin_OnBookIntro_load(d_bcode);
 			
 			request.setAttribute("obiDto", obiDto);
-			request.setAttribute("article", article);
+			request.setAttribute("Dto", Dto);
 			
 		 	String d_norder = obiDto.getD_norder();
 //		 	d_norder = d_norder.replace("<br/>", "\r\n");

@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mvc.doit.Login.mySellingListDto;
+import mvc.doit.Online.OnBookDto;
 import mvc.doit.Online.OnDao;
+import mvc.doit.Statistics.StatisticsDto;
 import mvc.doit.SuperAction.SuperAction;
 
 public class OnSellBookAction implements SuperAction {
@@ -28,6 +30,7 @@ public class OnSellBookAction implements SuperAction {
         int endRow = currentPage * pageSize;//한 페이지의 마지막 글번호, 마지막 등록글번호 20
         int count = 0; //변수 초기화
         int number = 0; //변수 초기화
+        
         
 //------------1. fillter 정의 -----------------------------------------------------
         int d_bonFillterReturn = 0; //원래페이지로 다시 반환하여 사용할 값        
@@ -56,40 +59,34 @@ public class OnSellBookAction implements SuperAction {
 
 //------------2. 종합검색 정의-------------------------------------------------------------
 		String select = null;
-		if(request.getParameter("select") != ""){
+		if(request.getParameter("select") != null){
 			select = request.getParameter("select");
 		}
 		
         List articleList = null; //리스트 초기화
-        OnDao article = OnDao.getInstance();//DB연동
-        
+        List avgSellvalue = null;
+        OnDao dao = OnDao.getInstance();//DB연동
 
-//  //--------------0. 전체 리스트  반환 test 중복값 제거 -----------------------------------------------------
-//        if(d_bonFillter == null && select == null){
-//            count = article.getD_BSellCount();//전체 글의 수 
-//            if(count>0){
-//                articleList = article.getD_BSellList(startRow, endRow);//현재 페이지에 해당하는 글 목록
-//            }        
-        
-        
-        
+        String selectBookFullNameReturn = null;
 //--------------0. 전체 리스트  반환 -----------------------------------------------------
         if(d_bonFillter == null && select == null){
-            count = article.getD_BSellCount();//전체 글의 수 
-            if(count>0){
-                articleList = article.getD_BSellList(startRow, endRow);//현재 페이지에 해당하는 글 목록
+            count = dao.getD_BSellCount();//전체 글의 수 
+            if(count > 0){
+                articleList = dao.getD_BSellList(startRow, endRow);//현재 페이지에 해당하는 글 목록
             }
 //--------------1. 책 장르 조건으로 리스트  반환----------------------------------------------    	        	
     	}else if(d_bonFillter != null){
-            count = article.getD_BSellCount(d_bonFillter ,d_bonFillterReturn);//전체 글의 수 
-            if(count>0){
-                articleList = article.getD_BSellList(d_bonFillter, d_bonFillterReturn, startRow, endRow);//현재 페이지에 해당하는 글 목록
+            count = dao.getD_BSellCount(d_bonFillter ,d_bonFillterReturn);//전체 글의 수 
+            if(count > 0){
+                articleList = dao.getD_BSellList(d_bonFillter, d_bonFillterReturn, startRow, endRow);//현재 페이지에 해당하는 글 목록
             }
 //-------------2. 종합 검색(text)로 리스트 반환----------------------------------------------
     	}else if(select != null){
-            count = article.getD_BSelectCount(select);//전체 글의 수 
-            if(count>0){
-                articleList = article.getD_BSelectList(select, startRow, endRow);//현재 페이지에 해당하는 글 목록
+            count = dao.getD_BSelectCount(select);//전체 글의 수 
+            if(count > 0){
+                articleList = dao.getD_BSelectList(select, startRow, endRow);//현재 페이지에 해당하는 글 목록
+                //큰제목 이름을 '검색어 + 리스트'로 변경하는 구문, selectBookFullNameReturn 를 반환합니다. 
+                selectBookFullNameReturn = dao.findSelectToBookFullName(select);
             }	
     	}        
         
@@ -102,9 +99,9 @@ public class OnSellBookAction implements SuperAction {
         String Thousand = "0";
         String hundred = "0";
         
-        if(article.getD_BTodayCount() == 0){}else{
+        if(dao.getD_BTodayCount() == 0){}else{
         	
-        	digitCheck = article.getD_BTodayCount();
+        	digitCheck = dao.getD_BTodayCount();
         	
         	if(digitCheck >= 0 && digitCheck < 10){
         		todayPurchaseCount += Thousand + hundred + digitCheck;
@@ -116,14 +113,25 @@ public class OnSellBookAction implements SuperAction {
     		todayPurchaseCountArray = todayPurchaseCount.split("(?<=\\G.{" + 1 + "})");
         }
         
-        
-        
-        
-        
 
-//--------------1. 평균 구매가 검색 및 반환 --------------------------------------------------------
 
+
+//-------------4. 책  평균가 반환 ----------------------------------------------------------
+        //불필요하게 나열될 List가 아닌 책 전체 DB의 책당 평균값을 모두 List
+        String getD_bname = null;
+        OnBookDto dto = null;
+        int d_bavgsellvalue = 0;
+        int articleListSize = articleList.size();
+     	for(int i = 0; i < articleListSize; i++){
+     		dto = ((OnBookDto)articleList.get(i));
+     				getD_bname = dto.getD_bname();
+     				d_bavgsellvalue = dao.getBookNameToAvgSellValue(getD_bname);
+     				dto.setD_bavgsellvalue(d_bavgsellvalue);
+     	}
 		number=count-(currentPage-1)*pageSize;//글목록에 표시할 글번호
+//--------------5. 반환 --------------------------------------------------------
+
+
         //해당 뷰에서 사용할 속성
 	    request.setAttribute("currentPage", new Integer(currentPage));
         request.setAttribute("startRow", new Integer(startRow));
@@ -136,12 +144,9 @@ public class OnSellBookAction implements SuperAction {
         request.setAttribute("digitCheck", digitCheck);
         request.setAttribute("todayPurchaseCount", todayPurchaseCount);
         request.setAttribute("todayPurchaseCountArray", todayPurchaseCountArray);
-//        request.setAttribute("d_bonFillterGenre", d_bonFillterGenre); //확인용, 주석처리
-//        request.setAttribute("d_bonFillterLocation", d_bonFillterLocation); //확인용, 주석처리
-//        request.setAttribute("d_bonFillterGenre2", d_bonFillterGenre2);//확인용, 주석처리
-//        request.setAttribute("fillterVar", fillterVar); //확인용, 주석처리
-//        request.setAttribute("select", select); //확인용, 주석처리
-//        request.setAttribute("avgPurchaseValue", avgPurchaseValue);
+        request.setAttribute("selectBookFullNameReturn", selectBookFullNameReturn);
+
+        
         
         
         return "/d_online/onSellBook.jsp";//해당 뷰

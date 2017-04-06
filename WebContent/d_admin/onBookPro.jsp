@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
- <c:if test="${userGradeCheck == '00' || userGradeCheck == '11' || userGradeCheck == '22'}" >
+ <c:if test="${userGradeCheck == '0' || userGradeCheck == '1' || userGradeCheck == '2'}" >
 
 	<script>
 	alert("책이 등록되었습니다.");
@@ -24,7 +24,7 @@
 <c:if test="${userGradeCheck == '12'}" >
 
 	<script>
-	alert("책이 등록되었습니다. 그리고 ${d_id}님께서 '책좀 읽는  책벌레 등급2'로 등급이 올랐습니다. 축하메세지를 전달해주세요!");
+	alert("책이 등록되었습니다. 그리고 ${d_id}님께서 '책좀 읽는 책벌레 등급2'로 등급이 올랐습니다. 축하메세지를 전달해주세요!");
 	window.location="/DoIt/d_admin/adminOnInspectionList.do";
 	</script>
 

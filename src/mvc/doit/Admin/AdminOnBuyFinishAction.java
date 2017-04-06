@@ -18,6 +18,7 @@ public class AdminOnBuyFinishAction implements SuperAction {
 	 	
 	 	DeliveryDao dao = DeliveryDao.getInstance();
 	 	
+//---- 배송관련 
 	 	int d_bdelivery =-1;
 	 	if(delivery == 0){
 	 		dao.Admin_OnBuyBook_finish(d_bcode);
@@ -34,12 +35,15 @@ public class AdminOnBuyFinishAction implements SuperAction {
 	 	}
 	 	
 	 	OnDao odao = OnDao.getInstance();
-		//회원의 등급을 파악하고, 유지 또는 등업 향상을 시킵니다.
-	 	String userGradeCheck = odao.getUserSellPurchaseCountToGrade(d_bcode); //d_bcode로 방금 등록한 책의 정보를 불러옴
+		//---- 회원의 회원의 등급을 파악하고, 유지 또는 등업 향상을 시킵니다.
+	 	String Check = "d_bcode";
+	 	String id = null;
+	 	String userGradeCheck = odao.getUserSellPurchaseCountToGrade(d_bcode, id, Check); //d_bcode로 방금 등록한 책의 정보를 불러옴
 	//책코드 d_bcode로 회원의 아이디를 불러옵니다.
-	 	OnBookDto dto1 = new OnBookDto();
-	 	dto1 = odao.getOnBookArticleD_bcode(d_bcode);
-	 	String d_id = dto1.getD_id();
+	 	OnBookDto dto = new OnBookDto();
+	 	Check = "";  //오류가 날씨 전페이지에서 '판매완료버튼'에 회원 아이디 받아올것
+	 	dto = odao.getOnBookArticle(d_bcode, Check);
+	 	String d_id = dto.getD_id();
 	 	
 	 	
 	 	

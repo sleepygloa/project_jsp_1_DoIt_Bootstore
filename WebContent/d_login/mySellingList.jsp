@@ -14,7 +14,7 @@
 	<div class="rl alert alert-erorr"><small>*. 관리자가 <span class="code">판매신청 확인</span>을 하면 자동으로 완료페이지로 넘어갑니다.</small></div>
 
 <!--------------------------------- 회원의 판매중인 List ------------------------------------->
-	<table style="width:100%" border="1 solid black">	
+	<table style="width:100%" class="table-border">	
 		<tr style="background-color:#bebebe">
 			<td height="20px" width="100px"  class="d-center"> <!--  책이미지와 셀의 높이가 10px 커야함. thumbnail 적용 여백 -->
 				<span class="big-font20">신청 번호
@@ -33,7 +33,7 @@
 	</table>
 	<!-- -------판매중인 책이 없을때----------------------------- -->
 <c:if test="${count==0}">
-	<div class="d-center">
+	<div class="d-center" class="table-border">
 		현재 판매중인 책이 없습니다! 
 	</div>
 	<div class="rl"></div>
@@ -42,11 +42,11 @@
  
 	<!-- ------판매신청중이 책이 있을 때----------------------------- -->
  	<c:if test="${count!=0}">
-	<table style="width:100%" border="1 solid black">	
+	
 	
 
-		<c:forEach var="article" begin="0" end="${articleList.size()}" step="1" items="${articleList}">	
-
+<c:forEach var="article" begin="0" end="${articleList.size()}" step="1" items="${articleList}">	
+	<table style="width:100%" class="table-border" >	
 				<tr>
 					<td height="20px" width="100px" class="d-center"> <!--  책이미지와 셀의 높이가 10px 커야함. thumbnail 적용 여백 -->
 						<span class="big-font20">
@@ -75,11 +75,10 @@
 					</td>
 				</tr>
 
-		
-		 
-		</c:forEach>
+	</table>		 
+</c:forEach>
 
-	</table>
+
 	</c:if>	 
 
 <!-- 페이지 번호 ------------------------------------------------------------------------ -->	

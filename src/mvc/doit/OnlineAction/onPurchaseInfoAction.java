@@ -15,7 +15,7 @@ public class OnPurchaseInfoAction implements SuperAction {
 	 
 		request.setCharacterEncoding("utf-8");
 
-//------------0. 공통부분 -------------------------------------------------------------		
+//---- 0. 공통부분, 변수지정, 변수를 받아옴. -------------------------------------------------------------		
 		String pageNum = request.getParameter("pageNum");//페이지 번호
         if (pageNum == null) {
             pageNum = "1"; //1페이지당 10권의 책 보여줌
@@ -27,8 +27,7 @@ public class OnPurchaseInfoAction implements SuperAction {
         int count = 0; //변수 초기화
         int number = 0; //변수 초기화		
 		
-		
-		
+//---- 1. 변수를 받아옴. d_bno 가 있다면, d_bcode가 있다면 --------------------------------------------------
 		String d_bname = "";
 		int d_bno = 0;
 		if(request.getParameter("d_bno") != null){
@@ -40,23 +39,33 @@ public class OnPurchaseInfoAction implements SuperAction {
 		}
 		
 		
-        List articleList = null; //리스트 초기화
+        List<OnBookDto> articleList = null; //리스트 초기화
         OnDao dao = OnDao.getInstance();//DB연동
 		OnBookDto article = new OnBookDto();
-        
+
 		//접근상황을 설정하는 Dao , d_bno일때, d_bcode일때--------------------------
+		String Check = "";
 		if(d_bno == 0){
 			if(d_bcode == 0){
 			}else{
-				article = dao.getOnBookArticleD_bcode(d_bcode);	
+				Check = "d_bcode_oneBook";
+				article = dao.getOnBookArticle(d_bcode, Check);	
 			}
 		}else{
-				article = dao.getOnBookArticle(d_bno);		
-		} 
+				Check = "d_bno_oneBook";
+				article = dao.getOnBookArticle(d_bno, Check);	
+		}
+		
 		//List를 뽑는 Dao-----------------------------------------------------
 		d_bname = article.getD_bname();
 		count =  dao.getFindNameToNameCount(d_bname);
 		articleList = dao.getFindNameToName(d_bname, startRow, endRow);//책의 이름과 같은 책들을 List 
+		
+		//첫번째페이지에 보여줄 Dto-----------------------------------------------
+		//d_bno로 검색한 첫번째 페이지의 책은 현재 판매가능한 책과 거리가 멀기때문에 다시 검색을 해준다.
+		if(request.getParameter("d_bno") != null){
+			article = (OnBookDto)articleList.get(0);
+		}
 		
 		//최저가 검색
 		int MinD_bsellvalue = dao.getFindNameToMinSellValue(d_bname);
@@ -72,7 +81,7 @@ public class OnPurchaseInfoAction implements SuperAction {
 		int gradeToSellValue = article.getD_bsellvalue();
 		int gradeCheck = dao.getIdToGrade(d_id);
 				if(		  gradeCheck == 0) {
-					gradeToSellValue = gradeToSellValue; 
+					 
 				}else if (gradeCheck == 1) {
 					gradeToSellValue = (int)((double)gradeToSellValue * 0.95);
 				}else if (gradeCheck == 2) {

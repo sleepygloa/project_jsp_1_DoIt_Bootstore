@@ -27,14 +27,18 @@
 
 
 		<tr>
-		<c:if test="${article.d_bpic != null}">
-			<td rowspan="5" width="120" height="250" >
-				<img src="\DoIt\d_bpic/${article.d_bpic}" width="120" />
-				<input type="hidden" name="d_bpic_re" value="${article.d_bpic}" />
-				<!-- C:\Users\seonhokim\Documents\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\DoIt\d_bpic\  -->
-			</td>
-				
-		</c:if>
+			<c:if test="${dto.d_bpic != null}">
+				<td class="onForm_left1 d-center" width="200px" height="50px" >
+					책사진
+				</td>
+				<td>
+					<img src="\DoIt\d_bpic/${dto.d_bpic}" width="120" />
+					<input type="hidden" name="d_bpic_re" value="${dto.d_bpic}" />
+					
+				</td>
+			</c:if>
+		</tr>
+		<tr>
 			<td class="onForm_left1 d-center" width="200px" height="50px">회원 아이디</td>
 			<td class="onForm_right" width="550px">&nbsp;&nbsp;${id}</td>
 			<input type="hidden" name="${id}" value="${id}" />
@@ -44,10 +48,10 @@
 		<tr>
 			<td class="onForm_left1 d-center" height="30px" >책 이 름</td>
 			<td class="onForm_right">
-				<c:if test="${article.d_bname != null}">&nbsp;&nbsp;${article.d_bname}
-					<input type="hidden" name="d_bname" value="${article.d_bname}" />
+				<c:if test="${dto.d_bname != null}">&nbsp;&nbsp;${dto.d_bname}
+					<input type="hidden" name="d_bname" value="${dto.d_bname}" />
 				</c:if>
-				<c:if test="${article.d_bname == null}">
+				<c:if test="${dto.d_bname == null}">
 					<input type="text" name="d_bname" class="input_box">
 				</c:if>
 			</td>
@@ -55,9 +59,9 @@
 		<tr>
 			<td class="onForm_left1 d-center"  height="30px">출 판 사</td>
 			<td class="onForm_right">
-				<c:if test="${article.d_bpublisher != null}">${article.d_bpublisher}</c:if>
-					<input type="hidden" name="d_bpublisher" value="${article.d_bpublisher}" />
-				<c:if test="${article.d_bpublisher == null}">
+				<c:if test="${dto.d_bpublisher != null}">${dto.d_bpublisher}</c:if>
+					<input type="hidden" name="d_bpublisher" value="${dto.d_bpublisher}" />
+				<c:if test="${dto.d_bpublisher == null}">
 					<input type="text" name="d_bpublisher" class="input_box">
 				</c:if>			
 			</td>
@@ -65,10 +69,10 @@
 		<tr>
 			<td class="onForm_left1 d-center"  height="30px">저 자</td>
 			<td class="onForm_right">
-				<c:if test="${article.d_bauthor != null}">${article.d_bauthor}
-					<input type="hidden" name="d_bauthor" value="${article.d_bauthor}" />
+				<c:if test="${dto.d_bauthor != null}">${dto.d_bauthor}
+					<input type="hidden" name="d_bauthor" value="${dto.d_bauthor}" />
 				</c:if>
-				<c:if test="${article.d_bauthor == null}">
+				<c:if test="${dto.d_bauthor == null}">
 					<input type="text" name="d_bauthor" class="input_box">
 				</c:if>			
 			</td>
@@ -76,10 +80,10 @@
 		<tr>
 			<td class="onForm_left1 d-center"  height="30px">장 르</td>
 			<td class="onForm_right">
-				<c:if test="${article.d_bgenre != null}">${article.d_bgenre}
-					<input type="hidden" name="d_bgenre" value="${article.d_bgenre}" />
+				<c:if test="${dto.d_bgenre != null}">${dto.d_bgenre}
+					<input type="hidden" name="d_bgenre" value="${dto.d_bgenre}" />
 				</c:if>
-				<c:if test="${article.d_bgenre == null}">
+				<c:if test="${dto.d_bgenre == null}">
 					<select name="d_bgenre">
 						<option value="소설 / 시 / 에세이" checked>소설 / 시 / 에세이</option>
 						<option value="참고 / 전문서적">참고 / 전문서적</option>
@@ -92,15 +96,13 @@
 			</td>
 		</tr>
 		<tr>
-			<c:if test="${article.d_bpic != null}">
-			<td rowspan="6" ></td>
-			</c:if>
+
 			<td class="onForm_left1 d-center" height="30px">&nbsp;&nbsp;종 류</td>
 			<td class="onForm_right">
-				<c:if test="${article.d_bgenre2 != null}">${article.d_bgenre2}
-					<input type="hidden" name="d_bgenre2" value="${article.d_bgenre2}" />
+				<c:if test="${dto.d_bgenre2 != null}">${dto.d_bgenre2}
+					<input type="hidden" name="d_bgenre2" value="${dto.d_bgenre2}" />
 				</c:if>
-				<c:if test="${article.d_bgenre2 == null}">
+				<c:if test="${dto.d_bgenre2 == null}">
 					<select name="d_bgenre2">
 						<option value="아트지" checked>아트지</option>
 						<option value="레자크지">레자크지</option>
@@ -115,10 +117,10 @@
 			
 			<td class="onForm_left1 d-center" height="30px">국내/외</td>
 			<td class="onForm_right">
-				<c:if test="${article.d_blocation != null}">&nbsp;&nbsp;${article.d_blocation}
-					<input type="hidden" name="d_blocation" value="${article.d_blocation}" />
+				<c:if test="${dto.d_blocation != null}">&nbsp;&nbsp;${dto.d_blocation}
+					<input type="hidden" name="d_blocation" value="${dto.d_blocation}" />
 				</c:if>
-				<c:if test="${article.d_blocation == null}">
+				<c:if test="${dto.d_blocation == null}">
 					<select name="d_blocation">
 						<option value="국내">국내</option>
 						<option value="국외">국외</option>
@@ -130,11 +132,11 @@
 			<td class="onForm_left1 d-center" height="30px">책 출간 날짜</td>
 			<td class="onForm_right">
 				<p >* ex) 2017-03-23</p>
-				<c:if test="${article.d_bregistdate != null}">&nbsp;&nbsp;${article.d_bregistdate} 원
-					<input type="hidden" name="d_bregistdate" value="${article.d_bregistdate}" />
+				<c:if test="${dto.d_bregistdate != null}">&nbsp;&nbsp;${dto.d_bregistdate} 원
+					<input type="hidden" name="d_bregistdate" value="${dto.d_bregistdate}" />
 					
 				</c:if>
-				<c:if test="${article.d_bregistdate == null}">
+				<c:if test="${dto.d_bregistdate == null}">
 					<input type="text" name="d_bregistdate" class="input_box">
 				</c:if>	
 			</td>
@@ -143,11 +145,11 @@
  		<tr>
 			<td class="onForm_left1 d-center" height="30px">가격 (정가)</td>
 			<td class="onForm_right">
-				<c:if test="${article.d_bvalue != null}">&nbsp;&nbsp;${article.d_bvalue} 원
-					<input type="hidden" name="d_bvalue" value="${article.d_bvalue}" />
+				<c:if test="${dto.d_bvalue != null}">&nbsp;&nbsp;${dto.d_bvalue} 원
+					<input type="hidden" name="d_bvalue" value="${dto.d_bvalue}" />
 					
 				</c:if>
-				<c:if test="${article.d_bvalue == null}">
+				<c:if test="${dto.d_bvalue == null}">
 					<input type="text" name="d_bvalue" class="input_box">
 				</c:if>	
 			</td>
@@ -184,7 +186,7 @@
 
 
 <!-- 책 링크를 타고 신청서를 작성 할 때에는 Form 왼쪽부분에 DB에서 불러온 책사진을 꺼내어주고/ 새로운 책을 신청 할 땐,사진이없고, 첨부할 수 있는 양식을 보여줍니다. -->		
-		<c:if test="${article.d_bpic == null}">
+		<c:if test="${dto.d_bpic == null}">
  		<tr>
 			<td class="onForm_left1 d-center" height="30px">책 사진 등록</td>
 			<td class="onForm_right">
@@ -218,6 +220,6 @@
 
 
 <!-- footer import -->
-<%@include file="../footer.jsp" %>
+<jsp:include page="/footer.jsp" />
 		
 		

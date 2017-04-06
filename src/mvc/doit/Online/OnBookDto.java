@@ -23,6 +23,9 @@ public class OnBookDto {
 	   private String d_id;            //판매자코드 //회원정보와 공유
 	   private int d_bdeliverycode;         //배달코드
 	   private Timestamp d_bdate;            //DB 등록일시(검수 완료 후)
+	   
+	   //책 평균가 계산때 사용하는 variable
+	   private int d_bavgsellvalue;
 	
 		//판매신청List에만 사용하는 List
 		private int d_sno;              //등록번호,seq
@@ -53,6 +56,12 @@ public class OnBookDto {
 		
 
 		
+public int getD_bavgsellvalue() {
+			return d_bavgsellvalue;
+		}
+		public void setD_bavgsellvalue(int d_bavgsellvalue) {
+			this.d_bavgsellvalue = d_bavgsellvalue;
+		}
 public int getD_bgradevalue() {
 			return d_bgradevalue;
 		}
