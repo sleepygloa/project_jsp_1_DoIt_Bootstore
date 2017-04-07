@@ -18,7 +18,7 @@
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/my_page.css">
 		
 		<%-- 관리자페이지 css --%>
-		<link rel="stylesheet" type="text/css"  href="/DoIt/css/manage.css?ver=1">
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/manage.css">
 		
 		
 		<%-- 스크립트, Jquery  삽입 --%>
@@ -31,27 +31,7 @@
 			$(".info2_bottom").click(function(){
 				$(this).css("background","#e7ebee");
 			})
-			
-			//메세지창 제어
-			$(".mess_but").click(function(){
-				$(".mess_cont").css("display","block");
-			})
-			
-			$(".x_but").click(function(){
-				$(".mess_cont").css("display","none");
-			})
-			
-			//이동 링크 제어
-			$(".system_sel").click(function(){
-				$(".mana_op").slideDown(350);
-			})
-
-			$(".sung_navi img").click(function(){
-				$(".mana_op").slideUp(350);
-			})
 		
-			
-			
 		});
 		
 		</script>

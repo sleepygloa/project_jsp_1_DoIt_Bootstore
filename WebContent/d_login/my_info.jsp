@@ -9,7 +9,6 @@
 <%--------------- 사이드 메뉴 include --------------%>
 <jsp:include page="/d_login/side_my.jsp"></jsp:include>
 
-
 	
 			<%-- 본문내용 --%>
 			<article class="my_cont_wrap">

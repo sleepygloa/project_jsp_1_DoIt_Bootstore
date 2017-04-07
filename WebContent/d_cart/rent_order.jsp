@@ -37,20 +37,34 @@
 						<table cellspacing="0" style="width:100%;" class="jjang_list">
 							<h4>주문내용</h4>
 							<colgroup>
-							<col width="10%"><col width="15%"><col width="30%" ><col width="20%"><col width="20%"><col width="5%">
+							<c:if test="${cols == 'd_rent'}">
+								<col width="10%"><col width="15%"><col width="30%" ><col width="20%"><col width="20%"><col width="5%">
+							</c:if>
+							<c:if test="${cols == 'd_sell'}">
+								<col width="10%"><col width="10%"><col width="15%"><col width="25%" ><col width="15%"><col width="20%"><col width="10%"><col width="5%">
+							</c:if>
 							</colgroup>
 								<thead>
+								<c:if test="${cols == 'd_rent' || cols == 'd_sell' && buy == 'cart'}">
 									<tr>
 										<th scope="col">도서 코드</th>
+										<c:if test="${cols == 'd_sell'}">
+											<th scope="col">도서 등급</th>
+										</c:if>
 										<th scope="col">도서 이미지</th>
 										<th scope="col">도서명</th>
 										<th scope="col">저자</th>
 										<th scope="col">출판사</th>
+										<c:if test="${cols == 'd_sell'}">
+											<th scope="col">판매가</th>
+										</c:if>
 										<th scope="col">삭제</th>
 									</tr>
+								</c:if>
 								</thead>
 								<tbody id="results">
 								
+								<c:if test="${cols == 'd_rent'}">
 										<%-- 장바구니 내용 출력 --%>
 										<c:forEach var="ca" items ="${ CartList }">
 											<tr>
@@ -62,13 +76,73 @@
 												<td><a href="/DoIt/d_cart/removeCart.do?br_code=${ ca.getBr_code() }&cols=d_rent" class="x_button"></a></td>
 											</tr>
 										</c:forEach>
+								</c:if>
+								<c:if test="${cols == 'd_sell' && buy == 'cart'}">
+								<form action="/DoIt/d_cart/payshot.do?cols=d_sell&buy=cart" method="post" name="d_sell_cart" onSubmit="return d_sell_cart()">
+
+										<%-- 장바구니 내용 출력 --%>
+										<c:forEach var="ca" items ="${ CartList }">
+											<tr>
+												<td>${ ca.getD_bcode() }
+													<input type="hidden" name="d_bcode" value=""${ ca.getD_bcode() }/>
+												</td>
+												<td>${ ca.getD_bgrade() }</td>
+												<td><img src="/DoIt/d_bpic/${ ca.getD_bpic() }" /></td>												
+												<td><a href="#">${ ca.getD_bname() }</a></td>												
+												<td>${ ca.getD_bauthor() }</td>
+												<td>${ ca.getD_bpublisher() }</td>
+												<td>${ ca.getD_bsellvalue() }</td>
+												<td><a href="/DoIt/d_cart/removeCart.do?br_code=${ ca.getD_bcode() }&cols=d_sell&buy=cart" class="x_button"></a></td>
+											</tr>
+										</c:forEach>
+								</c:if>
+								<c:if test="${cols == 'd_sell' && buy == 'buy'}">
+								<form action="/DoIt/d_cart/payshot.do?cols=d_sell&buy=buy" method="post">
+									<div>
+									
+										<p id="OnBook_detail_title">${dto.d_bname}</p>
+										<p class="detail_line"></p>
+										
+										<article id="detail_con">
+											<section id="detail_left">
+												<div class="detail_img">
+													<img src="/DoIt/d_bpic/${dto.d_bpic}" alt="" class="">
+													<input type="hidden" name="d_bpic" value="${dto.d_bpic}">
+												</div>
+												<!-- <p class="detail_left_line"></p> -->
+												
+											
+											</section>
+											<section id="user_buybook">
+												<p class="detail_right_txt">책 정보</p>
+												<div class="detail_right_txtBox">
+														<p><span class="txtBox_spanTxt_1">책 이 름</span>  :   <span class="txtBox_spanTxt_2">${dto.d_bname}</span></p>
+														<input type="hidden" name="d_bcode" value="${dto.d_bcode}">
+														<p><span class="txtBox_spanTxt_1">저&nbsp;&nbsp;&nbsp; 자</span>  :   <span class="txtBox_spanTxt_2">${dto.d_bauthor}</span></p>
+														<p><span class="txtBox_spanTxt_1">출 판 사</span> :   <span class="txtBox_spanTxt_2">${dto.d_bpublisher}</span></p>
+														<p><span class="txtBox_spanTxt_1">장&nbsp;&nbsp;&nbsp; 르</span> :    <span class="txtBox_spanTxt_2">${dto.d_bgenre}</span></p>
+														<p><span class="txtBox_spanTxt_1">종&nbsp;&nbsp;&nbsp; 류</span> :    <span class="txtBox_spanTxt_2">${dto.d_bgenre2}</span></p>
+														<p><span class="txtBox_spanTxt_1">국 내/외</span> : <span class="txtBox_spanTxt_2">${dto.d_blocation}</span></p>
+														<p><span class="txtBox_spanTxt_1">출간날짜</span> : <span class="txtBox_spanTxt_2"> ${dto.d_bregistdate}</span></p>
+														<br/>
+														<p><span class="txtBox_spanTxt_1">정&nbsp;&nbsp;&nbsp; 가</span> : <span class="txtBox_spanTxt_2">${dto.d_bvalue}</span> \</p>
+														<p><span class="txtBox_spanTxt_1">판 매 가</span> : <span class="txtBox_spanTxt_2">${dto.d_bsellvalue}</span> \</p>
+														<p><span class="txtBox_spanTxt_1">결제금액</span> : <span class="txtBox_spanTxt_2">${dto.d_bsellvalue}</span> \</p>
+															
+												</div>
+													
+										</section>
+										</article>
+									</div>			
+								</c:if>
 	
 								</tbody>
 						</table>
-		
-						<a class="men_add fl_ri" href="/DoIt/d_cart/headCartList.do?cols=d_rent" >도서관서비스</a>
-						<a class="men_add fl_ri"  href="/DoIt/d_cart/headCartList.do?cols=d_sell" >직접판매도서</a>
 						
+						<c:if test="${cols == 'd_rent' || cols == 'd_sell'}">
+							<a class="men_add fl_ri" href="/DoIt/d_cart/headCartList.do?cols=d_rent" >도서관서비스</a>
+							<a class="men_add fl_ri"  href="/DoIt/d_cart/headCartList.do?cols=d_sell&buy=cart" >직접판매도서</a>
+						</c:if>
 					</header><%-- 주문결제 목록 끝--%>
 		
 					<section class="order_le_sect">
@@ -85,43 +159,118 @@
 					</section><%-- 주문결제 주의 끝--%>
 					
 					
-					
-					<%-- 주문 배송정보 입력 --%>
-					<footer class="order_le_foot">
-						<p>배송정보</p>
-						<p class="tab_con_ord">
-							<a class="ord_juso">배송지 입력</a>
-						</p>
-						
-						<table class="or_ju1" cellspacing="0">
-						<colgroup>
-						<col width="20%"><col width="80%">
-						</colgroup>
-							<tbody>
-								<tr>
-									<td>수령인 이름</td>
-									<td>${ sessionScope.memName }<input type="hidden" name="order_name" value="${ sessionScope.memName }" /></td>
-								</tr>
-								<tr>
-									<td>휴대전화</td>
-									<td>${ sessionScope.memPhone }<input type="hidden" name="" value="${ sessionScope.memPhone }" /></td>
-								</tr>
-								<tr>
-									<td>주소입력</td>
-									<td><input type="text" value="${ sessionScope.memAddr }" name="jumoon_juso" class="input_033"/></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td><input type="text"  name="" placeholder="추가 주소를 입력해 주세요." class="input_033"/></td>
-								</tr>
-								<tr>
-									<td>배송 요청사항</td>
-									<td><input type="text"  name="" class="input_033"/></td>
-								</tr>
-							</tbody>
-						</table>
-						
-					</footer>
+					<c:if test="${cols == 'd_rent'}">
+						<%-- 주문 배송정보 입력 --%>
+						<footer class="order_le_foot">
+							<p>배송정보</p>
+							<p class="tab_con_ord">
+								<a class="ord_juso">배송지 입력</a>
+							</p>
+							
+							<table class="or_ju1" cellspacing="0">
+							<colgroup>
+							<col width="20%"><col width="80%">
+							</colgroup>
+								<tbody>
+									<tr>
+										<td>수령인 이름</td>
+										<td>${ sessionScope.memName }<input type="hidden" name="order_name" value="${ sessionScope.memName }" /></td>
+									</tr>
+									<tr>
+										<td>휴대전화</td>
+										<td>${ sessionScope.memPhone }<input type="hidden" name="" value="${ sessionScope.memPhone }" /></td>
+									</tr>
+									<tr>
+										<td>주소입력</td>
+										<td><input type="text" value="${ sessionScope.memAddr }" name="jumoon_juso" class="input_033"/></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td><input type="text"  name="" placeholder="추가 주소를 입력해 주세요." class="input_033"/></td>
+									</tr>
+									<tr>
+										<td>배송 요청사항</td>
+										<td><input type="text"  name="" class="input_033"/></td>
+									</tr>
+								</tbody>
+							</table>
+							
+						</footer>
+					</c:if>
+					<c:if test="${cols == 'd_sell'}">
+						<%-- 주문 배송정보 입력 --%>
+						<footer class="order_le_foot">
+							<p>배송정보</p>
+							<p class="tab_con_ord">
+								<a class="ord_juso">배송지 입력</a>
+							</p>
+							
+							<c:if test="${user_check == null && buy == 'cart'}">
+								<input class="btn btn-default" type="button" value="배송정보가 회원 정보와 동일"
+									onclick="window.location='/DoIt/d_cart/headCartList.do?cols=d_sell&buy=cart&d_bcode=${dto.d_bcode}&user_check=yes'" />
+							</c:if>
+							<c:if test="${user_check != null && buy == 'cart'}">
+								<input class="btn btn-default btn-checked" type="button"  value="배송정보가 회원 정보와 동일" 
+									onclick="window.location='/DoIt/d_cart/headCartList.do?cols=d_sell&buy=cart&d_bcode=${dto.d_bcode}&user_check=yes'" />
+							</c:if>
+							<c:if test="${user_check == null && buy == 'buy'}">
+								<input class="btn btn-default" type="button" value="배송정보가 회원 정보와 동일"
+									onclick="window.location='/DoIt/d_cart/headCartList.do?cols=d_sell&buy=buy&d_bcode=${dto.d_bcode}&user_check=yes'" />
+							</c:if>
+							<c:if test="${user_check != null && buy == 'buy'}">
+								<input class="btn btn-default btn-checked" type="button"  value="배송정보가 회원 정보와 동일" 
+									onclick="window.location='/DoIt/d_cart/headCartList.do?cols=d_sell&buy=buy&d_bcode=${dto.d_bcode}&user_check=yes'" />
+							</c:if>
+							
+							<table class="or_ju1" cellspacing="0">
+							<colgroup>
+							<col width="20%"><col width="80%">
+							</colgroup>
+							
+								<tbody>
+									<tr>
+										<td>주 문 인</td>
+										<td>${ sessionScope.memName }
+										<input type="hidden" name="d_bbuyer" value="${id}" />
+										</td>
+									</tr>
+									<tr>
+										<td>수 령 인</td>
+										<td><input type="text" name="d_brecipient" class="input_033" /></td>
+									</tr>
+									<tr>
+										<td>휴대전화번호</td>
+										<td>
+										<c:if test="${user_check == null}">
+											<input type="text" name="user_phone1" maxlength="3" class="input_033_2"/> - 
+											<input type="text" name="user_phone2" maxlength="4" class="input_033_2"/> -
+											<input type="text" name="user_phone3" maxlength="4" class="input_033_2"/>
+										</c:if>
+										<c:if test="${user_check != null}">
+											<input type="text" name="user_phone1" maxlength="3" value="${LogDto.getUser_phone1()}" class="input_033_2"/> - 
+											<input type="text" name="user_phone2" maxlength="4" value="${LogDto.getUser_phone2()}" class="input_033_2"/> -
+											<input type="text" name="user_phone3" maxlength="4" value="${LogDto.getUser_phone3()}" class="input_033_2" />
+										</c:if>
+										</td>
+									</tr>
+									<tr>
+										<td>주소</td>
+										<c:if test="${user_check == null}">
+											<td><input type="text" name="d_addr" class="input_033"></td>
+										</c:if>
+										<c:if test="${user_check != null}">
+											<td><input type="text" name="d_addr" value="${LogDto.d_addr}" class="input_033"></td>
+										</c:if>
+									</tr>
+									<tr>
+										<td>배송 요청사항</td>
+										<td><input type="text"  name="d_brequested" class="input_033"/></td>
+									</tr>
+								</tbody>
+							</table>
+							
+						</footer>
+					</c:if>
 		
 				</article><%-- 주문결제 왼쪽part--%>
 				

@@ -64,7 +64,6 @@ public class OnSellBookAction implements SuperAction {
 		}
 		
         List articleList = null; //리스트 초기화
-        List avgSellvalue = null;
         OnDao dao = OnDao.getInstance();//DB연동
 
         String selectBookFullNameReturn = null;
@@ -118,6 +117,7 @@ public class OnSellBookAction implements SuperAction {
 
 //-------------4. 책  평균가 반환 ----------------------------------------------------------
         //불필요하게 나열될 List가 아닌 책 전체 DB의 책당 평균값을 모두 List
+        if(count>0){
         String getD_bname = null;
         OnBookDto dto = null;
         int d_bavgsellvalue = 0;
@@ -129,7 +129,7 @@ public class OnSellBookAction implements SuperAction {
      				d_bavgsellvalue = dao.getBookNameToAvgSellValue(getD_bname);
      				dto.setD_bavgsellvalue(d_bavgsellvalue);
      	}
-     	
+        }
 		number=count-(currentPage-1)*pageSize;//글목록에 표시할 글번호
 //--------------5. 반환 --------------------------------------------------------
 

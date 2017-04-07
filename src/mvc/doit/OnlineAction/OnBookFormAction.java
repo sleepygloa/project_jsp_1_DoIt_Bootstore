@@ -37,11 +37,10 @@ public class OnBookFormAction  implements SuperAction {
 			String Check = null;
 			OnBookIntroDto obiDto = null;
 			OnBookDto Dto = null;
-			
-			if(d_bno != 0){
+
 				Check = "d_bno";
 				Dto = dao.getOnBookArticle(d_bno, Check);				
-			}
+
 			int d_bcode = Dto.getD_bcode();
 			obiDto = dao.Admin_OnBookIntro_load(d_bcode);
 			

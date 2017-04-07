@@ -9,7 +9,7 @@
 
 <article class="my_cont_wrap ">
 
-
+${arrayList}
 <table border="1px solid black" class="d-center d-margin" width="700px">
 	<tr>
 		<td colspan="6">DoIt 도서 서비스의 연령별 전체 이용현황(가입현황) </td>
@@ -19,6 +19,15 @@
 	</tr>
 	
 	<tr>
+		<td width="100px" rowspan="6">
+			<c:if test="${avgage0 == 0}"></c:if>
+			<c:if test="${avgage0 > 0 && avgage0 < 10}"><small>${avgage0}명</small><br /><img src="/DoIt/images/graph1.png" /></c:if>
+			<c:if test="${avgage0 > 10 && avgage0 < 20}"><small>${avgage0}명</small><br /><img src="/DoIt/images/graph2.png" /></c:if>
+			<c:if test="${avgage0 > 20 && avgage0 < 30}"><small>${avgage0}명</small><br /><img src="/DoIt/images/graph3.png" /></c:if>
+			<c:if test="${avgage0 > 30 && avgage0 < 40}"><small>${avgage0}명</small><br /><img src="/DoIt/images/graph4.png" /></c:if>
+			<c:if test="${avgage0 > 40 && avgage0 < 50}"><small>${avgage0}명</small><br /><img src="/DoIt/images/graph5.png" /></c:if>
+			<c:if test="${avgage0 > 50 && avgage0 < 60}"><small>${avgage0}명</small><br /><img src="/DoIt/images/graph6.png" /></c:if>
+		</td>
 		<td width="100px" rowspan="6">
 			<c:if test="${avgage10 == 0}"></c:if>
 			<c:if test="${avgage10 > 0 && avgage10 < 10}"><small>${avgage10}명</small><br /><img src="/DoIt/images/graph1.png" /></c:if>
@@ -78,6 +87,7 @@
 </table>
 <table border="1px solid black" class="d-center d-margin" width="700px">
 	<tr>
+		<td>어린이</td>
 		<td>10대</td>
 		<td>20대</td>
 		<td>30대</td>

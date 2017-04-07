@@ -13,7 +13,7 @@ public class AcDto {
 	private int d_lno;				//로그번호
 	private int d_lsender;			//보내는사람
 	private int d_lreceiver;		//받는사람
-	private int d_bdelivery;		//배송코드 및 그외 거래코드
+	private String d_lcode;		//배송코드 및 그외 거래코드
 	private int d_ldealmoney;		//거래금액
 	private int d_lsummoney;		//잔액
 	private int d_ldealtype;		//거래종류(방법)
@@ -22,10 +22,7 @@ public class AcDto {
 	private String d_ldateS;		//거래시간 String 형식
 	private int listD_lsummoney;	//계좌 List 당시 잔액
 	
-	
-	
-	
-	
+
 	
 	public int getListD_lsummoney() {
 		return listD_lsummoney;
@@ -81,11 +78,12 @@ public class AcDto {
 	public void setD_lreceiver(int d_lreceiver) {
 		this.d_lreceiver = d_lreceiver;
 	}
-	public int getD_bdelivery() {
-		return d_bdelivery;
+
+	public String getD_lcode() {
+		return d_lcode;
 	}
-	public void setD_bdelivery(int d_bdelivery) {
-		this.d_bdelivery = d_bdelivery;
+	public void setD_lcode(String d_lcode) {
+		this.d_lcode = d_lcode;
 	}
 	public int getD_ldealmoney() {
 		return d_ldealmoney;

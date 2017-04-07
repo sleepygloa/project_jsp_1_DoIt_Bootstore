@@ -42,7 +42,7 @@ public class MyListAction implements SuperAction{
 			//----------------------- 도서관 서비스 파트 ----------------------
 			//책 정보 추가
 			getE = cdo.getHeadCart(br_no,"dr_rent");
-		}else{
+		}else if(col.equals("dr_sell")){
 			//----------------------- 직접판매 주문내역 ----------------------
 			
 		}

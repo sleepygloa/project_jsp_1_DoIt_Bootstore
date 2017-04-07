@@ -72,6 +72,7 @@ public class MyAccountListAction implements SuperAction {
         int startRow = (currentPage - 1) * pageSize + 1;//한 페이지의 시작글 번호, 시작 글 번호 1
         int endRow = currentPage * pageSize;//한 페이지의 마지막 글번호, 마지막 등록글번호 20
         int count = 0;
+        int number = 0;
         
 		count = adao.dealSituationCount(d_no);
 		if(count > 0){
@@ -84,6 +85,7 @@ public class MyAccountListAction implements SuperAction {
 	    request.setAttribute("adto", adto);
 		request.setAttribute("d_lsummoney", d_lsummoney);
 		request.setAttribute("accountList", accountList);
+		request.setAttribute("number", number);
 
 
 		

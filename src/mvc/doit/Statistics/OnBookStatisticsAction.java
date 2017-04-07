@@ -28,6 +28,8 @@ public class OnBookStatisticsAction implements SuperAction {
 		int avgage20 = 0;
 		int avgage30 = 0;
 		int avgage40 = 0;
+		int avgage50 = 0;
+		int avgage60 = 0;
 		StatisticsDto sdto = null;
 		List arrayList = null;
 		int sum = 0;
@@ -44,8 +46,6 @@ public class OnBookStatisticsAction implements SuperAction {
 			sdto = ((StatisticsDto)arrayList.get(i));
 			if(sdto.getD_birth() != null){
 				d_birth = Integer.parseInt(sdto.getD_birth());
-			}else{
-				continue;
 			}
 			
 			sum = today - d_birth + 1;
@@ -57,8 +57,12 @@ public class OnBookStatisticsAction implements SuperAction {
 				avgage20 += 1;
 			}else if(sum  >= 30 && sum < 40){
 				avgage30 += 1;
-			}else{
+			}else if(sum  >= 40 && sum < 50){
 				avgage40 += 1;
+			}else if(sum  >= 50 && sum < 60){
+				avgage50 += 1;
+			}else{
+				avgage60 += 1;
 			}
 		}
 		
@@ -68,10 +72,12 @@ public class OnBookStatisticsAction implements SuperAction {
 		request.setAttribute("avgage20", avgage20);
 		request.setAttribute("avgage30", avgage30);
 		request.setAttribute("avgage40", avgage40);
+		request.setAttribute("avgage50", avgage50);
+		request.setAttribute("avgage60", avgage60);	
 		
 		request.setAttribute("sdto", sdto);
 		
-
+request.setAttribute("arrayList", arrayList);
 		
 		
 		

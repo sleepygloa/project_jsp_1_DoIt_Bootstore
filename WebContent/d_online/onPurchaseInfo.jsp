@@ -9,7 +9,7 @@
 
 
 <!-- 1. 선택된 책에 대한 상세 내용이 이 페이지에서 해결된다. -->
-<form action ="/DoIt/d_online/user_onBuyBook.do?d_bcode=${article.d_bcode}" method="post">
+<form action ="/DoIt/d_cart/headCartList.do?cols=d_sell&buy=buy&d_bcode=${article.d_bcode}" method="post">
 	<table  style="width:1000px; border:1px solid gray" class="d-center">
 		<tr>
 			<td colspan="2" width="1000px" height="80px" style="background-color:#e5e5e5">
@@ -75,7 +75,10 @@
 		</tr>
 		<tr>
 			<td class="d-center" colspan="2">
-				<input class="btn btn-default d-w-30" type="button" value="장바구니" />
+			
+				<input class="btn btn-default d-w-30" type="button" value="장바구니"
+               onclick="window.location='/DoIt/d_cart/insertCart.do?start_cart=d_sell&b_code=${article.d_bcode}&d_bno=${article.d_bno}'" />
+               
 				<input class="btn btn-default d-w-30" type="submit" value="구매하기" />
 				<input class="btn btn-default d-w-30" type="button" value="취소"
 					onclick="window.location='/DoIt/d_online/onSellBook.do'" /> 
@@ -113,7 +116,7 @@
 </c:if>
 <!-- -------등록된 책이 있을 때----------------------------- -->
 <c:if test="${count!=0}">
-	<c:forEach var="articleList" begin="0" end="${articleList.size()}" step="1" items="${articleList}">
+	<c:forEach var="articleList"  items="${articleList}">
 		<table style="width:1000px;border:1px solid gray" class="d-center">			
 			<tr>
 				<td width="100px"  height="160px">

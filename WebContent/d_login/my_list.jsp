@@ -37,7 +37,7 @@
 				
 				<ul class="my_list_tab">
 					<li><a href="/DoIt/d_login/myList.do?cols=dr_rent">나의 대여목록</a></li>
-					<li><a href="#">나의 구매목록</a></li>
+					<li><a href="/DoIt/d_login/user_BuyBookList.do">나의 구매목록</a></li>
 					<li><a href="#">나의 입찰내용</a></li>
 				</ul>
 				

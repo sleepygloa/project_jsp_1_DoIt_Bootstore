@@ -40,16 +40,17 @@ public class CartInsertAction1 implements SuperAction{
 			srt = "/d_cart/headCartList.do";
 			col = "d_rent"; 
 			colss = "dr_rent";
+		}else if(start_cart.equals("d_sell")){
+			srt = "/d_online/onPurchaseInfo.do";
+			request.setAttribute("d_bno", request.getParameter("d_bno"));
+			col = "d_sell"; 
+			//colss = "dr_sell";
 		}
 		
 		CartDao cdo = CartDao.getInstance();
 		
-		//해당 도서 대기자 명단 : 5명 이하인가
-		int personC = cdo.getPerson(b_code);
-		request.setAttribute("personC", personC); //대기자 숫자 
-		
-		
-		if(personC < 6){
+		//온라인 중고서점
+		if(col.equals("d_sell")){
 			
 			//장바구니 생성 여부 판단
 			boolean check = cdo.checkASD(br_no);
@@ -57,24 +58,47 @@ public class CartInsertAction1 implements SuperAction{
 			if(!check){ //장바구니 레코드가 없는 경우
 				cdo.insASD(br_no);
 			}//신규 생성 및 삽입
-				
-			//각 장바구니 속 갯수 확인 
-			int countC = cdo.countCart(br_no,col);
-				
-			//해당도서가 이미 대여 됬는가 ? 대여목록 확인
-			boolean checkRe = cdo.checkCart(br_no,colss,b_code);
-				
+			
 			//해당도서가 이미 장바구니에 있는가 ? 장바구니 목록 확인
 			boolean checkRe2 = cdo.checkCart(br_no, col, b_code);
 			
-			// 장바구니 속 내용이 5개 이하인가?
-			// 대기자 목록이 5명 이하인가?
-			// 나의 대여목록에 이미 있는가?
-			if(countC < 6 && !checkRe && !checkRe2 && personC < 6){
+			if(checkRe2 == false){
 				cdo.insetCart(br_no,col,b_code);	
 			}// -> 장바구니 입력
+		}else if(col.equals("d_rent")){
+
+			//해당 도서 대기자 명단 : 5명 이하인가
+			int personC = cdo.getPerson(b_code);
+			request.setAttribute("personC", personC); //대기자 숫자 
 			
-		
+			
+			if(personC < 6){
+				
+				//장바구니 생성 여부 판단
+				boolean check = cdo.checkASD(br_no);
+				
+				if(!check){ //장바구니 레코드가 없는 경우
+					cdo.insASD(br_no);
+				}//신규 생성 및 삽입
+					
+				//각 장바구니 속 갯수 확인 
+				int countC = cdo.countCart(br_no,col);
+					
+				//해당도서가 이미 대여 됬는가 ? 대여목록 확인
+				boolean checkRe = cdo.checkCart(br_no,colss,b_code);
+					
+				//해당도서가 이미 장바구니에 있는가 ? 장바구니 목록 확인
+				boolean checkRe2 = cdo.checkCart(br_no, col, b_code);
+				
+				// 장바구니 속 내용이 5개 이하인가?
+				// 대기자 목록이 5명 이하인가?
+				// 나의 대여목록에 이미 있는가?
+				if(countC < 6 && !checkRe && !checkRe2 && personC < 6){
+					cdo.insetCart(br_no,col,b_code);	
+				}// -> 장바구니 입력
+				
+			
+			}
 		}
 		
 		
@@ -83,7 +107,7 @@ public class CartInsertAction1 implements SuperAction{
 			session.removeAttribute("CartL");
 			List CartL = cdo.getHeadCart(br_no, col);
 			session.setAttribute("CartL", CartL);
-		}else{ //직접판매 저장
+		}else if(col.equals("d_sell")){ //직접판매 저장
 			session.removeAttribute("CartP");
 			List CartP = cdo.getHeadCart(br_no, col);
 		    session.setAttribute("CartP", CartP);

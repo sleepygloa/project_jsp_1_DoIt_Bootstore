@@ -12,6 +12,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import mvc.doit.Account.AcDto;
 import mvc.doit.Delivery.DeliveryDto;
 import mvc.doit.Login.LoginDto;
 import mvc.doit.Login.mySellingListDto;
@@ -180,6 +181,7 @@ public class OnDao {
      return avgSellValue;
   }   
 
+
 //-------책장르 조건에 따른 책 DB의 레코드 수 count-------책장르 조건에 따른 책 DB의 레코드 수 count-------책장르 조건에 따른 책 DB의 레코드 수 count-------책장르 조건에 따른 책 DB의 레코드 수 count-------책장르 조건에 따른 책 DB의 레코드 수 count 
    public int getD_BSellCount(String d_bonFillter, int d_bonFillterReturn) throws Exception{
      int x = 0;
@@ -189,10 +191,10 @@ public class OnDao {
 if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 1 & d_bonFillterReturn <= 6){
 	sql += "select count(*) from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
 		    "where b.d_bcode = s.d_bcode and d_bgenre = '" +d_bonFillter+ "') b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2";	
-}else if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 7 & d_bonFillterReturn <= 10){
+}else if(d_bonFillterReturn >= 7 & d_bonFillterReturn <= 10){
 	sql += "select count(*) from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
 		    "where b.d_bcode = s.d_bcode and d_bgenre2 = '" +d_bonFillter+ "') b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2";
-}else if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 11 & d_bonFillterReturn <= 12){
+}else if(d_bonFillterReturn >= 11 & d_bonFillterReturn <= 12){
 	sql += "select count(*) from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
 		    "where b.d_bcode = s.d_bcode and d_bLocation = '" +d_bonFillter+ "') b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2";	
 
@@ -229,13 +231,13 @@ if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 1 & d_bonFillterReturn <= 6)
 			"from (select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate "+
 			"from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
 			"where b.d_bcode = s.d_bcode and d_bgenre = '" +d_bonFillter+ "') b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 )) where r >= "+startRow+" and r <= "+endRow;	
-}else if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 7 & d_bonFillterReturn <= 10){
+}else if(d_bonFillterReturn >= 7 & d_bonFillterReturn <= 10){
 	sql += "select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,r "+
 			"from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
 			"from (select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate "+
 			"from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
 			"where b.d_bcode = s.d_bcode and d_bgenre2 = '" +d_bonFillter+ "') b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 )) where r >= "+startRow+" and r <= "+endRow;	
-}else if(d_bonFillterReturn != 0 && d_bonFillterReturn >= 11 & d_bonFillterReturn <= 12){
+}else if(d_bonFillterReturn >= 11 & d_bonFillterReturn <= 12){
 	sql += "select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,r "+
 			"from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
 			"from (select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate "+
@@ -296,7 +298,7 @@ public int getD_BSelectCount(String select) throws Exception{
     conn = getConnection();
     pstmt = conn.prepareStatement(
 		"select count(*) from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
-        "where b.d_bcode = s.d_bcode) b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and b.d_bcount = 1 and " +
+        "where b.d_bcode = s.d_bcode) b, d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2  and " +
 		"(b.d_bgenre like '%"+select +"%' or b.d_bgenre2 like '%"+select +"%' or b.d_blocation like '%"+select +"%' or b.d_bname like '%"+select +"%' or b.d_bpublisher like '%"+select +"%' or b.d_bauthor like '%"+select +"%')"    		
     		);
     rs = pstmt.executeQuery();
@@ -326,7 +328,7 @@ public List<OnBookDto> getD_BSelectList(String select, int startRow, int endRow)
 "from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
 "from (select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate "+
 "from (select b.* from d_onBook b, (SELECT min(d_bcode) As d_bcode  FROM d_onBook b  GROUP BY d_bname) s "+
-"where b.d_bcode = s.d_bcode) b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2 and b.d_bcount = 1 and" +
+"where b.d_bcode = s.d_bcode) b , d_onSellList s where b.d_bcode = s.d_bcode and s.d_sfinish = 2  and" +
 "(b.d_bgenre like '%"+select +"%' or b.d_bgenre2 like '%"+select +"%' or b.d_blocation like '%"+select +"%' or b.d_bname like '%"+select +"%' or b.d_bpublisher like '%"+select +"%' or b.d_bauthor like '%"+select +"%') " +
 " )) where r >= "+startRow+" and r <= "+endRow        		    		
     		);
@@ -370,109 +372,113 @@ public List<OnBookDto> getD_BSelectList(String select, int startRow, int endRow)
  }
  return articleList;
 }        
- 
- 
+
+
 //------select, 검색으로 책의 전체이름을 찾는 Dao --------------------------------------------------------------------------
 public String findSelectToBookFullName(String select) throws Exception{
 
-	 String find = null;
-	 
-	 try {
-	    conn = getConnection();
-	    pstmt = conn.prepareStatement(   		   		 
-	"select d_bname from d_onBook where d_bname like '%"+select+"%'"     		    		
-	    		);
-	    rs = pstmt.executeQuery();
-	    
-	    if(rs.next()){
-	    	find = rs.getString("d_bname");
-	                      
-
-	    }
-	    
-	 }catch(Exception e){
-	    e.printStackTrace();
-	 }finally{
-	    if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
-	    if( pstmt != null){ try{ pstmt.close(); }catch(SQLException se){} };
-	    if( conn != null){ try{ conn.close(); }catch(SQLException se){} };
-	 }
-	 return find;
-	} 
+   String find = null;
    
-//---- 책의 상세정보를 반환 ----- variable 변수와 Check 목적을 받아 목적을 조건으로 서로다른 방법으로 책정보를 검색합니다.
-    public OnBookDto getOnBookArticle(int variable, String Check) throws Exception{
-       OnBookDto article = null;
-       String d_bnameCheck = null;
-       try{
-          conn = getConnection();
-          //d_bno로 d_bname을 찾고 d_bname로 판매가능한 책의 정보를 찾음. (페이지 : )
-          if(Check == ""){
-              pstmt = conn.prepareStatement(
-                      "select d_bname from d_onBook where d_bno = " + variable
-                      );
-                rs = pstmt.executeQuery();
-                if(rs.next()){
-              	d_bnameCheck = rs.getString("d_bname");  
-                }
-                pstmt = conn.prepareStatement(
-              		  "select * from (select b.* from d_onBook b, d_onSellList s where b.d_bcode = s.d_bcode and b.d_bgrade != '매입 불가' and s.d_sfinish = 2 and b.d_bcount = 1) where d_bname = '"+ d_bnameCheck +"'"
-              		  );
-                rs = pstmt.executeQuery();
-          //d_bno 로 책의 모든 정보를 찾습니다.(판매중이건, 판매완료건, 배송중이건 상관없이)
-          }else if(Check == "d_bno"){
-              pstmt = conn.prepareStatement(
-                      "select * from d_onBook where d_bno = " + variable
-                      );
-                rs = pstmt.executeQuery();
-          //d_bcode로 판매가능한 책정보를 뽑습니다.
-          }else if(Check == "d_bcode_oneBook"){
-        	  pstmt = conn.prepareStatement(
-       	           "select * from d_onBook where d_bcode = " + variable + " and d_bgrade != '매입불가' and d_bcount = 1" 
-   	        		   );
-          		rs = pstmt.executeQuery();
-      	  }else if(Check == "d_bno_oneBook"){
-       	   pstmt = conn.prepareStatement(
-       	           "select * from d_onBook where d_bno = " + variable + " and d_bgrade != '매입불가' and d_bcount = 1" 
-       	        		   );       
-       	   		rs = pstmt.executeQuery();
-      	  }
- 
-          if(rs.next()){
-            article = new OnBookDto();
-            article.setD_bno(rs.getInt("d_bno"));
-            article.setD_bcode(rs.getInt("d_bcode"));
-            article.setD_bname(rs.getString("d_bname"));
-            article.setD_bgrade(rs.getString("d_bgrade"));
-            article.setD_bpublisher(rs.getString("d_bpublisher"));
-            article.setD_bauthor(rs.getString("d_bauthor"));
-            article.setD_bgenre(rs.getString("d_bgenre"));
-            article.setD_bgenre2(rs.getString("d_bgenre2"));
-            article.setD_blocation(rs.getString("d_blocation"));
-            article.setD_bregistdate(rs.getString("d_bregistdate"));
-            article.setD_bpic(rs.getString("d_bpic"));
-            article.setD_bcount(rs.getInt("d_bcount"));
-            article.setD_bvalue(rs.getInt("d_bvalue"));
-            article.setD_bsellvalue(rs.getInt("d_bsellvalue"));
-            article.setD_bpurchasevalue(rs.getInt("d_bpurchasevalue"));
-            article.setD_icode(rs.getInt("d_icode"));
-            article.setD_id(rs.getString("d_id"));                
-            article.setD_bdeliverycode(rs.getInt("d_bdeliverycode"));
-            article.setD_bdate(rs.getTimestamp("d_bdate"));
-                             
-          }          
-       }catch(Exception e){
-          e.printStackTrace();
-       }finally{ 
-             if( rs != null ){ try{ rs.close(); }catch( SQLException se ){}};
-             if( pstmt != null ){ try{ pstmt.close(); }catch( SQLException se ){}};
-             if( conn != null ){ try{ conn.close(); }catch( SQLException se ){}};
-       }
-       return article;
-    }
- 
-    
+   try {
+      conn = getConnection();
+      pstmt = conn.prepareStatement(                   
+  "select d_bname from d_onBook where d_bname like '%"+select+"%'"                     
+            );
+      rs = pstmt.executeQuery();
+      
+      if(rs.next()){
+         find = rs.getString("d_bname");
+                        
 
+      }
+      
+   }catch(Exception e){
+      e.printStackTrace();
+   }finally{
+      if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+      if( pstmt != null){ try{ pstmt.close(); }catch(SQLException se){} };
+      if( conn != null){ try{ conn.close(); }catch(SQLException se){} };
+   }
+   return find;
+  } 
+  
+//---- 책의 상세정보를 반환 ----- variable 변수와 Check 목적을 받아 목적을 조건으로 서로다른 방법으로 책정보를 검색합니다.
+   public OnBookDto getOnBookArticle(int variable, String Check) throws Exception{
+      OnBookDto article = null;
+      String d_bnameCheck = null;
+      try{
+         conn = getConnection();
+         //d_bno로 d_bname을 찾고 d_bname로 판매가능한 책의 정보를 찾음. (페이지 : )
+         if(Check != null && Check == "none"){
+             pstmt = conn.prepareStatement(
+                     "select d_bname from d_onBook where d_bno = " + variable
+                     );
+               rs = pstmt.executeQuery();
+               if(rs.next()){
+                d_bnameCheck = rs.getString("d_bname");  
+               }
+               pstmt = conn.prepareStatement(
+                     "select * from (select b.* from d_onBook b, d_onSellList s where b.d_bcode = s.d_bcode and b.d_bgrade != '매입 불가' and s.d_sfinish = 2 and b.d_bcount = 1) where d_bname = '"+ d_bnameCheck +"'"
+                     );
+               rs = pstmt.executeQuery();
+         //d_bno 로 책의 모든 정보를 찾습니다.(판매중이건, 판매완료건, 배송중이건 상관없이)
+         }else if(Check == "d_bno"){
+             pstmt = conn.prepareStatement(
+                     "select * from d_onBook where d_bno = " + variable
+                     );
+               rs = pstmt.executeQuery();
+         }else if(Check == "d_bcode"){
+             pstmt = conn.prepareStatement(
+                     "select * from d_onBook where d_bcode = " + variable
+                     );
+               rs = pstmt.executeQuery();                
+         //d_bcode로 판매가능한 책정보를 뽑습니다.
+         }else if(Check == "d_bcode_oneBook"){
+            pstmt = conn.prepareStatement(
+                    "select * from d_onBook where d_bcode = " + variable + " and d_bgrade != '매입불가' and d_bcount = 1" 
+                      );
+               rs = pstmt.executeQuery();
+          }else if(Check == "d_bno_oneBook"){
+            pstmt = conn.prepareStatement(
+                    "select * from d_onBook where d_bno = " + variable + " and d_bgrade != '매입불가' and d_bcount = 1" 
+                          );       
+                  rs = pstmt.executeQuery();
+          }else{}
+
+         if(rs.next()){
+           article = new OnBookDto();
+           article.setD_bno(rs.getInt("d_bno"));
+           article.setD_bcode(rs.getInt("d_bcode"));
+           article.setD_bname(rs.getString("d_bname"));
+           article.setD_bgrade(rs.getString("d_bgrade"));
+           article.setD_bpublisher(rs.getString("d_bpublisher"));
+           article.setD_bauthor(rs.getString("d_bauthor"));
+           article.setD_bgenre(rs.getString("d_bgenre"));
+           article.setD_bgenre2(rs.getString("d_bgenre2"));
+           article.setD_blocation(rs.getString("d_blocation"));
+           article.setD_bregistdate(rs.getString("d_bregistdate"));
+           article.setD_bpic(rs.getString("d_bpic"));
+           article.setD_bcount(rs.getInt("d_bcount"));
+           article.setD_bvalue(rs.getInt("d_bvalue"));
+           article.setD_bsellvalue(rs.getInt("d_bsellvalue"));
+           article.setD_bpurchasevalue(rs.getInt("d_bpurchasevalue"));
+           article.setD_icode(rs.getInt("d_icode"));
+           article.setD_id(rs.getString("d_id"));                
+           article.setD_bdeliverycode(rs.getInt("d_bdeliverycode"));
+           article.setD_bdate(rs.getTimestamp("d_bdate"));
+                            
+         }          
+      }catch(Exception e){
+         e.printStackTrace();
+      }finally{ 
+            if( rs != null ){ try{ rs.close(); }catch( SQLException se ){}};
+            if( pstmt != null ){ try{ pstmt.close(); }catch( SQLException se ){}};
+            if( conn != null ){ try{ conn.close(); }catch( SQLException se ){}};
+      }
+      return article;
+   }
+
+   
 //-----중고 판매가격 List-----중고 판매가 List-----중고 판매가 List-----중고 판매가 List-----중고 판매가 List-----중고 판매가 List
     public List<OnBookDto> getD_bsellvalue(int d_bno) throws Exception{
         List<OnBookDto> sellList = null;
@@ -823,9 +829,11 @@ public String findSelectToBookFullName(String select) throws Exception{
      }    
 
 //-------------사용자 구매-----------사용자 구매-----------사용자 구매-----------사용자 구매----------사용자 구매-----------사용자 구매----------사용자 구매   
- public void User_onBuyBook_insert(DeliveryDto Ddto, LoginDto LogDto, int d_bcode, String d_id){
+ public void User_onBuyBook_insert(DeliveryDto Ddto, LoginDto LogDto, AcDto acDto, int d_bcode, String d_id){
   		try{
   			conn = getConnection();
+  			
+  			//배송 DB 등록
   			pstmt = conn.prepareStatement("insert into d_bdelivery values(d_bdeliverycode_seq.NEXTVAL,?,?,?,?,?,sysdate)");
 
   			
@@ -836,16 +844,28 @@ public String findSelectToBookFullName(String select) throws Exception{
   			pstmt.setString(5, Ddto.getD_brequested());
   			pstmt.executeUpdate();
   			
+  			// 회원 주소, 전화번호 새로 등록
   			pstmt = conn.prepareStatement("update d_member set d_addr = ?,d_phone=? where d_id= ?");
   			pstmt.setString(1, LogDto.getD_addr());
   			pstmt.setString(2, LogDto.getD_phone());
   			pstmt.setString(3, d_id);	
   			pstmt.executeUpdate();
   			
-  			
+  			//책 1-> 0 , 판매할 수 없는 책으로 바뀜
   			pstmt = conn.prepareStatement("update d_onBook set d_bcount = 0 where d_bcode= ?");
   			pstmt.setInt(1, d_bcode);	
   			pstmt.executeUpdate();
+  			
+  			//거래 내역 등록
+  			pstmt = conn.prepareStatement("insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,sysdate)");
+			pstmt.setInt(1, acDto.getD_lsender());
+			pstmt.setInt(2, acDto.getD_lreceiver());
+			pstmt.setString(3, "d_d"+d_bcode);
+			pstmt.setInt(4, acDto.getD_ldealmoney());
+			pstmt.setInt(5, acDto.getD_ldealtype());
+			pstmt.setInt(6, acDto.getD_ldealresult());
+			
+			pstmt.executeUpdate();
   			
 
   		}catch(Exception e){
@@ -2104,7 +2124,7 @@ public int getFindNameToNameCount(String d_bname) throws Exception{
     try{
        conn = getConnection();
        pstmt = conn.prepareStatement(
-       		"select count(*) from (select * from d_onBook where d_bname like '%"+d_bname+"%' and d_bgrade != '매입불가' and d_bcount = 1)"
+       		"select count(*) from (select * from d_onBook where d_bname like '%"+d_bname+"%' and d_bgrade != '매입불가' and d_bgrade != 'c' and d_bcount = 1)"
       		 );
        rs = pstmt.executeQuery();
        if(rs.next()){
@@ -2129,7 +2149,7 @@ public List<OnBookDto> getFindNameToName(String d_bname, int startRow, int endRo
 	       pstmt = conn.prepareStatement(
    "select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,r "+
    "from (select d_bno,d_bcode,d_bname,d_bgrade,d_bpublisher,d_bauthor,d_bgenre,d_bgenre2,d_blocation,d_bregistdate,d_bpic,d_bcount,d_bvalue,d_bsellvalue,d_bpurchasevalue,D_icode,d_id,d_bdeliverycode,d_bdate,rownum r "+
-   "from (select * from d_onBook where d_bname like '%"+d_bname+"%' and d_bgrade != '매입불가' and d_bcount = 1)) where  r >= "+startRow+" and r <= "+endRow
+   "from (select * from d_onBook where d_bname like '%"+d_bname+"%' and d_bgrade != '매입불가' and d_bgrade != 'c' and d_bcount = 1)) where  r >= "+startRow+" and r <= "+endRow
    );
 	       rs = pstmt.executeQuery();
 	       
@@ -2221,7 +2241,6 @@ public int getFindNameToValue(String d_bname) throws Exception{
 //---- 책을 등록하는 페이지, 배송완료되는 페이지의 시점에서 알고리즘이 완료가 되었을때, 즉, 사용자가 판매와 구매의 완료를 하게될때(받게될때) 실행합니다.
 //---- 회원의 등급을 조사하고, 그대로 둘지, 등급을 올릴지 판단하는 Dao입니다.
 public String getUserSellPurchaseCountToGrade(int d_bcode, String d_id, String Check) throws Exception{
-	  Check = "";
 	  int sellCount = 0;
 	  int purchaseCount = 0;
 	  String d_idCheck = null;
@@ -2230,34 +2249,36 @@ public String getUserSellPurchaseCountToGrade(int d_bcode, String d_id, String C
 	     conn = getConnection();
 	     
 	     if(Check == "d_bcode"){
-     //---- d_onBook에서 회원이 방금 판매한 책코드로 회원의 id를 검색함
-	     pstmt = conn.prepareStatement(
-	     		"select d_id from d_onBook where d_bcode = " + d_bcode
-	    		 );
-	     rs = pstmt.executeQuery();
-	     if(rs.next()){
-	    	 d_idCheck = rs.getString("d_id");
-	     }else if(Check == "d_id"){
+   //---- d_onBook에서 회원이 방금 판매한 책코드로 회원의 id를 검색함
+	    	 pstmt = conn.prepareStatement(
+	    			 "select d_id from d_onBook where d_bcode = " + d_bcode
+	    			 );
+	    	 rs = pstmt.executeQuery();
+	    	 if(rs.next()){
 	 //---- d_member에서 회원이 로그인했을때 id를 받아옴.
-	    	 d_idCheck = d_id;
-	     }else{}	 
-	     //---- 회원의 id로 d_onBook으로 판매한 책의 수를 세어줍니다.
+	    		 d_idCheck = rs.getString(1);
+	    	 }else{ }
+	     }else{
+	    	 d_idCheck = d_id;//세션에서 받아올경우 admin의 아이디일 수 있음.	
+	     }
+			     
+   //---- 회원의 id로 d_onBook으로 회원이 판매한 책의 수를 세어줍니다.
 		     pstmt = conn.prepareStatement(
 		    		 "select count(*) from d_onBook where d_id = '" + d_idCheck + "'"
 		    		 );
 		     rs = pstmt.executeQuery();
 		     if(rs.next()){
-		    	 purchaseCount = rs.getInt(1); //카운트 첫번째 행의 값을 출력하여 x에 대입
+		    	 sellCount = rs.getInt(1); //카운트 첫번째 행의 값을 출력하여 x에 대입
 		     }else{}
-	     //---- 회원의 id로 d_onSellList에서 판매한 수를 세어 줍니다.
+   //---- 회원의 id로 d_onSellList에서 구매한 수를 세어 줍니다.
 	    	 pstmt = conn.prepareStatement(
-	    			 "select count(*) from d_onSellList where d_id = '" + d_idCheck +"'"
+	    			 "select count(*) from d_bdelivery where d_bbuyer = '" + d_idCheck +"'"
 					);
 	    	 rs = pstmt.executeQuery();
 	    	 if(rs.next()){
-	    		 sellCount = rs.getInt(1);
+	    		 purchaseCount = rs.getInt(1);
 	    	 }else{}
-    	 //---- 회원의 id로 d_member에서 회원의 등급을 불러옵니다.
+	 //---- 회원의 id로 d_member에서 회원의 등급을 불러옵니다.
 	    	 pstmt = conn.prepareStatement(
 	    			 "select d_nom_grade from d_member where d_id = '" + d_idCheck + "'" 
 					);
@@ -2266,17 +2287,16 @@ public String getUserSellPurchaseCountToGrade(int d_bcode, String d_id, String C
 	    		 d_nom_grade = rs.getInt("d_nom_grade");
 	    		 
 	    	 }else{}
-	     }//여기까지 회원의 d_id를 찾았고, d_id로 판매한책의 수, 구매한 책의 수, 등급을 반환했습니다.
+	     //여기까지 회원의 d_id를 찾았고, d_id로 판매한책의 수, 구매한 책의 수, 등급을 반환했습니다.
 
 	     //회원이 20개 이상 구매하고, 10개 이상 판매했을때와 50개 이상 구매하고 30개이상 판매했을때 의 경우로 회원의 등급을 올려줍니다.
 	     //회원등급은 기본이 0, 책에 관심이 있는 책벌레 1, 책 좀 읽는 책벌레 2 입니다. 
 	     //회원에게 보여줄 메세지를 보여줄 등급은 01과 12 입니다.
 	     switch (d_nom_grade) {
 		     case 0 :	   
-			    	 Check = "00"; //기본값입니다.
-			    	 if(purchaseCount >= 20 && sellCount >= 10){
+			    	 if(purchaseCount >= 2 && sellCount >= 2){
 				    	 pstmt = conn.prepareStatement(
-				    			 "update d_member SET d_nom_grade = 11 where d_bgrade != 'c' and d_id = '" + d_idCheck + "'"
+				    			 "update d_member SET d_nom_grade = 11 where d_id = '" + d_idCheck + "'"
 				    			 );
 				    	 pstmt.executeUpdate();
 				    	 Check = "01";
@@ -2284,20 +2304,18 @@ public String getUserSellPurchaseCountToGrade(int d_bcode, String d_id, String C
 		    	 break;
 		    	 
 		     case 11 :	   
-		    	 Check = "00"; //기본값입니다.
 			    	 pstmt = conn.prepareStatement(
-			    			 "update d_member SET d_nom_grade = 1 where d_bgrade != 'c' and d_id = '" + d_idCheck + "'"
+			    			 "update d_member SET d_nom_grade = 1 where d_id = '" + d_idCheck + "'"
 			    			 );
 			    	 pstmt.executeUpdate();
-			    	 Check = "01";
+			    	 Check = "11";
 
-	    	 break;
+			    	 break;
 
 		     case 1 :
-		    	 	 Check = "11";
-			    	 if(purchaseCount >= 50 && sellCount >= 30 ){
+			    	 if(purchaseCount >= 4 && sellCount >= 4 ){
 				    	 pstmt = conn.prepareStatement(
-				    			 "update d_member SET d_nom_grade = 22 where d_bgrade != 'c' and d_id = '" + d_idCheck + "'"
+				    			 "update d_member SET d_nom_grade = 22 where  d_id = '" + d_idCheck + "'"
 				    			 );
 				    	 pstmt.executeUpdate();	    
 				    	 Check = "12";
@@ -2305,22 +2323,18 @@ public String getUserSellPurchaseCountToGrade(int d_bcode, String d_id, String C
 		    	 break;
 
 		     case 22 :	   
-		    	 Check = "11"; //기본값입니다.
 			    	 pstmt = conn.prepareStatement(
-			    			 "update d_member SET d_nom_grade = 2 where d_bgrade != 'c' and d_id = '" + d_idCheck + "'"
+			    			 "update d_member SET d_nom_grade = 2 where  d_id = '" + d_idCheck + "'"
 			    			 );
 			    	 pstmt.executeUpdate();
-			    	 Check = "12";
+			    	 Check = "22";
 
-	    	 break;		    	 
+			    	 break;		    	 
 		    	 
 		     case 2 :
 		    	 	Check = "2";
-		    	 break;
-		    	 
+		    	 break;		    	 
 	     }
-	     
-	     
 	  }catch(Exception e){
 	     e.printStackTrace();
 	  }finally{
@@ -2379,7 +2393,28 @@ public int getSellCanCount(String d_bname) throws Exception{
   return x ;
 }
 
-
+//---- 회원 ID로 회원 NO를 찾응 Dao -------
+public int findIdToNo(String d_id) throws Exception{
+	 int x = 0;
+	 try{
+	    conn = getConnection();
+	    pstmt = conn.prepareStatement(
+	    		"select d_no from d_member where d_id = '" + d_id + "'"
+	    		);
+	    
+	    rs = pstmt.executeQuery();
+	    if(rs.next()){
+	       x = rs.getInt(1); //카운트 첫번째 행의 값을 출력하여 x에 대입
+	    }
+	 }catch(Exception e){
+	    e.printStackTrace();
+	 }finally{
+	    if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+	    if( pstmt != null){ try{ pstmt.close(); }catch(SQLException se){} };
+	    if( conn != null){ try{ conn.close(); }catch(SQLException se){} };
+	 }
+	 return x ;
+} 
 
 
 

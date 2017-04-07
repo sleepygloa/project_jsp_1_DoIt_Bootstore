@@ -26,7 +26,11 @@ public class CartRemoveAction implements SuperAction{
 		String br_code = request.getParameter("br_code"); //책 코드 번호
 		String col = request.getParameter("cols"); // 삭제할 컬럼 구분
 		int br_no = (int)session.getAttribute("memNo"); // 회원번호 출력
+		
+		String buy = request.getParameter("buy");
+		
 		request.setAttribute("cols", col);
+		request.setAttribute("buy", buy);
 		
 		//해당 코드 삭제(라고 쓰고 새롭게 업데이트라고 읽는다.)
 		cdao.deleteCart(br_no,br_code,col); // 회원번호, 해당 책코드, 구분 컬럼
@@ -34,6 +38,10 @@ public class CartRemoveAction implements SuperAction{
 		//새롭게 정보 출력
 		List CartList = cdao.getHeadCart(br_no, col);
 		request.setAttribute("CartList", CartList);
+		
+		//d_sell 총금액 다시 출력
+		int d_total = cdao.getBookBuyTotal(br_no, col);
+		request.setAttribute("d_total", d_total);
 		
 		//세션에 장바구니 새롭게 저장
 		if(col.equals("d_rent")){ //도서관 내용 저장

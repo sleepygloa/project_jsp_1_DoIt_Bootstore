@@ -84,7 +84,7 @@
 <!-- 페이지 번호 ------------------------------------------------------------------------ -->	
 <center>
 	<c:if test="${startPage>10}">
-		<a href="/DoIt/d_login/mySellingList.do?pageNum=${startPage-10}" >[이전]</a>
+		<a href="/DoIt/d_login/mySellingList.do?pageNum=${startPage-5}" >[이전]</a>
 	</c:if>
 	
 	<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
@@ -93,7 +93,7 @@
 	
 	
 	<c:if test="${endPage<pageCount}">
-		<a href="/jsp/board/list.nhn?pageNum=${startPage+10}">[다음]</a>
+		<a href="/jsp/board/list.nhn?pageNum=${startPage+5}">[다음]</a>
 	</c:if>
 </center>
 

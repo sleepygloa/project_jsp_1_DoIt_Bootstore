@@ -18,7 +18,6 @@ public class OnBookDto {
 	   private int d_bcount;            //수량
 	   private int d_bvalue;            //정가 
 	   private int d_bsellvalue;         //판매가
-	   private int d_bgradevalue;        //등급할인판매가
 	   private int d_bpurchasevalue;      //구입가
 	   private String d_id;            //판매자코드 //회원정보와 공유
 	   private int d_bdeliverycode;         //배달코드
@@ -53,9 +52,28 @@ public class OnBookDto {
 		private String d_brequested;		// 배송요청사항
 		private Timestamp d_bdeldate;		// 주문등록날짜
 		   
+		//등급할인 판매가
+	    private int d_bgradevalue;        //등급할인판매가
 		
-
-		
+	    
+	    
+	    private String br_thumpic;	//도서 이미지
+	    private String br_name;
+	    
+	    
+	    
+public String getBr_name() {
+			return br_name;
+		}
+		public void setBr_name(String br_name) {
+			this.br_name = br_name;
+		}
+public String getBr_thumpic() {
+			return br_thumpic;
+		}
+		public void setBr_thumpic(String br_thumpic) {
+			this.br_thumpic = br_thumpic;
+		}
 public int getD_bavgsellvalue() {
 			return d_bavgsellvalue;
 		}

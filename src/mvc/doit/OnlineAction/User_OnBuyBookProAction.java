@@ -30,7 +30,7 @@ public class User_OnBuyBookProAction implements SuperAction {
 	 	LogDto.setUser_phone3(request.getParameter("user_phone3"));
 	 	
 	 	OnDao dao = OnDao.getInstance();
-	 	dao.User_onBuyBook_insert(Ddto, LogDto, d_bcode, d_id);
+	 	//dao.User_onBuyBook_insert(Ddto, LogDto, null, d_bcode, d_id);
 	 	return "/d_online/user_onBuyBookPro.jsp";
 	}
 

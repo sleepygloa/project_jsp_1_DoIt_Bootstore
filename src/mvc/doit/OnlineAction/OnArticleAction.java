@@ -31,7 +31,7 @@ public class OnArticleAction implements SuperAction {
 			
 	//---- 1. 글번호가 있을때, 글정보와 목차 정보를 불러옴----------------------------
 			OnBookIntroDto obiDto = null;
-			String Check = "";
+			String Check = "none";
 			if(d_bno == 0){
 			}else{
 				//지정한 판매가능한 책의 정보를 불러옴

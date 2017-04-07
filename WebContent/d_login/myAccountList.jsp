@@ -13,10 +13,9 @@ function acc_err(){
 	history.back;
 }
 
-
+${adto}
 </script>
 
-${d_acMyMoney}, ${d_acRequest}
 <article class="my_cont_wrap">
 	<p class="my_title">
 		계좌 관리
@@ -116,7 +115,7 @@ ${d_acMyMoney}, ${d_acRequest}
 					<td>${account.d_lsender}</td>
 					<td>${account.d_ldealmoney}원</td>
 					<td>${account.listD_lsummoney}원</td>
-					<td>${account.d_bdelivery}</td>
+					<td>${account.d_lcode}</td>
 				</tr>
 			</tbody>
 		</c:forEach>

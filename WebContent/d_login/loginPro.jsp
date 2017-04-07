@@ -4,18 +4,17 @@
 
 
 <!-- ----로그인 성공 -------------------------------------------------- -->
-<c:if test="${check == true}" >
-
-	<c:if test="${userGradeCheck == '01'}">
-		alert("회원의 등급이 '책에 관심이 있는 책벌레 등급'으로 상승하였습니다. 책 구매시 5% 할인 혜택을 받으실 수 있습니다.")
+	<c:if test="${userGradeCheck == '11'}">
+		<script>
+			alert("회원의 등급이 '책에 관심이 있는 책벌레 등급'으로 상승하였습니다. 책 구매시 5% 할인 혜택을 받으실 수 있습니다.")
+		</script>
 	</c:if>
-	<c:if test="${userGradeCheck == '12'}">
-		alert("회원의 등급이 '책 좀 읽는 책벌레 등급'으로 상승하였습니다. 책 구매시 10% 할인 혜택을 받으실 수 있습니다.")
+	<c:if test="${userGradeCheck == '22'}">
+		<script>
+			alert("회원의 등급이 '책 좀 읽는 책벌레 등급'으로 상승하였습니다. 책 구매시 10% 할인 혜택을 받으실 수 있습니다.")
+		</script>
 	</c:if>
-
-	<meta http-equiv="Refresh" content="0;url=/DoIt/d_login/login.do" >
-</c:if>
-
+	
 <!-- ----check == false 로그인 실패 ---------다시 header 페이지로----------- -->
 <c:if test="${check == false}" >
 	<script>
@@ -23,3 +22,5 @@
 	    history.go(-1);
 	</script>
 </c:if>
+
+<meta http-equiv="Refresh" content="1;url=/DoIt/d_login/login.do" >
