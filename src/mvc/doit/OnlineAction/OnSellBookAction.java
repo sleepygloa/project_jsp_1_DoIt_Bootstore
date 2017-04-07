@@ -122,12 +122,14 @@ public class OnSellBookAction implements SuperAction {
         OnBookDto dto = null;
         int d_bavgsellvalue = 0;
         int articleListSize = articleList.size();
+        
      	for(int i = 0; i < articleListSize; i++){
      		dto = ((OnBookDto)articleList.get(i));
      				getD_bname = dto.getD_bname();
      				d_bavgsellvalue = dao.getBookNameToAvgSellValue(getD_bname);
      				dto.setD_bavgsellvalue(d_bavgsellvalue);
      	}
+     	
 		number=count-(currentPage-1)*pageSize;//글목록에 표시할 글번호
 //--------------5. 반환 --------------------------------------------------------
 
