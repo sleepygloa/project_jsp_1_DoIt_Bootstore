@@ -13,7 +13,15 @@ function acc_err(){
 	history.back;
 }
 
-${adto}
+function MyMoneyCheck(userinput){
+	if (userinput.d_acMyMoney.value == "") {
+	    alert("금액을 채워주세요.");
+	}
+	if (userinput.d_acMyMoney.value > d_lsummoney.value){
+		alert("잔액보다 큰 금액을 출금 할 수 없습니다.");
+	}
+    history.go(-1);
+}
 </script>
 
 <article class="my_cont_wrap">
@@ -37,11 +45,11 @@ ${adto}
 		</c:if>  
 			<form action="/DoIt/d_login/myAccountList.do?d_acRequest=2" method="post">
 				<input type="text" name="d_acMyMoney" placeholder="금액을 입력하세요"  />
-				<input type="submit"  value="충전하기" class="btn btn-default" />
+				<input type="submit"  value="충전하기" class="btn btn-default" onclick="MyMoneyCheck(this.form)" />
 			</form>	
 			<form action="/DoIt/d_login/myAccountList.do?d_acRequest=3" method="post">
 				<input type="text" name="d_acMyMoney" placeholder="금액을 입력하세요"  />
-				<input type="submit"  value="출금하기" class="btn btn-default" />
+				<input type="submit"  value="출금하기" class="btn btn-default" onclick="MyMoneyCheck(this.form)" />
 			</form>			
 
 	</div>
@@ -54,37 +62,19 @@ ${adto}
 			<tr>
 				<td>잔액</td>
 				<td>
-						${d_lsummoney} 원
+					<c:if test="${d_lsummoney != 0}">${d_lsummoney} 원</c:if>
+					<c:if test="${d_lsummoney == 0}">0 원</c:if>
+					<c:set var="d_lsummoney" value="${d_lsummoney}" />
+				</td>
+			</tr>
+		</tbody>	
+		
+	</table>
 
-				</td>
-			</tr>
-		</tbody>	
-		
-	</table>
-	<p class="L_title">
-		검색 조건
-	</p>
-	<table class="info_ta2" cellspacing="0">
-		<tbody>
-			<tr>
-				<td>계좌번호</td>
-				<td>${adto.d_acnum}</td>
-			</tr>
-			<tr>
-				<td>잔액</td>
-				<td>
-					<c:if test="${logDto.d_lsummoney != 0}">${logDto.d_lsummoney} 원</c:if>
-					<c:if test="${logDto.d_lsummoney == 0}">0 원</c:if>
-				</td>
-			</tr>
-		</tbody>	
-		
-	</table>
-	
 	<p class="L_title">
 		계좌 거래 내역
 	</p>
-	<table class="info_ta2 small-font8" cellspacing="0">
+	<table class="info_ta2 small-font8 d-center" cellspacing="0">
 		<tbody>
 			<tr>
 				<td>연번</td>
@@ -96,12 +86,12 @@ ${adto}
 				<td>관련코드</td>
 			</tr>
 		</tbody>
-		<c:forEach var="account"  items="${accountList}">
+		<c:forEach var="account" begin="0" end="${accountList.size()}"  items="${accountList}">
 			<tbody>
 				<tr>
 					<td>
 						<c:out value="${number}"/>
-						<c:set var="number" value="${number + 1}"/>
+						<c:set var="number" value="${number+1}"/>
 											</td>
 					<td>${account.d_ldateS}</td>
 					<td>
@@ -120,15 +110,17 @@ ${adto}
 			</tbody>
 		</c:forEach>
 		
-
-		
-		
-		
-		
-		
-		
-			
 	</table>
+	
+	<!-- 페이지 번호 ------------------------------------------------------------------------ -->	
+
+
+	<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+		<a href="/DoIt/d_login/myaccountlist.do?pageNum=${i}">[${i}]</a>
+	</c:forEach>
+	
+
+	
 </article>
 
 

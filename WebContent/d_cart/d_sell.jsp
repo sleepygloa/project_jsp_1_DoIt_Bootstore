@@ -27,10 +27,10 @@
 									<input type="hidden" name="d_total" value="${dto.d_bsellvalue}">									
 								</c:if>				
 							</span></p>
-							<p><a>멤버십 할인금액</a><span>-0원</span></p>
-							<p><a>쿠폰 할인금액</a><span>-0원</span></p>
-							<p><a>문화상품권</a><span>-0원</span></p>
-							<p><a>추가 결제 비용</a><span id="plu">+0원</span></p>
+							<p><a>정가</a><span>${dto.d_bvalue}원</span></p>
+							<p><a>회원등급 할인</a><span>-0원</span></p>
+	<!-- 						<p><a>문화상품권</a><span>-0원</span></p>
+							<p><a>추가 결제 비용</a><span id="plu">+0원</span></p> -->
 						</article>
 		
 					</section><%--deli_menu_gel 결제 창 위쪽 끝--%>
@@ -52,7 +52,7 @@
 						</header><%--deli_menu_gel 결제 창 아래쪽 01 끝--%>
 		
 						<footer class="menu_bang_foot">
-							<input id="rider_jumoon" type="submit" value="주문하기">
+							<input id="rider_jumoon" type="submit" value="주문하기" class="btn btn-default d-w-100">
 							<%--<a id="rider_jumoon" href="/DoIt/d_cart/payshot.do?cols=d_sell&buy=cart">주문하기</a> --%>
 						</footer><%--deli_menu_gel 결제 창 아래쪽 02 끝--%>
 					</footer>

@@ -84,7 +84,7 @@ public class AdminOnPurchasePaymentListAction implements SuperAction {
         
     }              
         
-    request.setAttribute("aoppl", aoppl);
+    	request.setAttribute("aoppl", aoppl);
         
         request.setAttribute("count", count);
         request.setAttribute("paymentList", paymentList);

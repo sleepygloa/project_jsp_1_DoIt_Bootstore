@@ -30,6 +30,7 @@ public class OnBookDto {
 		private int d_sno;              //등록번호,seq
 		private int d_sfinish;			//0 신청중, 1신청완료, 2취소
 		private Timestamp d_sdate;      //DB 판매신청 일시()
+		private String d_sdateS;		//DB 판매신청 일시() String code
 		
 		//책 등록할때 사용
 		private int d_icode;  	        //검수 DB 검수코드
@@ -60,8 +61,22 @@ public class OnBookDto {
 	    private String br_thumpic;	//도서 이미지
 	    private String br_name;
 	    
+	    private int d_ldealresult;
 	    
 	    
+	    
+public int getD_ldealresult() {
+			return d_ldealresult;
+		}
+		public void setD_ldealresult(int d_ldealresult) {
+			this.d_ldealresult = d_ldealresult;
+		}
+public String getD_sdateS() {
+			return d_sdateS;
+		}
+		public void setD_sdateS(String d_sdateS) {
+			this.d_sdateS = d_sdateS;
+		}
 public String getBr_name() {
 			return br_name;
 		}

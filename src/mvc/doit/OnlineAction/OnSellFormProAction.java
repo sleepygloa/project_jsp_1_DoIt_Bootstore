@@ -26,15 +26,16 @@ public class OnSellFormProAction implements SuperAction {
 	 	HttpSession session = request.getSession();
 	 	String d_id = (String)session.getAttribute("memId");
 	 	
-	 	String path = request.getRealPath("d_bpic"); 			
-		int size = 1024*1024*5;		//5mb
-		String enc = "UTF-8";		
-		DefaultFileRenamePolicy df = new DefaultFileRenamePolicy();				
-		MultipartRequest multi = new MultipartRequest(request, path, size, enc, df);
+	 	
+// ---- 변수 설정 ----	 	
+ 	String path = request.getRealPath("d_bpic"); 			
+	int size = 1024*1024*5;		//5mb
+	String enc = "UTF-8";		
+	DefaultFileRenamePolicy df = new DefaultFileRenamePolicy();				
+	MultipartRequest multi = new MultipartRequest(request, path, size, enc, df);
 		
-
-		String d_bpic = "";
-	//넘어오는 값들을 여러 곳에 사용하기 위해 변수로 받아줍니다.
+		//책정보
+	String d_bpic = "";
 	String d_bname = multi.getParameter("d_bname");
 	String d_bpublisher = multi.getParameter("d_bpublisher");
 	String d_bauthor = multi.getParameter("d_bauthor");
@@ -49,21 +50,16 @@ public class OnSellFormProAction implements SuperAction {
 	}
 	int d_bvalue = Integer.parseInt(multi.getParameter("d_bvalue"));
 	Timestamp d_sdate = new Timestamp(System.currentTimeMillis());
-	//목차, 설명도 변수로 저장
+		//목차, 설명
  	String d_norder = multi.getParameter("d_norder");
- 	d_norder = d_norder.replace("\r\n", "<br/>");
+ 	d_norder = d_norder.replace("\r\n", "<br/>"); //엔터 -> 코드 저장
  	
  	String d_nintro = multi.getParameter("d_nintro");
- 	d_nintro = d_nintro.replace("\r\n", "<br/>");
+ 	d_nintro = d_nintro.replace("\r\n", "<br/>"); //엔터 -> 코드 저장
 		
-	//여기서는 한번에 3개의 테이블을 조정합니다.
-	//1.d_onBook 테이블에서 책코드만 부여합니다.
-	//2.d_bdelivery 테이블에서 배송코드만 부여합니다.
-	//3.d_onSellList 테이블에서 전체리스트를 작성해줍니다.
-
  	
-//2.Dto 저장 --------------------------------------------------------------------------------------------------- 	
-	//onbookdto에 넣어 DB에 저장하지만, 검수에 필요한 값과 배송에 필요한 값은 초기화를 시켜줍니다.
+//---- 2.Dto 저장 --------------------------------------------------------------------------------------------------- 	
+	//dto형으로 d_onBook 책전체 DB에 책 기본정보를 입력, 검수에 대한 정보는 초기값 지정
 	OnBookDto onbookdto = new OnBookDto();
 	onbookdto.setD_id(d_id);
 	onbookdto.setD_bname(d_bname);
@@ -89,20 +85,23 @@ public class OnSellFormProAction implements SuperAction {
 //3.dao 실행---------------------------------------------------------------------------------------------------	
 	//dao 연결
 		OnDao dao = OnDao.getInstance();		
-		//책 전체 DB에 레코드를 추가, 책코드부여와 전달된 값을 삽입하며, 다시 책코드를 반환합니다. //D_bcode를 이용하여 다른 테이블과 연결을 함.
+		//dto를 이용. 책전체 DB에 레코드 1행 추가, 다시 책코드 반환  //D_bcode를 이용하여 다른 테이블과 연결을 함.
 		int d_bcode = dao.setD_bcode(d_id, onbookdto);
 		
+	//배송 코드 생성
+		DeliveryDao ddao = DeliveryDao.getInstance();
+		int d_bdeliverycode = ddao.setD_bUserdeliverycode(d_id, d_bcode);
 	
-	//(위의)3.d_onSellList 테이블에서 전체리스트를 작성해줍니다.
+	//판매 신청 d_onSellLIst table 생성. 레코드 1행 추가
 		OnSellListDto onSellListDto = new OnSellListDto();
 		onSellListDto.setD_bcode(d_bcode);
 		onSellListDto.setD_id(d_id);
-		onSellListDto.setD_bdeliverycode(0);
+		onSellListDto.setD_bdeliverycode(d_bdeliverycode);
 		onSellListDto.setD_sdate(d_sdate);
 		
 		dao.onSellList(onSellListDto);
 		
-		//목차와 설명 테이블의 레코드를 추가하며, no, d_norder, d_nintro, d_bcode, d_ndate를 넣어줍니다.
+		//목차, 설명 table 에 dto.d_bcode와 동일한  d_bcode의 레코드1행추가
 		dao.Admin_OnBookIntro_insert(obiDto, d_bcode);
 	
 		request.setAttribute("path", path);

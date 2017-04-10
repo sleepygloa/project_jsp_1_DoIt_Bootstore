@@ -158,7 +158,7 @@ public class OnDao {
      		      	if(rs.next()){
      		      		avgSellValueCount = rs.getInt(1);
      		      	}
-     		                
+     		        if( rs != null){ try{ rs.close(); }catch(SQLException se){} };       
      		        pstmt = conn.prepareStatement(
      		"select d_bsellvalue from d_onBook where d_bname = '" + getD_bname + "'"     		
      		        		);
@@ -568,9 +568,9 @@ public String findSelectToBookFullName(String select) throws Exception{
   } 
     
     
-//-----------판매신청 중인 책 count-----------판매신청 중인 책 count-----------판매신청 중인 책 count-----------판매신청 중인 책 count   
+//----- 회원 책판 매 Dao -------------------------------------------------------------------------------------
 
-    //---- mySellingList 내가 판매중이 책 리스트 -------------------------------------------------------------------------------   
+//---- 회원 책판매 전체 count -------------------------------------------------------------------------------   
     public int getD_bmySellingCount(String d_id) throws Exception{
         int x = 0;
         try{
@@ -578,7 +578,7 @@ public String findSelectToBookFullName(String select) throws Exception{
            pstmt = conn.prepareStatement(
 //두 테이블간에 책코드가 같고, 회원 이름이 같고, 신청확인 값이 초기값(검수전,검수필요=0)인 것의 레코드 수        		   
 "select count(*) from d_onSellList s, d_onBook b "+ 
-" where s.d_bcode = b.d_bcode and s.d_id = b.d_id and s.d_id = '"+d_id+"' and s.d_sfinish = 0"
+" where s.d_bcode = b.d_bcode and s.d_id = b.d_id and s.d_id = '"+d_id+"'"
 
  );
            rs = pstmt.executeQuery();
@@ -619,21 +619,23 @@ public String findSelectToBookFullName(String select) throws Exception{
 		}		
     }    
     
-//-----------판매신청중인 책 list-----------판매신청중인 책 list-----------판매신청중인 책 list-----------판매신청중인 책 list-----------판매신청중인 책 list
+//---- 회원 책 판매 전체 책 List ------------------------------------------------------------------------
     public List getD_bMySellingList(String d_id, int startRow, int endRow) throws Exception{
 
         List articleList = null;
         
         try {
            conn = getConnection();
+           OnDao dao = OnDao.getInstance();
+           dao.
            pstmt = conn.prepareStatement(
-"select *  from "+ 
-"(select b.*, s.d_sno, s.d_sdate, s.d_sfinish,  rownum r  from d_onSellList s, d_onBook b "+
-"where s.d_bcode = b.d_bcode and s.d_id = b.d_id and s.d_id = '"+d_id+"' and s.d_sfinish = 0) "+
-"where r >= "+startRow+" and r <= "+endRow
+"select *  from "+
+"(select d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher, d_bauthor, d_bgenre, d_bgenre2, d_blocation, d_bregistdate, d_bpic, d_bcount, d_bvalue, d_bsellvalue d_bpurchasevalue, d_bsellvalue,d_icode, d_id,  d_bdate, d_sno, d_sdateS, d_sfinish, d_bdeliverycode, d_bdelibery, rownum r  from "+
+"(select b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation, b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.d_icode, b.d_id,  b.d_bdate, s.d_sno, s.d_sfinish, d.d_bdeliverycode, d.d_bdelibery, to_char(s.d_sdate, 'yyyy-mm-dd HH:dd') AS d_sdateS from d_onSellList s, d_onBook b, d_bdelivery d "+ 
+"where s.d_bcode = b.d_bcode and s.d_id = b.d_id and b.d_bcode = d.d_bcode and s.d_id = '"+d_id+"' order by b.d_bcode) ) "+
+"where r >= "+startRow+" and r <= "+endRow+"  order by d_bcode desc " 
 );
            rs = pstmt.executeQuery();
-           
            if(rs.next()){
               articleList = new ArrayList();
               do{
@@ -652,8 +654,10 @@ public String findSelectToBookFullName(String select) throws Exception{
                  article.setD_bcount(rs.getInt("d_bcount"));
                  article.setD_bvalue(rs.getInt("d_bvalue"));
                  article.setD_id(rs.getString("d_id"));                
-                 article.setD_bdeliverycode(rs.getInt("d_bdeliverycode"));
+                 
                  article.setD_bdate(rs.getTimestamp("d_bdate"));
+                 article.setD_bdeliverycode(rs.getInt("d_bdeliverycode"));
+                 article.setD_bdelibery(rs.getInt("d_bdelibery"));
                  
 
                  
@@ -666,7 +670,7 @@ public String findSelectToBookFullName(String select) throws Exception{
                  
             	              
                  article.setD_sno(rs.getInt("d_sno"));
-                 article.setD_sdate(rs.getTimestamp("d_sdate"));
+                 article.setD_sdateS(rs.getString("d_sdateS"));
                  article.setD_sfinish(rs.getInt("d_sfinish")); //*****
                                   
                  articleList.add(article);
@@ -867,7 +871,17 @@ public String findSelectToBookFullName(String select) throws Exception{
 			
 			pstmt.executeUpdate();
   			
-
+  			//거래 내역 등록(자신의 돈 차감)
+  			pstmt = conn.prepareStatement("insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,sysdate)");
+			pstmt.setInt(1, acDto.getD_lsender());
+			pstmt.setInt(2, acDto.getD_lsender());
+			pstmt.setString(3, "d_d"+d_bcode);
+			pstmt.setInt(4, acDto.getD_ldealmoney());
+			pstmt.setInt(5, 5); //1 입금 2 출금 3 계좌이체 송금 4 계좌이체 받음 5 계좌이체시 자신의돈
+			pstmt.setInt(6, acDto.getD_ldealresult());
+			
+			pstmt.executeUpdate();
+			
   		}catch(Exception e){
   			e.printStackTrace();
   		}finally{
@@ -883,7 +897,7 @@ public String findSelectToBookFullName(String select) throws Exception{
    int x = 0;
    try{
       conn = getConnection();
-      pstmt = conn.prepareStatement("select  count(*) from d_bdelivery  where d_bdelibery BETWEEN 0 AND 3 and d_bbuyer = ?");
+      pstmt = conn.prepareStatement("select  count(*) from d_bdelivery  where d_bdelibery BETWEEN 0 AND 23 and d_bbuyer = ?");
       
       pstmt.setString(1, d_id);
       rs = pstmt.executeQuery();
@@ -916,7 +930,7 @@ public String findSelectToBookFullName(String select) throws Exception{
           		+ "(SELECT b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation,"
           		+ "b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.d_icode, b.d_id, b.d_bdeliverycode, b.d_bdate,"
           		+ "deli.d_bdelibery, deli.d_bbuyer, deli.d_brecipient, deli.d_brequested ,deli.d_bdeldate FROM "
-          		+ "d_bdelivery deli, d_onBook b where  deli.d_bcode = b.d_bcode and deli.d_bdelibery BETWEEN 0 AND 3 and deli.d_bbuyer=?  )"
+          		+ "d_bdelivery deli, d_onBook b where  deli.d_bcode = b.d_bcode and deli.d_bdelibery BETWEEN 0 AND 23 and deli.d_bbuyer=?  )"
           		+ "order by d_bdeldate desc) where r >= ? and r <=?");
 
         
@@ -1306,7 +1320,7 @@ public List User_BuyBook_CancelList(int start, int end, String id) throws Except
 
 
 //-----------관리자 판매신청 완료 책 list-----------관리자 판매신청 완료 책 list-----------관리자 판매신청 완료 책 list ----------관리자 판매신청 완료 책 list-----------
-public List Admin_InspectionList(int start, int end) throws Exception{
+public List Admin_InspectionList(int start, int end, int d_bocde) throws Exception{
 
     List articleList = null;
     
@@ -1314,15 +1328,15 @@ public List Admin_InspectionList(int start, int end) throws Exception{
        conn = getConnection();
 
        pstmt = conn.prepareStatement("SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher, d_bauthor, d_bgenre,d_bgenre2, d_blocation,"
-          		+ "d_bregistdate,d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, D_icode, d_id, d_bdeliverycode, d_bdate,"
+          		+ "d_bregistdate,d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, D_icode, d_id, d_bdeliverycode, d_bdelibery, d_bdate,"
           		+ "d_sno, d_sfinish, d_sdate , r FROM "
           		+ "(SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher, d_bauthor, d_bgenre, d_bgenre2, d_blocation,"
-          		+ "d_bregistdate, d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, D_icode, d_id, d_bdeliverycode, d_bdate, "
-          		+ "d_sno,d_bdeliverycode  d_sfinish, d_sdate , rownum r FROM "
+          		+ "d_bregistdate, d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, D_icode, d_id, d_bdate, "
+          		+ "d_sno, d_bdeliverycode,d_bdelibery,  d_sfinish, d_sdate , rownum r FROM "
           		+ "(SELECT b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation,"
-          		+ "b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdeliverycode, b.d_bdate, "
+          		+ "b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bdate, d.d_bdeliverycode, d.d_bdelibery, "
           		+ "s.d_sno, s.d_sfinish, s.d_sdate FROM "
-          		+ "d_onSellList s, d_onBook b where s.d_sfinish= 1 and s.d_bcode = b.d_bcode)order by d_sno asc) where r >= ? and r <=?");
+          		+ "d_onSellList s, d_onBook b, d_bdelivery d where s.d_sfinish= 1 and s.d_bcode = b.d_bcode and s.d_bcode = d.d_bcode)order by d_sno asc) where r >= ? and r <=?");
        pstmt.setInt(1, start);
        pstmt.setInt(2, end);
  
@@ -1347,7 +1361,7 @@ public List Admin_InspectionList(int start, int end) throws Exception{
               dto.setD_id(rs.getString("d_id"));                
               dto.setD_bdeliverycode(rs.getInt("d_bdeliverycode"));
               dto.setD_bdate(rs.getTimestamp("d_bdate"));
-              
+              dto.setD_bdelibery(rs.getInt("d_bdelibery"));
         	  dto.setD_sno(rs.getInt("d_sno"));
         	  dto.setD_sfinish(rs.getInt("d_sfinish"));              
              articleList.add(dto);
@@ -1775,7 +1789,7 @@ public int Admin_BuyBook_Count() throws Exception{
 	 int x = 0;
 	 try{
 	    conn = getConnection();
-	    pstmt = conn.prepareStatement("select  count(*) from d_bdelivery where d_bdelibery BETWEEN 0 AND 2");
+	    pstmt = conn.prepareStatement("select  count(*) from d_bdelivery where d_bdelibery BETWEEN 0 AND 22");
 	    
 	    rs = pstmt.executeQuery();
 	    if(rs.next()){
@@ -1807,7 +1821,7 @@ public List Admin_BuyBookList(int start, int end) throws Exception{
     		+ "(SELECT b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation,"
     		+ "b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.d_icode, b.d_id, b.d_bdeliverycode, b.d_bdate,"
     		+ "deli.d_bdelibery, deli.d_bbuyer, deli.d_brecipient, deli.d_brequested ,deli.d_bdeldate FROM "
-    		+ "d_bdelivery deli, d_onBook b where  deli.d_bcode = b.d_bcode and deli.d_bdelibery BETWEEN 0 AND 2)"
+    		+ "d_bdelivery deli, d_onBook b where  deli.d_bcode = b.d_bcode and deli.d_bdelibery BETWEEN 0 AND 22)"
     		+ "order by d_bno asc) where r >= ? and r <=?");
 
     pstmt.setInt(1, start);
@@ -1862,7 +1876,7 @@ public int Admin_BuyBook_FinishList_Count() throws Exception{
 	 int x = 0;
 	 try{
 	    conn = getConnection();
-	    pstmt = conn.prepareStatement("select  count(*) from d_bdelivery where d_bdelibery = 3");
+	    pstmt = conn.prepareStatement("select  count(*) from d_bdelivery where d_bdelibery = 23");
 	    
 	    rs = pstmt.executeQuery();
 	    if(rs.next()){
@@ -1894,7 +1908,7 @@ try {
   		+ "(SELECT b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation,"
   		+ "b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.d_icode, b.d_id, b.d_bdeliverycode, b.d_bdate,"
   		+ "deli.d_bdelibery, deli.d_bbuyer, deli.d_brecipient, deli.d_brequested ,deli.d_bdeldate FROM "
-  		+ "d_bdelivery deli, d_onBook b where  deli.d_bcode = b.d_bcode and deli.d_bdelibery =3)"
+  		+ "d_bdelivery deli, d_onBook b where  deli.d_bcode = b.d_bcode and deli.d_bdelibery =23)"
   		+ "order by d_bno desc) where r >= ? and r <=?");
 
   pstmt.setInt(1, start);
@@ -1949,7 +1963,7 @@ public int Admin_BuyBook_CancelList_Count() throws Exception{
 	 int x = 0;
 	 try{
 	    conn = getConnection();
-	    pstmt = conn.prepareStatement("select  count(*) from d_bdelivery where d_bdelibery = 4");
+	    pstmt = conn.prepareStatement("select  count(*) from d_bdelivery where d_bdelibery = 24");
 	    
 	    rs = pstmt.executeQuery();
 	    if(rs.next()){
@@ -1981,7 +1995,7 @@ pstmt = conn.prepareStatement("SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpubl
 		+ "(SELECT b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation,"
 		+ "b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.d_icode, b.d_id, b.d_bdeliverycode, b.d_bdate,"
 		+ "deli.d_bdelibery, deli.d_bbuyer, deli.d_brecipient, deli.d_brequested ,deli.d_bdeldate FROM "
-		+ "d_bdelivery deli, d_onBook b where  deli.d_bcode = b.d_bcode and deli.d_bdelibery =4)"
+		+ "d_bdelivery deli, d_onBook b where  deli.d_bcode = b.d_bcode and deli.d_bdelibery =24)"
 		+ "order by d_bno asc) where r >= ? and r <=?");
 
 pstmt.setInt(1, start);
@@ -2036,7 +2050,7 @@ public int Admin_BuyBook_CancelFinish_Count() throws Exception{
 	 int x = 0;
 	 try{
 	    conn = getConnection();
-	    pstmt = conn.prepareStatement("select  count(*) from d_bdelivery where d_bdelibery = 5");
+	    pstmt = conn.prepareStatement("select  count(*) from d_bdelivery where d_bdelibery = 25");
 	    
 	    rs = pstmt.executeQuery();
 	    if(rs.next()){
@@ -2068,7 +2082,7 @@ pstmt = conn.prepareStatement("SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpubl
 		+ "(SELECT b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation,"
 		+ "b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.d_icode, b.d_id, b.d_bdeliverycode, b.d_bdate,"
 		+ "deli.d_bdelibery, deli.d_bbuyer, deli.d_brecipient, deli.d_brequested ,deli.d_bdeldate FROM "
-		+ "d_bdelivery deli, d_onBook b where  deli.d_bcode = b.d_bcode and deli.d_bdelibery =5)"
+		+ "d_bdelivery deli, d_onBook b where  deli.d_bcode = b.d_bcode and deli.d_bdelibery =25)"
 		+ "order by d_bno asc) where r >= ? and r <=?");
 
 pstmt.setInt(1, start);
@@ -2415,9 +2429,6 @@ public int findIdToNo(String d_id) throws Exception{
 	 }
 	 return x ;
 } 
-
-
-
 
 
 

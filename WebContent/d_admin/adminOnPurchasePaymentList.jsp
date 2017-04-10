@@ -6,7 +6,7 @@
 
 <%--------------- 사이드 메뉴 include --------------%>
 <jsp:include page="/d_admin/adminSide.jsp" />
-${count}==${aoppl}
+
 <article class="my_cont_wrap">
 	<p class="my_title">
 		계좌 관리

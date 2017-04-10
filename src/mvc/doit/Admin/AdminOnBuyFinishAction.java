@@ -23,15 +23,15 @@ public class AdminOnBuyFinishAction implements SuperAction {
 	 	if(delivery == 0){
 	 		dao.Admin_OnBuyBook_finish(d_bcode);
 	 		d_bdelivery = 0;
-	 	}else if(delivery == 1){
+	 	}else if(delivery == 21){
 	 		dao.Admin_OnBuyBook_delivertStart(d_bcode);
-	 		d_bdelivery = 1;
-	 	}else if(delivery == 2){
+	 		d_bdelivery = 21;
+	 	}else if(delivery == 22){
 	 		dao.Admin_OnBuyBook_delivertEnd(d_bcode);
-	 		d_bdelivery = 2;
-	 	}else if(delivery == 4){
+	 		d_bdelivery = 22;
+	 	}else if(delivery == 24){
 	 		dao.Admin_OnBuyBook_CancelCheck(d_bcode);
-	 		d_bdelivery = 4;
+	 		d_bdelivery = 24;
 	 	}
 	 	
 	 	OnDao odao = OnDao.getInstance();

@@ -38,7 +38,12 @@
 	
 		
 		<c:forEach var="article"  items="${articleList}">	
-			<form action="/DoIt/d_admin/onBook.do" method="post">
+			<c:if test="${article.d_bdelibery == 12}" >
+				<form action="/DoIt/d_admin/adminOnInspectionList.do" method="post">
+			</c:if>
+			<c:if test="${article.d_bdelibery == 13}" >
+				<form action="/DoIt/d_admin/onBook.do" method="post">
+			</c:if>			
 				<tr class="AdminList_tr">
 					<td class="AdminList_num Admin_txtCen"> 
 						<span class="big-font20">
@@ -66,7 +71,18 @@
 						</div>
 					</td>
 		 				<td class="AdminList_Ins Admin_txtCen"> 
-		 					<input type="submit" value="책 등록" class="AdminList_btn"/>
+		 				<c:if test="${article.d_bdelibery == 0}" >
+		 					<input type="button" value="배송준비중" class="btn btn-default"/>
+		 				</c:if>		 				
+		 				
+		 				<c:if test="${article.d_bdelibery == 12}" >
+		 					<input type="submit" value="배송완료확인" class="btn btn-default"/>
+		 					<input type="hidden" name="delivery" value="13" />
+		 				</c:if>
+		 				<c:if test="${article.d_bdelibery == 13}" >
+		 					<input type="submit" value="책 등록" class="btn btn-default"/>
+		 				</c:if>
+		 						 					
 		 				</td>
 					
 						 

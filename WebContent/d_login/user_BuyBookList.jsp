@@ -84,7 +84,7 @@
 							</c:if>
 						</td>
 						<td class="AdminList_con">
-							<div class="AdminList_con_list">
+							<div class="AdminList_con_list small-font8">
 								<input type="hidden" name="d_bno" value="${article.d_bno}">
 				 				책 이름 : ${article.d_bname} <br/>
 				 				저자 : ${article.d_bauthor} <br/>
@@ -99,19 +99,19 @@
 							<c:if test="${article.d_bdelibery == 0}">
 								<input type="submit" value="취소신청" class="AdminList_btn"/>
 							</c:if>
-							<c:if test="${article.d_bdelibery == 1}">
+							<c:if test="${article.d_bdelibery == 21}">
 								<p>배송준비중</p>
 							</c:if>
-							<c:if test="${article.d_bdelibery == 2}">
+							<c:if test="${article.d_bdelibery == 22}">
 								<p>배송 중</p>
 							</c:if>
-							<c:if test="${article.d_bdelibery == 3}">
+							<c:if test="${article.d_bdelibery == 23}">
 								<p>배송완료</p>
 							</c:if>
-							<c:if test="${article.d_bdelibery == 4}">
+							<c:if test="${article.d_bdelibery == 24}">
 								<p>취소신청 중</p>
 							</c:if>
-							<c:if test="${article.d_bdelibery == 5}">
+							<c:if test="${article.d_bdelibery == 25}">
 								<p>취소완료</p>
 							</c:if>
 						</td>

@@ -3,7 +3,7 @@
 
 <link rel="stylesheet" type="text/css"  href="/DoIt/css/online_admin.css?ver=1">
 <!-- header import -->
-<%@include file="../header.jsp" %>
+<jsp:include page="/header.jsp" />
 <%--------------- 사이드 메뉴 include --------------%>
 <jsp:include page="/d_admin/adminSide.jsp" />
 	<article class="my_cont_wrap">
@@ -72,23 +72,23 @@
 								<input type="submit" value="주문확인" class="AdminList_btn"/>
 								<input type="hidden" name="delivery" value="0">
 							</c:if>
-							<c:if test="${article.d_bdelibery == 1}">
+							<c:if test="${article.d_bdelibery == 21}">
 								<p>구매 완료.<br/> 현재 배송 준비중</p>
 								<br/>
 								<hr/>
 								<br/>
 								<input type="button" value="배송시작" class="AdminList_btn" 
-								onclick="window.location='/DoIt/d_admin/adminOnBuyFinish.do?d_bcode=${article.d_bcode}&delivery=1'"/>
+								onclick="window.location='/DoIt/d_admin/adminOnBuyFinish.do?d_bcode=${article.d_bcode}&delivery=21'"/>
 							</c:if>
-							<c:if test="${article.d_bdelibery == 2}">
+							<c:if test="${article.d_bdelibery == 22}">
 								<p>배송중</p>
 								<br/>
 								<hr/>
 								<br/>
 								<input type="button" value="배송완료" class="AdminList_btn" 
-								onclick="window.location='/DoIt/d_admin/adminOnBuyFinish.do?d_bcode=${article.d_bcode}&delivery=2'" />
+								onclick="window.location='/DoIt/d_admin/adminOnBuyFinish.do?d_bcode=${article.d_bcode}&delivery=22'" />
 							</c:if>
-							<c:if test="${article.d_bdelibery == 5}">
+							<c:if test="${article.d_bdelibery == 25}">
 								<p>취소 완료</p>
 							</c:if>
 						</td>

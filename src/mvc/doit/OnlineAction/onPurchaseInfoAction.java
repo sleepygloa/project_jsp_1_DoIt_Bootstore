@@ -43,7 +43,7 @@ public class OnPurchaseInfoAction implements SuperAction {
         OnDao dao = OnDao.getInstance();//DB연동
 		OnBookDto article = new OnBookDto();
 
-		//접근상황을 설정하는 Dao , d_bno일때, d_bcode일때--------------------------
+//---- 페이지 접근상황을 설정하는 Dao, d_bno일 때, d_bcode일 때(바로전 페이지는 d_no로 접근했지만, 동일한 d_bname의 list 페이지인 여기에서는 d_bcode로 접근)--------------------------
 		String Check = "";
 		if(d_bno == 0){
 			if(d_bcode == 0){
@@ -56,26 +56,26 @@ public class OnPurchaseInfoAction implements SuperAction {
 				article = dao.getOnBookArticle(d_bno, Check);	
 		}
 		
-		//List를 뽑는 Dao-----------------------------------------------------
+//---- List를 뽑는 Dao-----------------------------------------------------
 		d_bname = article.getD_bname();
 		count =  dao.getFindNameToNameCount(d_bname);
 		articleList = dao.getFindNameToName(d_bname, startRow, endRow);//책의 이름과 같은 책들을 List 
 		
-		//첫번째페이지에 보여줄 Dto-----------------------------------------------
-		//d_bno로 검색한 첫번째 페이지의 책은 현재 판매가능한 책과 거리가 멀기때문에 다시 검색을 해준다.
+//---- 첫번째 페이지에서 보여줄 dto (화면 아래 List클릭시 보여주는 dto가 아님)-----------------------------------------------
+//d_bno로 검색한 첫번째 페이지의 책은 현재 판매가능한 책과 거리가 멀기때문에 다시 검색을 해준다.
 		if(request.getParameter("d_bno") != null){
 			article = (OnBookDto)articleList.get(0);
 		}
 		
-		//최저가 검색
+//---- 최저가 검색 ------------
 		int MinD_bsellvalue = dao.getFindNameToMinSellValue(d_bname);
 		
-		//정가대비 할인 되는 비율		
+//---- 정가대비 할인 되는 비율 ----------		
 		int valueToSellvaluePercent = 
 (int)(100 - 	((double)article.getD_bsellvalue() / (double)article.getD_bvalue() * 100));
 		
-		//등급적용 판매가
-		//회원의 등급을 불러옵니다.
+//---- 등급적용 판매가 ----------
+//회원의 등급을 불러옵니다.
 		HttpSession  session = request.getSession();
 		String d_id = (String)session.getAttribute("memId");
 		int gradeToSellValue = article.getD_bsellvalue();

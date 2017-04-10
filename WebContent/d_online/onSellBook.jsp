@@ -101,23 +101,23 @@
 
 <!-- -------등록된 책이 있을 때----------------------------- -->
 <c:if test="${count!=0}">
-<table style="width:100%" border="1 solid black">	
+<table class="info_ta2 d-center" cellspacing="0">
+	<thead>	
 		<tr>
-			<td class="d-center">순번</td>
-			<td class="d-center">책 이미지</td>
-			<td class="d-center">내용</td>
+			<td>순번</td>
+			<td>책 이미지</td>
+			<td>내용</td>
 		</tr>	
-
+	</thead>
+	
+	<tbody>
 	<c:forEach var="article"  items="${articleList}">	
-
 		<tr>
-			<td width="80px" class="d-center" > <!--  책이미지와 셀의 높이가 10px 커야함. thumbnail 적용 여백 -->
-				<span class="big-font20">
-					<c:out value="${number}"/>
-					<c:set var="number" value="${number - 1}"/>
-				</span>
+			<td>
+				<c:out value="${number}"/>
+				<c:set var="number" value="${number - 1}"/>
 			</td>
-			<td width="100px"  height="160px">
+			<td>
  				<c:if test="${article.d_bpic == null}">
 					<img src="/DoIt/images/ma_img.jpg"  width="100px" height="150px" class="thumbnail" />
 				</c:if>
@@ -126,18 +126,20 @@
 					"\DoIt\d_bpic/${article.d_bpic}" width="100px" height="150px"  class="thumbnail" />
 				</c:if>
 			</td>
-			<td width="800px" class="d-w80 ">
+			<td class="d-left">
 <!--  책제목을 눌렀을 때 상세 페이지로 이동 ------------------------------------------------------------------------------ -->
- 				<span class="big-font35 d-bold d-l-padding10">
+ 				<span class="big-font30 d-bold d-l-padding10">
  					<a href="/DoIt/d_online/onArticle.do?d_bno=${article.d_bno}">${article.d_bname}</a>
  				</span><br /><br />
-				저자 : ${article.d_bauthor} | 출판사 : ${article.d_bpublisher} | 출간날짜 : ${article.d_bregistdate}<br /><br />
-				평균 구매금액 : <span class="code">${article.d_bavgsellvalue}</span> 원 <span class="small70"> → [책상태에 따라 달라집니다.] </span> 
+				<span class="small-font8">
+					저자 : ${article.d_bauthor} | 출판사 : ${article.d_bpublisher} | 출간날짜 : ${article.d_bregistdate}<br />
+					평균 구매금액 : <span class="code">${article.d_bavgsellvalue}</span> 원
+				</span> 
 			</td>
 		</tr>
 	 
 	</c:forEach>
-
+	</tbody>
 </table>
 </c:if>	
 <!-- 2. list 의 2) list -- 끝 ----------------------------------------------------------------------------------- -->

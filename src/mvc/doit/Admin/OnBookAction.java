@@ -11,14 +11,15 @@ import mvc.doit.SuperAction.SuperAction;
 
 public class OnBookAction implements SuperAction {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		request.setCharacterEncoding("utf-8");
 		
+//---- 변수 설정 -----	
 		int d_bcode = Integer.parseInt(request.getParameter("d_bcode"));
 		
 		OnDao dao = OnDao.getInstance();
 		OnBookDto dto = dao.Admin_Onbook(d_bcode);
-		
-//------------------- test 편의를 위한 syntax 자동으로 등급 및 구매가 판매가를 계산하여 출력해줌---------------------		
+//---- 검수 결과의 가격을 계산해주는 구문 ----S:80%, A:60%, B:40% 구매 ( 100단위 버림 )	
 		int d_itotal = dto.getD_itotal();
 		int d_bvalue = dto.getD_bvalue();
 		int d_bpurchasevalue = dto. getD_bpurchasevalue(); //0
@@ -46,9 +47,7 @@ public class OnBookAction implements SuperAction {
 		request.setAttribute("d_bgrade", d_bgrade);
 		request.setAttribute("d_bpurchasevalue", d_bpurchasevalue);
 		request.setAttribute("d_bsellvalue", d_bsellvalue);
-//------------------- test 편의를 위한 syntax 자동으로 등급 및 구매가 판매가를 계산하여 출력해줌   끝끝끝--------------------		
-		
-		
+
 //--------------------목차, 소개글 불러오기------------------------------
 		OnBookIntroDto obiDto =	dao.Admin_OnBookIntro_load(d_bcode);
 		

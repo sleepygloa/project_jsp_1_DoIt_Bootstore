@@ -10,8 +10,7 @@
 	</ul>
 	
 	<ul class="my_side_ul">
-		<li><a href="/DoIt/d_login/mySellingList.do">판매신청 중인 책 보기</a></li>
-		<li><a href="/DoIt/d_login/mySellingFinishList.do">판매신청 완료 책 보기</a></li>
+		<li><a href="/DoIt/d_login/mySellList.do">판매 중인 책 조회</a></li>
 	</ul>	
 	<ul class="my_side_ul">
 		<li><a href="/DoIt/d_login/user_BuyBookList.do">주문/배송 조회</a></li>
