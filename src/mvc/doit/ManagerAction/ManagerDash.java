@@ -2,7 +2,11 @@ package mvc.doit.ManagerAction;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import mvc.doit.Manager.ManDao;
+import mvc.doit.Manager.ManDto;
+import mvc.doit.Rent.RentDao;
 import mvc.doit.SuperAction.SuperAction;
 
 public class ManagerDash implements SuperAction {
@@ -12,14 +16,29 @@ public class ManagerDash implements SuperAction {
 		//한글 인코딩
 		request.setCharacterEncoding("UTF-8");
 		
-		//불러올 페이지 파라미터
-		String mana_page = request.getParameter("mana_page");
+		//세션 저장
+		HttpSession session = request.getSession();
+		
+		//전체 수익
+		ManDao mdao = ManDao.getInstance();
+		ManDto mdto = new ManDto();
+		mdto = mdao.getDashM();
+		request.setAttribute("dashM", mdto);
+		//session.setAttribute("dashM", mdto);
+		
+		//직접판매물
 		
 		
+		//도서관 내용
+		RentDao rdao = RentDao.getInstance();
+		int r_book1 = rdao.getArticleCount(0); //기증대기
+		int r_book2 = rdao.getArticleCount(1); //기증완료
+		int r_book3 = rdao.getArticleCount(3); //폐기도서
+		request.setAttribute("r_bookCount", r_book1+r_book2+r_book3);
 		
 		
-		//파라미터 저장 
-		request.setAttribute("mana_page", mana_page);
+		//직거래 / 경매 게시판
+		
 		
 		return "/d_manage/manage_dash.jsp";
 	}

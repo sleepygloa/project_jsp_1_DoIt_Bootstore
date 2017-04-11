@@ -9,6 +9,9 @@
 <%--------------- 사이드 메뉴 include --------------%>
 <jsp:include page="/d_login/side_my.jsp"></jsp:include>
 
+
+
+	
 	
 			<%-- 본문내용 --%>
 			<article class="my_cont_wrap">
@@ -125,30 +128,6 @@
 							<td >${ lto.getD_gender() }</td>
 						</tr>
 					</tbody>
-				</table>
-				<%-- 회원정보 조회 테이블 하단 --%>
-				
-				<p class="L_title">
-					<a class="d-left">계좌 정보</a>
-					<div class="d-right"><small style="color:gray">
-						<button class="btn btn-default"
-							onclick="window.location='/DoIt/d_login/myAccountList.do'" >계좌관리</button>
-					</div>
-				</p>	
-				<table class="info_ta2" cellspacing="0">
-					<tbody>
-						<tr>
-							<td>계좌번호</td>
-							<td>${adto.d_acnum}</td>
-						</tr>
-						<tr>
-							<td>잔액</td>
-							<td>
-								${d_lsummoney} 원
-							</td>
-						</tr>
-					</tbody>	
-					
 				</table>
 				
 				<p class="button_cell">

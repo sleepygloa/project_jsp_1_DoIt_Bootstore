@@ -1,33 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 		
 		<%-- header, footer  --%>
-		<link rel="stylesheet" type="text/css"  href="/DoIt/css/he_foot.css?ver=1">
-<!-- <link rel="stylesheet" type="text/css"  href="/DoIt/css/he_foot.css"> 윤수 장바구니 20170331 버전-->
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/he_foot.css">
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/reset.css">
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/list.css">
+		
 		
 		<%-- 회원관리 css 삽입 --%>
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/join.css">
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/Login.css">
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/side_menu.css">
-		<!-- <link rel="stylesheet" type="text/css"  href="/DoIt/css/my_page.css"> 선향  20170403 버전-->
-		<link rel="stylesheet" type="text/css"  href="/DoIt/css/my_page.css?ver=2">		
-		<link rel="stylesheet" type="text/css"  href="/DoIt/css/online.css">
-
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/my_page.css?ver=1">
+		
+		
+		<%-- 직접판매 css삽입 --%>
+		
+		
+		
 		<%-- 도서관 css삽입 --%>
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/d_rent.css">
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/deli_order.css">
-
-		<%-- 온라인 서점, 직접 판매 css 삽입 선호 --%>
-		<link rel="stylesheet" type="text/css"  href="/DoIt/css/bootstrap-ko.css">
-
 		
+		
+		<%-- 직거래 css 삽입 --%>
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/resell.css">
+				
 		
 		<%-- 스크립트, Jquery  삽입 --%>
 		<script type="text/javascript" src="/DoIt/js/Join_Login.js" ></script>
@@ -38,19 +44,6 @@
 			
 			//header에 필요한 Jquery 코드
 			$(document).ready(function(){
-				$("#login_al").click(function(){
-					alert("로그인을 누름");
-				})
-				
-				$(".l_list_ma").on("mouseenter", function(){
-					$(".s_list_con").slideUp().stop();
-					$(".s_list_con").slideDown();
-				})
-				$(".l_list").on("mouseleave", function(){
-					$(".s_list_con").slideDown().stop();
-					$(".s_list_con").slideUp();
-				})
-
 				
 				//도서관 상세보기 파트 구분
 				$("#de_cont").click(function(){
@@ -109,11 +102,22 @@
 				})
 				$(".jang_conb").on("mouseleave",function(){
 					$(this).children().eq(1).css("display","none");
-				})				
+				})
+				
+				//카테고리 제어
+				$(".l_list").on("mouseenter",function(){
+					$(".l_list").stop(true,false);
+					$(".s_list_con").slideDown();
+				})
+				
+				$(".l_list").on("mouseleave",function(){
+					$(".l_list").stop(true,false);
+					$(".s_list_con").slideUp();
+				})
+
 				
 			});
-
-		
+			
 			//현재 가지고 있지 않습니다.
 			function not_deli(){
 				alert("거래 정지 되었거나 현재 거래중인 회원이 아닙니다.");
@@ -187,25 +191,25 @@
 							<li><a href="/DoIt/d_login/myInfo.do">마이페이지</a></li>
 							<li><a href="/DoIt/d_cart/headCartList.do?cols=d_rent">장바구니</a></li>
 						</c:if>
-						<c:if test="${ sessionScope.memId != null && sessionScope.memMG == 0 }">
-							<li><a href="/DoIt/d_admin/admin.do">관리자 페이지</a></li>
+						<c:if test="${ sessionScope.memId != null && sessionScope.memMG == 10 }">
+							<li><a href="/DoIt/d_manage/manager.do">관리자 페이지</a></li>
 						</c:if>
 					</ul>
 				</div>
 			</header><%-- top_gnb 끝 --%>
 
- 			<section class="l_list" >
+			<section class="l_list" >
 					<ul class="l_list_ma">
 						<li><p style="border:solid 1px red; width:220px; height:80px;">로고 삽입</p></li>
 						<li><a href="#">회사소개</a></li>
 						<li><a href="/DoIt/d_online/onSellBook.do">온라인중고서점</a></li>
 						<li><a href="/DoIt/d_rent/list_cont.do?view_type=list_cont">DOIT 도서관</a></li>
-						<li><a href="#">직거래게시판</a></li>
+						<li><a href="/DoIt/d_resell/reList.do">중고직거래/경매</a></li>
 						<li><a href="#">고객센터</a></li>
 					</ul>
 					
-					<div class="s_list_con">
-
+					<div class="s_list_con" style="display:none">
+						<p class="gong_back"></p>
 						<ul>
 							<li><a href="#">인사말</a></li>
 							<li><a href="#">조직도</a></li>
@@ -214,17 +218,26 @@
 							<li><a href="#">찾아오시는 길</a></li>
 						</ul>
 						<ul>
-							<li><a></a></li>	
+							<!--
+							<li><a href="#">어린이 서적</a></li>
+							<li><a href="#">참고 / 전문서적</a></li>
+							<li><a href="#">소설 / 시 / 에세이</a></li>
+							<li><a href="#">인문학 서적</a></li>
+							<li><a href="#">과학 전문서적</a></li>
+							<li><a href="#">기타 서적 </a></li>
+							-->
+							<li><a href="/DoIt/d_online/onSellBook.do">온라인중고서점</a></li>
 						</ul>
 						<ul>
-							<li><a href="#">DoIt 도서관</a></li>
-							<li><a href="#">도서 기증신청</a></li>
-							<li><a href="#">도서 반납신청</a></li>
+							<li><a href="/DoIt/d_rent/list_cont.do?view_type=list_cont">DoIt 도서관</a></li>
+							<li><a href="/DoIt/d_rent/b_write.do">도서 기증신청</a></li>
+							<li><a href="/DoIt/d_login/myList.do?cols=dr_rent">도서 반납신청</a></li>
 						</ul>
 						<ul>
-							<li><a href="#">판매자 회원 소개</a></li>
-							<li><a href="#">판매자 권한 신청</a></li>
-							<li><a href="#">직거래 게시판</a></li>
+							<li><a href="/DoIt/d_resell/sellerList.do">판매자 회원 소개</a></li>
+							<li><a href="/DoIt/d_resell/callForm.do">판매자 권한 신청</a></li>
+							<li><a href="/DoIt/d_resell/reList.do">중고 직거래</a></li>
+							<li><a href="/DoIt/d_bid/bidList.do">중고 경매</a></li>
 						</ul>
 						<ul>
 							<li><a href="#">공지사항</a></li>
@@ -232,16 +245,16 @@
 							<li><a href="#">1 : 1 문의 신청</a></li>
 						</ul>
 					</div>
-			</section><!--  대메뉴 끝 -->  
+			</section> <%-- 대메뉴 끝 --%>
 			
 			
 			
 		</header>
 		
-		<div style="height:200px; width:100%;"></div>
+		<div style="height:160px; width:100%;"></div>
 		
 		
-		<jsp:include page="/d_cart/cart_part.jsp"></jsp:include>		
+		<jsp:include page="/d_cart/cart_part.jsp"></jsp:include>
 		
 		<section id="mypage_wrap">
 		

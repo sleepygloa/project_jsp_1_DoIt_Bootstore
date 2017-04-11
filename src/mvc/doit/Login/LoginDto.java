@@ -33,6 +33,69 @@ public class LoginDto {
 	private int d_mech_grade;
 	private Timestamp d_date;
 	
+	private String report_count;
+	public String getReport_count() {
+	      return report_count;
+	   }
+	   public void setReport_count(String report_count) {
+	      this.report_count = report_count;
+	   }
+	
+	//resellintro join
+    private String rbook_intro;      //판매자소개
+    private Timestamp rbook_reg_date; //판매자 가입일자
+    
+//--join(bidbook)--------------------------------------------   
+    private int bid_no;
+    private String bid_subject;
+    private String bid_name;
+    private int bid_price2;
+    private String bid_last_id;
+	
+	//-- 직거래 게시판 + 확장팩
+	public String getRbook_intro() {
+		return rbook_intro;
+	}
+	public void setRbook_intro(String rbook_intro) {
+		this.rbook_intro = rbook_intro;
+	}
+	public Timestamp getRbook_reg_date() {
+		return rbook_reg_date;
+	}
+	public void setRbook_reg_date(Timestamp rbook_reg_date) {
+		this.rbook_reg_date = rbook_reg_date;
+	}
+	public int getBid_no() {
+		return bid_no;
+	}
+	public void setBid_no(int bid_no) {
+		this.bid_no = bid_no;
+	}
+	public String getBid_subject() {
+		return bid_subject;
+	}
+	public void setBid_subject(String bid_subject) {
+		this.bid_subject = bid_subject;
+	}
+	public String getBid_name() {
+		return bid_name;
+	}
+	public void setBid_name(String bid_name) {
+		this.bid_name = bid_name;
+	}
+	public int getBid_price2() {
+		return bid_price2;
+	}
+	public void setBid_price2(int bid_price2) {
+		this.bid_price2 = bid_price2;
+	}
+	public String getBid_last_id() {
+		return bid_last_id;
+	}
+	public void setBid_last_id(String bid_last_id) {
+		this.bid_last_id = bid_last_id;
+	}
+	
 	
 	
 	//Getter , setter 메서드 
@@ -109,7 +172,7 @@ public class LoginDto {
 	
 //mail-------------------------------------------------	
 	public String getD_mail() {
-		return user_mail1+" @ "+user_mail2;
+		return user_mail1+"@"+user_mail2;
 	}
 	public void setD_mail(String d_mail) {
 		this.d_mail = d_mail;
@@ -129,7 +192,7 @@ public class LoginDto {
 	
 	
 	public String getD_birth() {
-		return user_birth1+" 년 "+user_birth2+" 월 "+user_birth3+" 일 ";
+		return user_birth1+"년"+user_birth2+"월"+user_birth3+"일";
 	} 
 	public void setD_birth(String d_birth) {
 		this.d_birth = d_birth;

@@ -49,8 +49,7 @@
 .thum_li p img{ width:100%; height:260px; }
 .rent_thum div p{ font-size:14px; line-height:25px; margin:0 auto;}
 .rent_thum div p:nth-child(2){ margin-top:20px; }
-.rent_thum div p:nth-child(3){ font-weight:bold; font-size:22px; color:#3DB7CC } /*추가됨 윤수꺼*/
-.rent_thum div p:nth-child(4){ font-weight:bold; font-size:22px; color:#3DB7CC }
+.rent_thum div p:nth-child(3){ font-weight:bold; font-size:22px; color:#3DB7CC }
 .rent_thum div p:nth-child(6){ width:539px; overflow:hidden; }
 .rent_thum div p:nth-child(7){ font-size:12px; color:#777; margin-top:25px; }
 
@@ -84,7 +83,7 @@
 .det_top_ri li:nth-child(1) p:nth-child(2){ font-size:28px; font-weight:bold; color:#3DB7CC;  }
 
 .title_f{ font-weight:bold; color:black; font-size:16px !important; }
-.ri_cont_c1{ width:60%;  float:left; overflow:hidden; border-right:solid 1px #eaeaea; box-sizing:border-box; height:100%;}
+.ri_cont_c1{ width:60%;  float:left; overflow:hidden; border-right:solid 1px #eaeaea; box-sizing:border-box; }
 .det_top_ri li:nth-child(2) .ri_cont_c1 p:nth-child(2){ font-size:15px; }
 .det_top_ri li:nth-child(2) .ri_cont_c1 p:nth-child(2) span{ font-size:20px; font-weight:bold }
 
@@ -115,7 +114,7 @@
 .gi_prev,.gi_next{ width:7%; text-align:center;  padding-top:10%;}
 
 .list_book_wrap{ width:86%; margin:0 auto; height:100%; overflow:hidden; position:relative }
-.list_book_cont{  height:100%; position:absolute; top:0px; left:0px; }
+.list_book_cont{ width:1000%; height:100%; position:absolute; top:0px; left:0px; }
 .list_book_cont ul{ float:left; width:133px; height:100%; margin-right:30px;}
 .book_cont_ul li{ text-align:center; font-size:13px;}
 .book_cont_ul li:nth-child(1){ width:100%; height:180px; }

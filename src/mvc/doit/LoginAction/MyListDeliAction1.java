@@ -69,6 +69,7 @@ public class MyListDeliAction1 implements SuperAction{
 		request.setAttribute("deli_info", deli_info); //배송 대기 상태 저장
 		request.setAttribute("firstMan", firstMan); //대기자 1번째 회원번호
 		request.setAttribute("memNo", memNo); //로그인한 회원의 번호
+		request.setAttribute("br_code", br_code); //해당 책코드 저장
 		
 		return "/d_login/my_list_deli1.jsp";
 	}

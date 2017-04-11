@@ -156,7 +156,7 @@ private static RentDao instance = new RentDao();
     //---------------------------------------------- 도서 입력시 연체 레코드 자동생성 끝------------------------------------------//
   
     //--------------------------대여품목리스트-----------대여품목리스트------------------대여품목리스트
-	public List getArticles(String sort,int start, int end) throws Exception {	
+	public List getArticles(String sort,int start, int end,int wait) throws Exception {	
 		List articleList=null;
 		
 		try {
@@ -167,10 +167,11 @@ private static RentDao instance = new RentDao();
 							+
 							"from (select br_no,br_code,br_thumpic,br_name,br_pub,br_writer,br_sname,br_cont,d_bno,br_don,br_admin,br_wait,br_date,rownum r " +
 							"from (select br_no,br_code,br_thumpic,br_name,br_pub,br_writer,br_sname,br_cont,d_bno,br_don,br_admin,br_wait,br_date " +
-							"from b_rent order by br_no desc) order by br_no desc ) where r >= ? and r <= ? order by "+sort
+							"from b_rent order by br_no desc) order by br_no desc ) where r >= ? and r <= ? and br_wait = ? order by "+sort
 							);	
 					pstmt.setInt(1, start); 
 					pstmt.setInt(2, end); 
+					pstmt.setInt(3, wait);
 					rs = pstmt.executeQuery();
 					if (rs.next()) {
 						articleList = new ArrayList(end); 
@@ -204,13 +205,15 @@ private static RentDao instance = new RentDao();
   
   
 	
-	public int getArticleCount() throws Exception {
-	
+	public int getArticleCount(int ad) throws Exception {
+		
 		int x=0;
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement("select count(*) from b_rent");
+			pstmt = conn.prepareStatement("select count(*) from b_rent where br_wait = ?");
+			pstmt.setInt(1, ad);
 			rs = pstmt.executeQuery();
+			
 			if (rs.next()) {
 				x= rs.getInt(1); 
 			}
@@ -455,10 +458,7 @@ private static RentDao instance = new RentDao();
 	   //----------------------------------- 도서 댓글 출력하기 끝---------------------------------------------------------------//
 	   
 	   //----------------------------------- 댓글리스트 페이지 번호---------------------------------------------------------------//
-	   
-	   
-	   
-	   
+
 	   public int getReplyCount(String br_no) throws Exception {
 	      int x= 0;      
 	      try {
@@ -585,7 +585,88 @@ private static RentDao instance = new RentDao();
 	
 	   //----------------------------------- 리스트 검색 내용 파트 끝--------------------------------------------------------------//   
 	
-	
+		
+		
+		//-------------------------------------  도서 대기 리스트 -------------------------------------------------------------------//
+		public List getArticles2(String sort,int wait) throws Exception {   
+	         List articleList=null;
+	         
+	         try {
+	            conn = getConnection();
+	                  pstmt = conn.prepareStatement(
+	                        "select br_no,br_code,br_thumpic,br_name,br_pub,br_writer,br_sname,br_cont,d_bno,br_don,br_admin,br_wait,br_date,r "
+	                        +
+	                        "from (select br_no,br_code,br_thumpic,br_name,br_pub,br_writer,br_sname,br_cont,d_bno,br_don,br_admin,br_wait,br_date,rownum r " +
+	                        "from (select br_no,br_code,br_thumpic,br_name,br_pub,br_writer,br_sname,br_cont,d_bno,br_don,br_admin,br_wait,br_date " +
+	                        "from b_rent order by br_no desc) order by br_no desc ) where br_wait = ? order by "+sort
+	                        );   
+	                  pstmt.setInt(1, wait);
+	                  rs = pstmt.executeQuery();
+	                  if (rs.next()) {
+	                     articleList = new ArrayList(); 
+	                     do{ 
+	                        RentDto book= new RentDto();
+	                        book.setBr_no(Integer.parseInt(rs.getString("br_no")));
+	                        book.setBr_code(rs.getString("br_code"));                         
+	                            book.setBr_thumpic(rs.getString("br_thumpic"));
+	                            book.setBr_name(rs.getString("br_name"));
+	                            book.setBr_pub(rs.getString("br_pub"));
+	                            book.setBr_writer(rs.getString("br_writer"));
+	                            book.setBr_sname(rs.getString("br_sname"));
+	                            book.setBr_cont(rs.getString("br_cont"));
+	                            book.setD_bno(Integer.parseInt(rs.getString("d_bno")));
+	                            book.setBr_don(Integer.parseInt(rs.getString("br_don")));
+	                            book.setBr_admin(Integer.parseInt(rs.getString("br_admin")));
+	                            book.setBr_wait(Integer.parseInt(rs.getString("br_wait")));
+	                            book.setBr_date(rs.getTimestamp("br_date"));
+	                        articleList.add(book); 
+	                     }while(rs.next());
+	                  }
+	         } catch(Exception ex) {
+	            ex.printStackTrace();
+	         } finally {
+	            if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+	            if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+	            if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	         }
+	         return articleList;
+	      }
+		//-------------------------------------  도서 대기 리스트 끝-------------------------------------------------------------------//
+		
+		
+		//------------------------------------- 도서 대기 승인 처리 -------------------------------------------------------------------//
+		public void upBook(int aa, String br_code) throws Exception{
+			String sql = "";
+			try{
+				conn = getConnection();
+				if(aa == 0){//전체처리
+					sql = "update b_rent set br_wait = ? where br_wait = 0";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, aa);
+				}else if(aa == 1){ //개별처리
+					sql = "update b_rent set br_wait = ? where br_code = ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, aa);
+					pstmt.setString(2, br_code);
+				}else if(aa == 3){ //개별 폐기처분
+					sql = "update b_rent set br_wait = ? where br_code = ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, aa);
+					pstmt.setString(2, br_code);
+				}
+				
+				pstmt.executeUpdate();
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+	            if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+	            if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+			}
+				
+		}
+		//------------------------------------- 도서 대기 승인 처리 끝-------------------------------------------------------------------//
 }
 
 

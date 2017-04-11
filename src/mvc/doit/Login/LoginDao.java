@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import mvc.doit.Login.LoginDao;
 import mvc.doit.Login.LoginDto;
+import mvc.doit.Rent.RentDao;
 import mvc.doit.SuperAction.SuperAction;
 
 
@@ -60,8 +61,10 @@ public class LoginDao implements SuperAction{
        }
     
     /*------------------ 로그인 끝-------------------------------------------------------------------------*/
-
-     
+    
+    
+    
+    
     
     /*------------------------------- 회원 가입 ---------------------------------------------------------*/
   	public void insertMember(LoginDto dto){
@@ -70,7 +73,7 @@ public class LoginDao implements SuperAction{
   	         conn=getConnection();
   	         String sql = "insert into d_member values(d_mem_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,sysdate)";
   	         pstmt = conn.prepareStatement(sql);
-  	    
+  	         
   	         pstmt.setString(1, dto.getD_id());
   	         pstmt.setString(2, dto.getD_pass());
   	         pstmt.setString(3, dto.getD_name());
@@ -97,6 +100,54 @@ public class LoginDao implements SuperAction{
     
     /*------------------------------- 회원가입 끝 ------------------------------------------------------*/
     
+  	/*-------------------------------- 회원가입시 계좌 생성 -------------------------------------------*/
+  	public void insAccount(String d_id) throws Exception{
+  		String aco[] = new String[5];
+		String acon = "";
+			
+  		try{
+  			conn = getConnection();
+  			String sql = "select * from d_member where d_id = ?";
+  			pstmt = conn.prepareStatement(sql);
+  			pstmt.setString(1, d_id);
+  			
+  			rs = pstmt.executeQuery();
+  			if(rs.next()){
+  				//랜덤 코드 계좌 생성
+  				RentDao rdao = RentDao.getInstance();
+
+  				for(int i = 0; i < 3; i++){
+  					if(i == 2){
+  						aco[i] = rdao.code_gen();
+  						acon += "4"+aco[i];
+  						break;
+  					}
+  					aco[i] = rdao.code_gen();
+  					acon += "5"+aco[i]+"-";
+  				}
+  				
+  				sql = "insert into d_account values(account_seq.nextval,?, ?, ?, 0) ";
+  				pstmt = conn.prepareStatement(sql);
+  				pstmt.setInt(1, rs.getInt("d_no")); //회원번호
+  				pstmt.setString(2, rs.getString("d_id")); //회원 아이디
+  				pstmt.setString(3, acon);
+  				
+  				pstmt.executeUpdate();
+  				
+  			}
+  			
+  		}catch(Exception e){
+  			e.printStackTrace();
+  		}finally{
+  			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+            if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+            if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+  		}
+  		
+  	}
+  	
+  	/*-------------------------------- 회원가입시 계좌 생성 끝 -------------------------------------------*/
+  	
   	/*------------------------------- 중복확인 ---------------------------------------------------------*/
 	public int confirmId(String d_id) 
 			throws Exception {
@@ -131,6 +182,7 @@ public class LoginDao implements SuperAction{
 	
 	/*------------------------------- 중복 확인 끝 ---------------------------------------------*/
     
+	
 	/*------------------------------- 회원정보 - 회원번호로 회원 id 출력 --------------------------------------------*/
 	public String getMemNo(int d_no){
 		String jo_id = null;

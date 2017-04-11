@@ -37,17 +37,17 @@
 									</div>
 									<div >
 										<p class="graph_img" style="margin:0px;">
-											<a>1,750<span>visitors</span></a>
+											<a>${ dashM.getD_seller() }<span>merchant</span></a>
 											<a class="graph_img2"><img src="/DoIt/images/ERP_01.png" style="width:100%; height:100%;"/></a>
 										</p>
 
 										<p class="graph_img">
-											<a>12,250<span>Production</span></a>
+											<a>${ dashM.getD_lib() }<span>late fee</span></a>
 											<a class="graph_img2"><img src="/DoIt/images/ERP_01.png" style="width:100%; height:100%;"/></a>
 										</p>
 
 										<p class="graph_img">
-											<a style="color:#019a93; font-weight:bold">\ 4,802,400<span>Sales</span></a>
+											<a style="color:#019a93; font-weight:bold">\ ${ dashM.getD_seller() + dashM.getD_lib() + dashM.getD_trade() }<span>Sales</span></a>
 											<a class="graph_img2"><img src="/DoIt/images/ERP_01.png" style="width:100%; height:100%;"/></a>
 										</p>
 									</div>

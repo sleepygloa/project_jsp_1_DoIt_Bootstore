@@ -20,16 +20,22 @@ public class LoginProAction implements SuperAction {
 			HttpServletResponse response) throws Exception{
 		
 		
-//---- 변수 설정 ---------------------------------------------------------------------
+//-----------------------------로그인 비즈니스 로직 ------------------------------------------
+		
+//아이디 값을 받기위해 UTF-8 설정한다.
+//받아온 입력된 id, pass를 변수로 지정한다.
+//Dao에있는 loginCheck(id,passwd) 에 입력, db와 비교하여 return boolean 으로 받는다.
+//true 일 때, 세션등록, 로그인성공
+//false일때, 세션X, 로그인실패
 		request.setCharacterEncoding("UTF-8");
+
 		String id = null;
 		String passwd = null;
 		boolean check = false;
+		
 	    id = request.getParameter("d_id");
 		passwd  = request.getParameter("d_pass");
 		
-		
-//---- 로그인 진행 Dao, 회원 테이블에 아이디와 비밀번호를 비교하여 로그인 할 것인지 확인한다 -----------------		
 		LoginDao manager = LoginDao.getInstance();
 	    check= manager.loginCheck(id,passwd);
 	    
@@ -47,7 +53,6 @@ public class LoginProAction implements SuperAction {
 	    	session.setAttribute("memName", ltt.getD_name()); //회원 이름
 	    	session.setAttribute("memPic", ltt.getD_pic()); //회원 썸네일 사진
 	    	
-	    	
 	    	//세션에 장바구니 저장
 	    	int br_no = (int)session.getAttribute("memNo");
 			String rent = "d_rent"; //도서관 
@@ -64,10 +69,13 @@ public class LoginProAction implements SuperAction {
 		    session.setAttribute("CartP", CartP);
 		    
 	    }else{}
+
+	    request.setAttribute("check", check);
+	    request.setAttribute("d_id", id);
+	    request.setAttribute("d_pass", passwd);
 	    
 	    
-	    
-//---- 회원이 로그인하였을때, 등급을 확인하여, 등급이 상승되었음을 알려줍니다.--------------------------------------
+	  //---- 회원이 로그인하였을때, 등급을 확인하여, 등급이 상승되었음을 알려줍니다.--------------------------------------
 	    int d_bcode = 0;
 	    String Check = "d_id";
 	    OnDao dao = OnDao.getInstance();
@@ -77,6 +85,7 @@ public class LoginProAction implements SuperAction {
 	    request.setAttribute("d_id", id);
 	    request.setAttribute("d_pass", passwd);
 	    request.setAttribute("userGradeCheck", userGradeCheck);
+	    
 
 	    
 	return "/d_login/loginPro.jsp"; //View 경로

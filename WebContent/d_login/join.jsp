@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <script type="text/javascript" src="/DoIt/js/script.js"></script>
    
 
 
 		<!-- header import -->
-		<jsp:include page="/header.jsp" />
+		<%@include file="../header.jsp" %>
 		
 		
 	
@@ -113,19 +113,6 @@
 								<td>생년월일</td>
 								<td>
 									<select id="jo_user_birth1" name="user_birth1" class="input_02">
-										<option>2015</option>
-										<option>2014</option>
-										<option>2013</option>
-										<option>2012</option>
-										<option>2011</option>
-										<option>2010</option>
-										<option>2009</option>
-										<option>2008</option>
-										<option>2007</option>
-										<option>2006</option>
-										<option>2005</option>
-										<option>2004</option>
-										<option>2003</option>
 										<option>2002</option>
 										<option>2001</option>
 										<option>2000</option>
@@ -139,19 +126,6 @@
 										<option>1992</option>
 										<option>1991</option>
 										<option>1990</option>
-										<option>1989</option>
-										<option>1988</option>
-										<option>1987</option>
-										<option>1986</option>
-										<option>1985</option>
-										<option>1984</option>
-										<option>1983</option>
-										<option>1982</option>
-										<option>1981</option>
-										<option>1980</option>
-										<option>1979</option>
-										<option>1978</option>
-										
 									</select>
 									<select id="jo_user_birth2" name="user_birth2" class="input_02">
 										<option>12</option>

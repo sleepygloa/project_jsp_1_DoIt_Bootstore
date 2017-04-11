@@ -110,6 +110,14 @@
 					<li>
 						<a>현재 거래 중인 회원번호 : [ <span style="color:red">${ firstMan }</span> ]</a>
 					</li>
+					<li>
+						<a>
+							나의 회원번호 : [ <span style="color:red">${ memNo }</span> ]
+							<c:if test="${ firstMan == memNo }">
+								-> 현재 도서를 보유중입니다.( <span style="color:red">반납가능</span> )
+							</c:if>
+						</a>
+					</li>
 				</ul>
 				
 				<%-- 문의 안내 --%>
@@ -126,7 +134,7 @@
 				
 				<c:if test="${ memNo == firstMan }">
 					<p class="re_deli_but">
-						<a href="#">반납 신청하기</a>
+						<a href="/DoIt/d_cart/overdue.do?br_code=${ br_code }&cols=dr_rent">반납 신청하기</a>
 					</p>
 				</c:if>
 				<c:if test="${ memNo != firstMan }">

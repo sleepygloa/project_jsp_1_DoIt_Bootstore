@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import mvc.doit.Login.mySellingListDto;
 import mvc.doit.Online.OnBookDto;
 import mvc.doit.Online.OnDao;
-import mvc.doit.Statistics.StatisticsDto;
+
 import mvc.doit.SuperAction.SuperAction;
 
 public class OnSellBookAction implements SuperAction {

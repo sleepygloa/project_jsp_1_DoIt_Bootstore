@@ -1,0 +1,84 @@
+@CHARSET "UTF-8";
+.text_center{ text-align:center; }
+.font_s1{ font-size:0.9em; color:#888 }
+.bold{ font-weight:bold; }
+.boder_le_ri{ border-left:solid 1px #e7e7e7; border-right:solid 1px #e7e7e7; box-sizing:border-box }
+
+
+/* 리스트 테이블 - list.jsp */
+.board_wrap{ width:100%; overflow:hidden; border-top:solid 2px #3DB7CC}
+.board_wrap th{ border-bottom:solid 1px #3db7cc; background:#f4f4f4; font-size:1em }
+.board_wrap td{ border-bottom:solid 1px #EAEAEA; font-size:0.9em }
+.board_wrap td, .board_wrap th{ text-align:center; height:45px; }
+.board_wrap td:nth-child(2), .board_wrap th:nth-child(2){ text-align:left; padding-left:20px; }
+
+.write_bu{ text-align:right; margin:20px 0px; }
+.write_bu a{ font-size:0.9em; color:#3db7cc; padding:5px 15px; border:solid 1px #3db7cc }
+.write_bu a:hover{ color:black; border:solid 1px black; cursor:pointer}
+
+.read_list{ text-align:center; }
+.read_list a{ font-size:0.9em; color:gray }
+.read_list a:hover{ color:black }
+
+
+
+.hei_40 td{ height:60px }
+/* 리스트 내용 보기 - board_content */
+
+.list_con_wrap{ width:100%; border-top:solid 2px #3DB7CC}
+.list_con_wrap th,.list_con_wrap td{ padding:10px 10px; border-bottom:solid 1px #EAEAEA}
+.list_con_wrap th:nth-child(1), .list_con_wrap th:nth-child(3),.list_con_wrap td:nth-child(1), .list_con_wrap td:nth-child(3){background:#f4f4f4; font-size:1em; text-align:center}
+.list_con_wrap th:nth-child(2), .list_con_wrap th:nth-child(4){ font-size:0.9em }
+.link_wrap{margin-top:20px; }
+ 
+.link_wrap button{color:#4C4C4C; background:white; border:solid 2px #4C4C4C; padding:10px 20px; font-size:0.9em; margin-right:5px;}
+.link_wrap button:hover{ cursor:pointer; border:solid 2px black; color:black }
+ 
+ /* 테이블 제목 관련 */
+ .L_title { margin:20px 0px; font-weight:bold; font-size:1.1em }
+ .Left_ali{ text-align:left !important; padding-left:10px; }
+ 
+ 
+ 
+.list_con_wrap2{ width:100%; border-top:solid 2px #3db7cc}
+.list_con_wrap2 th{ background:#f4f4f4; }
+.list_con_wrap2 th, .list_con_wrap2 td{ height:50px; max-height:55px; text-align:center; font-size:0.9em; overflow:hidden; }
+ .list_con_wrap2 td{ border-bottom:solid 1px #eaeaea; padding-top:10px; }
+ .list_con_wrap2 td img{ width:50px; height:55px; }
+ 
+ 
+ /* 반품리스트 스타일 - 쿠팡 */
+.list_cont_taa2{ width:100%; margin-bottom:300px; padding-bottom:3%; padding-right:10px; height:800px; overflow:scroll;}
+.border_land{ border:solid 1px #e7e7e7; box-sizing:border-box; margin-bottom:15px; }
+.list_taa_2{ border-bottom:1px solid #e7e7e7; width:100%; box-sizing:border-box; background:#f9f9f9; padding:16px; overflow:hidden; }
+.list_taa_2 p{ font-size:0.8em; margin-right:10px; }
+.list_taa_2 p span{ padding-right:8px;}
+.ban_list{ width:100%; }
+.ban_list td{ padding:35px 20px; font-size:0.9em; line-height:22px; }
+.ban_list td p img{ width:70px;}
+.del_but a{display:block; padding:0px 8px; margin-left:15px; font-size:0.75em; color:#0a6def; border:solid 1px #0a6def }
+.del_but a:hover{ color:white; background:#0a6def; }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

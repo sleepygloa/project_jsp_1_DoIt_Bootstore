@@ -70,7 +70,7 @@
 						</header><%--deli_menu_gel 결제 창 아래쪽 01 끝--%>
 		
 						<footer class="menu_bang_foot">
-							<input id="rider_jumoon" type="submit" value="주문하기" class="btn btn-default d-w-100">
+							<a><input id="rider_jumoon" type="submit" value="주문하기" Style="width:100%; background:none; border:none; height:36px; padding-bottom:24px; color:white; font-size:16px;" /></a>
 							<%--<a id="rider_jumoon" href="/DoIt/d_cart/payshot.do?cols=d_sell&buy=cart">주문하기</a> --%>
 						</footer><%--deli_menu_gel 결제 창 아래쪽 02 끝--%>
 					</footer>

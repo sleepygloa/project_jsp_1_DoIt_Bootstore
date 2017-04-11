@@ -1,0 +1,254 @@
+@charset "utf-8";
+/* manage */
+html,body{height:100%;}
+body{width:100%; background:#e7ebee;}
+
+.calcal td{text-align: center; padding-top:22px; font-size:22px;}
+.calcal th{padding-top:25px; font-size:26px; color:#43aea8;}
+
+/* erp-header */
+/* erp-header-logo */
+.le_nav{width:30%; max-width:300px; height:1700px; float:left; background:#282f36; position:relative;}
+.na_le_foot{position:absolute; bottom:70px;}
+header .ne_le_he .to_logo{width:300px; height:65px; background:#202126;}
+header .ne_le_he .to_logo article{margin-left:22px; padding-top:20px;}
+header .ne_le_he .to_logo a{color:white; font-size:27px; }
+header .ne_le_he footer{width:300px; height:30px; background:#212227;}
+header .ne_le_he footer img{margin-left:22px;}
+
+/* erp-header-article */
+ .sec_he{width:255px; padding-bottom:22px; margin:33px 0 30px 22px; border-bottom:solid 3px #565866}
+.sec_he div{width:160px; height:160px; margin:0 auto;border-radius:160px 160px 160px 160px; background-image:url("../images/ma_img.jpg"); background-repeat: no-repeat; background-size: 160px 190px; }
+.sec_he a{color:white; display:block; font-size:13px; text-align:center; margin-top:12px;}
+
+
+
+.sec_art_2{width:255px; height:50px; margin-left:22px; margin-bottom:18px;}
+ .sec_art_2 span{color:white; font-size:18px; margin-left:18px;}
+ .sec_art_2 .mess{position:relative;}
+.sec_art_2 .mess .mess_me{width:42px; height:45px; display:block; position:absolute; right:-45px; top:-20px; z-index:3}
+.sec_art_2 .mess .mess_me:hover{cursor:pointer;}
+.sec_art_2 a{color:white; font-size:16px;}
+
+/* 메세지 창 */
+ .mess_con{width:372px; height:557px; background:#eaeaea; border:solid 1px black; position:absolute; right:-395px; top:-10px;}
+ .mess_con header{width:100%; height:60px; padding-top:10px; background:#d4d4d4; margin-bottom:10px;}
+ .mess_con header p{padding-left:32px; width:320px; color:black; font-size:17px; font-weight:bold}
+ .mess_con header .mm{font-size:16px; color:gray;}
+
+.mess_con_con{width:340px; height:420px; margin:0 auto; overflow:scroll;}
+ .mess_con_con article{margin-bottom:30px;}
+.mess_con_con article div{margin-bottom:15px; font-size:14px;}
+.mess_con_con article div p{float:left; overflow:hidden; width:25px; height:25px; border-radius:25px 25px 25px 25px; border:solid 1px black; margin-right:10px;}
+.mess_con_con article div a{color:#e56f5d; font-size:13px;}
+
+.mess_con footer form{width:330px; height:37px; margin:0 auto;}
+.mess_con footer form p{float:left; overflow:hidden;}
+.mess_con footer form .jun_inp input{width:270px; height:37px; border:none; text-indent:10px;}
+.mess_con footer form .jun_button input{width:60px; height:38px; background:#fdcc05;}
+
+ .sec_part03{width:255px; margin:50px 0px 30px 27px; cursor:pointer;}
+.sec_part03 a{display:inline-block; height:31px; margin-right:20px;}
+ .sec_part03 a span{color:white; }
+
+.sec_copy_foot{width: 311px; padding:22px 0px 22px 0px;}
+.sec_copy_foot p{text-align:center; color:white; font-size:12px;}
+.sec_copy_foot p span{color:#fdcd21;}
+
+
+
+/* 05. erp - total dashboard */
+
+.wrap{min-width:1580px; overflow:hidden;}
+.wrap:after{content:''; display:block; clear:both;} 
+.ri_sec{width:70%; min-width:1100px; }
+
+/* 05. dash_header*/
+.dashboard{width:100%; overflow:hidden;}
+
+ .dash_head{width:100%; height:280px; background:white; }
+.dash_nav_wrap{width:100%; height:60px; border-bottom:solid 2px #e6e7e8;}
+.dash_nav{height:100%; float:right; position:relative;}
+.dash_nav p{float:left; overflow:hidden; border-left:solid 2px #e6e7e8;}
+.dash_nav p:nth-child(1){border:none;}
+.dash_nav p span{color:#c2c7cd; padding-left:8px;}
+ .dash_nav p:nth-child(2), .dash_nav_wrap .dash_nav p:nth-child(3)
+{margin-top:20px; padding-left:9px; padding-right:9px; text-align:center; cursor:pointer; font-size:14px;}
+.system_sel{margin-left:17px; padding:18px 15px 18px 15px; border-left:solid 2px #e6e7e8; cursor:pointer;}
+
+.mana_op{display:none; visible width:60%; position:absolute; right:0px; margin-top:64px; background:white; border:solid 1px #e6e7e8;}
+.sung_navi span{font-size:19px; margin-right:10px; font-weight:bold}
+.mana_op a{padding-left:15px; display:block; margin-bottom:20px; margin-top:10px;}
+.mana_op a:hover{color:#b70707;}
+
+.dash_nav2{width:100%; overflow:hidden; clear:both; padding-top:60px;} 
+.dash_nav2 article{width:1100px; min-width:1000px; margin:0 auto; overflow:hidden;}
+
+
+ .dash_nav2 article div:nth-child(1) p:nth-child(1){font-size:40px; color:#202126; font-weight:bold;} 
+ .dash_nav2 article div:nth-child(1) p:nth-child(2), .dash_nav2 article div p a span
+{font-size:15px; color:#969696;}
+.dash_nav2 article div p a span{padding-left:5px;}
+.print_to{width:140px; height:38px; padding-top:12px; text-align:center; background:#fdcc05; color:white; margin:25px 0px 0px 15px;}
+.print_to:hover{cursor:pointer; background:white; border:solid 2px #fdcc05; color:#fdcc05; }
+
+/* 05. dash_section*/
+ .dash_section{width:100%; overflow:hidden;}
+.ma_con_011, .ma_con_022, .ma_con_033, .ma_con_044{display:none;}
+
+/* 01. dash_crew */
+.dash_crew{width:100%; overflow:hidden;}
+
+.da_crew_top{width:100%; overflow:hidden; margin-bottom:22px;}
+.da_crew_top article{width:49%; height:200px; background:white;}
+.crew_le, .crew_le img{width:120px; height:120px;}
+ .crew_ri a{display:block;}
+.crew_ri a:nth-child(1){font-size:50px; color:#019a93; margin-top:10px;}
+.crew_ri a:nth-child(2){font-size:20px; color:#666666; text-align:right; }
+.crew_top_con{width:90%; margin:0 auto; overflow:hidden; margin-top:40px;}
+
+.da_crew_bot{width:100%; padding-top:30px; background:white;}
+.crew_bot_he{width:96%; margin:0 auto; }
+.crew_bot_he img{vertical-align:middle; width:70px; height:35px; margin-right:10px;}
+.crew_bot_he span{font-size:22px;}
+
+.crew_bot_sec{width:100%;}
+.bot_sec_ar{width:96%; margin:0 auto; min-height:300px; max-height:600px; background:white; margin-top:50px; overflow:scroll; }
+table{border-spacing:0px;}
+.crew_table{width:100%;}
+.crew_table thead th{padding-bottom:15px; border-bottom:solid 2px #666666;}
+.crew_table tbody td{text-align:center; height:100px; padding:10px 0px; border-bottom:solid 2px #cccccc}
+.crew_table tbody td p img{width:80px; height:100px;}
+.crew_table tbody td div{width:100%; height:100px; padding-top:20px;}
+.crew_table tbody td p:nth-child(2){border:solid 2px black; margin-top:20px; padding:10px 20px; font-weight:bold; clear:both;}
+.crew_table tbody td span{color:#43aea8; border:solid 2px #43aea8; display:block; float:left; overflow:hidden; margin-bottom:10px; width:45%; padding:6px 0px}
+.crew_table tbody td span:nth-child(2){margin-left:8px;}
+.crew_table tbody td span:hover{background:black; border:solid 2px black; color:white; cursor:pointer}
+.crew_table tbody td a{padding:10px 25px; border:solid 2px #cccccc; color:#cccccc;}
+.crew_table tbody td a:hover{color:white; background:#e56f5d; border:solid 2px #e56f5d; }
+
+.bot_sec_ar2{width:96%; overflow:hidden; margin:0 auto; padding-top:30px;}
+.bot_sec_ar2 p{font-weight:bold; font-size:20px; color:#e56f5d; margin-bottom:20px;}
+.bot_sec_ar2 table thead th{padding-bottom:15px; border-bottom:solid 2px #666666;}
+.bot_sec_ar2 table tbody td{text-align:center; height:100px; padding:10px 0px; border-bottom:solid 2px #cccccc}
+.bot_sec_ar2 div{display:none; margin-bottom:30px;}
+.bot_sec_ar2 .inst_butt{width:150px; padding:20px 5px; text-align:center; font-size:16px; color:#6699cc; border:solid 2px #6699cc;}
+.bot_sec_ar2 .inst_butt:hover{background:#6699cc; color:white; cursor:pointer;}
+.bot_sec_ar2 .inst_butt2{display:none; width:150px; padding:20px 5px; text-align:center; font-size:16px; color:#e56f5d; border:solid 2px #e56f5d;}
+.bot_sec_ar2 .inst_butt2:hover{background:#e56f5d; color:white; cursor:pointer;}
+
+/* 02. dash_rider */
+.dash_rider{width:100%; overflow:hidden;}
+.da_rider_top{width:100%; overflow:hidden; margin-bottom:22px;}
+.rider_le{width:62%; height:400px;}
+.rider_ri{width:36%; height:400px;}
+.rider_ri header, .rider_ri section{margin-bottom:3.5%;}
+.rider_ri header, .rider_ri section, .rider_ri footer{width:100%; height:31%; background:white;}
+.rider_ri header article, .rider_ri section article, .rider_ri footer article{width:92%; padding-top:25px; margin:0 auto;}
+.rider_info_he article p:nth-child(1){font-size:30px; font-weight:bold;}
+.rider_info_he article p:nth-child(2){font-size:16px; font-weight:bold; margin-top:5px; color:#62677b;}
+.rider_info_sec article p:nth-child(1){color:#019a93; font-size:28px; font-weight:bold;}
+.rider_info_foot article p:nth-child(1){font-size:28px; font-weight:bold; color:#585858; margin-bottom:5px;}
+.rider_info_foot article p:nth-child(2),.rider_ri .rider_info_foot article p:nth-child(2){color:#585858; font-size:16px; margin-top:5px;}
+
+.rider_list{width:100%; overflow:hidden; background:white;}
+.rider_table_wrap{width:100%; overflow:scroll; max-height:600px; }
+.rider_table_wrap p:nth-child(2){width:96%; margin:0 auto; font-size:22px; padding:20px 0px;}
+.rider_table_wrap table{width:96%; margin:0 auto;}
+.rider_table_wrap table thead th{padding:10px 0px; border-bottom:solid 2px #666666;}
+.rider_table_wrap table tbody td{text-align:center; padding:10px 0px; border-bottom:solid 2px #cccccc;}
+.rider_table_wrap table tbody td:nth-child(1) img{width:80px; height:100px;}
+.rider_table_wrap table tbody td:nth-child(6) a, .rider_table_wrap table tbody td:nth-child(7) a
+{display:block; width:70%; margin:0 auto; padding:10px 0px; border:solid 2px black;}
+.rider_table_wrap table tbody td:nth-child(6) a:hover, .rider_table_wrap table tbody td:nth-child(7) a:hover{background:black; color:white;}
+.rider_list_inst{width:100%; overflow:hidden; background:white;}
+.rider_ins_con{width:96%; margin:0 auto; padding:20px 0px;}
+.rider_ins_con p:nth-child(1){margin:15px 0px; color:#41aea8; font-size:20px; font-weight:bold;}
+.rider_ins_con div{margin-bottom:20px; display:none;}
+.rider_ins_con table thead th{margin:10px 0px; height:50px; border-bottom:solid 2px #666666;}
+.rider_ins_con table tbody td{text-align:center; height:100px; border-bottom:solid 2px #cccccc;} 
+.inst_butt11{width:150px; padding:10px 5px; text-align:center; color:#44aea8; border:solid 2px #44aea8;}
+.inst_butt11:hover{background:#44aea8; color:white; cursor:pointer;}
+.inst_butt22{width:150px; display:none; padding:10px 5px; text-align:center; border:solid 2px black;}
+.inst_butt22:hover{background:black; color:white; cursor:pointer;}
+
+/* 05. dash_section graph*/
+.dash_graph{width:100%; height:500px; background:white; overflow:hidden;}
+.dash_graph .graph_le, .dash_graph .graph_ri{padding:20px 0px;}
+.dash_graph .graph_le{width:75%; height:100%;}
+.dash_graph .graph_le_con{width:90%; margin:0 auto; overflow:hidden;}
+.graph_le_con{overflow:hidden;}
+.graph_le_con .gr_le_title{overflow:hidden;}
+.graph_le_con .gr_le_title p, .gr_le_title p a{font-size:18px; color:#848484}
+.graph_le_con .gr_le_title div p{float:left; overflow:hidden;}
+.graph_le_con .gr_le_title div p a{display:inline-block; font-size:14px;margin-left:10px;}
+.graph_le_con .gr_le_title div p a:nth-child(1){width:22px; height:10px; border-radius:10px 10px 10px 10px;
+border:solid 1px red; vertical-align:middle;}
+.graph_le_con .gr_le_bon{width:100%; height:100%;}
+.dash_graph .graph_ri{width:25%; height:100%; background:#f5f6f8;}
+.dash_graph .graph_ri .graph_ri_con{width:230px; margin:0 auto;}
+.dash_graph .graph_ri .graph_ri_con .gr_ri_he, .dash_graph .graph_ri .graph_ri_sec{width:100%;}
+.dash_graph .graph_ri .graph_ri_con .gr_ri_he p:nth-child(1){color:#019a93; font-size:30px; font-weight:bold;}
+.dash_graph .graph_ri .graph_ri_con .gr_ri_he p:nth-child(2){color:#62677b; font-size:18px; margin-bottom:30px;}
+.dash_graph .graph_ri .graph_ri_con .gr_ri_sec p{width:100%; margin-top:6px;}
+.dash_graph .graph_ri .graph_ri_con .gr_ri_sec p:nth-child(1){font-size:24px; color:#585858;}
+
+
+.dash_graph .graph_ri .graph_ri_con .gr_ri_sec p:nth-child(3){font-size:14px; color:#b5b9c0;}
+.print_gr{width:180px; height:40px; text-align:center; background:#a6aeb9; color:white; margin:0 auto; padding-top:16px; margin-top:40px}
+.print_gr:hover{border:solid 2px #a6aeb9; color:#a6aeb9; background:#f5f6f8; cursor:pointer;}
+/* 05. dash_section part 01*/
+.dash_part01{width:100%; margin-top:20px; overflow:hidden;}
+.pa_con{width:32%; height:350px; background:white; text-align:center}
+.pa_con header{width:100%; height:40px; background:#f5f6f8; padding-top:20px;} 
+.pa_con header p{color:#7a7f8d; }
+.to_visit{margin-right:2%;}
+.to_visit section p:nth-child(1){font-size:100px; color:#434a5d; font-weight:bold; margin-top:50px;}
+ .to_visit section p:nth-child(2){font-size:25px; color:#7a7f8d;}
+ .to_prod{margin-right:2%;}
+ .to_prod section p:nth-child(1){font-size:26px; color:#434a5d; font-weight:bold; margin-top:30px;}
+.to_prod section p:nth-child(3){width:75%; height:30px; background:#43aea8; margin:0 auto;}
+.to_prod section p:nth-child(4){font-size:20px; color:#434a5d; font-weight:bold; margin-top:10px;}
+.to_analy{position:relative;}
+/*.dash_part01 .to_analy section div{width:180px; height:180px; border:solid 1px black; border-radius:180px 180px 180px 180px; margin:0 auto;}*/
+
+.dash_sche{width:100%; margin-top:20px; overflow:hidden; background:white;}
+.da_sche_le{width:68%;}
+.da_sche_he{width:100%; height:40px; background:#f5f6f8; padding-top:20px;}
+.da_sche_he p{width:90%; margin:0 auto; color:#7a7f8d;}
+.da_sche_sec{width:100%; margin-top:20px;}
+.da_sche_sec header{width:90%; height:40px; margin:0 auto; border-bottom:solid 2px #efeff0; box-sizing:border-box}
+.da_sche_sec header p:nth-child(1){color:#434a5d;}
+.da_sche_sec header p:nth-child(2), .da_sche_sec header p:nth-child(3){width:140px; height:40px;
+border:solid 2px #efeff0; box-sizing:border-box; text-align:center; padding-top:8px; cursor:pointer; float:right; font-size:15px; color:#858994;}
+.crew_sche{width:90%; height:600px; margin:0 auto; }
+.da_sche_sec header p:nth-child(2):hover{background:#efeff0;}
+.da_sche_sec header p:nth-child(3):hover{background:#efeff0;}
+.crew_sche{width:90%; height:230px; margin-top:30px; margin-bottom:30px;
+border:solid 1px red; background:url("../images/sche_back.png") left bottom; background-size:contain; background-repeat:no-repeat}
+.crew_sche div{background:url("../images/bl_tri.png") center; }
+
+.dash_sche .da_sche_ri{width:32%; height:100%;}
+/* schedule cal css */
+.cal_he{width:100%; height:50px; padding-top:10px; background:#43aea8; overflow:hidden;}
+.cal_but, .cal_but2{width:14%; height:42px; cursor:pointer}
+ .cal_he div{width:68%; margin:0 auto;}
+.cal_he div p{text-align:center; color:white;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -45,26 +45,26 @@
 						
 						
 						<%-- 직접판매 장바구니 --%>
-						<article class="cart_pan" style="display:none">
-							<p class="cart_title">직접판매도서</p>
-							<p class="cart_link"><a href="#">직접판매 List ▶</a></p>
-							<ul class="cart_lib_list">
-								<li>
-									
-									<c:forEach var="ca" items="${ sessionScope.CartP }">
-									<a href="#" class="jang_conb">
-										<span><img src="/DoIt/save/${ ca.getBr_thumpic() }" /> 책사진</span>
-										<span class="jang_cona">
-											<p>${ ca.getBr_name() }책 이름</p> <br>
-											<span style="font-size:18px; color:#3DB7CC">가격 표시</span>
-										</span>
-									</a>
-									</c:forEach>
-									
-								</li>
-							</ul>
-						</article>
-						<%-- 직접판매 장바구니 끝--%>
+		                  <article class="cart_pan" style="display:none">
+		                     <p class="cart_title">직접판매도서</p>
+		                     <p class="cart_link"><a href="#">직접판매 List ▶</a></p>
+		                     <ul class="cart_lib_list">
+		                        <li>
+		                           
+		                           <c:forEach var="ca" items="${ sessionScope.CartP }">
+		                           <a href="#" class="jang_conb">
+		                              <span><img src="/DoIt/d_bpic/${ ca.getD_bpic() }" /> 책사진</span>
+		                              <span class="jang_cona">
+		                                 <p>${ ca.getD_bname() }</p> <br>
+		                                 <span style="font-size:18px; color:#3DB7CC">${ ca.getD_bsellvalue() }</span>
+		                              </span>
+		                           </a>
+		                           </c:forEach>
+		                           
+		                        </li>
+		                     </ul>
+		                  </article>
+		                  <%-- 직접판매 장바구니 끝--%>
 						
 					</section>
 					<%-- 장바구니 본문 끝 --%>

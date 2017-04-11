@@ -14,7 +14,7 @@ public class Rent_wrapAction implements SuperAction{
 		
 		request.setCharacterEncoding("UTF-8");	
 		String sort = request.getParameter("sort");
-			
+		
 		String pageNum = request.getParameter("pageNum");//페이지 번호
 
         if (pageNum == null) {
@@ -29,10 +29,10 @@ public class Rent_wrapAction implements SuperAction{
         
         List articleList = null;		
 		RentDao dbPro = RentDao.getInstance();
-		count = dbPro.getArticleCount();//전체 글의 수
+		count = dbPro.getArticleCount(1);//전체 글의 수
 		
 		if (count > 0) {
-		 articleList = dbPro.getArticles(sort,startRow,endRow);//페이지 글 목록
+		 articleList = dbPro.getArticles(sort,startRow,endRow,1);//페이지 글 목록
 		}
 		
 		request.setAttribute("pageNum", new Integer(pageNum));

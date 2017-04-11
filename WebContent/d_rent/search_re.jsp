@@ -5,7 +5,7 @@
     
     
     <p class="sear_title">
-    	검색하신 내용은 장르 <span>${ jang }</span>, 내용은 "<a>${ word }</a> " 이며, 결과 개수는 <span>${ count }</span>개 입니다.
+    	검색하신 분류는 <span>${ jang }</span>, 내용은 "<a>${ word }</a> " 이며, 결과 개수는 <span>${ count }</span>개 입니다.
     </p>
     
 	<table class="rent_list" cellspacing="0">
