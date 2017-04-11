@@ -19,16 +19,34 @@
 							<p><a>총 상품금액</a>
 							<span id="det_total"> 
 								<c:if test="${buy == 'cart'}">
-									${d_total}
-									<input type="hidden" name="d_total" value="${d_total}">
+									${d_bgradevalue}
+									<input type="hidden" name="d_total" value="${d_bgradevalue}">
+									<input type="hidden" name="d_bgradevalue" value="${d_bgradevalue}">
 								</c:if>
 								<c:if test="${buy == 'buy'}">
-									${dto.d_bsellvalue}
-									<input type="hidden" name="d_total" value="${dto.d_bsellvalue}">									
+									${d_bgradevalue}
+									<input type="hidden" name="d_total" value="${d_bgradevalue}">
+									<input type="hidden" name="d_bgradevalue" value="${d_bgradevalue}">									
 								</c:if>				
 							</span></p>
+							<c:if test="${buy == 'cart'}">
+							<p><a>정가</a><span>${d_total - d_totalDis}원</span></p>
+							</c:if>
+							<c:if test="${buy == 'buy'}">
 							<p><a>정가</a><span>${dto.d_bvalue}원</span></p>
-							<p><a>회원등급 할인</a><span>-0원</span></p>
+							</c:if>
+							<c:if test="${buy == 'buy'}">
+							<p><a>책등급가</a><span>${dto.d_bvalue - dto.d_bsellvalue}원</span></p>
+							</c:if>
+							<c:if test="${buy == 'cart'}">
+							<p><a>회원등급 할인</a><span>${d_total - d_totalDis - d_bgradevalue}원</span></p>
+							</c:if>
+							<c:if test="${buy == 'buy'}">
+							<p><a>회원등급 할인</a><span>${dto.d_bsellvalue - d_bgradevalue}원</span></p>
+							</c:if>							
+
+						
+							
 	<!-- 						<p><a>문화상품권</a><span>-0원</span></p>
 							<p><a>추가 결제 비용</a><span id="plu">+0원</span></p> -->
 						</article>

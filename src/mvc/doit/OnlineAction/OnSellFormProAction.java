@@ -76,7 +76,7 @@ public class OnSellFormProAction implements SuperAction {
 	onbookdto.setD_bsellvalue(0); //초기화
 	onbookdto.setD_bpurchasevalue(0); //초기화
 	onbookdto.setD_icode(0); //초기화
-	onbookdto.setD_bdeliverycode(0); //초기화
+	onbookdto.setD_bgradevalue(0); //초기화
 	//onbookintrodto 에도 목차와 설명을 넣어줍니다.
 	OnBookIntroDto obiDto = new OnBookIntroDto();
 	obiDto.setD_norder(d_norder);

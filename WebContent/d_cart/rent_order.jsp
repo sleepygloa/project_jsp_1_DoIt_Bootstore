@@ -76,6 +76,7 @@
 												<td><a href="/DoIt/d_cart/removeCart.do?br_code=${ ca.getBr_code() }&cols=d_rent" class="x_button"></a></td>
 											</tr>
 										</c:forEach>
+					<!-- 장바구니일때 ------------------------------------------- -->
 								</c:if>
 								<c:if test="${cols == 'd_sell' && buy == 'cart'}">
 								<form action="/DoIt/d_cart/payshot.do?cols=d_sell&buy=cart" method="post" name="d_sell_cart" onSubmit="return d_sell_cart()">
@@ -96,6 +97,7 @@
 											</tr>
 										</c:forEach>
 								</c:if>
+					<!-- 개별구매일때 ------------------------------------------- -->			
 								<c:if test="${cols == 'd_sell' && buy == 'buy'}">
 								<form action="/DoIt/d_cart/payshot.do?cols=d_sell&buy=buy" method="post">
 									<div>
@@ -126,9 +128,20 @@
 														<p><span class="txtBox_spanTxt_1">출간날짜</span> : <span class="txtBox_spanTxt_2"> ${dto.d_bregistdate}</span></p>
 														<br/>
 														<p><span class="txtBox_spanTxt_1">정&nbsp;&nbsp;&nbsp; 가</span> : <span class="txtBox_spanTxt_2">${dto.d_bvalue}</span> \</p>
+														<c:if test="${d_bgradevalue == 0}" >
 														<p><span class="txtBox_spanTxt_1">판 매 가</span> : <span class="txtBox_spanTxt_2">${dto.d_bsellvalue}</span> \</p>
-														<p><span class="txtBox_spanTxt_1">결제금액</span> : <span class="txtBox_spanTxt_2">${dto.d_bsellvalue}</span> \</p>
-															
+														</c:if>
+														<c:if test="${d_bgradevalue != 0}" >
+														<p><span class="txtBox_spanTxt_1">판 매 가</span> : <span class="txtBox_spanTxt_2">${d_bgradevalue}</span> \</p>
+														</c:if>														
+														<p><span class="txtBox_spanTxt_1">결제금액</span> : <span class="txtBox_spanTxt_2">${d_bgradevalue}</span> \</p>
+														<c:if test="${d_bgradevalue == 0}" >
+														<p><span class="txtBox_spanTxt_1">회원 등급가</span> : <span class="txtBox_spanTxt_2">0</span> \</p>
+														</c:if>
+														<c:if test="${d_bgradevalue != 0}" >
+														<p><span class="txtBox_spanTxt_1">회원 등급가</span> : <span class="txtBox_spanTxt_2">${d_bgradevalue}</span> \</p>
+														</c:if>															
+														
 												</div>
 													
 										</section>
@@ -212,6 +225,8 @@
 							<c:if test="${user_check != null && buy == 'cart'}">
 								<input class="btn btn-default btn-checked" type="button"  value="배송정보가 회원 정보와 동일" 
 									onclick="window.location='/DoIt/d_cart/headCartList.do?cols=d_sell&buy=cart&d_bcode=${dto.d_bcode}&user_check=yes'" />
+								<input class="btn btn-default btn-checked" type="hidden"  value="배송정보가 회원 정보와 동일" 
+									onclick="window.location='/DoIt/d_cart/headCartList.do?cols=d_sell&buy=cart&d_bcode=${dto.d_bcode}&user_check=yes'" />
 							</c:if>
 							<c:if test="${user_check == null && buy == 'buy'}">
 								<input class="btn btn-default" type="button" value="배송정보가 회원 정보와 동일"
@@ -220,6 +235,8 @@
 							<c:if test="${user_check != null && buy == 'buy'}">
 								<input class="btn btn-default btn-checked" type="button"  value="배송정보가 회원 정보와 동일" 
 									onclick="window.location='/DoIt/d_cart/headCartList.do?cols=d_sell&buy=buy&d_bcode=${dto.d_bcode}&user_check=yes'" />
+								<input class="btn btn-default btn-checked" type="hidden"  value="배송정보가 회원 정보와 동일" 
+									onclick="window.location='/DoIt/d_cart/headCartList.do?cols=d_sell&buy=buy&d_bcode=${dto.d_bcode}&user_check=yes'" />	
 							</c:if>
 							
 							<table class="or_ju1" cellspacing="0">
@@ -242,8 +259,8 @@
 										<td>휴대전화번호</td>
 										<td>
 										<c:if test="${user_check == null}">
-											<input type="text" name="user_phone1" maxlength="3" class="input_033_2"/> - 
-											<input type="text" name="user_phone2" maxlength="4" class="input_033_2"/> -
+											<input type="text" name="user_phone1" maxlength="3" class="input_033_2" value="010"/> - 
+											<input type="text" name="user_phone2" maxlength="4" class="input_033_2" /> -
 											<input type="text" name="user_phone3" maxlength="4" class="input_033_2"/>
 										</c:if>
 										<c:if test="${user_check != null}">
@@ -256,7 +273,7 @@
 									<tr>
 										<td>주소</td>
 										<c:if test="${user_check == null}">
-											<td><input type="text" name="d_addr" class="input_033"></td>
+											<td><input type="text" name="d_addr" value="." placeholder="주소를 입력해주세요" class="input_033"></td>
 										</c:if>
 										<c:if test="${user_check != null}">
 											<td><input type="text" name="d_addr" value="${LogDto.d_addr}" class="input_033"></td>
@@ -264,7 +281,7 @@
 									</tr>
 									<tr>
 										<td>배송 요청사항</td>
-										<td><input type="text"  name="d_brequested" class="input_033"/></td>
+										<td><input type="text" value="." placeholder="요청사항을 입력해주세요" name="d_brequested" class="input_033"/></td>
 									</tr>
 								</tbody>
 							</table>

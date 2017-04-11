@@ -56,6 +56,10 @@ public class DeliveryDto {
 	public void setD_bdeldate(Timestamp d_bdeldate) {
 		this.d_bdeldate = d_bdeldate;
 	}
+	public void setD_bgradevalue(int int1) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

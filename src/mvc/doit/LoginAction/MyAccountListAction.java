@@ -44,8 +44,9 @@ public class MyAccountListAction implements SuperAction {
 			//---- 계좌 등록 요청이 있을 경우 신규 계좌를 만들어줍니다.
 			if(d_acRequest == 1){
 				adao.insAccount(d_no);
-				adto = adao.getAccount(d_no);
+
 			}
+			adto = adao.getAccount(d_no);
 		}else{
 			//---- 계좌 충전하기 요청(2)에 따라 계좌에 원하는 수만큼 돈을 증가 시킵니다. 계좌 출금하기 요청(3)에 따라 계좌의 원하는 수만큼 돈을 감소시킵니다.		
 			if(d_acRequest == 2 || d_acRequest == 3){

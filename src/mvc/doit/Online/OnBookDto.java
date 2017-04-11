@@ -20,7 +20,7 @@ public class OnBookDto {
 	   private int d_bsellvalue;         //판매가
 	   private int d_bpurchasevalue;      //구입가
 	   private String d_id;            //판매자코드 //회원정보와 공유
-	   private int d_bdeliverycode;         //배달코드
+	   private int d_bgradevalue;         //등급할인판매가
 	   private Timestamp d_bdate;            //DB 등록일시(검수 완료 후)
 	   
 	   //책 평균가 계산때 사용하는 variable
@@ -47,6 +47,7 @@ public class OnBookDto {
 		
 		//배송
 		
+		private int d_bdeliverycode;
 		private int d_bdelibery;			// 배송상태
 		private String d_bbuyer;			// 구매자 아이디
 		private String d_brecipient;		// 받는사람
@@ -54,7 +55,7 @@ public class OnBookDto {
 		private Timestamp d_bdeldate;		// 주문등록날짜
 		   
 		//등급할인 판매가
-	    private int d_bgradevalue;        //등급할인판매가
+	    //private int d_bgradevalue;        //등급할인판매가
 		
 	    
 	    
@@ -65,6 +66,7 @@ public class OnBookDto {
 	    
 	    
 	    
+
 public int getD_ldealresult() {
 			return d_ldealresult;
 		}
@@ -100,6 +102,12 @@ public int getD_bgradevalue() {
 		}
 		public void setD_bgradevalue(int d_bgradevalue) {
 			this.d_bgradevalue = d_bgradevalue;
+		}
+public int getD_bdeliverycode() {
+			return d_bdeliverycode;
+		}
+public void setD_bdeliverycode(int d_bdeliverycode) {
+			this.d_bdeliverycode = d_bdeliverycode;
 		}
 public int getD_bdelibery() {
 			return d_bdelibery;
@@ -299,12 +307,6 @@ public String getD_id() {
 }
 public void setD_id(String d_id) {
 	this.d_id = d_id;
-}
-public int getD_bdeliverycode() {
-	return d_bdeliverycode;
-}
-public void setD_bdeliverycode(int d_bdeliverycode) {
-	this.d_bdeliverycode = d_bdeliverycode;
 }
 
    public Timestamp getD_bdate() {

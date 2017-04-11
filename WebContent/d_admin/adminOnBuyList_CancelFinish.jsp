@@ -69,7 +69,7 @@
 						</td>
 						<td class="AdminList_Ins Admin_txtCen"> 
 							
-							<c:if test="${article.d_bdelibery == 5}">
+							<c:if test="${article.d_bdelibery == 25}">
 								<p>취소완료</p>
 							</c:if>
 						</td>

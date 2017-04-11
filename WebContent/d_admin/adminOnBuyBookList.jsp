@@ -68,9 +68,9 @@
 							 </div>
 						</td>
 						<td class="AdminList_Ins Admin_txtCen"> 
-							<c:if test="${article.d_bdelibery == 0}">
+							<c:if test="${article.d_bdelibery == 20}">
 								<input type="submit" value="주문확인" class="AdminList_btn"/>
-								<input type="hidden" name="delivery" value="0">
+								<input type="hidden" name="delivery" value="20">
 							</c:if>
 							<c:if test="${article.d_bdelibery == 21}">
 								<p>구매 완료.<br/> 현재 배송 준비중</p>

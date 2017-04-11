@@ -27,6 +27,8 @@ public class HeadCartList implements SuperAction{
 		
 		String cols = request.getParameter("cols"); //장바구니 구분 column 이름
 		String buy = request.getParameter("buy");
+
+		int d_bgradevalue = 0;
 		
 		CartDao cdao = CartDao.getInstance();
 		List CartList = cdao.getHeadCart(br_no, cols);
@@ -62,7 +64,27 @@ public class HeadCartList implements SuperAction{
 					user_check = request.getParameter("user_check");
 				}
 				int d_total = cdao.getBookBuyTotal(br_no, cols);
+				if(d_total == 0 ){
+					d_total = dto.getD_bsellvalue();
+				}
+				//회원등급에 대한 할인가와 total금액을 정하는 구문
+				int dng = LogDto.getD_nom_grade();
+				int d_totalDis = 0;
+				if(dng == 1 ){
+					d_totalDis = (int)((double)d_total * 0.05);
+				}else if(dng == 2){
+					d_totalDis = (int)((double)d_total * 0.10);
+				}else{}
+
+				d_bgradevalue = d_total - d_totalDis;
+				if(request.getParameter("d_bgradevalue") != null){
+					d_bgradevalue = Integer.parseInt(request.getParameter("d_bgradevalue"));
+				}		
+
+				
+				request.setAttribute("d_totalDis", d_totalDis);
 				request.setAttribute("d_total", d_total);
+				request.setAttribute("d_bgradevalue", d_bgradevalue);
 				
 				request.setAttribute("dto", dto);
 				request.setAttribute("LogDto", LogDto);
@@ -81,9 +103,29 @@ public class HeadCartList implements SuperAction{
 					user_check = request.getParameter("user_check");
 				}
 				
-				int d_total = cdao.getBookBuyTotal(br_no, cols);
-				request.setAttribute("d_total", d_total);
+				int d_total = cdao.getBookBuyTotal(br_no, cols);				
+
+				//회원등급에 대한 할인가와 total금액을 정하는 구문
+				int dng = LogDto.getD_nom_grade();
+				int d_totalDis = 0;
+				if(dng == 1 ){
+					d_totalDis = (int)((double)d_total * 0.05);
+				}else if(dng == 2){
+					d_totalDis = (int)((double)d_total * 0.10);
+				}else{}
+
+				d_bgradevalue = d_total - d_totalDis;
+				if(request.getParameter("d_bgradevalue") != null){
+					d_bgradevalue = Integer.parseInt(request.getParameter("d_bgradevalue"));
+				}				
 				
+				
+				
+				
+				
+
+				request.setAttribute("d_total", d_total);
+				request.setAttribute("d_bgradevalue", d_bgradevalue);
 				request.setAttribute("LogDto", LogDto);
 				request.setAttribute("user_check", user_check);
 				request.setAttribute("id", id);

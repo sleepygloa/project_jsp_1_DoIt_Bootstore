@@ -37,11 +37,7 @@ public class AdminOnInspectionListAction implements SuperAction {
 	    int number=0;
 	    
 	    
-	    //---- 예외상황 ---- 배송현황(d_bdelivery=12)일때,  delivery == 13 --> 배송현황(배송완료 13)으로 table update -----
-	    DeliveryDao ddao = DeliveryDao.getInstance();
-	    if(delivery == 13){
-	    	ddao.User_SellBook_delivertEnd(d_bcode);
-	    }
+
 	    
 	    //---- List ---- count:d_sfinish==1 (판매가능한 책 count), list: 3table(d_onBook, d_onSellList, d_bdelivery) 판매가능한(d_sfinish==1) 책 List
 	    List articleList = null;

@@ -69,7 +69,7 @@
 						</td>
 						<td class="AdminList_Ins Admin_txtCen"> 
 							
-							<c:if test="${article.d_bdelibery == 3}">
+							<c:if test="${article.d_bdelibery == 23}">
 								<p>배송완료</p>
 							</c:if>
 						</td>

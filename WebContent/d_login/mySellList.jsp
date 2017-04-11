@@ -72,7 +72,7 @@
 								<input type="button" value="판매신청중" class="btn btn-default"/>
 							</c:if>
 							<c:if test="${article.d_sfinish == 1}">
-								<c:if test="${article.d_bdelibery == 0}">
+								<c:if test="${article.d_bdelibery == 10}">
 									<input type="button" value="판매신청 완료" class="btn btn-default"/><br />
 									<input type="submit" value="배송 시작" class="btn btn-default"/>
 									<input type="hidden" name="d_bcode" value="${article.d_bcode}" />

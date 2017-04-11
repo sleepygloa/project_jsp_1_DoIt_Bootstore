@@ -20,9 +20,9 @@ public class AdminOnBuyFinishAction implements SuperAction {
 	 	
 //---- 배송관련 
 	 	int d_bdelivery =-1;
-	 	if(delivery == 0){
+	 	if(delivery == 20){
 	 		dao.Admin_OnBuyBook_finish(d_bcode);
-	 		d_bdelivery = 0;
+	 		d_bdelivery = 20;
 	 	}else if(delivery == 21){
 	 		dao.Admin_OnBuyBook_delivertStart(d_bcode);
 	 		d_bdelivery = 21;

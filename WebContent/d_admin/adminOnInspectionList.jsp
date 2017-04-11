@@ -37,61 +37,47 @@
 		</tr>
 	
 		
-		<c:forEach var="article"  items="${articleList}">	
-			<c:if test="${article.d_bdelibery == 12}" >
-				<form action="/DoIt/d_admin/adminOnInspectionList.do" method="post">
-			</c:if>
-			<c:if test="${article.d_bdelibery == 13}" >
-				<form action="/DoIt/d_admin/onBook.do" method="post">
-			</c:if>			
-				<tr class="AdminList_tr">
-					<td class="AdminList_num Admin_txtCen"> 
-						<span class="big-font20">
-							<c:out value="${number}"/>
-							<c:set var="number" value="${number - 1}"/>
-						</span>
-					</td>
-					<td class="AdminList_pic Admin_txtCen">
-		 				<c:if test="${article.d_bpic == null}">
-							<p>사진 정보가 없습니다.</p>
-						</c:if>
-						<c:if test="${article.d_bpic != null}">
-							<img src="/DoIt/d_bpic/${article.d_bpic}" height="190px;" class="thumbnail" />
-						</c:if>
-					</td>
-					<td class="AdminList_con">
-		 				<div class="AdminList_con_list">
-				 				회원 아이디 : ${article.d_id} <br/>
-				 				책 이름 : ${article.d_bname} <br/>
-				 				저자 : ${article.d_bauthor} <br/>
-				 				출판사 : ${article.d_bpublisher} <br/>
-				 				판매신청 날짜 : ${article.d_bdate} <br /><br />
-				 				<input type="hidden" name="d_bcode" value="${article.d_bcode}">
-				 				
-						</div>
-					</td>
-		 				<td class="AdminList_Ins Admin_txtCen"> 
-		 				<c:if test="${article.d_bdelibery == 0}" >
-		 					<input type="button" value="배송준비중" class="btn btn-default"/>
-		 				</c:if>		 				
+	<c:forEach var="article"  items="${articleList}">	
+		<form action="/DoIt/d_admin/onInspection.do" method="post">
+		<tr class="AdminList_tr">
+			<td class="AdminList_num Admin_txtCen"> 
+				<span class="big-font20">
+					<c:out value="${number}"/>
+					<c:set var="number" value="${number - 1}"/>
+				</span>
+			</td>
+			<td class="AdminList_pic Admin_txtCen">
+ 				<c:if test="${article.d_bpic == null}">
+					<p>사진 정보가 없습니다.</p>
+				</c:if>
+				<c:if test="${article.d_bpic != null}">
+					<img src="/DoIt/d_bpic/${article.d_bpic}" height="190px;" class="thumbnail" />
+				</c:if>
+			</td>
+			<td class="AdminList_con">
+ 				<div class="AdminList_con_list">
+		 				회원 아이디 : ${article.d_id} <br/>
+		 				책 이름 : ${article.d_bname} <br/>
+		 				저자 : ${article.d_bauthor} <br/>
+		 				출판사 : ${article.d_bpublisher} <br/>
+		 				판매신청 날짜 : ${article.d_bdate} <br /><br />
+		 				<input type="hidden" name="d_bcode" value="${article.d_bcode}">
 		 				
-		 				<c:if test="${article.d_bdelibery == 12}" >
-		 					<input type="submit" value="배송완료확인" class="btn btn-default"/>
-		 					<input type="hidden" name="delivery" value="13" />
-		 				</c:if>
+				</div>
+			</td>
+				<td class="AdminList_Ins Admin_txtCen"> 
+					<c:if test="${article.d_sfinish == 1}">
 		 				<c:if test="${article.d_bdelibery == 13}" >
-		 					<input type="submit" value="책 등록" class="btn btn-default"/>
+							<input type="submit" value="검수하기" class="AdminList_btn"/> 
+							<input type="hidden" name="d_bcode" value="${article.d_bcode}" class="AdminList_btn"/>		
 		 				</c:if>
-		 						 					
-		 				</td>
-					
-						 
-					
-				</tr>	
+					</c:if>
+			
+				</td>
 
-		
-		 	</form>
-		</c:forEach>
+		</tr>	
+ 	</form>
+	</c:forEach>
 		
 
 	</table>

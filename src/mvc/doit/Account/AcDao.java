@@ -111,7 +111,7 @@ public class AcDao {
 
     
     
-	/*-------------------------------- 계좌 불러오기 -------------------------------------------*/
+/*-------------------------------- 계좌 불러오기 -------------------------------------------*/
     public AcDto getAccount(int d_no) throws Exception{
 
      AcDto adto = null;
@@ -119,7 +119,7 @@ public class AcDao {
        try{
          conn = getConnection();
          pstmt = conn.prepareStatement(
-        		 "select a.*, l.* from d_account a, d_log l where a.d_no = " + d_no +" order by d_ldate desc"
+        		 "select a.*, l.* from d_account a, d_log l where a.d_no = l.d_lreceiver and  a.d_no = " + d_no +" order by d_ldate desc"
         		 );
          rs = pstmt.executeQuery();
          if(rs.next()){
@@ -163,7 +163,7 @@ public class AcDao {
        return adto;
     }
 
-    /*-------------------------------- 입금 출금하기 -------------------------------------------*/
+/*-------------------------------- 입금 출금하기 -------------------------------------------*/
     
     
     public void MyMoneyToAccout(int d_acMyMoney, int d_no, int d_acRequest) throws Exception{
@@ -213,7 +213,7 @@ public class AcDao {
        }  
     
 
-    //-------사용자의 잔액 불러오기 ------------------------------------------------
+//-------사용자의 잔액 불러오기 ------------------------------------------------
     public int getAccountSumMoney(int d_no) throws Exception{
       int d_lsummoney = 0;
       try{
@@ -240,7 +240,7 @@ public class AcDao {
       return d_lsummoney;
    }
     
-    //----- 사용자의 거래 현황 count -----------------------------------------------
+//----- 사용자의 거래 현황 count -----------------------------------------------
     public int dealSituationCount(int d_no) throws Exception{
         int x = 0;
         try{
@@ -263,7 +263,7 @@ public class AcDao {
         return x;
      }
   
-    //----- 사용자의 거래 현황 List----------------------------------------------------------
+//----- 사용자의 거래 현황 List----------------------------------------------------------
     public List<AcDto> dealSituation(int d_no, int startRow, int endRow) throws Exception{
     	List<AcDto> AccountList = null;
         AcDto adto = null;
@@ -274,7 +274,7 @@ public class AcDao {
 "select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver,d_lcode, d_ldealmoney, d_ldealtype, d_ldealresult, to_char(d_ldate, 'yyyy-mm-dd HH:mm') AS d_ldateS, r " + 
 "from (select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lcode, d_ldealmoney, d_ldealtype, d_ldealresult, d_ldate, rownum r " + 
 "from (select a.d_acno, a.d_no, a.d_acnum, a.d_acregdate, l.d_lno, l.d_lsender, l.d_lreceiver, l.d_lcode, l.d_ldealmoney, l.d_ldealtype, l.d_ldealresult, l.d_ldate " +
-"from d_log l, d_account a  where a.d_no = l.d_lsender and l.d_lsender = " + d_no + " order by d_ldate asc)) where r >= " + startRow + " and r <= " + endRow
+"from d_log l, d_account a  where a.d_no = l.d_lreceiver and l.d_lreceiver = " + d_no + " order by d_ldate asc)) where r >= " + startRow + " and r <= " + endRow
            		 );
             rs = pstmt.executeQuery();
             
@@ -317,7 +317,7 @@ public void insertAccountLog(String d_id, int d_bcode, int d_bsellvalue) throws 
     	 String d_bcode1 = "";
     	 OnDao dao = OnDao.getInstance();
     	 int d_no = dao.findIdToNo(d_id);
-    	 System.out.println(d_id);
+
     	 //회원의 책판매 : d_s, 회원의 책구매 : d_p
         conn = getConnection();
         	d_bcode1 += "d_b" + d_bcode;
@@ -361,7 +361,7 @@ public void updateAccountLog(int d_lno) throws Exception{
     }
  } 
 
-/*-------------------------- 회원이 판매하는 책에 대한 결제 count -------------------------------------------*/
+/*---- 회원이 판매하는 책에 대한 결제의 전체 count -------------------------------------------*/
 public int getD_sPayListCount() throws Exception{
 	int x = 0;
 
@@ -386,7 +386,7 @@ public int getD_sPayListCount() throws Exception{
    return x;
 }
 
-//----- 회원의 책 판매 에 관한 결제  List ----------------------------------------------------------
+//----- 회원의 책 판매 에 관한 결제의 전체  List ----------------------------------------------------------
 public List<AcDto> getD_sPayList(int startRow, int endRow) throws Exception{
 	List<AcDto> AccountList = null;
     AcDto adto = null;
@@ -396,7 +396,7 @@ public List<AcDto> getD_sPayList(int startRow, int endRow) throws Exception{
 "select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver,d_lcode, d_ldealmoney, d_ldealtype, d_ldealresult, to_char(d_ldate, 'yyyy-mm-dd HH:MM') AS d_ldateS, r " + 
 "from (select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lcode, d_ldealmoney, d_ldealtype, d_ldealresult, d_ldate, rownum r " + 
 "from (select a.d_acno, a.d_no, a.d_acnum, a.d_acregdate, l.d_lno, l.d_lsender, l.d_lreceiver, l.d_lcode, l.d_ldealmoney, l.d_ldealtype, l.d_ldealresult, l.d_ldate " +
-"from d_log l, d_account a where a.d_no = l.d_lsender and d_lcode like 'd_b%'   order by d_ldate asc)) where r >= " + startRow + " and r <= " + endRow
+"from d_log l, d_account a where a.d_no = l.d_lreceiver and d_lcode like 'd_b%'   order by d_ldate asc)) where r >= " + startRow + " and r <= " + endRow
        		 );
         rs = pstmt.executeQuery();
         
@@ -429,7 +429,7 @@ public List<AcDto> getD_sPayList(int startRow, int endRow) throws Exception{
       return AccountList;
    }
 
-/*-------------------------- 회원이 판매하는 책에 대한 결제 count -------------------------------------------*/
+/*---- 회원이 판매하는 책에 대한 결제 전 count -------------------------------------------*/
 public int getD_sNoPayListCount() throws Exception{
 	int x = 0;
 
@@ -454,7 +454,7 @@ public int getD_sNoPayListCount() throws Exception{
    return x;
 }
 
-//----- 회원의 책 판매 에 관한 결제  List ----------------------------------------------------------
+//----- 회원의 책 판매 에 관한 결제 전 List ----------------------------------------------------------
 public List<AcDto> getD_sNoPayList(int startRow, int endRow) throws Exception{
 	List<AcDto> AccountList = null;
     AcDto adto = null;
@@ -497,7 +497,7 @@ public List<AcDto> getD_sNoPayList(int startRow, int endRow) throws Exception{
       return AccountList;
    }
 
-/*-------------------------- 회원이 판매하는 책에 대한 결제 count -------------------------------------------*/
+/*---- 회원이 판매하는 책에 대한 결제완료 count -------------------------------------------*/
 public int getD_sPayEndListCount() throws Exception{
 	int x = 0;
 
@@ -522,7 +522,7 @@ public int getD_sPayEndListCount() throws Exception{
    return x;
 }
 
-//----- 회원의 책 판매 에 관한 결제  List ----------------------------------------------------------
+//----- 회원 책 판매에 관한 결제완료  List ----------------------------------------------------------
 public List<AcDto> getD_sPayEndList(int startRow, int endRow) throws Exception{
 	List<AcDto> AccountList = null;
     AcDto adto = null;

@@ -69,9 +69,9 @@
 						</td>
 						<td class="AdminList_Ins Admin_txtCen"> 
 							
-							<c:if test="${article.d_bdelibery == 4}">
+							<c:if test="${article.d_bdelibery == 24}">
 								<input type="button" value="취소 신청 확인" class="AdminList_btn" 
-								onclick="window.location='/DoIt/d_admin/adminOnBuyFinish.do?d_bcode=${article.d_bcode}&delivery=4'" />
+								onclick="window.location='/DoIt/d_admin/adminOnBuyFinish.do?d_bcode=${article.d_bcode}&delivery=24'" />
 							</c:if>
 						</td>
 					</tr>	

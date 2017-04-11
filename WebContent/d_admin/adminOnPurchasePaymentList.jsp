@@ -50,10 +50,9 @@
 					<td>
 						<c:if test="${payment.d_ldealtype == 1}">입금</c:if>
 						<c:if test="${payment.d_ldealtype == 2}">출금</c:if>
-						<c:if test="${payment.d_ldealtype == 3}">무통장</c:if>
-						<c:if test="${payment.d_ldealtype == 3}">계좌이체</c:if>
-						<c:if test="${payment.d_ldealtype == 4}">신용카드</c:if>
-						<c:if test="${payment.d_ldealtype == 5}">연체료</c:if>
+						<c:if test="${payment.d_ldealtype == 3}">계좌이체송금</c:if>
+						<c:if test="${payment.d_ldealtype == 4}">계좌이체받음</c:if>
+						<c:if test="${payment.d_ldealtype == 5}">이체송금액출금</c:if>
 					</td>
 					<td>${payment.d_ldealmoney}원</td>
 					<td>${payment.d_ldateS}</td>

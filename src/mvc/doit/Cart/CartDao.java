@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 
 import mvc.doit.Account.AcDto;
 import mvc.doit.Delivery.DeliveryDto;
+import mvc.doit.Login.LoginDao;
 import mvc.doit.Login.LoginDto;
 import mvc.doit.Online.OnBookDto;
 import mvc.doit.Online.OnDao;
@@ -89,7 +90,7 @@ public class CartDao implements SuperAction{
 	public void insASD(int br_no) throws Exception{
 		try{
 			conn = getConnection();
-			String sql = "insert into d_cart values (cart_no.nextval,"+br_no+", ',', ',', ',', ',')";
+			String sql = "insert into d_cart values (cart_no.nextval,"+br_no+", ',', ',', ',', ',', 0, sysdate)";
 			pstmt = conn.prepareStatement(sql);
 				
 			pstmt.executeUpdate();
@@ -102,8 +103,8 @@ public class CartDao implements SuperAction{
 			if(pstmt != null)try{pstmt.close();}catch(SQLException ex){}
 			if(conn != null)try{conn.close();}catch(SQLException ex){}
 		}
-	}
 	
+	}
 	//---------------------------------------------- 장바구니 신규 생성 끝---------------------------//
 	
 	//-------------------------------------- 장바구니 갯수 파악 ---------------------------------------------//
@@ -466,6 +467,8 @@ public class CartDao implements SuperAction{
 						d_bcode =reList[i];
 						int int_d_bcode =Integer.parseInt(reList[i]);
 						
+						
+						
 						pstmt = conn.prepareStatement("select d_bdeliverycode from d_bdelivery where d_bcode=? ");
 						pstmt.setInt(1, int_d_bcode);
 						
@@ -473,13 +476,13 @@ public class CartDao implements SuperAction{
 						
 						if(rs.next()){
 						
-							pstmt = conn.prepareStatement("insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,sysdate)");
+							pstmt = conn.prepareStatement("insert into d_log values(account_log.NEXTVAL,?,?,?,-"+acDto.getD_ldealmoney()+",?,?,sysdate)");
 							pstmt.setInt(1, acDto.getD_lsender());
 							pstmt.setInt(2, acDto.getD_lreceiver());
 							pstmt.setString(3, "d_d"+d_bcode);
-							pstmt.setInt(4, acDto.getD_ldealmoney());
-							pstmt.setInt(5, acDto.getD_ldealtype());
-							pstmt.setInt(6, acDto.getD_ldealresult());
+							//pstmt.setInt(4, acDto.getD_ldealmoney());
+							pstmt.setInt(4, acDto.getD_ldealtype());
+							pstmt.setInt(5, acDto.getD_ldealresult());
 							
 							pstmt.executeUpdate();
 						}
@@ -951,8 +954,9 @@ public class CartDao implements SuperAction{
 						OnDao odao = OnDao.getInstance();
 						String Check = "d_bcode";
 						OnBookDto odto = odao.getOnBookArticle(br_n3, Check);
-						
+
 						sellvalue = odto.getD_bsellvalue();
+
 
 					}
 					 d_total += sellvalue;

@@ -198,7 +198,7 @@ private static DeliveryDao instance = new DeliveryDao();
   	        conn=getConnection();
   	 
   			pstmt = conn.prepareStatement(
-"insert into d_bdelivery values(d_bdeliverycode_seq.NEXTVAL, "+d_bcode+", 0, '"+d_id+"', 'admin1', '회원판매', sysdate)"
+"insert into d_bdelivery values(d_bdeliverycode_seq.NEXTVAL, "+d_bcode+", 10, '"+d_id+"', 'admin1', '회원판매', sysdate)"
 //seq, d_bcode, d_bdelivery상태, 배송인, 수령인, 요청사항, 시간  					
   					);
   			pstmt.executeUpdate();

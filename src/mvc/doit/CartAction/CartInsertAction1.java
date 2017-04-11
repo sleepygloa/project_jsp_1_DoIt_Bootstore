@@ -22,7 +22,7 @@ public class CartInsertAction1 implements SuperAction{
 		HttpSession session = request.getSession();
 		int br_no = (int)session.getAttribute("memNo"); //로그인 회원번호 불러오기
 		
-		
+
 		//장바구니가 온 위치 파악 [ 도서관 / 직접판매 ] - start_cart
 		String start_cart = request.getParameter("start_cart");//들어온 위치
 		String b_code = request.getParameter("b_code"); //생성된 br_code
@@ -54,7 +54,8 @@ public class CartInsertAction1 implements SuperAction{
 			
 			//장바구니 생성 여부 판단
 			boolean check = cdo.checkASD(br_no);
-			
+			System.out.println(br_no);
+			System.out.println(check);
 			if(!check){ //장바구니 레코드가 없는 경우
 				cdo.insASD(br_no);
 			}//신규 생성 및 삽입

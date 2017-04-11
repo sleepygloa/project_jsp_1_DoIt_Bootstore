@@ -68,10 +68,11 @@ public class CartPayAction implements SuperAction{
 		 	String d_id = request.getParameter("d_bbuyer");
 		 	
 		 	DeliveryDto Ddto = new DeliveryDto();
-		 	Ddto.setD_bdelibery(0);
+		 	Ddto.setD_bdelibery(20);
 		 	Ddto.setD_bbuyer(d_id);
 		 	Ddto.setD_brecipient(request.getParameter("d_brecipient"));
 		 	Ddto.setD_brequested(request.getParameter("d_brequested"));
+		 	Ddto.setD_bgradevalue(Integer.parseInt(request.getParameter("d_bgradevalue")));
 		 	
 		 	LoginDto LogDto = new LoginDto();
 		 	LogDto.setD_addr(request.getParameter("d_addr"));

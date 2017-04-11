@@ -96,7 +96,7 @@
 							 </div>
 						</td>
 						<td class="AdminList_Ins Admin_txtCen"> 
-							<c:if test="${article.d_bdelibery == 0}">
+							<c:if test="${article.d_bdelibery == 20}">
 								<input type="submit" value="취소신청" class="AdminList_btn"/>
 							</c:if>
 							<c:if test="${article.d_bdelibery == 21}">
@@ -107,12 +107,6 @@
 							</c:if>
 							<c:if test="${article.d_bdelibery == 23}">
 								<p>배송완료</p>
-							</c:if>
-							<c:if test="${article.d_bdelibery == 24}">
-								<p>취소신청 중</p>
-							</c:if>
-							<c:if test="${article.d_bdelibery == 25}">
-								<p>취소완료</p>
 							</c:if>
 						</td>
 					</tr>	
