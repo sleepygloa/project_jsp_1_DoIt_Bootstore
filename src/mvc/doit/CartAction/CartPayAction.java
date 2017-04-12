@@ -25,7 +25,7 @@ public class CartPayAction implements SuperAction{
 		HttpSession session = request.getSession();
 		int br_no = (int)session.getAttribute("memNo"); //로그인 회원번호 불러오기
 		List br_code = (List)session.getAttribute("CartL");
-		
+		String d_bcodesum = request.getParameter("d_bcodesum");
 		String buy = request.getParameter("buy");
 		
 	
@@ -81,15 +81,24 @@ public class CartPayAction implements SuperAction{
 		 	LogDto.setUser_phone3(request.getParameter("user_phone3"));
 		 	
 		 	AcDto acDto = new AcDto();
+		 	//d_lno seq
 		 	acDto.setD_lsender(br_no); 			//보내는 사람
 		 	acDto.setD_lreceiver(261);		//받는사람
-		 	acDto.setD_ldealmoney(Integer.parseInt(request.getParameter("d_total")));	//거래금액
-		 	acDto.setD_ldealtype(0);		//거래 종류
+		 	acDto.setD_lbno(0);
+		 	acDto.setD_lbcode(d_bcodesum);
+		 	acDto.setD_ldivision(1); 
+		 	acDto.setD_ldealtype(1);	//거래 종류
 		 	acDto.setD_ldealresult(1);				//거래 결과 0:거래생성, 1:거래완료, 2:거래취소
+		 	acDto.setD_ldealmoney(Integer.parseInt(request.getParameter("d_total")));	//거래금액
+		 	//d_ldate sysdate
+
 		 	
 		 	
 		 	if(buy.equals("cart")){
-		 		cdo.moveCart_delivery(br_no, Ddto, LogDto,acDto, d_id);
+		 		int sumdealmoney = cdo.moveCart_delivery(br_no, Ddto, LogDto,acDto, d_id);
+		 		System.out.println(sumdealmoney);
+		 		System.out.println(br_no);
+		 		cdo.moveCart_deliveryToAccount(sumdealmoney,br_no,acDto);
 		 		
 		 	}else if(buy.equals("buy")){
 		 		

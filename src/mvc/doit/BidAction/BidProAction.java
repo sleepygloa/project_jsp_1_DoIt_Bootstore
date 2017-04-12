@@ -34,7 +34,7 @@ public class BidProAction implements SuperAction{
 			
 			
 			request.setAttribute("bid_id", bid_id);
-			
+			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("bid_no", bid_no);
 			request.setAttribute("check", check);
 		} catch (Exception ex) {

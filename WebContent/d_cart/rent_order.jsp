@@ -80,12 +80,13 @@
 								</c:if>
 								<c:if test="${cols == 'd_sell' && buy == 'cart'}">
 								<form action="/DoIt/d_cart/payshot.do?cols=d_sell&buy=cart" method="post" name="d_sell_cart" onSubmit="return d_sell_cart()">
-
+								<input type="hidden" name="d_bcodesum" value="${Cartsd_bcode}" />
 										<%-- 장바구니 내용 출력 --%>
 										<c:forEach var="ca" items ="${ CartList }">
 											<tr>
 												<td>${ ca.getD_bcode() }
-													<input type="hidden" name="d_bcode" value=""${ ca.getD_bcode() }/>
+													
+													<input type="hidden" name="d_bcode" value="${ ca.getD_bcode() }" />
 												</td>
 												<td>${ ca.getD_bgrade() }</td>
 												<td><img src="/DoIt/d_bpic/${ ca.getD_bpic() }" /></td>												
@@ -100,6 +101,7 @@
 					<!-- 개별구매일때 ------------------------------------------- -->			
 								<c:if test="${cols == 'd_sell' && buy == 'buy'}">
 								<form action="/DoIt/d_cart/payshot.do?cols=d_sell&buy=buy" method="post">
+								<input type="hidden" name="d_bcodesum" value="${dto.d_bcode}" />
 									<div>
 									
 										<p id="OnBook_detail_title">${dto.d_bname}</p>

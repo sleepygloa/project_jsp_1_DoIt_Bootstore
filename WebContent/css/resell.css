@@ -305,8 +305,14 @@
 .auc_con_but1{ width:100%;  overflow:hidden; margin-top:15px; }
 .auc_con_but1 li{  float:left; overflow:hidden;; }
 .auc_con_but1 li:nth-child(1) a{ background:#3DB7CC; color:white;}
+
+
+.Bid_button{ display:block;  padding:10px 40px; margin-right:15px; border:solid 2px #3DB7CC  }
+
+
+.Bid_button{ background:#3DB7CC; color:white; width:148px; height:45px; }
 .auc_con_but1 li a{ display:block; color:#3DB7CC; padding:10px 40px; margin-right:15px; border:solid 2px #3DB7CC  }
-.auc_con_but1 li a:hover{ background:#005E75; border:solid 2px #005E75; color:white }
+.auc_con_but1 li a:hover, .Bid_button:hover{ background:#005E75; border:solid 2px #005E75; color:white }
 
 .auc_con_but2{ width:100%; overflow:hidden; margin-top:15px; }
 .auc_con_but2 li{ float:left; overflow:hidden; }
@@ -317,7 +323,8 @@
 .pan_title1{ border-bottom:solid 1px #cfcfcf; color:#333; padding:10px 0px; width:90%; float:right; overflow:hidden; font-size:14px; font-weight:bold }
 .pan_ul{ width:80%; margin:25px 0px; }
 .pan_pan1{ background:#f6f6f6; padding:20px 11px;}
-.pan_pan1 li{ height:46px; padding:0px 10px; float:left; overflow:hidden; }
+.pan_pan1 li{ height:80px; padding:0px 10px; float:left; overflow:hidden; }   
+/*--------이 위가 판매자 정보오른쪽---------------------------------------------------------------*/
 .pan_pan1 li:nth-child(1){ border-right:solid 1px #eaeaea; }
 .pan_pan1 li p{ font-size:13px; line-height:20px;}
 .pan_pan2 img{ width:80px; border:solid 1px #eaeaea; }
@@ -327,7 +334,6 @@
 .pan_pan2 li p select{ width:100%; padding:5px 10px; font-size:12px; margin-top:18px;}
 
 .auc_cont_sec{ overflow:hidden; margin-top:60px; }
-
 
 
 

@@ -29,8 +29,34 @@ public class BidbookDto {
 	//---join------------------
 	private String bid_bid;
 	
+	//-------bid---------
+	private int d_no;
+	private String d_person;
+	private int rbook_finish_count;
 	
 	
+	//-------bid³¡
+	
+	
+	public int getD_no() {
+		return d_no;
+	}
+	public void setD_no(int d_no) {
+		this.d_no = d_no;
+	}
+	public String getD_person() {
+		return d_person;
+	}
+	public void setD_person(String d_person) {
+		this.d_person = d_person;
+	}
+	public int getRbook_finish_count() {
+		return rbook_finish_count;
+	}
+	public void setRbook_finish_count(int rbook_finish_count) {
+		this.rbook_finish_count = rbook_finish_count;
+	}
+	//-------bid³¡
 	public String getBid_bid() {
 		return bid_bid;
 	}

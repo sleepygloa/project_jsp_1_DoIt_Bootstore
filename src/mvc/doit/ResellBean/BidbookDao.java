@@ -315,34 +315,44 @@ public class BidbookDao{
   			
   			return article;
   		}
-  //----------입찰하기 누르면 그상품에 대해 행해지는 조건들
-  		public boolean getBidClick(String bid_id, int bid_no)throws Exception{
-  			Connection conn =null;
-  			PreparedStatement pstmt =null;
-  			ResultSet rs = null;
-  			boolean check= false; //입찰 누르기 전
-  			
-  			try {
-  				conn= getConnection();
-  				pstmt= conn.prepareStatement(
-  						"update bidbook set bid_price2= bid_price2+(bid_price1*0.25), bid_count=bid_count+1, bid_last_id=? where bid_no =?");
-  				pstmt.setString(1, bid_id);
-  				pstmt.setInt(2, bid_no);
-  				pstmt.executeUpdate();
-  			
-  			
-  				check =true;	
-  				
-  			} catch (Exception ex) {
-  				ex.printStackTrace();
-  			}finally{
-  				if( rs != null ){ try{ rs.close(); }catch( SQLException se ){}};
-  	            if( pstmt != null ){ try{ pstmt.close(); }catch( SQLException se ){}};
-  	            if( conn != null ){ try{ conn.close(); }catch( SQLException se ){}};
-  			}
-  			
-  			return check;
-  		}
+  	//----------입찰하기 누르면 그상품에 대해 행해지는 조건들
+        public boolean getBidClick(String bid_id, int bid_no)throws Exception{
+           Connection conn =null;
+           PreparedStatement pstmt =null;
+           ResultSet rs = null;
+           boolean check= false; //입찰 누르기 전
+           
+           try {
+              conn= getConnection();
+              pstmt= conn.prepareStatement(
+                    "update bidbook set bid_price2= bid_price2+(bid_price1*0.25), bid_count=bid_count+1, bid_last_id=? where bid_no =?");
+              pstmt.setString(1, bid_id);
+              pstmt.setInt(2, bid_no);
+              pstmt.executeUpdate();
+              
+              pstmt= conn.prepareStatement(
+                    "insert into bidbid(bid_no,bid_bid)"
+                          + " values(?,?)");
+                    
+              pstmt.setInt(1, bid_no);
+              pstmt.setString(2, bid_id);
+              
+              
+              pstmt.executeUpdate();
+           
+           
+              check =true;   
+              
+           } catch (Exception ex) {
+              ex.printStackTrace();
+           }finally{
+              if( rs != null ){ try{ rs.close(); }catch( SQLException se ){}};
+                 if( pstmt != null ){ try{ pstmt.close(); }catch( SQLException se ){}};
+                 if( conn != null ){ try{ conn.close(); }catch( SQLException se ){}};
+           }
+           
+           return check;
+        }
   		
   		//경매시간 종료되면 판매완료 되는 과정
   		public void getFinishArticle(int bid_no)throws Exception{
@@ -606,7 +616,354 @@ public class BidbookDao{
   	  			}
   	  			return articleList;
   	  		}  			 
- 
+  	  	//---------------------나의 입찰 글개수----------------------------------------------
+  	  	  	public int getMyBidCount(String bid_id) throws Exception{
+  	  	  		Connection conn = null;
+  	  	  		PreparedStatement pstmt = null;
+  	  	  		ResultSet rs = null;
+  	  	  		int x=0;
+  	  	  		try {
+  	  	  			conn = getConnection();
+  	  	  			pstmt = conn.prepareStatement("select count(*) from (select distinct * from bidbid where bid_bid=?)");
+  	  	  			pstmt.setString(1, bid_id);
+  	  	  			rs = pstmt.executeQuery();
+  	  	  			
+  	  	  			if(rs.next()){
+  	  	  				x=rs.getInt(1);
+  	  	  			}
+  	  	  		} catch (Exception ex) {
+  	  	  			ex.printStackTrace();
+  	  	  		}finally{
+  	  	  			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+  	  	  			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+  	  	  			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+  	  	  		}
+  	  	  		return x;
+  	  	  	}
+  	  	//---------------------나의 입찰목록-------------------------------------------
+  	        public List getMyBidList(String bid_id, int start ,int end) throws Exception{
+  	           Connection conn = null;
+  	           PreparedStatement pstmt = null;
+  	           ResultSet rs = null;
+  	           List articleList = null;
+  	           try {
+  	              conn = getConnection();
+  	              pstmt = conn.prepareStatement(
+  	              "select distinct bid_pic,bid_no,bid_subject,bid_name,bid_price1,bid_price2,bid_id,bid_finish,bid_reg_date,bid_last_id,bid_bid "
+  	              + "from (select distinct bid_pic,bid_no,bid_subject,bid_name,bid_price1,bid_price2,bid_id,bid_finish,bid_reg_date,bid_last_id,bid_bid, r "
+  	              + "from (select bid_pic,bid_no,bid_subject,bid_name,bid_price1,bid_price2,bid_id,bid_finish,bid_reg_date,bid_last_id,bid_bid, rownum r "
+  	              + "from (select a.bid_pic,a.bid_no,a.bid_subject,a.bid_name,a.bid_price1,a.bid_price2,a.bid_id,a.bid_finish,a.bid_reg_date,a.bid_last_id,b.bid_bid "
+  	              + "from bidbook a, bidbid b where a.bid_no=b.bid_no) order by r asc ) where bid_bid=?) where r >= ? and r <= ?");
+  	              pstmt.setString(1, bid_id);
+  	              pstmt.setInt(2, start);
+  	              pstmt.setInt(3, end);
+  	              
+  	              rs = pstmt.executeQuery();
+  	              if(rs.next()){
+  	                 articleList = new ArrayList(end);
+  	                 do {
+  	                    BidbookDto dto = new BidbookDto();
+  	                    dto.setBid_no(rs.getInt("bid_no"));
+  	                    dto.setBid_id(rs.getString("bid_id"));
+  	                    dto.setBid_name(rs.getString("bid_name"));
+  	                    dto.setBid_price1(rs.getInt("bid_price1"));
+  	                    dto.setBid_price2(rs.getInt("bid_price2"));
+  	                    dto.setBid_pic(rs.getString("bid_pic"));
+  	                    dto.setBid_subject(rs.getString("bid_subject"));
+  	                    dto.setBid_reg_date(rs.getTimestamp("bid_reg_date"));
+  	                    dto.setBid_last_id(rs.getString("bid_last_id"));
+  	                    dto.setBid_finish(rs.getInt("bid_finish"));
+  	                    dto.setBid_bid(rs.getString("bid_bid"));
+  	                    
+  	                    articleList.add(dto);
+  	                 } while (rs.next());
+  	              }
+  	           } catch (Exception ex) {
+  	              ex.printStackTrace();
+  	           }finally {
+  	              if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+  	                 if( pstmt != null){ try{ pstmt.close(); }catch(SQLException se){} };
+  	                 if( conn != null){ try{ conn.close(); }catch(SQLException se){} };
+  	           }
+  	           return articleList;
+  	        } 
+  	  	//-------------나의 입찰 목록검색개수--------------------------------------------------------------
+  	  		public int BidMySearchCount(String search,String id) throws Exception{
+  	  			Connection conn =null;
+  	  			PreparedStatement pstmt =null;
+  	  			ResultSet rs = null;
+  	  			int x = 0;
+  	  			
+  	  			try {
+  	  				conn = getConnection();
+  	  				pstmt = conn.prepareStatement(
+  	  						
+  	  						"select count(*) from (select distinct * from (select a.bid_name, b.bid_bid from bidbook a, bidbid b where a.bid_no=b.bid_no) where bid_bid=?)where bid_name like '%"+search+"%'");
+  	  				pstmt.setString(1, id);
+  	  				rs = pstmt.executeQuery();
+  	  				
+  	  				if(rs.next()){
+  	  					x= rs.getInt(1);
+  	  				}
+  	  			} catch (Exception ex) {
+  	  				ex.printStackTrace();
+  	  			}finally {
+  	  				if(rs != null)try {rs.close();} catch (SQLException ex) {}
+  	  				if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+  	  				if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+  	  			}
+  	  			return x;
+  	  		}
+  	  		
+  	  	//-------------나의 입찰 목록검색 -------------------------------------------------------------------
+  	  		public List BidMySearch(String search,String id, int start, int end) throws Exception{
+  	  			Connection conn = null;
+  	  			PreparedStatement pstmt =null;
+  	  			ResultSet rs = null;
+  	  			List articleList =null;
+  	  				
+  	  			try{
+  	  				conn =getConnection();
+  	  				pstmt = conn.prepareStatement(
+  	  						 "select * from (select distinct bid_pic,bid_no,bid_subject,bid_name,bid_price1,bid_price2,bid_id,bid_finish,bid_reg_date,bid_last_id,bid_bid "
+  	  				  				+ "from (select distinct bid_pic,bid_no,bid_subject,bid_name,bid_price1,bid_price2,bid_id,bid_finish,bid_reg_date,bid_last_id,bid_bid, r "
+  	  				  				+ "from (select bid_pic,bid_no,bid_subject,bid_name,bid_price1,bid_price2,bid_id,bid_finish,bid_reg_date,bid_last_id,bid_bid, rownum r "
+  	  				  				+ "from (select a.bid_pic,a.bid_no,a.bid_subject,a.bid_name,a.bid_price1,a.bid_price2,a.bid_id,a.bid_finish,a.bid_reg_date,a.bid_last_id,b.bid_bid "
+  	  				  				+ "from bidbook a, bidbid b where a.bid_no=b.bid_no) order by r asc ) where bid_bid=?) where r >= ? and r <= ?) where bid_name like '%"+search+"%'");
+  	  				  				pstmt.setString(1, id);
+  	  				  				pstmt.setInt(2, start);
+  	  				  				pstmt.setInt(3, end);
+  	  				  				
+  	  				rs =pstmt.executeQuery();
+  	  				if(rs.next()){
+  	  					articleList = new ArrayList();
+  	  					do {
+  	  						BidbookDto dto = new BidbookDto();
+  	  						dto.setBid_no(rs.getInt("bid_no"));
+  	  						dto.setBid_id(rs.getString("bid_id"));
+  	  						dto.setBid_name(rs.getString("bid_name"));
+  	  						dto.setBid_price1(rs.getInt("bid_price1"));
+  	  						dto.setBid_price2(rs.getInt("bid_price2"));
+  	  						dto.setBid_pic(rs.getString("bid_pic"));
+  	  						dto.setBid_subject(rs.getString("bid_subject"));
+  	  						dto.setBid_reg_date(rs.getTimestamp("bid_reg_date"));
+  	  						dto.setBid_last_id(rs.getString("bid_last_id"));
+  	  						dto.setBid_finish(rs.getInt("bid_finish"));
+  	  						dto.setBid_bid(rs.getString("bid_bid"));
+  	  						articleList.add(dto);
+  	  					} while (rs.next());
+  	  				}
+  	  			}catch (Exception ex) {
+  	  				ex.printStackTrace();
+  	  			}finally {
+  	  				if(rs !=null)try{rs.close();}catch(SQLException ex){}
+  	  				if(pstmt !=null)try{pstmt.close();}catch(SQLException ex){}
+  	  				if(conn !=null)try{conn.close();}catch(SQLException ex){}
+  	  			}
+  	  			return articleList;
+  	  		}
+  	  		
+  	  	//------------경매목록상세페이지-------------------------------------------------------------------
+  	  		public BidbookDto getBidArticle(int bid_no, String id)throws Exception{
+  	  			Connection conn =null;
+  	  			PreparedStatement pstmt =null;
+  	  			ResultSet rs = null;
+  	  			BidbookDto article = null;
+  	  			
+  	  			try {
+  	  				conn= getConnection();
+  	  				pstmt= conn.prepareStatement(
+  	  						"update bidbook set bid_readcount= bid_readcount+1 where bid_no =?");
+  	  				pstmt.setInt(1, bid_no);
+  	  				pstmt.executeUpdate();
+  	  				
+  	  				pstmt= conn.prepareStatement(
+  	  						"select * from bidbook where bid_no=?"
+  	  						);
+  	  				pstmt.setInt(1, bid_no);
+  	  				rs= pstmt.executeQuery();
+  	  				//해당 아이디에 따른 그의 개인기업, 등급을 나타내기위함
+  	  			/*	pstmt= conn.prepareStatement(
+  	  						"select * from "
+  	  						+ "(select a.d_id, a.d_person, b.rbook_finish_count from d_member a, resellintro b where a.d_id=b.d_id) "
+  	  						+ "where d_id=?");
+  	  				pstmt.setString(1, id);
+  	  				rs= pstmt.executeQuery();*/
+  	  				
+  	  				
+  	  				if(rs.next()){
+
+  	  					article = new BidbookDto();
+  						article.setBid_no(rs.getInt("bid_no"));
+  	  					article.setBid_id(rs.getString("bid_id"));
+  	  					article.setBid_name(rs.getString("bid_name"));
+  	  					article.setBid_price1(rs.getInt("bid_price1"));
+  	  					article.setBid_price2(rs.getInt("bid_price2"));
+  	  					article.setBid_pic(rs.getString("bid_pic"));
+  	  					article.setBid_subject(rs.getString("bid_subject"));
+  	  					article.setBid_content(rs.getString("bid_content"));
+  	  					article.setBid_readcount(rs.getInt("bid_readcount"));
+  	  					article.setBid_reg_date(rs.getTimestamp("bid_reg_date"));
+  	  					article.setBid_count(rs.getInt("bid_count"));
+  	  					article.setBid_last_id(rs.getString("bid_last_id"));
+  	  					article.setBid_finish(rs.getInt("bid_finish"));
+  	  					article.setBid_finish_date(rs.getTimestamp("bid_finish_date"));
+  	  					//article.setD_person(rs.getString("d_person"));
+  	  					//article.setRbook_finish_count(rs.getInt("rbook_finish_count"));
+  	  				}
+  	  			} catch (Exception ex) {
+  	  				ex.printStackTrace();
+  	  			}finally{
+  	  				if( rs != null ){ try{ rs.close(); }catch( SQLException se ){}};
+  	  	            if( pstmt != null ){ try{ pstmt.close(); }catch( SQLException se ){}};
+  	  	            if( conn != null ){ try{ conn.close(); }catch( SQLException se ){}};
+  	  			}
+  	  			
+  	  			return article;
+  	  		}
+  	  		
+  	  	//-----------해당 아이디에 따른 그의 개인기업, 등급을 나타내기위함
+  	  		public BidbookDto getBidGrade(String bid_id)throws Exception{
+  	  			Connection conn =null;
+  	  			PreparedStatement pstmt =null;
+  	  			ResultSet rs = null;
+  	  			BidbookDto article1 = null;
+  	  			try {
+  	  				conn= getConnection();
+  	  				pstmt= conn.prepareStatement(
+  	  						"select * from "
+  	  						+ "(select a.d_id, a.d_no, a.d_person, b.rbook_finish_count from d_member a, resellintro b where a.d_id=b.d_id) "
+  	  						+ "where d_id=?");
+  	  				pstmt.setString(1, bid_id);
+  	  				rs= pstmt.executeQuery();
+  	  				
+  	  				
+  	  				if(rs.next()){
+  	  					article1 = new BidbookDto();
+  	  					
+  	  					article1.setD_no(rs.getInt("d_no"));
+  						article1.setD_person(rs.getString("d_person"));
+  	  					article1.setRbook_finish_count(rs.getInt("rbook_finish_count"));
+  	  				
+  	  				}
+  	  				
+  	  			} catch (Exception ex) {
+  	  				ex.printStackTrace();
+  	  			}finally{
+  	  				if( rs != null ){ try{ rs.close(); }catch( SQLException se ){}};
+  	  	            if( pstmt != null ){ try{ pstmt.close(); }catch( SQLException se ){}};
+  	  	            if( conn != null ){ try{ conn.close(); }catch( SQLException se ){}};
+  	  			}
+  	  			
+  	  			return article1;
+  	  		}
+  	  		
+  	  	//--------경매 글삭제-----------------------------------------------------------------	
+  	  		public void bidDeleteArticle(int bid_no){
+  	  			Connection conn= null;
+  	  			PreparedStatement pstmt=null;
+  	  			ResultSet rs = null;
+  	  			
+  	  			try {
+  	  				conn =getConnection();
+  	  				pstmt =conn.prepareStatement("delete from bidbook where bid_no=?");
+  	  				pstmt.setInt(1, bid_no);
+  	  				pstmt.executeUpdate();
+  	  			} catch (Exception ex) {
+  	  				ex.printStackTrace();
+  	  			}finally {
+  	  				if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+  	  				if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+  	  				if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+  	  			}
+  	  		}
+  	  		
+  	  	//----------경매 글수정 받아오기------------------------------------------------------------------
+  	  		public BidbookDto BidModifyArticle(int bid_no) throws Exception{
+  	  			Connection conn= null;
+  	  			PreparedStatement pstmt = null;
+  	  			ResultSet rs =null;
+  	  			BidbookDto article =null;
+  	  			
+  	  			try {
+  	  				conn=getConnection();
+  	  				pstmt=conn.prepareStatement(
+  	  						"select * from bidbook where bid_no=?");
+  	  				pstmt.setInt(1, bid_no);
+  	  				rs = pstmt.executeQuery();
+  	  				if(rs.next()){
+  	  					article = new BidbookDto();
+  	  					article.setBid_no(rs.getInt("bid_no"));
+  	  					article.setBid_id(rs.getString("bid_id"));
+  	  					article.setBid_name(rs.getString("bid_name"));
+  	  					article.setBid_pic(rs.getString("bid_pic"));
+  	  					article.setBid_price1(rs.getInt("bid_price1"));
+  	  					article.setBid_subject(rs.getString("bid_subject"));
+  	  					article.setBid_content(rs.getString("bid_content"));
+  	  				}
+  	  			} catch (Exception ex) {
+  	  				ex.printStackTrace();
+  	  			}finally {
+  	  				if(rs !=null)try{rs.close();}catch(SQLException ex){}
+  	  				if(pstmt !=null)try{pstmt.close();}catch(SQLException ex){}
+  	  				if(conn !=null)try{conn.close();}catch(SQLException ex){}
+  	  			}
+  	  			
+  	  			return article;
+  	  		} 
+  	  	//--------경매 글수정-------------------------------------------------------------------
+  	  		public void BidModifyArticle(BidbookDto article)throws Exception{
+  	  			Connection conn =null;
+  	  			PreparedStatement pstmt=null;
+  	  			ResultSet rs =null;
+  	  			
+  	  			try {
+  	  				conn = getConnection();
+  	  				pstmt =conn.prepareStatement(
+  	  				"update bidbook set bid_subject=?,bid_name=?,bid_content=?,bid_pic=? where bid_no=?");
+  	  				pstmt.setString(1,article.getBid_subject());
+  	  				pstmt.setString(2,article.getBid_name());
+  	  				pstmt.setString(3,article.getBid_content());
+  	  				pstmt.setString(4,article.getBid_pic());
+  	  				pstmt.setInt(5,article.getBid_no());
+  	  				
+  	  				pstmt.executeUpdate();
+  	  				
+  	  			} catch (Exception ex) {
+  	  				ex.printStackTrace();
+  	  			}finally {
+  	  				if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+  	  				if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+  	  				if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+  	  			}
+  	  		}
+
+  	  	//---------------------해당 아이디 경매하고있는 전체글개수(글 갯수 제한)----------------------------------------------
+  	        public int getBidderCount(String bid_id) throws Exception{
+  	           Connection conn = null;
+  	           PreparedStatement pstmt = null;
+  	           ResultSet rs = null;
+  	           int x=0;
+  	           try {
+  	              conn = getConnection();
+  	              pstmt = conn.prepareStatement("select count(*) from bidbook where bid_id=? and bid_finish=0");
+  	              pstmt.setString(1, bid_id);
+  	              rs = pstmt.executeQuery();
+  	              
+  	              
+  	              if(rs.next()){
+  	                 x=rs.getInt(1);
+  	              }
+  	           } catch (Exception ex) {
+  	              ex.printStackTrace();
+  	           }finally{
+  	              if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+  	              if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+  	              if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+  	           }
+  	           return x;
+  	        }
+  	  		
  //마지막 닫는 괄호
   	}
 

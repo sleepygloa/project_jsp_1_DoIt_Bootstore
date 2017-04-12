@@ -8,18 +8,11 @@
 <input type="hidden" name="bid_no" value="${bid_no}" />
 
 	
-<c:if test="${bid_id == null}">
-	<script>
-		alert("로그인후 이용해주세요.");
-		window.location='/DoIt/d_login/login.do';
-	</script>
-</c:if>
-
 <c:if test="${check==true}">
 	<script>
 		alert("입찰 완료했습니다.");
-		history.go(-1);
-		//window.location="/DoIt/d_bid/bidList.do";
+		
+		window.location="/DoIt/d_bid/bidContent.do?bid_no=${bid_no}&pageNum=${pageNum}";
 	</script>
 </c:if>
 

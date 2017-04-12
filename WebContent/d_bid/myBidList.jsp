@@ -36,7 +36,6 @@
 		
 		<c:if test="${count > 0}">
 		
-		
 		  <c:forEach var="article" items="${articleList}">
 		  <div id="relist_wrap">
 		  		<div id="relist_box1">

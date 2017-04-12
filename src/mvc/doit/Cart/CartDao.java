@@ -965,8 +965,8 @@ public class CartDao implements SuperAction{
 	}
 	
 	//---------------------------------------------- 장바구니 -> 구매 (d_bdelivery에 저장) --------------------------//
-			public void moveCart_delivery(int br_no, DeliveryDto Ddto, LoginDto LogDto,AcDto acDto ,String d_id) throws Exception{
-
+			public int moveCart_delivery(int br_no, DeliveryDto Ddto, LoginDto LogDto,AcDto acDto ,String d_id) throws Exception{
+				int sumdealmoney = 0;
 				try{
 					conn = getConnection();
 					String sql = "select d_sell from d_cart where d_no = ?";
@@ -1035,20 +1035,43 @@ public class CartDao implements SuperAction{
 							rs = pstmt.executeQuery();
 							
 							if(rs.next()){
-							
-								pstmt = conn.prepareStatement("insert into d_log values(account_log.NEXTVAL,?,?,?,-"+acDto.getD_ldealmoney()+",?,?,sysdate)");
+								//회원이 관리자에게 돈 지불
+								pstmt = conn.prepareStatement(
+		"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, "+acDto.getD_ldealmoney()+",sysdate)");
 								pstmt.setInt(1, acDto.getD_lsender());
 								pstmt.setInt(2, acDto.getD_lreceiver());
-								pstmt.setString(3, "d_d"+d_bcode);
-								//pstmt.setInt(4, acDto.getD_ldealmoney());
-								pstmt.setInt(4, acDto.getD_ldealtype());
-								pstmt.setInt(5, acDto.getD_ldealresult());
-								
+								pstmt.setInt(3, acDto.getD_lbno());
+								pstmt.setString(4, acDto.getD_lbcode());
+								pstmt.setInt(5, 1);
+								pstmt.setInt(6, 3);								
+								pstmt.setInt(7, 1);
+								//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
+
 								pstmt.executeUpdate();
+							
+
+								//회원이 관리자아게 돈 지불하여 회원자신의돈 차감
+								pstmt = conn.prepareStatement(
+		"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, -"+acDto.getD_ldealmoney()+",sysdate)");
+								pstmt.setInt(1, acDto.getD_lsender());
+								pstmt.setInt(2, acDto.getD_lsender());
+								pstmt.setInt(3, acDto.getD_lbno());
+								pstmt.setString(4, acDto.getD_lbcode());
+								pstmt.setInt(5, 1);
+								pstmt.setInt(6, 4);								
+								pstmt.setInt(7, 1);
+								//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
+
+								pstmt.executeUpdate();
+								
+								sumdealmoney += acDto.getD_ldealmoney();
+								System.out.println(sumdealmoney);//-----------------------------------------------
+
 							}
 							
+							
 						}
-			
+
 					}
 					
 				}catch(Exception e){
@@ -1059,6 +1082,7 @@ public class CartDao implements SuperAction{
 					if(conn != null)try{conn.close();}catch(SQLException ex){}
 				}
 				
+				return sumdealmoney;
 			}
 			
 			//---------------------------------------------- 장바구니 -> 구매 (d_bdelivery에 저장)--------------------------//
@@ -1111,6 +1135,95 @@ public class CartDao implements SuperAction{
 			}
 	
 	
+			//----------------------------------------------- 장바구니 출력 -----------------------------------------------//
+			public String getCartsd_bcode(int br_no, String cols) throws Exception {
+				String result = "";
+				
+				try{
+					conn = getConnection();
+					pstmt = conn.prepareStatement(
+							"select "+cols+" from d_cart where d_no = "+br_no
+							);
+					rs = pstmt.executeQuery();
+
+					if(rs.next()){
+
+						result = rs.getString(1); //도서관 / 직접판매 중 한가지의 내용 저장
+
+					}
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}finally{
+					if(rs != null)try{rs.close();}catch(SQLException ex){}
+					if(pstmt != null)try{pstmt.close();}catch(SQLException ex){}
+					if(conn != null)try{conn.close();}catch(SQLException ex){}
+				}
+				
+				return result;
+				
+			}
+			
+			
+			//----------------------------------------------- 장바구니 출력 끝-----------------------------------------------//			
+			
+			
+			public void moveCart_deliveryToAccount(int sumdealmoney, int br_no, AcDto acDto) throws Exception {
+				int d_cashUser = 0;
+				try{
+					conn = getConnection();
+
+					//회원의 잔액 변동
+					pstmt = conn.prepareStatement(
+		"select d_cash from d_account where d_no = " +br_no
+							);
+					rs = pstmt.executeQuery();
+					if(rs.next()){
+						d_cashUser = rs.getInt(1);
+						System.out.println(d_cashUser); //1-----------------------------------
+						d_cashUser = d_cashUser - sumdealmoney;
+					}
+					
+					pstmt = conn.prepareStatement(
+		"update d_account set d_cash = "+d_cashUser+" where d_no = " +br_no
+							);
+					pstmt.executeUpdate();
+					
+					int d_cashAdmin = 0;
+					//관리자의 잔액 변동
+					pstmt = conn.prepareStatement(
+		"select d_cash from d_account where d_no = " +261
+							);
+					rs = pstmt.executeQuery();
+					if(rs.next()){
+						d_cashAdmin = rs.getInt(1);
+						System.out.println(d_cashAdmin); //1----------------------------------------
+						d_cashAdmin = d_cashAdmin + sumdealmoney;
+					}
+					
+					pstmt = conn.prepareStatement(
+		"update d_account set d_cash = "+d_cashAdmin+" where d_no = "+261
+							);
+					pstmt.executeUpdate();
+
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}finally{
+					if(rs != null)try{rs.close();}catch(SQLException ex){}
+					if(pstmt != null)try{pstmt.close();}catch(SQLException ex){}
+					if(conn != null)try{conn.close();}catch(SQLException ex){}
+				}
+			}
+			
+
+			
+			
+			
+
+			
+			
+			
 }
 
 

@@ -123,18 +123,20 @@ function  reList_WriterClick() {
 
 //---------------bid---------
 function  bidClick() {
-      alert("중복입찰은 불가합니다.");
-      
+    alert("중복입찰은 불가합니다.");
+    
+}
+function  bidClick1() {
+ alert("로그인후 이용해주세요.");
+ location.href="/DoIt/d_login/login.do";
 }
 function bidList_click2() {
-   alert("판매자만 글을 작성할 수 있습니다");
-   location.href="/DoIt/d_bid/bidList.do";
+ alert("판매자만 글을 작성할 수 있습니다");
+ location.href="/DoIt/d_bid/bidList.do";
 }
 function bidList_click3() {
-   alert("판매자 승인 신청중입니다 마이페이지를 확인해 주세요");
-   location.href="/DoIt/d_bid/bidList.do";
+ alert("판매자 승인 신청중입니다 마이페이지를 확인해 주세요");
+ location.href="/DoIt/d_bid/bidList.do";
 }
- 
- 
  
  

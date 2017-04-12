@@ -35,7 +35,8 @@ public class BidContentAction implements SuperAction{
 			
 			BidbookDao dbPro = BidbookDao.getInstance();//db처리
 			BidbookDto article =dbPro.getBidArticle(bid_no, bid_id);//해당 글번호에 대한 해당 레코드
-			BidbookDto article1 =dbPro.getBidGrade(article.getBid_id());
+			BidbookDto article1 =dbPro.getBidGrade(article.getBid_id());// 회원번호와 등급을 받아옴
+			
 			dbPro.getFinishArticle(bid_no);
 			
 			String bb= "";

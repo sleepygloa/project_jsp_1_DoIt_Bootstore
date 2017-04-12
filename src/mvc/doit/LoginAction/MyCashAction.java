@@ -2,7 +2,9 @@ package mvc.doit.LoginAction;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import mvc.doit.Online.OnDao;
 import mvc.doit.SuperAction.SuperAction;
 
 public class MyCashAction implements SuperAction{
@@ -13,7 +15,7 @@ public class MyCashAction implements SuperAction{
 		request.setCharacterEncoding("UTF-8");
 		
 		//캐쉬 내역 세션
-		
+
 		
 		return "/d_login/my_cash.jsp";
 	}

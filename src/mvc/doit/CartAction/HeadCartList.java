@@ -32,12 +32,13 @@ public class HeadCartList implements SuperAction{
 		
 		CartDao cdao = CartDao.getInstance();
 		List CartList = cdao.getHeadCart(br_no, cols);
-		
+		//계좌에 추가하기 위해 cart의 code를 그대로 가져옴.
+		String Cartsd_bcode = cdao.getCartsd_bcode(br_no, cols);		
 		
 		request.setAttribute("CartList", CartList);
 		request.setAttribute("cols", cols);
 		request.setAttribute("buy", buy);
-		
+		request.setAttribute("Cartsd_bcode", Cartsd_bcode);
 		
 		if(cols.equals("d_sell")){
 			if(buy.equals("buy")){
