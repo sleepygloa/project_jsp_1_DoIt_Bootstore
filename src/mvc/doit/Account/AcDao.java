@@ -131,7 +131,7 @@ public class AcDao {
         	 adto.setD_lno(rs.getInt("d_lno"));
         	 adto.setD_lsender(rs.getInt("d_lsender"));
         	 adto.setD_lreceiver(rs.getInt("d_lreceiver"));
-        	 adto.setD_lcode(rs.getString("d_lcode"));
+        	 adto.setD_lbcode(rs.getString("d_lbcode"));
         	 adto.setD_ldealmoney(rs.getInt("d_ldealmoney"));
         	 adto.setD_ldealtype(rs.getInt("d_ldealtype"));
         	 adto.setD_ldealresult(rs.getInt("d_ldealresult"));
@@ -271,9 +271,9 @@ public class AcDao {
           try{
             conn = getConnection();
             pstmt = conn.prepareStatement(
-"select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver,d_lcode, d_ldealmoney, d_ldealtype, d_ldealresult, to_char(d_ldate, 'yyyy-mm-dd HH:mm') AS d_ldateS, r " + 
-"from (select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lcode, d_ldealmoney, d_ldealtype, d_ldealresult, d_ldate, rownum r " + 
-"from (select a.d_acno, a.d_no, a.d_acnum, a.d_acregdate, l.d_lno, l.d_lsender, l.d_lreceiver, l.d_lcode, l.d_ldealmoney, l.d_ldealtype, l.d_ldealresult, l.d_ldate " +
+"select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver,d_lbcode, d_ldealmoney, d_ldealtype, d_ldealresult, to_char(d_ldate, 'yyyy-mm-dd HH:mm') AS d_ldateS, r " + 
+"from (select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lbcode, d_ldealmoney, d_ldealtype, d_ldealresult, d_ldate, rownum r " + 
+"from (select a.d_acno, a.d_no, a.d_acnum, a.d_acregdate, l.d_lno, l.d_lsender, l.d_lreceiver, l.d_lbcode, l.d_ldealmoney, l.d_ldealtype, l.d_ldealresult, l.d_ldate " +
 "from d_log l, d_account a  where a.d_no = l.d_lreceiver and l.d_lreceiver = " + d_no + " order by d_ldate asc)) where r >= " + startRow + " and r <= " + endRow
            		 );
             rs = pstmt.executeQuery();
@@ -289,7 +289,7 @@ public class AcDao {
                    	 adto.setD_lno(rs.getInt("d_lno"));
                    	 adto.setD_lsender(rs.getInt("d_lsender"));
                    	 adto.setD_lreceiver(rs.getInt("d_lreceiver"));
-                   	 adto.setD_lcode(rs.getString("d_lcode"));
+                   	 adto.setD_lbcode(rs.getString("d_lbcode"));
                    	 adto.setD_ldealmoney(rs.getInt("d_ldealmoney"));
                    	 adto.setD_ldealtype(rs.getInt("d_ldealtype"));
                    	 adto.setD_ldealresult(rs.getInt("d_ldealresult"));
@@ -312,25 +312,37 @@ public class AcDao {
     
 
 //---- 배송완료와 책등록 시 사용자에게 돈을 지불해야합니다. 그때 발쌩하는 Dao ---------------    
-public void insertAccountLog(String d_id, int d_bcode, int d_bsellvalue) throws Exception{
+public void insertAccountLog(AcDto acDto) throws Exception{
       try{
-    	 String d_bcode1 = "";
-    	 OnDao dao = OnDao.getInstance();
-    	 int d_no = dao.findIdToNo(d_id);
+    	  conn = getConnection();
+			//회원이 관리자에게 돈 지불
+			pstmt = conn.prepareStatement(
+"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, "+acDto.getD_ldealmoney()+",sysdate)");
+			pstmt.setInt(1, acDto.getD_lsender()); //261관리자
+			pstmt.setInt(2, acDto.getD_lreceiver()); //회원(책판매자)
+			pstmt.setInt(3, acDto.getD_lbno()); //0
+			pstmt.setString(4, acDto.getD_lbcode()); //책코드
+			pstmt.setInt(5, 1); //d_onBook
+			pstmt.setInt(6, 3);	//송금이체							
+			pstmt.setInt(7, 1); //거래완료
+			//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
 
-    	 //회원의 책판매 : d_s, 회원의 책구매 : d_p
-        conn = getConnection();
-        	d_bcode1 += "d_b" + d_bcode;
-        //관리자가 -> 회원에게 돈을 지불
-        pstmt = conn.prepareStatement(
-"insert into d_log values(account_log.NEXTVAL, 261, "+d_no+", '"+d_bcode1+"', "+d_bsellvalue+", 3, 0, sysdate)"
-   		 );
-        pstmt.executeUpdate();
-        //관리자 돈 차감.
-        pstmt = conn.prepareStatement(
-"insert into d_log values(account_log.NEXTVAL, 261, 261, '"+d_bcode1+"', -"+d_bsellvalue+", 5, 0, sysdate)"
-   		 );
-        pstmt.executeUpdate();        
+			pstmt.executeUpdate();
+		
+
+			//회원이 관리자아게 돈 지불하여 회원자신의돈 차감
+			pstmt = conn.prepareStatement(
+"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, -"+acDto.getD_ldealmoney()+",sysdate)");
+			pstmt.setInt(1, acDto.getD_lsender());
+			pstmt.setInt(2, acDto.getD_lsender());
+			pstmt.setInt(3, acDto.getD_lbno());
+			pstmt.setString(4, acDto.getD_lbcode());
+			pstmt.setInt(5, 1);
+			pstmt.setInt(6, 4);								
+			pstmt.setInt(7, 1);
+			//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
+
+			pstmt.executeUpdate();        
       }catch(Exception e){
          e.printStackTrace();
       }finally{
@@ -368,7 +380,7 @@ public int getD_sPayListCount() throws Exception{
     try{
      conn = getConnection();
      pstmt = conn.prepareStatement(
-    		 "select count(*) from d_account a, d_log l where a.d_no = l.d_lsender and d_lcode like 'd_b%'"
+    		 "select count(*) from d_account a, d_log l where a.d_no = l.d_lsender and d_lbcode like 'd_b%'"
     		 );
      rs = pstmt.executeQuery();
      if(rs.next()){
@@ -393,10 +405,10 @@ public List<AcDto> getD_sPayList(int startRow, int endRow) throws Exception{
       try{
         conn = getConnection();
         pstmt = conn.prepareStatement(
-"select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver,d_lcode, d_ldealmoney, d_ldealtype, d_ldealresult, to_char(d_ldate, 'yyyy-mm-dd HH:MM') AS d_ldateS, r " + 
-"from (select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lcode, d_ldealmoney, d_ldealtype, d_ldealresult, d_ldate, rownum r " + 
-"from (select a.d_acno, a.d_no, a.d_acnum, a.d_acregdate, l.d_lno, l.d_lsender, l.d_lreceiver, l.d_lcode, l.d_ldealmoney, l.d_ldealtype, l.d_ldealresult, l.d_ldate " +
-"from d_log l, d_account a where a.d_no = l.d_lreceiver and d_lcode like 'd_b%'   order by d_ldate asc)) where r >= " + startRow + " and r <= " + endRow
+"select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver,d_lbcode, d_ldealmoney, d_ldealtype, d_ldealresult, to_char(d_ldate, 'yyyy-mm-dd HH:MM') AS d_ldateS, r " + 
+"from (select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lbcode, d_ldealmoney, d_ldealtype, d_ldealresult, d_ldate, rownum r " + 
+"from (select a.d_acno, a.d_no, a.d_acnum, a.d_acregdate, l.d_lno, l.d_lsender, l.d_lreceiver, l.d_lbcode, l.d_ldealmoney, l.d_ldealtype, l.d_ldealresult, l.d_ldate " +
+"from d_log l, d_account a where a.d_no = l.d_lreceiver and d_lbcode like 'd_b%'   order by d_ldate asc)) where r >= " + startRow + " and r <= " + endRow
        		 );
         rs = pstmt.executeQuery();
         
@@ -411,7 +423,7 @@ public List<AcDto> getD_sPayList(int startRow, int endRow) throws Exception{
                	 adto.setD_lno(rs.getInt("d_lno"));
                	 adto.setD_lsender(rs.getInt("d_lsender"));
                	 adto.setD_lreceiver(rs.getInt("d_lreceiver"));
-               	 adto.setD_lcode(rs.getString("d_lcode"));
+               	 adto.setD_lbcode(rs.getString("d_lbcode"));
                	 adto.setD_ldealmoney(rs.getInt("d_ldealmoney"));
                	 adto.setD_ldealtype(rs.getInt("d_ldealtype"));
                	 adto.setD_ldealresult(rs.getInt("d_ldealresult"));
@@ -436,7 +448,7 @@ public int getD_sNoPayListCount() throws Exception{
     try{
      conn = getConnection();
      pstmt = conn.prepareStatement(
-    		 "select count(*) from d_account a, d_log l where a.d_no = l.d_lsender and d_lcode like 'd_b%' and d_ldealresult = 0"
+    		 "select count(*) from d_account a, d_log l where a.d_no = l.d_lsender and d_lbcode like 'd_b%' and d_ldealresult = 0"
     		 );
      rs = pstmt.executeQuery();
      if(rs.next()){
@@ -461,10 +473,10 @@ public List<AcDto> getD_sNoPayList(int startRow, int endRow) throws Exception{
       try{
         conn = getConnection();
         pstmt = conn.prepareStatement(
-"select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver,d_lcode, d_ldealmoney, d_ldealtype, d_ldealresult, to_char(d_ldate, 'yyyy-mm-dd HH:mm') AS d_ldateS, r " + 
-"from (select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lcode, d_ldealmoney, d_ldealtype, d_ldealresult, d_ldate, rownum r " + 
-"from (select a.d_acno, a.d_no, a.d_acnum, a.d_acregdate, l.d_lno, l.d_lsender, l.d_lreceiver, l.d_lcode, l.d_ldealmoney, l.d_ldealtype, l.d_ldealresult, l.d_ldate " +
-"from d_log l, d_account a where a.d_no = l.d_lsender and d_lcode like 'd_b%' and d_ldealresult = 0  order by d_ldate asc)) where r >= " + startRow + " and r <= " + endRow
+"select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver,d_lbcode, d_ldealmoney, d_ldealtype, d_ldealresult, to_char(d_ldate, 'yyyy-mm-dd HH:mm') AS d_ldateS, r " + 
+"from (select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lbcode, d_ldealmoney, d_ldealtype, d_ldealresult, d_ldate, rownum r " + 
+"from (select a.d_acno, a.d_no, a.d_acnum, a.d_acregdate, l.d_lno, l.d_lsender, l.d_lreceiver, l.d_lbcode, l.d_ldealmoney, l.d_ldealtype, l.d_ldealresult, l.d_ldate " +
+"from d_log l, d_account a where a.d_no = l.d_lsender and d_lbcode like 'd_b%' and d_ldealresult = 0  order by d_ldate asc)) where r >= " + startRow + " and r <= " + endRow
        		 );
         rs = pstmt.executeQuery();
         
@@ -479,7 +491,7 @@ public List<AcDto> getD_sNoPayList(int startRow, int endRow) throws Exception{
                	 adto.setD_lno(rs.getInt("d_lno"));
                	 adto.setD_lsender(rs.getInt("d_lsender"));
                	 adto.setD_lreceiver(rs.getInt("d_lreceiver"));
-               	 adto.setD_lcode(rs.getString("d_lcode"));
+               	 adto.setD_lbcode(rs.getString("d_lbcode"));
                	 adto.setD_ldealmoney(rs.getInt("d_ldealmoney"));
                	 adto.setD_ldealtype(rs.getInt("d_ldealtype"));
                	 adto.setD_ldealresult(rs.getInt("d_ldealresult"));
@@ -504,7 +516,7 @@ public int getD_sPayEndListCount() throws Exception{
     try{
      conn = getConnection();
      pstmt = conn.prepareStatement(
-    		 "select count(*) from d_account a, d_log l where a.d_no = l.d_lsender and d_lcode like 'd_b%' and d_ldealresult = 1"
+    		 "select count(*) from d_account a, d_log l where a.d_no = l.d_lsender and d_lbcode like 'd_b%' and d_ldealresult = 1"
     		 );
      rs = pstmt.executeQuery();
      if(rs.next()){
@@ -529,10 +541,10 @@ public List<AcDto> getD_sPayEndList(int startRow, int endRow) throws Exception{
       try{
         conn = getConnection();
         pstmt = conn.prepareStatement(
-"select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver,d_lcode, d_ldealmoney, d_ldealtype, d_ldealresult, to_char(d_ldate, 'yyyy-mm-dd HH:mm') AS d_ldateS, r " + 
-"from (select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lcode, d_ldealmoney, d_ldealtype, d_ldealresult, d_ldate, rownum r " + 
-"from (select a.d_acno, a.d_no, a.d_acnum, a.d_acregdate, l.d_lno, l.d_lsender, l.d_lreceiver, l.d_lcode, l.d_ldealmoney, l.d_ldealtype, l.d_ldealresult, l.d_ldate " +
-"from d_log l, d_account a where a.d_no = l.d_lsender and d_lcode like 'd_b%' and d_ldealresult = 1 order by d_ldate asc)) where r >= " + startRow + " and r <= " + endRow
+"select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver,d_lbcode, d_ldealmoney, d_ldealtype, d_ldealresult, to_char(d_ldate, 'yyyy-mm-dd HH:mm') AS d_ldateS, r " + 
+"from (select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lbcode, d_ldealmoney, d_ldealtype, d_ldealresult, d_ldate, rownum r " + 
+"from (select a.d_acno, a.d_no, a.d_acnum, a.d_acregdate, l.d_lno, l.d_lsender, l.d_lreceiver, l.d_lbcode, l.d_ldealmoney, l.d_ldealtype, l.d_ldealresult, l.d_ldate " +
+"from d_log l, d_account a where a.d_no = l.d_lsender and d_lbcode like 'd_b%' and d_ldealresult = 1 order by d_ldate asc)) where r >= " + startRow + " and r <= " + endRow
        		 );
         rs = pstmt.executeQuery();
         
@@ -547,7 +559,7 @@ public List<AcDto> getD_sPayEndList(int startRow, int endRow) throws Exception{
                	 adto.setD_lno(rs.getInt("d_lno"));
                	 adto.setD_lsender(rs.getInt("d_lsender"));
                	 adto.setD_lreceiver(rs.getInt("d_lreceiver"));
-               	 adto.setD_lcode(rs.getString("d_lcode"));
+               	 adto.setD_lbcode(rs.getString("d_lbcode"));
                	 adto.setD_ldealmoney(rs.getInt("d_ldealmoney"));
                	 adto.setD_ldealtype(rs.getInt("d_ldealtype"));
                	 adto.setD_ldealresult(rs.getInt("d_ldealresult"));
@@ -566,7 +578,46 @@ public List<AcDto> getD_sPayEndList(int startRow, int endRow) throws Exception{
    }
 
 
+//---- 회원의 책 1권 구매시(X장바구니) 결제하는 상황 ---------------    
+public void D_onBookValueUserToAdmin(AcDto acDto) throws Exception{
+    try{
+    	conn = getConnection();
+			//회원이 관리자에게 돈 지불
+			pstmt = conn.prepareStatement(
+"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, "+acDto.getD_ldealmoney()+",sysdate)");
+			pstmt.setInt(1, acDto.getD_lsender()); //261관리자
+			pstmt.setInt(2, acDto.getD_lreceiver()); //회원(책판매자)
+			pstmt.setInt(3, acDto.getD_lbno()); //0
+			pstmt.setString(4, acDto.getD_lbcode()); //책코드
+			pstmt.setInt(5, 1); //d_onBook
+			pstmt.setInt(6, 3);	//송금이체							
+			pstmt.setInt(7, 1); //거래완료
+			//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
 
+			pstmt.executeUpdate();
+		
+
+			//회원이 관리자아게 돈 지불하여 회원자신의돈 차감
+			pstmt = conn.prepareStatement(
+"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, -"+acDto.getD_ldealmoney()+",sysdate)");
+			pstmt.setInt(1, acDto.getD_lsender());
+			pstmt.setInt(2, acDto.getD_lsender());
+			pstmt.setInt(3, acDto.getD_lbno());
+			pstmt.setString(4, acDto.getD_lbcode());
+			pstmt.setInt(5, 1);
+			pstmt.setInt(6, 4);								
+			pstmt.setInt(7, 1);
+			//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
+
+			pstmt.executeUpdate();        
+    }catch(Exception e){
+       e.printStackTrace();
+    }finally{
+       if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+        if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+        if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+    }
+ } 
 
 
     

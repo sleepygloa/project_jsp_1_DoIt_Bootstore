@@ -134,16 +134,15 @@
 														<p><span class="txtBox_spanTxt_1">판 매 가</span> : <span class="txtBox_spanTxt_2">${dto.d_bsellvalue}</span> \</p>
 														</c:if>
 														<c:if test="${d_bgradevalue != 0}" >
-														<p><span class="txtBox_spanTxt_1">판 매 가</span> : <span class="txtBox_spanTxt_2">${d_bgradevalue}</span> \</p>
+														<p><span class="txtBox_spanTxt_1">판 매 가</span> : <span class="txtBox_spanTxt_2">${dto.d_bsellvalue}</span> \</p>
 														</c:if>														
-														<p><span class="txtBox_spanTxt_1">결제금액</span> : <span class="txtBox_spanTxt_2">${d_bgradevalue}</span> \</p>
 														<c:if test="${d_bgradevalue == 0}" >
 														<p><span class="txtBox_spanTxt_1">회원 등급가</span> : <span class="txtBox_spanTxt_2">0</span> \</p>
 														</c:if>
 														<c:if test="${d_bgradevalue != 0}" >
 														<p><span class="txtBox_spanTxt_1">회원 등급가</span> : <span class="txtBox_spanTxt_2">${d_bgradevalue}</span> \</p>
 														</c:if>															
-														
+														<p><span class="txtBox_spanTxt_1">결제금액</span> : <span class="txtBox_spanTxt_2">${d_bgradevalue}</span> \</p>														
 												</div>
 													
 										</section>

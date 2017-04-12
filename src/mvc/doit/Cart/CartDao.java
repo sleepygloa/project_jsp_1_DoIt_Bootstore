@@ -1043,7 +1043,7 @@ public class CartDao implements SuperAction{
 								pstmt.setInt(3, acDto.getD_lbno());
 								pstmt.setString(4, acDto.getD_lbcode());
 								pstmt.setInt(5, 1);
-								pstmt.setInt(6, 3);								
+								pstmt.setInt(6, 3);		 // 송금						
 								pstmt.setInt(7, 1);
 								//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
 
@@ -1058,7 +1058,7 @@ public class CartDao implements SuperAction{
 								pstmt.setInt(3, acDto.getD_lbno());
 								pstmt.setString(4, acDto.getD_lbcode());
 								pstmt.setInt(5, 1);
-								pstmt.setInt(6, 4);								
+								pstmt.setInt(6, 4);		//송금시 차감				
 								pstmt.setInt(7, 1);
 								//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
 
@@ -1167,13 +1167,13 @@ public class CartDao implements SuperAction{
 			
 			//----------------------------------------------- 장바구니 출력 끝-----------------------------------------------//			
 			
-			
-			public void moveCart_deliveryToAccount(int sumdealmoney, int br_no, AcDto acDto) throws Exception {
+			//----------------------------------------------- 장바구니 이용, d_onBook 온라인서점 에서 회원이 책구매 -------------------//
+			public void D_onBookCartValueAdminToUser(int sumdealmoney, int br_no, AcDto acDto) throws Exception {
 				int d_cashUser = 0;
 				try{
 					conn = getConnection();
 
-					//회원의 잔액 변동
+		//회원의 잔액 변동-----------------------------------
 					pstmt = conn.prepareStatement(
 		"select d_cash from d_account where d_no = " +br_no
 							);
@@ -1190,7 +1190,7 @@ public class CartDao implements SuperAction{
 					pstmt.executeUpdate();
 					
 					int d_cashAdmin = 0;
-					//관리자의 잔액 변동
+		//관리자의 잔액 변동-----------------------------------
 					pstmt = conn.prepareStatement(
 		"select d_cash from d_account where d_no = " +261
 							);
@@ -1205,6 +1205,22 @@ public class CartDao implements SuperAction{
 		"update d_account set d_cash = "+d_cashAdmin+" where d_no = "+261
 							);
 					pstmt.executeUpdate();
+					
+					int d_cashdoit = 0;
+		//doit 전체 수익 변동 doit_aco table-----------------------------------
+					pstmt = conn.prepareStatement(
+		"select d_seller from doit_aco "
+							);
+					rs = pstmt.executeQuery();
+					if(rs.next()){
+						d_cashdoit = rs.getInt(1);
+						d_cashdoit = d_cashdoit + sumdealmoney;
+					}
+					
+					pstmt = conn.prepareStatement(
+		"update doit_aco set d_seller = "+d_cashdoit
+							);
+					pstmt.executeUpdate();
 
 					
 				}catch(Exception e){
@@ -1216,10 +1232,72 @@ public class CartDao implements SuperAction{
 				}
 			}
 			
+			//----------------------------------------------- 장바구니 이용, d_onBook 온라인서점 에서 회원이 책구매 끝-------------------//
+			
+			//----------------------------------------------- 장바구니 이용, d_onBook 온라인서점 에서 회원이 책구매 시 DoIT 전체 수익 table 업뎃 -------------------//
+			public void D_onBookValueUserToAdmin(int d_no, AcDto acDto) throws Exception {
+				int d_cashAdmin = 0;
+				try{
+					conn = getConnection();
 
-			
-			
-			
+		//회원의 잔액 변동-----------------------------------
+					pstmt = conn.prepareStatement(
+		"select d_cash from d_account where d_no = " +261
+							);
+					rs = pstmt.executeQuery();
+					if(rs.next()){
+						d_cashAdmin = rs.getInt(1);
+						d_cashAdmin = d_cashAdmin - acDto.getD_ldealmoney();
+					}
+					
+					pstmt = conn.prepareStatement(
+		"update d_account set d_cash = "+d_cashAdmin+" where d_no = " +261
+							);
+					pstmt.executeUpdate();
+					
+					int d_cashUser = 0;
+		//관리자의 잔액 변동-----------------------------------
+					pstmt = conn.prepareStatement(
+		"select d_cash from d_account where d_no = " +d_no
+							);
+					rs = pstmt.executeQuery();
+					if(rs.next()){
+						d_cashUser = rs.getInt(1);
+						System.out.println(d_cashAdmin); //1----------------------------------------
+						d_cashUser = d_cashUser + acDto.getD_ldealmoney();
+					}
+					
+					pstmt = conn.prepareStatement(
+		"update d_account set d_cash = "+d_cashUser+" where d_no = "+d_no
+							);
+					pstmt.executeUpdate();
+					
+					int d_cashdoit = 0;
+		//doit 전체 수익 변동 doit_aco table-----------------------------------
+					pstmt = conn.prepareStatement(
+		"select d_seller from doit_aco "
+							);
+					rs = pstmt.executeQuery();
+					if(rs.next()){
+						d_cashdoit = rs.getInt(1);
+						d_cashdoit = d_cashdoit - acDto.getD_ldealmoney();
+					}
+					
+					pstmt = conn.prepareStatement(
+		"update doit_aco set d_seller = "+d_cashdoit
+							);
+					pstmt.executeUpdate();
+
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}finally{
+					if(rs != null)try{rs.close();}catch(SQLException ex){}
+					if(pstmt != null)try{pstmt.close();}catch(SQLException ex){}
+					if(conn != null)try{conn.close();}catch(SQLException ex){}
+				}
+			}		
+			//----------------------------------------------- 장바구니 이용, d_onBook 온라인서점 에서 회원이 책구매 시 DoIT 전체 수익 table 업뎃 끝 -------------------//
 
 			
 			

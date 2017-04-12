@@ -7,6 +7,8 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import mvc.doit.Account.AcDao;
+import mvc.doit.Account.AcDto;
+import mvc.doit.Cart.CartDao;
 import mvc.doit.Login.LoginDao;
 import mvc.doit.Online.OnBookDto;
 import mvc.doit.Online.OnBookIntroDto;
@@ -53,9 +55,26 @@ public class OnBookProAction implements SuperAction {
 	 	String d_id = multi.getParameter("d_id");
 	//---- 계좌 관리 ----d_log table에  관련코드(d_bcode(원래는 d_bdeliverycode이지만, 회원책판매는 1개씩판매한다는 가정))로 log 레코드 1개를 생성시킵니다.-----------------------------
 	 	AcDao adao = AcDao.getInstance();
+	 	int d_no = dao.findIdToNo(multi.getParameter("d_id"));
+	 	AcDto acDto = new AcDto();
+	 	//d_lno seq
+	 	acDto.setD_lsender(261); 			//보내는 사람
+	 	acDto.setD_lreceiver(d_no);		//받는사람
+	 	acDto.setD_lbno(0);
+	 	acDto.setD_lbcode(multi.getParameter("d_bcode"));
+	 	acDto.setD_ldivision(1); 
+	 	acDto.setD_ldealtype(0);	//거래 종류(초기화)
+	 	acDto.setD_ldealresult(1);				//거래 결과 0:거래생성, 1:거래완료, 2:거래취소
+	 	acDto.setD_ldealmoney(Integer.parseInt(multi.getParameter("d_bpurchasevalue")));	//거래금액
+	 	//d_ldate sysdate
+	 	System.out.println(d_no);
+	 	
+	 	
+	 	
 	 	//결제 결과가 0인 d_log 레코드한줄 추가하는 dao
-	 	int d_bsellvalue = Integer.parseInt(multi.getParameter("d_bsellvalue"));
-	 	adao.insertAccountLog(d_id, d_bcode, d_bsellvalue);
+	 	adao.insertAccountLog(acDto);
+	 	CartDao cdo = CartDao.getInstance();
+	 	cdo.D_onBookValueUserToAdmin(d_no,acDto);
 	 	
 	 	request.setAttribute("d_bcode", d_bcode);
 	 	request.setAttribute("userGradeCheck",userGradeCheck);

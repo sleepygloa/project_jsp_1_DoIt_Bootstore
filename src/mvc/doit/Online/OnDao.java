@@ -860,24 +860,32 @@ public String findSelectToBookFullName(String select) throws Exception{
   			pstmt.setInt(1, d_bcode);	
   			pstmt.executeUpdate();
   			
-  			//거래 내역 등록
-  			pstmt = conn.prepareStatement("insert into d_log values(account_log.NEXTVAL,?, 261,?,?,?,?,sysdate)");
-			pstmt.setInt(1, acDto.getD_lsender());
+  		//회원이 관리자에게 돈 지불(X장바구니이용)
+			pstmt = conn.prepareStatement(
+"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, "+acDto.getD_ldealmoney()+",sysdate)");
+			pstmt.setInt(1, acDto.getD_lsender()); //회원(책구매자)
+			pstmt.setInt(2, acDto.getD_lreceiver()); //관리자
+			pstmt.setInt(3, acDto.getD_lbno()); //0
+			pstmt.setString(4, acDto.getD_lbcode()); //책코드
+			pstmt.setInt(5, 1); //d_onBook
+			pstmt.setInt(6, 3);	//송금이체							
+			pstmt.setInt(7, 1); //거래완료
+			//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
 
-			pstmt.setString(2, "d_d"+d_bcode);
-			pstmt.setInt(3, acDto.getD_ldealmoney());
-			pstmt.setInt(4, acDto.getD_ldealtype());
-			pstmt.setInt(5, acDto.getD_ldealresult());
-			
 			pstmt.executeUpdate();
-  			
-  			//거래 내역 등록(자신의 돈 차감)
-  			pstmt = conn.prepareStatement("insert into d_log values(account_log.NEXTVAL,?,?,?, -"+acDto.getD_ldealmoney()+",?,?,sysdate)");
+		
+
+			//회원이 관리자아게 돈 지불하여 회원자신의돈 차감(X장바구니이용)
+			pstmt = conn.prepareStatement(
+"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, -"+acDto.getD_ldealmoney()+",sysdate)");
 			pstmt.setInt(1, acDto.getD_lsender());
 			pstmt.setInt(2, acDto.getD_lsender());
-			pstmt.setString(3, "d_d"+d_bcode);
-			pstmt.setInt(4, 5); //1 입금 2 출금 3 계좌이체 송금 4 계좌이체 받음 5 계좌이체시 자신의돈
-			pstmt.setInt(5, acDto.getD_ldealresult());
+			pstmt.setInt(3, acDto.getD_lbno());
+			pstmt.setString(4, acDto.getD_lbcode());
+			pstmt.setInt(5, 1);
+			pstmt.setInt(6, 4);								
+			pstmt.setInt(7, 1);
+			//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
 			
 			pstmt.executeUpdate();
 			
