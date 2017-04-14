@@ -33,7 +33,7 @@ public class HeadCartList implements SuperAction{
 		CartDao cdao = CartDao.getInstance();
 		List CartList = cdao.getHeadCart(br_no, cols);
 		//계좌에 추가하기 위해 cart의 code를 그대로 가져옴.
-		String Cartsd_bcode = cdao.getCartsd_bcode(br_no, cols);		
+		String Cartsd_bcode = cdao.getCartsd_bcode(br_no, cols);	
 		
 		request.setAttribute("CartList", CartList);
 		request.setAttribute("cols", cols);
@@ -81,7 +81,6 @@ public class HeadCartList implements SuperAction{
 				if(request.getParameter("d_bgradevalue") != null){
 					d_bgradevalue = Integer.parseInt(request.getParameter("d_bgradevalue"));
 				}		
-
 				
 				request.setAttribute("d_totalDis", d_totalDis);
 				request.setAttribute("d_total", d_total);
@@ -98,14 +97,14 @@ public class HeadCartList implements SuperAction{
 				
 				LoginDao LogDao = LoginDao.getInstance();
 				LoginDto LogDto = LogDao.getMember(id);
-				
+
 				String user_check = null;
 				if(request.getParameter("user_check") != null){
 					user_check = request.getParameter("user_check");
 				}
 				
 				int d_total = cdao.getBookBuyTotal(br_no, cols);				
-
+				
 				//회원등급에 대한 할인가와 total금액을 정하는 구문
 				int dng = LogDto.getD_nom_grade();
 				int d_totalDis = 0;
@@ -115,8 +114,9 @@ public class HeadCartList implements SuperAction{
 					d_totalDis = (int)((double)d_total * 0.10);
 				}else{}
 
+				
 				d_bgradevalue = d_total - d_totalDis;
-				if(request.getParameter("d_bgradevalue") != null){
+								if(request.getParameter("d_bgradevalue") != null){
 					d_bgradevalue = Integer.parseInt(request.getParameter("d_bgradevalue"));
 				}				
 				

@@ -8,7 +8,7 @@
 
 	<script>
 	alert("책이 등록되었습니다. 그리고 ${d_id}님께서 '책에 관심이 많은 책벌레 등급 1'로 등급이 올랐습니다. 축하메세지를 전달해주세요!");
-	window.location="/DoIt/d_admin/adminOnInspectionList.do";
+	window.location="/DoIt/d_manage/manPart4.do";
 	</script>
 
 </c:if>
@@ -18,15 +18,15 @@
 
 	<script>
 	alert("책이 등록되었습니다. 그리고 ${d_id}님께서 '책좀 읽는 책벌레 등급2'로 등급이 올랐습니다. 축하메세지를 전달해주세요!");
-	window.location="/DoIt/d_admin/adminOnInspectionList.do";
+	window.location="/DoIt/d_manage/manPart4.do";
 	</script>
 
 </c:if>
 
 
 
-	<script>
+<script>
 	alert("책이 등록되었습니다.");
-	window.location="/DoIt/d_admin/adminOnInspectionList.do";
-	</script>
+	window.location="/DoIt/d_manage/manPart4.do";
+</script>
 

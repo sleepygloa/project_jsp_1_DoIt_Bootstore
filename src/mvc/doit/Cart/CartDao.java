@@ -965,127 +965,122 @@ public class CartDao implements SuperAction{
 	}
 	
 	//---------------------------------------------- 장바구니 -> 구매 (d_bdelivery에 저장) --------------------------//
-			public int moveCart_delivery(int br_no, DeliveryDto Ddto, LoginDto LogDto,AcDto acDto ,String d_id) throws Exception{
-				int sumdealmoney = 0;
-				try{
-					conn = getConnection();
-					String sql = "select d_sell from d_cart where d_no = ?";
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setInt(1, br_no);
+	public int moveCart_delivery(int br_no, DeliveryDto Ddto, LoginDto LogDto,AcDto acDto ,String d_id) throws Exception{
+		int sumdealmoney = 0;
+		try{
+			conn = getConnection();
+			String sql = "select d_sell from d_cart where d_no = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, br_no);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				
+				String result = rs.getString(1); 
+				String reList[] = result.split(",");
+				
+				for(int i =1; i < reList.length; i++){
+					//배송 테이블에 등록
+					pstmt = conn.prepareStatement("insert into d_bdelivery values(d_bdeliverycode_seq.NEXTVAL,?,?,?,?,?,sysdate)");
+			  			
+					int d_bcode = Integer.parseInt(reList[i]);
+			  		pstmt.setInt(1, d_bcode );
+			  		pstmt.setInt(2,Ddto.getD_bdelibery());
+			  		pstmt.setString(3, Ddto.getD_bbuyer());
+			  		pstmt.setString(4, Ddto.getD_brecipient());
+			  		pstmt.setString(5, Ddto.getD_brequested());
+			  		pstmt.executeUpdate();
+				}
+		  		
+		  		//회원 주소 ,전화번호 새로 입력
+	  			pstmt = conn.prepareStatement("update d_member set d_addr = ?,d_phone=? where d_id= ?");
+	  			
+	  			pstmt.setString(1, LogDto.getD_addr());
+	  			pstmt.setString(2, LogDto.getD_phone());
+	  			pstmt.setString(3, d_id);	
+	  			pstmt.executeUpdate();
+	  			
+	  			String d_bcode =null;
+	  			for(int i =1; i < reList.length; i++){
+	  				d_bcode =reList[i];
+	  				
+	  				pstmt = conn.prepareStatement("update d_onBook set d_bcount = 0 where d_bcode= ?");
+		  			pstmt.setString(1, d_bcode);
+		  			pstmt.executeUpdate();
+	  			}
+	  			
+
+				//장바구니 컬럼 초기화
+				pstmt = conn.prepareStatement("update d_cart set d_sell = ? where d_no = ?");
+
+				String all = ",";
+
+				pstmt.setString(1, all);
+				pstmt.setInt(2, br_no);
+
+				pstmt.executeUpdate();
+				
+				// 거래내역 등록
+				d_bcode =null;
+				for(int i =1; i < reList.length; i++){
+					d_bcode =reList[i];
+					int int_d_bcode =Integer.parseInt(reList[i]);
+					
+					
+					
+					pstmt = conn.prepareStatement("select d_bdeliverycode from d_bdelivery where d_bcode=? ");
+					pstmt.setInt(1, int_d_bcode);
 					
 					rs = pstmt.executeQuery();
 					
 					if(rs.next()){
-						
-						String result = rs.getString(1); 
-						String reList[] = result.split(",");
-						
-						for(int i =1; i < reList.length; i++){
-							//배송 테이블에 등록
-							pstmt = conn.prepareStatement("insert into d_bdelivery values(d_bdeliverycode_seq.NEXTVAL,?,?,?,?,?,sysdate)");
-					  			
-							int d_bcode = Integer.parseInt(reList[i]);
-					  		pstmt.setInt(1, d_bcode );
-					  		pstmt.setInt(2,Ddto.getD_bdelibery());
-					  		pstmt.setString(3, Ddto.getD_bbuyer());
-					  		pstmt.setString(4, Ddto.getD_brecipient());
-					  		pstmt.setString(5, Ddto.getD_brequested());
-					  		pstmt.executeUpdate();
-						}
-				  		
-				  		//회원 주소 ,전화번호 새로 입력
-			  			pstmt = conn.prepareStatement("update d_member set d_addr = ?,d_phone=? where d_id= ?");
-			  			
-			  			pstmt.setString(1, LogDto.getD_addr());
-			  			pstmt.setString(2, LogDto.getD_phone());
-			  			pstmt.setString(3, d_id);	
-			  			pstmt.executeUpdate();
-			  			
-			  			String d_bcode =null;
-			  			for(int i =1; i < reList.length; i++){
-			  				d_bcode =reList[i];
-			  				
-			  				pstmt = conn.prepareStatement("update d_onBook set d_bcount = 0 where d_bcode= ?");
-				  			pstmt.setString(1, d_bcode);
-				  			pstmt.executeUpdate();
-			  			}
-			  			
-		
-						//장바구니 컬럼 초기화
-						pstmt = conn.prepareStatement("update d_cart set d_sell = ? where d_no = ?");
-		
-						String all = ",";
-		
-						pstmt.setString(1, all);
-						pstmt.setInt(2, br_no);
-
-						pstmt.executeUpdate();
-						
-						// 거래내역 등록
-						d_bcode =null;
-						for(int i =1; i < reList.length; i++){
-							d_bcode =reList[i];
-							int int_d_bcode =Integer.parseInt(reList[i]);
-							
-							
-							
-							pstmt = conn.prepareStatement("select d_bdeliverycode from d_bdelivery where d_bcode=? ");
-							pstmt.setInt(1, int_d_bcode);
-							
-							rs = pstmt.executeQuery();
-							
-							if(rs.next()){
-								//회원이 관리자에게 돈 지불
-								pstmt = conn.prepareStatement(
-		"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, "+acDto.getD_ldealmoney()+",sysdate)");
-								pstmt.setInt(1, acDto.getD_lsender());
-								pstmt.setInt(2, acDto.getD_lreceiver());
-								pstmt.setInt(3, acDto.getD_lbno());
-								pstmt.setString(4, acDto.getD_lbcode());
-								pstmt.setInt(5, 1);
-								pstmt.setInt(6, 3);		 // 송금						
-								pstmt.setInt(7, 1);
-								//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
-
-								pstmt.executeUpdate();
-							
-
-								//회원이 관리자아게 돈 지불하여 회원자신의돈 차감
-								pstmt = conn.prepareStatement(
-		"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, -"+acDto.getD_ldealmoney()+",sysdate)");
-								pstmt.setInt(1, acDto.getD_lsender());
-								pstmt.setInt(2, acDto.getD_lsender());
-								pstmt.setInt(3, acDto.getD_lbno());
-								pstmt.setString(4, acDto.getD_lbcode());
-								pstmt.setInt(5, 1);
-								pstmt.setInt(6, 4);		//송금시 차감				
-								pstmt.setInt(7, 1);
-								//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
-
-								pstmt.executeUpdate();
-								
-								sumdealmoney += acDto.getD_ldealmoney();
-								System.out.println(sumdealmoney);//-----------------------------------------------
-
-							}
-							
-							
-						}
-
+						sumdealmoney = acDto.getD_ldealmoney();
 					}
-					
-				}catch(Exception e){
-					e.printStackTrace();
-				}finally{
-					if(rs != null)try{rs.close();}catch(SQLException ex){}
-					if(pstmt != null)try{pstmt.close();}catch(SQLException ex){}
-					if(conn != null)try{conn.close();}catch(SQLException ex){}
 				}
-				
-				return sumdealmoney;
+
+				//회원이 관리자에게 돈 지불
+				pstmt = conn.prepareStatement(
+"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, "+acDto.getD_ldealmoney()+",sysdate)");
+				pstmt.setInt(1, acDto.getD_lsender());
+				pstmt.setInt(2, acDto.getD_lreceiver());
+				pstmt.setInt(3, acDto.getD_lbno());
+				pstmt.setString(4, acDto.getD_lbcode());
+				pstmt.setInt(5, 1);
+				pstmt.setInt(6, 3);		 // 송금						
+				pstmt.setInt(7, 1);
+				//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
+
+				pstmt.executeUpdate();
+			
+
+				//회원이 관리자아게 돈 지불하여 회원자신의돈 차감
+				pstmt = conn.prepareStatement(
+"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, -"+acDto.getD_ldealmoney()+",sysdate)");
+				pstmt.setInt(1, acDto.getD_lsender());
+				pstmt.setInt(2, acDto.getD_lsender());
+				pstmt.setInt(3, acDto.getD_lbno());
+				pstmt.setString(4, acDto.getD_lbcode());
+				pstmt.setInt(5, 1);
+				pstmt.setInt(6, 4);		//송금시 차감				
+				pstmt.setInt(7, 1);
+				//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
+
+				pstmt.executeUpdate();
 			}
 			
-			//---------------------------------------------- 장바구니 -> 구매 (d_bdelivery에 저장)--------------------------//
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(rs != null)try{rs.close();}catch(SQLException ex){}
+			if(pstmt != null)try{pstmt.close();}catch(SQLException ex){}
+			if(conn != null)try{conn.close();}catch(SQLException ex){}
+		}
+		
+		return sumdealmoney;
+	}
+	
+	//---------------------------------------------- 장바구니 -> 구매 (d_bdelivery에 저장)--------------------------//
 
 			//----------------------------------------------- 장바구니 d_sell 총 금액 출력 -----------------------------------------------//
 			public int getBookBuyTotal(int br_no, String cols) throws Exception {
@@ -1134,7 +1129,7 @@ public class CartDao implements SuperAction{
 				
 			}
 	
-	
+			
 			//----------------------------------------------- 장바구니 출력 -----------------------------------------------//
 			public String getCartsd_bcode(int br_no, String cols) throws Exception {
 				String result = "";
@@ -1165,7 +1160,8 @@ public class CartDao implements SuperAction{
 			}
 			
 			
-			//----------------------------------------------- 장바구니 출력 끝-----------------------------------------------//			
+			//----------------------------------------------- 장바구니 출력 끝-----------------------------------------------//
+			
 			
 			//----------------------------------------------- 장바구니 이용, d_onBook 온라인서점 에서 회원이 책구매 -------------------//
 			public void D_onBookCartValueAdminToUser(int sumdealmoney, int br_no, AcDto acDto) throws Exception {
@@ -1180,7 +1176,7 @@ public class CartDao implements SuperAction{
 					rs = pstmt.executeQuery();
 					if(rs.next()){
 						d_cashUser = rs.getInt(1);
-						System.out.println(d_cashUser); //1-----------------------------------
+						
 						d_cashUser = d_cashUser - sumdealmoney;
 					}
 					
@@ -1197,7 +1193,7 @@ public class CartDao implements SuperAction{
 					rs = pstmt.executeQuery();
 					if(rs.next()){
 						d_cashAdmin = rs.getInt(1);
-						System.out.println(d_cashAdmin); //1----------------------------------------
+					
 						d_cashAdmin = d_cashAdmin + sumdealmoney;
 					}
 					
@@ -1263,7 +1259,7 @@ public class CartDao implements SuperAction{
 					rs = pstmt.executeQuery();
 					if(rs.next()){
 						d_cashUser = rs.getInt(1);
-						System.out.println(d_cashAdmin); //1----------------------------------------
+					
 						d_cashUser = d_cashUser + acDto.getD_ldealmoney();
 					}
 					
@@ -1299,9 +1295,10 @@ public class CartDao implements SuperAction{
 			}		
 			//----------------------------------------------- 장바구니 이용, d_onBook 온라인서점 에서 회원이 책구매 시 DoIT 전체 수익 table 업뎃 끝 -------------------//
 
+				
 			
 			
-			
+	
 }
 
 

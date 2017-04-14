@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-
-    
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
@@ -53,10 +50,10 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>4546844-5846845-6543432</td>
-							<td>16,000 원</td>
-							<td>0 원</td>
-							<td>16,000 원</td>
+							<td>${adto.d_acnum}</td>
+							<td>? 원</td>
+							<td>? 원</td>
+							<td>${adto.d_cash}원</td>
 						</tr>	
 					</tbody>
 					
@@ -74,19 +71,30 @@
 							<tr>
 								<th>사용일자</th>
 								<th>구분</th>
+								<th>보낸사람</th>
+								<th>받는사람</th>
 								<th>상세내역(사용 서비스)</th>
 								<th>거래금액</th>
 								<th>거래 후 잔액</th>
 							</tr>
 						</thead>
 						<tbody>
+						
+						<c:forEach var="account"  items="${accountList}">
 							<tr>
-								<td>2017-04-10 20:20:20</td>
-								<td><a>충전</a></td>
-								<td>도서구매서비스</td>
-								<td>35,000</td>
-								<td>16,000</td>
+								<td>${account.d_ldate}</td>
+								<td>${account.d_ldivision}</td>
+								<td>${account.d_lsender}</td>
+								<td>${account.d_lreceiver}</td>
+								<td>
+									<c:if test="${account.d_ldealtype == 1}"> 입금 </c:if>
+									<c:if test="${account.d_ldealtype == 2}"> 출금 </c:if>
+									<c:if test="${account.d_ldealtype == 3}"> 계좌이체(받음) </c:if>
+									<c:if test="${account.d_ldealtype == 4}"> 계좌이체(보냄) </c:if>
+								</td>
+								<td>${account.d_ldealmoney}</td>
 							</tr>	
+						</c:forEach>
 						</tbody>
 					</table>
 				</div>

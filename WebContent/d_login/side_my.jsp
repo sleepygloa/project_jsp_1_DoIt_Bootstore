@@ -8,17 +8,18 @@
 	<ul class="my_side_ul">
 		<li><a href="/DoIt/d_login/myInfo.do">내 정보 보기</a></li>
 		<li><a href="/DoIt/d_login/update.do">회원정보 수정</a></li>
-		<li><a href="/DoIt/d_login/myCash.do">Å Cash 충전 및 내역</a></li>
 		<li><a href="/DoIt/d_login/myList.do?cols=dr_rent">나의 주문 목록</a></li>
 		<li><a href="/DoIt/d_login/delete.do">회원탈퇴</a></li>
 		
-		<ul class="my_side_ul">
-			<li><a href="/DoIt/d_login/mySellList.do">판매 중인 책 조회</a></li>
-		</ul>	
+		<li style="border-top:solid 2px black"><a href="/DoIt/d_login/myCash.do">Å Cash 충전 및 내역</a></li>
+		<li><a href="/DoIt/d_login/mySellList.do">판매 중인 책 조회</a></li>
+		
+		<%-- 이동완료
 		<ul class="my_side_ul">
 			<li><a href="/DoIt/d_login/user_BuyBookList.do">주문/배송 조회</a></li>
 			<li><a href="/DoIt/d_login/user_BuyBook_CancelList.do">취소처리현황</a></li>
 		</ul>
+		--%>
 		
 		<%-- 직거래-  판매자만 --%>
 		<c:if test="${ 1 < sessionScope.memMG }">

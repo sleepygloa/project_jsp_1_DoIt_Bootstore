@@ -21,7 +21,7 @@
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/d_rent.css">
 		
 		<%-- 관리자페이지 css --%>
-		<link rel="stylesheet" type="text/css"  href="/DoIt/css/manage.css?ver=1">
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/manage.css?ver=6">
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/manage5.css">
 		
 		<%-- 직거래 css --%>

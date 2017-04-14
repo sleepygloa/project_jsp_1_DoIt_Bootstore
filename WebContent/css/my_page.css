@@ -84,7 +84,27 @@ font-size:12px; color:white; background:#283442; margin-top:15px; }
 
 .ddas2, .ddas3{ display:none; }
 
+.pan_list1{ width:100%; overflow:hidden; border:solid 1px #eaeaea;}
+.pan_list1 th{ text-align:center; height:50px; background:#f9f9f9; font-size:0.8em; border-bottom:solid 1px #eaeaea; }
+.pan_list1 td{ text-align:center; padding:10px 0px; font-size:0.8em; border-bottom:solid 1px #eaeaea; }
+.pan_list1 td:nth-child(4){ border-left:solid 1px #eaeaea }
+.pan_list1 td img{ width:100px; height:140px; }
+.text_left{ text-align:left; padding-left:15px; }
+.list_con3 li{ font-size:1.1em; height:25px; }
+.list_con3 li:nth-child(1){ height:30px; font-size:1.5em; color:#3DB7CC; font-weight:bold;  }
 
+
+
+/* 판매중인 상품 상세보기 */
+.det_pan_del1{ width:30%;  margin-top:50px;}
+.det_pan_del1 img { width:250px; height:300px; }
+
+.det_pan_del2{ width:66%; margin-top:50px;}
+.det_pan_del2 ul li span{ display:inline-block; width:100px; }
+.pan_deliu2, .pan_deliu3{ border-bottom:solid 1px #eaeaea; padding:20px 0px; }
+.pan_deliu1{ padding-top:0px; padding-bottom:20px; border-bottom:solid 2px #eaeaea }
+
+.det_pan_del3{ width:100%; clear:both; }
 
 /***************************************** 캐쉬 충전 및 내역 **************************************************/
 .cash_tab{ width:100%; overflow:hidden; border-top:2px solid #eb061a; margin-top:30px; }

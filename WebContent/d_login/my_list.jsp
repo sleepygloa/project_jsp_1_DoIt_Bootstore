@@ -33,7 +33,8 @@
 				<p class="my_sub_title" style="border:none; padding:0px; margin-top:10px;">
 					<span>* 대여 / 구매 목록 중 원하시는 버튼을 눌러주세요.</span>
 				</p>
-
+				
+				
 				<jsp:include page="/d_login/${ my_li }.jsp"></jsp:include>
 				
 			</article>

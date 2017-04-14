@@ -54,8 +54,6 @@ public class CartInsertAction1 implements SuperAction{
 			
 			//장바구니 생성 여부 판단
 			boolean check = cdo.checkASD(br_no);
-			System.out.println(br_no);
-			System.out.println(check);
 			if(!check){ //장바구니 레코드가 없는 경우
 				cdo.insASD(br_no);
 			}//신규 생성 및 삽입

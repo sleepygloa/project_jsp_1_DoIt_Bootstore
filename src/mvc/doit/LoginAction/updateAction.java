@@ -17,8 +17,10 @@ public class updateAction implements SuperAction {
 		
 		LoginDao log = LoginDao.getInstance();
 		LoginDto lto = log.getMember(id); //회원정보 꺼냄
+
 		
 		request.setAttribute("lto", lto); //회원정보 저장하여 전송
+
 		
 		return "/d_login/my_mody.jsp";
 	}

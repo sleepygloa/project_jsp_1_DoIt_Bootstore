@@ -60,7 +60,7 @@ public class OnBookAction implements SuperAction {
 		
 	
 	
-		return "/d_admin/onBook.jsp";
+		return "/d_manage/man_part4_1.jsp";
 	}
 
 }

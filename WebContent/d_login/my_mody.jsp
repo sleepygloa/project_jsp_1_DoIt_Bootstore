@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--------------- header include --------------%>
 <jsp:include page="/header.jsp"></jsp:include>
 
@@ -76,7 +77,7 @@
 						<tr>
 							<td>이메일</td>
 							<td>
-								<input type="text" value="${ lto.getUser_mail1() }" name="user_mail1" class="input_01" /> @ 
+								<input type="text" value="${ lto.getUser_mail1() }" name="user_mail1" class="input_01" />@ 
 								<select name="user_mail2" class="input_04">
 									<option value="naver.com" selected>naver.com</option>
 									<option value="hanmail.net">hanmail.net</option>

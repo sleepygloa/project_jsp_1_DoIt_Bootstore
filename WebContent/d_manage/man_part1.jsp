@@ -129,6 +129,15 @@
          	</article>
          	<%-- 도서관 배송 리스트 끝--%>
 			
+			
+			<%-- 사용자 취소, 구매 신청 / 완료 --%>
+			<%-- man_part1_1 : 구매 신청,완료 리스트 --%>
+			<%-- man_part1_2 : 취소 신청, 완료 리스트 --%>
+				
+			<jsp:include page="/d_manage/${ man_part_li }.jsp"></jsp:include>
+				
+			
+			
          </section>
          <%-- section 속에 아티클 단위로 입력해서 넣으시면 됩니다. 사이즈 : 자동 끝--%>
          

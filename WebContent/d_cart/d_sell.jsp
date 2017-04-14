@@ -30,16 +30,16 @@
 								</c:if>				
 							</span></p>
 							<c:if test="${buy == 'cart'}">
-							<p><a>정가</a><span>${d_total - d_totalDis}원</span></p>
+							<p><a>정가</a><span>${d_total}원</span></p>
 							</c:if>
 							<c:if test="${buy == 'buy'}">
 							<p><a>정가</a><span>${dto.d_bvalue}원</span></p>
 							</c:if>
 							<c:if test="${buy == 'buy'}">
-							<p><a>책등급가</a><span>${dto.d_bvalue - dto.d_bsellvalue}원</span></p>
+							<p><a>책등급가 할인</a><span>${dto.d_bvalue - dto.d_bsellvalue}원</span></p>
 							</c:if>
 							<c:if test="${buy == 'cart'}">
-							<p><a>회원등급 할인</a><span>${d_total - d_totalDis - d_bgradevalue}원</span></p>
+							<p><a>회원등급 할인</a><span>${d_total - d_bgradevalue}원</span></p>
 							</c:if>
 							<c:if test="${buy == 'buy'}">
 							<p><a>회원등급 할인</a><span>${dto.d_bsellvalue - d_bgradevalue}원</span></p>

@@ -119,26 +119,30 @@ public class AcDao {
        try{
          conn = getConnection();
          pstmt = conn.prepareStatement(
-        		 "select a.*, l.* from d_account a, d_log l where a.d_no = l.d_lreceiver and  a.d_no = " + d_no +" order by d_ldate desc"
+"select a.d_acno,a.d_no,a.d_acnum,a.d_cash,a.d_acregdate,l.d_lno,l.d_lsender,l.d_lreceiver,l.d_lbno,l.d_lbcode,l.d_ldivision,l.d_ldealtype,l.d_ldealresult,l.d_ldealmoney,l.d_ldate " +
+" from d_account a, d_log l where a.d_no = l.d_lreceiver and  a.d_no = "+d_no+" order by d_ldate desc"
         		 );
          rs = pstmt.executeQuery();
-         if(rs.next()){
+         if(rs.next()){ //받는사람이 자신인 계좌와 로그 를 불러옴.
         	 adto = new AcDto();
         	 adto.setD_acno(rs.getInt("d_acno"));
         	 adto.setD_no(rs.getInt("d_no"));
         	 adto.setD_acnum(rs.getString("d_acnum"));
+        	 adto.setD_acnum(rs.getString("d_cash"));
         	 adto.setD_acregdate(rs.getTimestamp("d_acregdate"));
         	 adto.setD_lno(rs.getInt("d_lno"));
         	 adto.setD_lsender(rs.getInt("d_lsender"));
         	 adto.setD_lreceiver(rs.getInt("d_lreceiver"));
+        	 adto.setD_lbcode(rs.getString("d_lbno"));
         	 adto.setD_lbcode(rs.getString("d_lbcode"));
-        	 adto.setD_ldealmoney(rs.getInt("d_ldealmoney"));
+        	 adto.setD_ldealmoney(rs.getInt("d_ldivision"));
         	 adto.setD_ldealtype(rs.getInt("d_ldealtype"));
         	 adto.setD_ldealresult(rs.getInt("d_ldealresult"));
+        	 adto.setD_ldealresult(rs.getInt("d_ldealmoney"));
         	 adto.setD_ldate(rs.getTimestamp("d_ldate"));
  
          }else{
-             pstmt = conn.prepareStatement(
+             pstmt = conn.prepareStatement( // 자신의 계좌만 불러옴
             		 "select * from d_account where d_no = " + d_no 
             		 );
              rs = pstmt.executeQuery();
@@ -147,6 +151,7 @@ public class AcDao {
             	 adto.setD_acno(rs.getInt("d_acno"));
             	 adto.setD_no(rs.getInt("d_no"));
             	 adto.setD_acnum(rs.getString("d_acnum"));
+            	 adto.setD_acnum(rs.getString("d_cash"));
             	 adto.setD_acregdate(rs.getTimestamp("d_acregdate"));
             	 adto.setD_ldealmoney(0);
              }else{}
@@ -167,7 +172,7 @@ public class AcDao {
     
     
     public void MyMoneyToAccout(int d_acMyMoney, int d_no, int d_acRequest) throws Exception{
-        int d_lsummoney = 0;
+        int userD_cash = 0;
           try{
             conn = getConnection();
            pstmt = conn.prepareStatement(
@@ -176,24 +181,35 @@ public class AcDao {
            rs = pstmt.executeQuery();
            
            if(rs.next()){
-          	 do{
-          		 d_lsummoney += rs.getInt(1); //카운트 첫번째 행의 값을 출력하여 x에 대입
-          	 }while(rs.next());
+
+        	   userD_cash = rs.getInt(1); //카운트 첫번째 행의 값을 출력하여 x에 대입
+
            }
             
             
             if(d_acRequest == 2){
             pstmt = conn.prepareStatement(
-           		 "insert into d_log values(account_log.NEXTVAL, "+d_no+", "+d_no+", 'd_aSelf', "+d_acMyMoney+",  1, 1, sysdate)"                            
+           		 "insert into d_log values(account_log.NEXTVAL, "+d_no+", "+d_no+", 0, 'd_aSelf', 2, 1, 1, "+d_acMyMoney+", sysdate)"                            
            		 );
             }else{
-            	if(d_acMyMoney > d_lsummoney){
+            	
+            	pstmt = conn.prepareStatement(
+            			"select * from d_account where d_no = "+d_no
+            			);
+            	rs = pstmt.executeQuery();
+            	if(rs.next()){
+            		userD_cash = rs.getInt(1); //회원읜 d_account의 총금액(잔액)
+            	}
+            	
+            	
+            	
+            	if(d_acMyMoney > userD_cash){
 	                pstmt = conn.prepareStatement(
-	          		 "insert into d_log values(account_log.NEXTVAL, "+d_no+", "+d_no+", 'd_aSelf', -"+d_lsummoney+",  1, 1, sysdate)"                            
+	          		 "insert into d_log values(account_log.NEXTVAL, "+d_no+", "+d_no+", 0, 'd_aSelf', 2, 2, 1, -"+userD_cash+", sysdate)"                            
 	          		 );
             	}else{
                     pstmt = conn.prepareStatement(
-             		 "insert into d_log values(account_log.NEXTVAL, "+d_no+", "+d_no+", 'd_aSelf', -"+d_acMyMoney+",  1, 1, sysdate)"                            
+             		 "insert into d_log valuesaccount_log.NEXTVAL, "+d_no+", "+d_no+", 0, 'd_aSelf', 2, 2, 1, -"+d_acMyMoney+", sysdate)"                            
              		 );
             	}
             }
@@ -271,9 +287,9 @@ public class AcDao {
           try{
             conn = getConnection();
             pstmt = conn.prepareStatement(
-"select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver,d_lbcode, d_ldealmoney, d_ldealtype, d_ldealresult, to_char(d_ldate, 'yyyy-mm-dd HH:mm') AS d_ldateS, r " + 
-"from (select d_acno, d_no, d_acnum, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lbcode, d_ldealmoney, d_ldealtype, d_ldealresult, d_ldate, rownum r " + 
-"from (select a.d_acno, a.d_no, a.d_acnum, a.d_acregdate, l.d_lno, l.d_lsender, l.d_lreceiver, l.d_lbcode, l.d_ldealmoney, l.d_ldealtype, l.d_ldealresult, l.d_ldate " +
+"select d_acno, d_no, d_acnum, d_cash, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lbno,d_lbcode, d_ldealmoney, d_ldivision, d_ldealtype, d_ldealresult, to_char(d_ldate, 'yyyy-mm-dd HH:mm') AS d_ldateS, r " + 
+"from (select d_acno, d_no, d_acnum, d_cash, d_acregdate, d_lno, d_lsender, d_lreceiver, d_lbno, d_lbcode, d_ldealmoney, d_ldivision, d_ldealtype, d_ldealresult, d_ldate, rownum r " + 
+"from (select a.d_acno, a.d_no, a.d_acnum, a.d_cash, a.d_acregdate, l.d_lno, l.d_lsender, l.d_lreceiver, l.d_lbno, l.d_lbcode, l.d_ldealmoney, l.d_ldivision, l.d_ldealtype, l.d_ldealresult, l.d_ldate " +
 "from d_log l, d_account a  where a.d_no = l.d_lreceiver and l.d_lreceiver = " + d_no + " order by d_ldate asc)) where r >= " + startRow + " and r <= " + endRow
            		 );
             rs = pstmt.executeQuery();
@@ -285,11 +301,14 @@ public class AcDao {
                    	 adto.setD_acno(rs.getInt("d_acno"));
                    	 adto.setD_no(rs.getInt("d_no"));
                    	 adto.setD_acnum(rs.getString("d_acnum"));
+                   	 adto.setD_cash(rs.getInt("d_cash"));
                    	 adto.setD_acregdate(rs.getTimestamp("d_acregdate"));
                    	 adto.setD_lno(rs.getInt("d_lno"));
                    	 adto.setD_lsender(rs.getInt("d_lsender"));
                    	 adto.setD_lreceiver(rs.getInt("d_lreceiver"));
+                   	 adto.setD_lbno(rs.getInt("d_lbno"));
                    	 adto.setD_lbcode(rs.getString("d_lbcode"));
+                   	 adto.setD_ldivision(rs.getInt("d_ldivision"));
                    	 adto.setD_ldealmoney(rs.getInt("d_ldealmoney"));
                    	 adto.setD_ldealtype(rs.getInt("d_ldealtype"));
                    	 adto.setD_ldealresult(rs.getInt("d_ldealresult"));

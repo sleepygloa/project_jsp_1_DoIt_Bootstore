@@ -1581,13 +1581,13 @@ public List Admin_OnBookList(int start, int end) throws Exception{
      conn = getConnection();
 
      pstmt = conn.prepareStatement("SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher, d_bauthor, d_bgenre,d_bgenre2, d_blocation,"
-       		+ "d_bregistdate,d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, D_icode, d_id, d_bgradevalue, d_bdate,"
+       		+ "d_bregistdate,d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue,d_id, d_bgradevalue, d_bdate,"
        		+ "d_sno, d_sfinish, d_sdate ,d_norder, d_nintro, r FROM "
-       		+ "(SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher, d_bauthor, d_bgenre, d_bgenre2, d_blocation,"
-       		+ "d_bregistdate, d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, D_icode, d_id, d_bgradevalue, d_bdate, "
-       		+ "d_sno,d_bgradevalue  d_sfinish, d_sdate ,d_norder, d_nintro, rownum r FROM "
+       		+ "(SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher, d_bauthor, d_bgenre,d_bgenre2, d_blocation,"
+       		+ "d_bregistdate,d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue,d_id, d_bgradevalue, d_bdate, "
+       		+ "d_sno, d_sfinish, d_sdate ,d_norder, d_nintro, rownum r FROM "
        		+ "(SELECT b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation,"
-       		+ "b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.D_icode, b.d_id, b.d_bgradevalue, b.d_bdate, "
+       		+ "b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.d_id, b.d_bgradevalue, b.d_bdate, "
        		+ "s.d_sno, s.d_sfinish, s.d_sdate, n.d_norder, n.d_nintro FROM "
        		+ "d_onSellList s, d_onBook b, d_onBookIntro n where s.d_sfinish=2 and s.d_bcode = b.d_bcode and b.d_bcode= n.d_bcode)order by d_sno asc) where r >= ? and r <=?");
      
@@ -1602,6 +1602,7 @@ public List Admin_OnBookList(int start, int end) throws Exception{
       	  dto.setD_bno(rs.getInt("d_bno"));
             dto.setD_bcode(rs.getInt("d_bcode"));
             dto.setD_bname(rs.getString("d_bname"));
+            dto.setD_bgrade(rs.getString("d_bgrade"));
             dto.setD_bpublisher(rs.getString("d_bpublisher"));
             dto.setD_bauthor(rs.getString("d_bauthor"));
             dto.setD_bgenre(rs.getString("d_bgenre"));
@@ -1611,12 +1612,15 @@ public List Admin_OnBookList(int start, int end) throws Exception{
             dto.setD_bpic(rs.getString("d_bpic"));
             dto.setD_bcount(rs.getInt("d_bcount"));
             dto.setD_bvalue(rs.getInt("d_bvalue"));
-            dto.setD_id(rs.getString("d_id"));                
+            dto.setD_bsellvalue(rs.getInt("d_bsellvalue"));   
+            dto.setD_id(rs.getString("d_id"));
             dto.setD_bgradevalue(rs.getInt("d_bgradevalue"));
             dto.setD_bdate(rs.getTimestamp("d_bdate"));
             
       	  dto.setD_sno(rs.getInt("d_sno"));
-      	  dto.setD_sfinish(rs.getInt("d_sfinish"));     
+      	  dto.setD_sfinish(rs.getInt("d_sfinish"));    
+      	  
+      	  System.out.println(rs.getInt("d_sfinish"));
       	  
       	  dto.setD_norder(rs.getString("d_norder"));
       	  dto.setD_nintro(rs.getString("d_nintro"));
@@ -1821,7 +1825,7 @@ public int Admin_BuyBook_Count() throws Exception{
 	 int x = 0;
 	 try{
 	    conn = getConnection();
-	    pstmt = conn.prepareStatement("select  count(*) from d_bdelivery where d_bdelibery BETWEEN 0 AND 22");
+	    pstmt = conn.prepareStatement("select  count(*) from d_bdelivery where d_bdelibery BETWEEN 20 AND 22");
 	    
 	    rs = pstmt.executeQuery();
 	    if(rs.next()){

@@ -31,7 +31,7 @@
 	
 		<table class="board_wrap" cellspacing="0">
 			<colgroup>
-				<col width="10%"><col width="50%"><col width="10%"><col width="10%"><col width="20%">
+				<col width="10%"><col width="45%"><col width="10%"><col width="10%"><col width="10%"><col width="15%">
 			</colgroup>
 			<thead>
 				<tr>
@@ -39,7 +39,8 @@
 					<th>판매자 소개</th>
 					<th>신청자 ID</th>
 					<th>승인상태</th>
-					<th>제어</th>
+					<th style="text-align:center;">승인</th>
+					<th>거절/강등</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -71,10 +72,15 @@
 			   					<c:if test="${article.d_mech_grade==2 }">승인</c:if>
 			   				</a>
 			   			</td>
+			   			<td style="text-align:center;">
+			   				<p class="write_bu" >
+			   					<a onclick="window.location='/DoIt/d_admin/callOkPro.do?d_id=${article.d_id}'" >승인하기</a>
+			   				</p>
+			   			</td>
 			   			<td>
 			   				<p class="write_bu">
-			   					<a onclick="window.location='/DoIt/d_admin/callOkPro.do?d_id=${article.d_id}'" >승인하기</a>
-			   					<a onclick="window.location='/DoIt/d_admin/callNoPro.do?d_id=${ article.d_id }'">거절 / 강등</a>
+			   					<a onclick="window.location='/DoIt/d_admin/callNoPro.do?d_id=${ article.d_id }'">거절</a>
+			   					<a onclick="window.location='/DoIt/d_admin/callNoPro.do?d_id=${ article.d_id }'">강등</a>
 			   				</p>
 			   			</td>
 					</tr>

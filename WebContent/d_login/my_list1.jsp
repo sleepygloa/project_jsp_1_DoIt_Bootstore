@@ -4,12 +4,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 				<%-- 도서관 대여 목록 --%>
-				
 				<ul class="my_list_tab">
 					<li class="click_tab1"><a href="/DoIt/d_login/myList.do?cols=dr_rent" class="ta_1a">나의 대여목록</a></li>
-					<li class="click_tab2"><a href="#" class="ta_1a">나의 구매목록</a></li>
+					<li class="click_tab2"><a href="/DoIt/d_login/myList.do?cols=dr_pan" class="ta_1a">주문/배송/취소 조회</a></li>
 					<li class="click_tab2"><a href="/DoIt/d_login/myList.do?cols=dr_resell" class="ta_1a">관심상품 / 경매 내역</a></li>
 				</ul>
+				
 				
 					<%-- 제목 div --%>
 					<div class="list_taa">

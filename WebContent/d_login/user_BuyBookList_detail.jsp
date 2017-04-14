@@ -9,89 +9,106 @@
 <jsp:include page="/d_login/side_my.jsp" />
 
 <article class="my_cont_wrap">
-	<form action="/DoIt/d_login/user_BuyBookList.do" method="post">
-			<div>
-				<p id="OnBook_detail_title">${dto.d_bname}</p>
-				<p class="detail_line"></p>
+	
+	
+	<%-- 본문 제목 --%>
+	<p class="my_title">
+		마이 페이지
+	</p>
+	<p class="my_sub_title">
+		판매중인 책 내용 상세페이지 입니다.
+		<span>해당도서의 도서 내용을 출력합니다. 확인을 누를시 리스트로 이동합니다.</span>
+	</p>
 				
-				<article id="detail_con">
-					<section id="detail_left">
-						<div class="detail_img">
-							<img src="/DoIt/d_bpic/${dto.d_bpic}" alt="" class="">
-							<input type="hidden" name="d_bpic" value="${dto.d_bpic}">
-						</div>
-						<!-- <p class="detail_left_line"></p> -->
-						
-					
-					</section>
-					<section id="user_buybook">
-							<p class="detail_right_txt">책 정보</p>
-							<div class="detail_right_txtBox">
-									<p><span class="txtBox_spanTxt_1">책 이 름</span>  :   <span class="txtBox_spanTxt_2">${dto.d_bname}</span></p>
-									<input type="hidden" name="d_bcode" value="${dto.d_bcode}">
-									<p><span class="txtBox_spanTxt_1">저&nbsp;&nbsp;&nbsp; 자</span>  :   <span class="txtBox_spanTxt_2">${dto.d_bauthor}</span></p>
-									<p><span class="txtBox_spanTxt_1">출 판 사</span> :   <span class="txtBox_spanTxt_2">${dto.d_bpublisher}</span></p>
-									<p><span class="txtBox_spanTxt_1">장&nbsp;&nbsp;&nbsp; 르</span> :    <span class="txtBox_spanTxt_2">${dto.d_bgenre}</span></p>
-									<p><span class="txtBox_spanTxt_1">종&nbsp;&nbsp;&nbsp; 류</span> :    <span class="txtBox_spanTxt_2">${dto.d_bgenre2}</span></p>
-									<p><span class="txtBox_spanTxt_1">국 내/외</span> : <span class="txtBox_spanTxt_2">${dto.d_blocation}</span></p>
-									<p><span class="txtBox_spanTxt_1">출간날짜</span> : <span class="txtBox_spanTxt_2"> ${dto.d_bregistdate}</span></p>
-									<br/>
-									<p><span class="txtBox_spanTxt_1">정&nbsp;&nbsp;&nbsp; 가</span> : <span class="txtBox_spanTxt_2">${dto.d_bvalue}</span> \</p>
-									<p><span class="txtBox_spanTxt_1">판 매 가</span> : <span class="txtBox_spanTxt_2">${dto.d_bsellvalue}</span> \</p>
-									<p><span class="txtBox_spanTxt_1">결제금액</span> : <span class="txtBox_spanTxt_2">${dto.d_bsellvalue}</span> \</p>
-									
-							</div>
-							
-					</section>
-					</article>
-				</div>
+
+				
+	<%-- 본문 내용 -------------------%>
+	
+	<%-- 도서 내용  ------------%>	
+	<%-- 이미지 --%>
+	<article class="fl_le det_pan_del1">
+		<p>
+			<c:if test="${dto.d_bpic == null}">
+				<img src="/DoIt/images/ex_do.jpg" >
+			</c:if>
+			<c:if test="${dto.d_bpic != null}">
+				<img src="/DoIt/d_bpic/${dto.d_bpic}" >
+			</c:if>
+		</p>
+	</article>
+	
+	<%-- 도서 내용 --%>
+	<article class="fl_ri det_pan_del2">
+		<ul class="pan_deliu1">
+			<li><span>책이름</span>${dto.d_bname}</li>
+			<li><span>저자</span>${dto.d_bauthor}</li>
+			<li><span>출판사</span>${dto.d_bpublisher}</li>
+		</ul>
+		
+		<ul class="pan_deliu2">
+			<li><span>장르</span>${dto.d_bgenre}</li>
+			<li><span>종류</span>${dto.d_bgenre2}</li>
+			<li><span>국내 / 외</span>${dto.d_blocation}</li>
+			<li><span>출간날짜</span>${dto.d_bregistdate}</li>
+		</ul>
+		
+		<ul class="pan_deliu3">
+			<li><span>정가</span><a>${dto.d_bvalue}</a> 원</li>
+			<li><span>판매가</span><a>${dto.d_bsellvalue}</a> 원</li>
+			<li><span>결제금액</span><a class="co_red">${dto.d_bsellvalue}</a> 원</li>
+		</ul>
+	
+	</article>
+	
+	
+	<%-- 배송 정보 -------------%>		
+	<article class="det_pan_del3">
+		<p class="mana_Stitle fl_le">배송정보</p>
+		
+		<table class="lib_deli_tab" cellspacing="0">
+			<colgroup>
+				<col width="10%"><col width="10%"><col width="35%">
+				<col width="15%"><col width="35%">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>주문인</th>
+					<th>받으시는 분</th>
+					<th>주소</th>
+					<th>휴대전화번호</th>
+					<th>배송요청사항</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>${id}</td>			
+					<td>${DelDto.d_brecipient}</td>
+					<td>${LogDto.d_addr}</td>
+					<td>
+						${LogDto.getUser_phone1()} - 
+						${LogDto.getUser_phone2()} -
+						${LogDto.getUser_phone3()}
+					</td>
+					<td>${DelDto.d_brequested}</td>
+				</tr>
+			</tbody>		
+		</table>
+		
+		<%-- <p>결제 버튼을 누르면 결제가 완료됩니다.</p> 뒤로 이동--%>		
+		<p class="button_cell">
+			<a href="javascript:history.go(-1)" class="sub_button">확인</a>
+		</p>
+		
+	</article>
+
 				
 			<!-- 	<section id="detail_btn_box">
 					<input type="submit" value="수정 " class="detail_btn_modi">
 					<input type="button" value="취소"  
 					onclick="window.location='/DoIt/d_online/onSellBook.do'"  class="detail_btn_del">
 				</section> -->
-				
-				<p id="delivery_line"></p>
-				
-				<section id="user_delivery">
-					<p id="user_delivery_title">배송정보</p>
-					<table>
-						<tr>
-							<td>주문인</td>
-							<td>${id}</td>
-							
-						</tr>
-						<tr>
-							<td>받으시는 분</td>
-							<td>${DelDto.d_brecipient}</td>
-						</tr>
-						<tr>
-							<td>주소</td>
-							<td>${LogDto.d_addr}</td>
-						</tr>
-						<tr>
-							<td>휴대전화번호</td>
-							<td>
-								${LogDto.getUser_phone1()} - 
-								${LogDto.getUser_phone2()} -
-								${LogDto.getUser_phone3()}
-							</td>
-						</tr>
-						<tr>
-							<td>배송요청사항</td>
-							<td>${DelDto.d_brequested}</td>
-						</tr>
-						
-					</table>
-					
-					<%-- <p>결제 버튼을 누르면 결제가 완료됩니다.</p>--%>					
-					<input type="submit" value="확인">
-				</section>
-				
-		</form>
 
-</article>
+				
 
 <!-- footer import -->
 <%@include file="../footer.jsp" %>

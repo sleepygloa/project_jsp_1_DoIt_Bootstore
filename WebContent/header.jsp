@@ -19,7 +19,7 @@
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/join.css">
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/Login.css">
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/side_menu.css">
-		<link rel="stylesheet" type="text/css"  href="/DoIt/css/my_page.css?ver=1">
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/my_page.css?ver=3">
 		
 		
 		<%-- 직접판매 css삽입 --%>
@@ -33,7 +33,9 @@
 		
 		<%-- 직거래 css 삽입 --%>
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/resell.css">
-				
+		
+		<%-- 관리자페이지 css --%>
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/manage.css">
 		
 		<%-- 스크립트, Jquery  삽입 --%>
 		<script type="text/javascript" src="/DoIt/js/Join_Login.js" ></script>
@@ -203,7 +205,9 @@
 						<li><p style="border:solid 1px red; width:220px; height:80px;">로고 삽입</p></li>
 						<li><a href="#">회사소개</a></li>
 						<li><a href="/DoIt/d_online/onSellBook.do">온라인중고서점</a></li>
-
+						<li><a href="/DoIt/d_rent/list_cont.do?view_type=list_cont">DOIT 도서관</a></li>
+						<li><a href="/DoIt/d_resell/reList.do">중고직거래/경매</a></li>
+						<li><a href="#">고객센터</a></li>
 					</ul>
 					
 					<div class="s_list_con" style="display:none">
@@ -216,9 +220,32 @@
 							<li><a href="#">찾아오시는 길</a></li>
 						</ul>
 						<ul>
+							<!--
+							<li><a href="#">어린이 서적</a></li>
+							<li><a href="#">참고 / 전문서적</a></li>
+							<li><a href="#">소설 / 시 / 에세이</a></li>
+							<li><a href="#">인문학 서적</a></li>
+							<li><a href="#">과학 전문서적</a></li>
+							<li><a href="#">기타 서적 </a></li>
+							-->
 							<li><a href="/DoIt/d_online/onSellBook.do">온라인중고서점</a></li>
 						</ul>
-
+						<ul>
+							<li><a href="/DoIt/d_rent/list_cont.do?view_type=list_cont">DoIt 도서관</a></li>
+							<li><a href="/DoIt/d_rent/b_write.do">도서 기증신청</a></li>
+							<li><a href="/DoIt/d_login/myList.do?cols=dr_rent">도서 반납신청</a></li>
+						</ul>
+						<ul>
+							<li><a href="/DoIt/d_resell/sellerList.do">판매자 회원 소개</a></li>
+							<li><a href="/DoIt/d_resell/callForm.do">판매자 권한 신청</a></li>
+							<li><a href="/DoIt/d_resell/reList.do">중고 직거래</a></li>
+							<li><a href="/DoIt/d_bid/bidList.do">중고 경매</a></li>
+						</ul>
+						<ul>
+							<li><a href="#">공지사항</a></li>
+							<li><a href="#">Q & A 게시판</a></li>
+							<li><a href="#">1 : 1 문의 신청</a></li>
+						</ul>
 					</div>
 			</section> <%-- 대메뉴 끝 --%>
 			

@@ -53,7 +53,7 @@ public class OnBookProAction implements SuperAction {
 	 	String userGradeCheck = dao.getUserSellPurchaseCountToGrade(d_bcode, id, Check); //d_bcode로 방금 등록한 책의 정보를 불러옴
 
 	 	String d_id = multi.getParameter("d_id");
-	//---- 계좌 관리 ----d_log table에  관련코드(d_bcode(원래는 d_bdeliverycode이지만, 회원책판매는 1개씩판매한다는 가정))로 log 레코드 1개를 생성시킵니다.-----------------------------
+		//---- 계좌 관리 ----d_log table에  관련코드(d_bcode(원래는 d_bdeliverycode이지만, 회원책판매는 1개씩판매한다는 가정))로 log 레코드 1개를 생성시킵니다.-----------------------------
 	 	AcDao adao = AcDao.getInstance();
 	 	int d_no = dao.findIdToNo(multi.getParameter("d_id"));
 	 	AcDto acDto = new AcDto();
@@ -67,7 +67,7 @@ public class OnBookProAction implements SuperAction {
 	 	acDto.setD_ldealresult(1);				//거래 결과 0:거래생성, 1:거래완료, 2:거래취소
 	 	acDto.setD_ldealmoney(Integer.parseInt(multi.getParameter("d_bpurchasevalue")));	//거래금액
 	 	//d_ldate sysdate
-	 	System.out.println(d_no);
+
 	 	
 	 	
 	 	

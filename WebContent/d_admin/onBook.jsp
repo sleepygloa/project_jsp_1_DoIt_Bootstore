@@ -1,19 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<%--------------- header include --------------%>
-<jsp:include page="/header.jsp" />
-
-<%--------------- 사이드 메뉴 include --------------%>
-<jsp:include page="/d_admin/adminSide.jsp" />
-
-<article class="my_cont_wrap">
-	<section class="join_wrap">
-		
-	<section class="join_sec">
-	
+		<%-- 각 파트 제목 --%>
+               <div style="overflow:hidden;">
+                  <p class="mana_Stitle">기부도서 대기 리스트</p>
+               </div>
+               
 		<form action="/DoIt/d_admin/onBookPro.do" method="POST"  id="join_form" name="join_form" onsubmit="" enctype="multipart/form-data">
-			<p class="La_title">책 DB 등록</p>
 	
 			<%--><input type="d_bgrade" name="d_pass" id="jo_user_pw" class="input_01"/>--%>	
 			<table width="100%" cellspacing="0" class="join_01_ta">
@@ -120,7 +113,7 @@
 					<tr>
 						<td><span class="co_red">*</span>책 메인사진</td>
 						<c:if test="${dto.d_bpic != null}">
-							<td><span><img src="/DoIt/d_bpic/${dto.d_bpic}" /></span></td>
+							<td><span><img src="/DoIt/d_bpic/${dto.d_bpic}" style="width:300px;"/></span></td>
 							<input type="hidden" name="d_bpic" value="${dto.d_bpic}"/>
 						</c:if>
 						<c:if test="${dto.d_bpic == null}">
@@ -321,7 +314,4 @@
 			
 			
 		</form><!-- 책 등록 form 끝 -->
-	</section><!-- 책 등록 form section 끝 -->
-		
-	</section>
-</article>
+	

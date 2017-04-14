@@ -15,19 +15,19 @@ public class OnPurchaseInfoAction implements SuperAction {
 	 
 		request.setCharacterEncoding("utf-8");
 
-//---- 0. ê³µí†µë¶€ë¶„, ë³€ìˆ˜ì§€ì •, ë³€ìˆ˜ë¥¼ ë°›ì•„ì˜´. -------------------------------------------------------------		
-		String pageNum = request.getParameter("pageNum");//í˜ì´ì§€ ë²ˆí˜¸
+//---- 0. °øÅëºÎºĞ, º¯¼öÁöÁ¤, º¯¼ö¸¦ ¹Ş¾Æ¿È. -------------------------------------------------------------		
+		String pageNum = request.getParameter("pageNum");//ÆäÀÌÁö ¹øÈ£
         if (pageNum == null) {
-            pageNum = "1"; //1í˜ì´ì§€ë‹¹ 10ê¶Œì˜ ì±… ë³´ì—¬ì¤Œ
+            pageNum = "1"; //1ÆäÀÌÁö´ç 10±ÇÀÇ Ã¥ º¸¿©ÁÜ
         }
-        int pageSize = 10;//í•œ í˜ì´ì§€ì˜ ê¸€ì˜ ê°œìˆ˜
-        int currentPage = Integer.parseInt(pageNum); //í˜ì´ì§€ë²ˆí˜¸ë¥¼ Int ë¡œ ì €ì¥í•œ ê°’
-        int startRow = (currentPage - 1) * pageSize + 1;//í•œ í˜ì´ì§€ì˜ ì‹œì‘ê¸€ ë²ˆí˜¸, ì‹œì‘ ê¸€ ë²ˆí˜¸ 1
-        int endRow = currentPage * pageSize;//í•œ í˜ì´ì§€ì˜ ë§ˆì§€ë§‰ ê¸€ë²ˆí˜¸, ë§ˆì§€ë§‰ ë“±ë¡ê¸€ë²ˆí˜¸ 10
-        int count = 0; //ë³€ìˆ˜ ì´ˆê¸°í™”
-        int number = 0; //ë³€ìˆ˜ ì´ˆê¸°í™”		
+        int pageSize = 10;//ÇÑ ÆäÀÌÁöÀÇ ±ÛÀÇ °³¼ö
+        int currentPage = Integer.parseInt(pageNum); //ÆäÀÌÁö¹øÈ£¸¦ Int ·Î ÀúÀåÇÑ °ª
+        int startRow = (currentPage - 1) * pageSize + 1;//ÇÑ ÆäÀÌÁöÀÇ ½ÃÀÛ±Û ¹øÈ£, ½ÃÀÛ ±Û ¹øÈ£ 1
+        int endRow = currentPage * pageSize;//ÇÑ ÆäÀÌÁöÀÇ ¸¶Áö¸· ±Û¹øÈ£, ¸¶Áö¸· µî·Ï±Û¹øÈ£ 10
+        int count = 0; //º¯¼ö ÃÊ±âÈ­
+        int number = 0; //º¯¼ö ÃÊ±âÈ­		
 		
-//---- 1. ë³€ìˆ˜ë¥¼ ë°›ì•„ì˜´. d_bno ê°€ ìˆë‹¤ë©´, d_bcodeê°€ ìˆë‹¤ë©´ --------------------------------------------------
+//---- 1. º¯¼ö¸¦ ¹Ş¾Æ¿È. d_bno °¡ ÀÖ´Ù¸é, d_bcode°¡ ÀÖ´Ù¸é --------------------------------------------------
 		String d_bname = "";
 		int d_bno = 0;
 		if(request.getParameter("d_bno") != null){
@@ -39,11 +39,11 @@ public class OnPurchaseInfoAction implements SuperAction {
 		}
 		
 		
-        List<OnBookDto> articleList = null; //ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
-        OnDao dao = OnDao.getInstance();//DBì—°ë™
+        List<OnBookDto> articleList = null; //¸®½ºÆ® ÃÊ±âÈ­
+        OnDao dao = OnDao.getInstance();//DB¿¬µ¿
 		OnBookDto article = new OnBookDto();
 
-//---- í˜ì´ì§€ ì ‘ê·¼ìƒí™©ì„ ì„¤ì •í•˜ëŠ” Dao, d_bnoì¼ ë•Œ, d_bcodeì¼ ë•Œ(ë°”ë¡œì „ í˜ì´ì§€ëŠ” d_noë¡œ ì ‘ê·¼í–ˆì§€ë§Œ, ë™ì¼í•œ d_bnameì˜ list í˜ì´ì§€ì¸ ì—¬ê¸°ì—ì„œëŠ” d_bcodeë¡œ ì ‘ê·¼)--------------------------
+//---- ÆäÀÌÁö Á¢±Ù»óÈ²À» ¼³Á¤ÇÏ´Â Dao, d_bnoÀÏ ¶§, d_bcodeÀÏ ¶§(¹Ù·ÎÀü ÆäÀÌÁö´Â d_no·Î Á¢±ÙÇßÁö¸¸, µ¿ÀÏÇÑ d_bnameÀÇ list ÆäÀÌÁöÀÎ ¿©±â¿¡¼­´Â d_bcode·Î Á¢±Ù)--------------------------
 		String Check = "";
 		if(d_bno == 0){
 			if(d_bcode == 0){
@@ -56,26 +56,26 @@ public class OnPurchaseInfoAction implements SuperAction {
 				article = dao.getOnBookArticle(d_bno, Check);	
 		}
 		
-//---- Listë¥¼ ë½‘ëŠ” Dao-----------------------------------------------------
+//---- List¸¦ »Ì´Â Dao-----------------------------------------------------
 		d_bname = article.getD_bname();
 		count =  dao.getFindNameToNameCount(d_bname);
-		articleList = dao.getFindNameToName(d_bname, startRow, endRow);//ì±…ì˜ ì´ë¦„ê³¼ ê°™ì€ ì±…ë“¤ì„ List 
+		articleList = dao.getFindNameToName(d_bname, startRow, endRow);//Ã¥ÀÇ ÀÌ¸§°ú °°Àº Ã¥µéÀ» List 
 		
-//---- ì²«ë²ˆì§¸ í˜ì´ì§€ì—ì„œ ë³´ì—¬ì¤„ dto (í™”ë©´ ì•„ë˜ Listí´ë¦­ì‹œ ë³´ì—¬ì£¼ëŠ” dtoê°€ ì•„ë‹˜)-----------------------------------------------
-//d_bnoë¡œ ê²€ìƒ‰í•œ ì²«ë²ˆì§¸ í˜ì´ì§€ì˜ ì±…ì€ í˜„ì¬ íŒë§¤ê°€ëŠ¥í•œ ì±…ê³¼ ê±°ë¦¬ê°€ ë©€ê¸°ë•Œë¬¸ì— ë‹¤ì‹œ ê²€ìƒ‰ì„ í•´ì¤€ë‹¤.
+//---- Ã¹¹øÂ° ÆäÀÌÁö¿¡¼­ º¸¿©ÁÙ dto (È­¸é ¾Æ·¡ ListÅ¬¸¯½Ã º¸¿©ÁÖ´Â dto°¡ ¾Æ´Ô)-----------------------------------------------
+//d_bno·Î °Ë»öÇÑ Ã¹¹øÂ° ÆäÀÌÁöÀÇ Ã¥Àº ÇöÀç ÆÇ¸Å°¡´ÉÇÑ Ã¥°ú °Å¸®°¡ ¸Ö±â¶§¹®¿¡ ´Ù½Ã °Ë»öÀ» ÇØÁØ´Ù.
 		if(request.getParameter("d_bno") != null){
 			article = (OnBookDto)articleList.get(0);
 		}
 		
-//---- ìµœì €ê°€ ê²€ìƒ‰ ------------
+//---- ÃÖÀú°¡ °Ë»ö ------------
 		int MinD_bsellvalue = dao.getFindNameToMinSellValue(d_bname);
 		
-//---- ì •ê°€ëŒ€ë¹„ í• ì¸ ë˜ëŠ” ë¹„ìœ¨ ----------		
+//---- Á¤°¡´ëºñ ÇÒÀÎ µÇ´Â ºñÀ² ----------		
 		int valueToSellvaluePercent = 
 (int)(100 - 	((double)article.getD_bsellvalue() / (double)article.getD_bvalue() * 100));
 		
-//---- ë“±ê¸‰ì ìš© íŒë§¤ê°€ ----------
-//íšŒì›ì˜ ë“±ê¸‰ì„ ë¶ˆëŸ¬ì˜µë‹ˆë‹¤.
+//---- µî±ŞÀû¿ë ÆÇ¸Å°¡ ----------
+//È¸¿øÀÇ µî±ŞÀ» ºÒ·¯¿É´Ï´Ù.
 		HttpSession  session = request.getSession();
 		String d_id = (String)session.getAttribute("memId");
 		int gradeToSellValue = article.getD_bsellvalue();
@@ -88,7 +88,7 @@ public class OnPurchaseInfoAction implements SuperAction {
 					gradeToSellValue = (int)((double)gradeToSellValue * 0.9);
 				}else{}
 				
-        //í•´ë‹¹ ë·°ì—ì„œ ì‚¬ìš©í•  ì†ì„±
+        //ÇØ´ç ºä¿¡¼­ »ç¿ëÇÒ ¼Ó¼º
 	    request.setAttribute("currentPage", new Integer(currentPage));
         request.setAttribute("startRow", new Integer(startRow));
         request.setAttribute("endRow", new Integer(endRow));

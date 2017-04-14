@@ -25,7 +25,7 @@ public class CartPayAction implements SuperAction{
 		HttpSession session = request.getSession();
 		int br_no = (int)session.getAttribute("memNo"); //로그인 회원번호 불러오기
 		List br_code = (List)session.getAttribute("CartL");
-		String d_bcodesum = request.getParameter("d_bcodesum");
+		String d_bcodesum = request.getParameter("d_bcodesum");//장바구니 의 책들의 코드를 그대로 계좌에 사용하기 위해씀
 		String buy = request.getParameter("buy");
 		
 	
@@ -91,13 +91,10 @@ public class CartPayAction implements SuperAction{
 		 	acDto.setD_ldealresult(1);				//거래 결과 0:거래생성, 1:거래완료, 2:거래취소
 		 	acDto.setD_ldealmoney(Integer.parseInt(request.getParameter("d_bgradevalue")));	//거래금액
 		 	//d_ldate sysdate
-
 		 	
 		 	
 		 	if(buy.equals("cart")){
 		 		int sumdealmoney = cdo.moveCart_delivery(br_no, Ddto, LogDto,acDto, d_id); //결제 관련 코드 포함.
-		 		System.out.println(sumdealmoney);
-		 		System.out.println(br_no);
 		 		cdo.D_onBookCartValueAdminToUser(sumdealmoney,br_no,acDto); //doit전체 수익 table 코드
 		 		
 		 	}else if(buy.equals("buy")){
