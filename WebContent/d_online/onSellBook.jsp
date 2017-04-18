@@ -25,15 +25,18 @@
 		onclick="window.location='/DoIt/d_online/onSellForm.do?d_bno=0'">책 판매</button>
 
 </div>
+
 <hr />
 <div class="d-space20"></div>
 	<!-- 1. 새책을 파는 btn --끝-- -- -->	
 
 	<!-- 2. 검색  ----------- -->
-	<div class="grid-w2 d-center">
-		<form action="/DoIt/d_online/onSellBook.do" method="get">
-			<input type="text" class="form-control d-center" id="inputSuccess1" name="select" placeholder="판매하실 책 이름을 검색해주세요" />
-			<input class="btn btn-default grid-w2-btn"  type="submit" value="검색" />
+	<div>
+		<form action="/DoIt/d_online/onSellBook.do" method="get" class="search_bar" style="margin:0px; text-align:left; padding:10px 0px;">
+		<p>
+			<a><input type="text" id="inputSuccess1" name="select" placeholder="판매하실 책 이름을 검색해주세요" /></a>
+			<a><button type="submit" >검색</button></a>
+		</p>
 		</form>
 	</div>
 	<!-- 2. 검색 -- 끝  ----------- -->

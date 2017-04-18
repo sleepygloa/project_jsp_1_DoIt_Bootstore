@@ -2,5 +2,5 @@
 
 		<script>
 			alert("취소 신청되었습니다.");
-			window.location="/DoIt/d_login/user_BuyBookList.do";
+			window.location="/DoIt/d_login/myList.do?cols=dr_pan";
 		</script>

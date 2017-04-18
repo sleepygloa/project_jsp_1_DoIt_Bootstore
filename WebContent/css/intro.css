@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+/* 공통  */
+
+.bon_cont{width:820px;}
+.sub_title{overflow:hidden; width:100%; height:130px; background:url('../images/sub_bg.png') no-repeat; background-size:cover;}
+.sub_title p:nth-child(1){margin-top:20px; font-size:24px; color:#514d4b}
+.sub_title p:nth-child(2){margin-top:10px; font-size:16px;}
+.int1_part1{width:100%; overflow:hidden;}
+.int1_part1 p:nth-child(1){width:48%; height:300px; margin-right:1%}
+.int1_part1 p:nth-child(2){width:48%; height:300px; margin-left:1%}
+.int1_part1 p img{width:100%;}
+.int1_part1 p{float:left; overflow:hidden; margin-bottom:70px; font-size:16px; line-height:30px}
+.int1_part1 p span{color:#669999; display:block; font-weight:bold; font-size:18px; margin-bottom:20px;}
+.int_bot{width:100%; height:80px; margin-bottom:150px; overflow:hidden;}
+.int_bot img{width:30%; height:150px; margin-right:15px;}
+
+
+/* intro 3 - 상인조직회 */
+
+.jozic_title{width:820px; overflow:hidden; margin-top:50px;}
+.jozic_title p img{width:100%; margin:0 auto;}
+.jozic_sec{width:820px; overflow:hidden;}
+
+.jozic_info1{width:100%;}
+.jozic_info1 p{font-size:16px; font-weight:bold; margin-top:40px;}
+.jozic_info1 img{vertical-align:middle; margin-right:10px; color:#000}
+.jozic_info1 ul{width:820px; overflow:hidden; padding-left:40px;}
+.jozic_info1 ul li,.map_info2 li{list-style-type:disc; line-height:20px; margin-top:7px; font-size:14px; color:#514d4b;}
+
+.jozic_table{margin-top:7px; border-collapse: collapse; width: 100%;  border-top: 1px solid #686e70;  border-bottom: 1px solid #c1c5cd; color: #505050;}
+.jozic_table th{background-color: #f5f7f7; color: #4f565b; padding: 8px 4px 6px;  border-bottom: 1px solid #c1c5cd; border-left: 1px solid #dbdfe4; font-size:15px;}
+.jozic_table td{  padding: 6px 10px 4px 10px;border: 1px solid #e4e7ec; border-right: none;  border-top: none; font-size:14px; text-align:center;}
+.jozic_table td:nth-child(4){text-align:left;}

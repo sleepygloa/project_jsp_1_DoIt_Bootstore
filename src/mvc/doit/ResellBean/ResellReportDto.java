@@ -8,7 +8,15 @@ public class ResellReportDto {
 	private	String report_id;
 	private String d_id;
 	private Timestamp report_reg_date;
+	private	String report_content;
 	
+	
+	public String getReport_content() {
+		return report_content;
+	}
+	public void setReport_content(String report_content) {
+		this.report_content = report_content;
+	}
 	
 	public String getD_id() {
 		return d_id;

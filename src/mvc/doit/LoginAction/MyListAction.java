@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mvc.doit.Cart.CartDao;
+import mvc.doit.Login.LoginDto;
 import mvc.doit.Online.OnDao;
 import mvc.doit.ResellBean.BidbookDao;
 import mvc.doit.ResellBean.ResellbookDao;
@@ -123,6 +124,58 @@ public class MyListAction implements SuperAction{
 	        request.setAttribute("pageSize1", pageSize1);
 			request.setAttribute("number1", number1);
 	        request.setAttribute("articleList1", articleList1);
+	        
+	        
+	        //입찰내용
+	        int pageSize2 = 10;//한화면 게시물개수
+	        
+	        
+	        String pageNum2 = request.getParameter("pageNum2");
+	        if(pageNum2==null){
+	           pageNum2 = "1";
+	        }
+	        
+	        
+	        int currentPage2 = Integer.parseInt(pageNum2); //페이지번호
+	        int startRow2 = (currentPage2 -1) * pageSize2 +1; 
+	        int endRow2 = currentPage2 * pageSize2 +1; //마지막페이지 범위값을 계산한정보
+	        int count2 = 0;
+	        int number2 = 0;
+	        
+	        List articleList2 = null;
+	        BidbookDao article2 = BidbookDao.getInstance();
+	        
+	        
+	        //검색
+	        String search2 = request.getParameter("search2");
+	        if(search2 == null){
+	           //전체내용
+	           count2 = article2.getMyBidCount(id);
+	           if(count2 > 0){ //글이 있을때 BidList호출
+	              
+	              articleList2 = article2.getMyBidList(id, startRow2, endRow2);
+	           }
+	        }else{
+	           count2 = article2.BidMySearchCount(search2,id);
+	           if(count2 >0){
+	              articleList2 = article2.BidMySearch(search2, id, startRow2, endRow2);
+	           }
+	        }
+	        
+	        number2= count2 -(currentPage2-1)*pageSize2;
+	        
+	        LoginDto dto2=article2.getGrade(id);//회원  등급 확인을 위함
+	        
+	        request.setAttribute("currentPage2", new Integer(currentPage2));
+	        request.setAttribute("startRow2", new Integer(startRow2));
+	        request.setAttribute("endRow2", new Integer(endRow2));
+	        request.setAttribute("count2", new Integer(count2));
+	        request.setAttribute("pageSize2", new Integer(pageSize2));
+	        request.setAttribute("number2", new Integer(number2));
+	        request.setAttribute("articleList2", articleList2);
+	        request.setAttribute("bid_id2", id);
+	        request.setAttribute("dto2", dto2);
+	        
 	        
 			srt = "my_list3";
 			request.setAttribute("my_li", srt);

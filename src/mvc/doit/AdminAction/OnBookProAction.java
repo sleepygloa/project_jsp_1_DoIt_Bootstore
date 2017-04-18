@@ -74,6 +74,9 @@ public class OnBookProAction implements SuperAction {
 	 	//결제 결과가 0인 d_log 레코드한줄 추가하는 dao
 	 	adao.insertAccountLog(acDto);
 	 	CartDao cdo = CartDao.getInstance();
+
+	 	adao.upTMon(acDto.getD_ldealmoney(),d_no);
+	 	
 	 	cdo.D_onBookValueUserToAdmin(d_no,acDto);
 	 	
 	 	request.setAttribute("d_bcode", d_bcode);

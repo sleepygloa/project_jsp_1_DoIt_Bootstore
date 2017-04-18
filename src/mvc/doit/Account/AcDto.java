@@ -20,6 +20,7 @@ public class AcDto {
 	private int d_ldealtype;		//거래종류(방법)
 	private int d_ldealresult;		//거래결과
 	private int d_ldealmoney;		//거래금액	
+	private int d_ltomoney; 		//거래당시 잔액
 	private Timestamp d_ldate;		//거래 시간
 	
 //그외 사용하는 변수들
@@ -117,6 +118,13 @@ public class AcDto {
 	}
 	public void setD_ldealmoney(int d_ldealmoney) {
 		this.d_ldealmoney = d_ldealmoney;
+	}
+	
+	public int getD_ltomoney() {
+		return d_ltomoney;
+	}
+	public void setD_ltomoney(int d_ltomoney) {
+		this.d_ltomoney = d_ltomoney;
 	}
 	public int getD_lsummoney() {
 		return d_lsummoney;

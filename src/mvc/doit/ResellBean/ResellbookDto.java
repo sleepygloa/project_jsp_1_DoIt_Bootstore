@@ -24,8 +24,7 @@ public class ResellbookDto {
 	private int report_no;				//신고번호
 	private String report_id;			//신고한 아이디
 	private Timestamp report_reg_date;	//신고한 시간
-	private String report_content;      //신고한 내용
-	
+	private String report_content;		//신고내용
 //--join(resellintro)----------------------------------------------
 	private int rbook_finish_check;		//판매완료 개수 
 //--join(resellscrap)-------------------------------------------------------

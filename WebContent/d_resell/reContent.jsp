@@ -30,13 +30,42 @@
 		<%-- 상단 제목 내용 wrap --%>
 		<div class="cont_title_wrap">
 			
-			<p class="top_res">
-				<c:if test="${!id.equals(article.rbook_id)}">
-					<input class="reConten_btn" type="button" value="신고하기" 
-						onclick="document.location.href='/DoIt/d_resell/reReport.do?rbook_no=${article.rbook_no}&pageNum=${pageNum}&report_id=${id}&report_id2=${article.rbook_id}'"/>
-					<input type="hidden" name="rbook_no" value="${article.rbook_no }"/>	
+			<div class="title_but">	
+				<c:if test="${ sessionScope.memId == null }">
+					<p class="fl_ri ri_ti" onclick="board_se()">신고하기</p>
 				</c:if>
-			</p>
+				<c:if test="${ sessionScope.memId != null }" >
+					<p class="fl_ri ri_ti" onclick="review_go()">신고하기</p>
+				</c:if>
+			</div>
+					
+			<%-- 신고하기 입력 폼 --%>		
+			<form action="/DoIt/d_resell/reReport.do" method="POST" >
+			<input type="hidden" name="rbook_no" value="${article.rbook_no }"/>	
+			<input type="hidden" name="report_id2" value="${article.rbook_id }"/>	
+				<table id="re_table" cellspacing="0">
+					<colgroup>
+						<col width="60%"><col width="20%"><col width="20%">
+					</colgroup>
+					<tbody>
+						<tr>
+							<td colspan="2">
+								<textarea name="report_content" placeholder="신고사유를 입력하세요..." rows="5" cols="90" maxlength="120"></textarea>
+							</td>
+							<td>
+								<p class="write_bu2"><button type="submit" >신고하기</button></p>
+							</td>	
+						</tr>
+						<tr>
+							<td></td>
+							<td>280byte (한글 140자 이내)</td>
+							<td></td>
+						</tr>
+	
+					</tbody>
+							
+				</table>
+			</form>
 			
 			<%-- 좌측 사진 내용 --%>
 			<div id="reContent_boxleft">

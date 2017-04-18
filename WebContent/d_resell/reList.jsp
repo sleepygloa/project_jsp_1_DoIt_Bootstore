@@ -28,8 +28,12 @@
 		
 			<%-- 개인 판매자 정보 --%>
 			<ul class="sort_top">
-				
 				<li><a>글목록(전체글:${count})</a></li>
+				<li class="rig1">
+					<p><a href="/DoIt/d_resell/reList.do">전체보기</a></p>
+					<p><a href="/DoIt/d_resell/reList.do?rbook_sell_check=0">판매중</a></p>
+					<p><a href="/DoIt/d_resell/reList.do?rbook_sell_check=1">판매완료</a></p>
+				</li>
 			</ul>
 			
 			
@@ -122,7 +126,7 @@
 									
 								</a>
 							</td>
-						
+							
 							<%-- 스크랩 버튼 --%>
 							<td>
 								<form action="reScarp.do">
@@ -156,70 +160,73 @@
 	  		
 	  		
 	  		
-	  			<%-- 글쓰기 버튼 권한... --%>
-              <form id="reList_wbtn">
-                <c:if test="${sessionScope.memId == null }">
-                      <input type="button" onclick="reList_click()" value="글쓰기"/>
-                </c:if>
-                <%-- <c:if test="${sessionScope.memId != null && ${article.d_mech_grade == 2 }">--%>
-                <c:if test="${sessionScope.memId != null}">
-                	<c:if test="${dto.d_mech_grade == 10 }">
-                		<input type="button" onclick="document.location.href='/DoIt/d_resell/reWriteForm.do'"  value="글쓰기"/>
-                	</c:if>
-                   <c:if test="${dto.d_mech_grade == 2 }">
-                      <c:if test="${0<= finish.rbook_finish_count  && finish.rbook_finish_count <=3}">
-                         <c:if test="${4<=sellerCount }">
-                            <input type="button" onclick="reList_WriterClick()"  value="글쓰기"/>
-                         </c:if>
-                         <c:if test="${sellerCount<=3 }">
-                            <input type="button" onclick="document.location.href='/DoIt/d_resell/reWriteForm.do'"  value="글쓰기"/>
-                         </c:if>
-                      </c:if>
-                      <c:if test="${4<= finish.rbook_finish_count  && finish.rbook_finish_count <=7}">
-                          <c:if test="${7<=sellerCount }">
-                            <input type="button" onclick="reList_WriterClick()"  value="글쓰기"/>
-                         </c:if>
-                         <c:if test="${sellerCount<=6 }">
-                            <input type="button" onclick="document.location.href='/DoIt/d_resell/reWriteForm.do'"  value="글쓰기"/>
-                         </c:if>
-                      </c:if>
-                      <c:if test="${8<= finish.rbook_finish_count  && finish.rbook_finish_count <=11}">
-                         <c:if test="${10<=sellerCount }">
-                            <input type="button" onclick="reList_WriterClick()"  value="글쓰기"/>
-                         </c:if>
-                         <c:if test="${sellerCount<=9 }">
-                            <input type="button" onclick="document.location.href='/DoIt/d_resell/reWriteForm.do'"  value="글쓰기"/>
-                         </c:if>
-                      </c:if>
-                      <c:if test="${12<= finish.rbook_finish_count  && finish.rbook_finish_count <=15}">
-                          <c:if test="${16<=sellerCount }">
-                            <input type="button" onclick="reList_WriterClick()"  value="글쓰기"/>
-                         </c:if>
-                         <c:if test="${sellerCount<=15 }">
-                            <input type="button" onclick="document.location.href='/DoIt/d_resell/reWriteForm.do'"  value="글쓰기"/>
-                         </c:if>
-                      </c:if>
-                      
-                   </c:if>
-                   <c:if test="${dto.d_mech_grade == 0}">
-                       <input type="button" onclick="reList_click2()"  value="글쓰기"/>
-                   </c:if>
-                   <c:if test="${dto.d_mech_grade == 1}">
-                       <input type="button" onclick="reList_click3()"  value="글쓰기"/>
-                   </c:if>
-                   
-                </c:if>
-             </form>
-
+	  		<%-- 글쓰기 버튼 권한... --%>
+	  			<form id="reList_wbtn">
+			    	<c:if test="${sessionScope.memId == null }">
+			    			<input type="button" onclick="reList_click()" value="글쓰기"/>
+			    	</c:if>
+			    	<%-- <c:if test="${sessionScope.memId != null && ${article.d_mech_grade == 2 }">--%>
+			    	<c:if test="${sessionScope.memId != null}">
+			    		<c:if test="${dto.d_mech_grade == 2 }">
+			    			<c:if test="${0<= finish.rbook_finish_count  && finish.rbook_finish_count <=3}">
+			    				<c:if test="${4<sellerCount }">
+			    					<input type="button" onclick="reList_WriterClick()"  value="글쓰기"/>
+			    				</c:if>
+			    				<c:if test="${sellerCount<=3 }">
+			    					<input type="button" onclick="document.location.href='/DoIt/d_resell/reWriteForm.do'"  value="글쓰기"/>
+			    				</c:if>
+			    			</c:if>
+			    			<c:if test="${4<= finish.rbook_finish_count  && finish.rbook_finish_count <=7}">
+				    		 	<c:if test="${7<sellerCount }">
+			    					<input type="button" onclick="reList_WriterClick()"  value="글쓰기"/>
+			    				</c:if>
+			    				<c:if test="${sellerCount<=6 }">
+			    					<input type="button" onclick="document.location.href='/DoIt/d_resell/reWriteForm.do'"  value="글쓰기"/>
+			    				</c:if>
+				    		</c:if>
+				    		<c:if test="${8<= finish.rbook_finish_count  && finish.rbook_finish_count <=11}">
+			    				<c:if test="${10<sellerCount }">
+			    					<input type="button" onclick="reList_WriterClick()"  value="글쓰기"/>
+			    				</c:if>
+			    				<c:if test="${sellerCount<=9 }">
+			    					<input type="button" onclick="document.location.href='/DoIt/d_resell/reWriteForm.do'"  value="글쓰기"/>
+			    				</c:if>
+			    			</c:if>
+			    			<c:if test="${12<= finish.rbook_finish_count  && finish.rbook_finish_count <=15}">
+				    		 	<c:if test="${16<sellerCount }">
+			    					<input type="button" onclick="reList_WriterClick()"  value="글쓰기"/>
+			    				</c:if>
+			    				<c:if test="${sellerCount<=15 }">
+			    					<input type="button" onclick="document.location.href='/DoIt/d_resell/reWriteForm.do'"  value="글쓰기"/>
+			    				</c:if>
+				    		</c:if>
+			    			
+			    		</c:if>
+			    		<c:if test="${dto.d_mech_grade == 0}">
+			    			 <input type="button" onclick="reList_click2()"  value="글쓰기"/>
+			    		</c:if>
+			    		<c:if test="${dto.d_mech_grade == 1}">
+			    			 <input type="button" onclick="reList_click3()"  value="글쓰기"/>
+			    		</c:if>
+			    		
+			    	</c:if>
+			    </form>
 			    
 			    
 			<%-- 검색 입력 창 --%>
-			<form action="/DoIt/d_resell/reList.do" class="search_bar">
-				<p>	
-		   			<a><input type="text" name="search" /></a>
-		   			<a><button type="submit">검색</button></a>
-		   		</p>
-	   		</form>
+			<form action="/DoIt/d_resell/reList.do" method="POST" class="search_bar">
+				<p>
+					<a class="select_box">
+						<select name="searchTitle" >
+							<option value="rbook_name" >책제목</option>
+							<option value="rbook_writer" >저자</option>
+							<option value="rbook_company" >출판사</option>
+						</select>
+					</a>
+					<a><input type="text" name="search"/></a>
+					<a><button type="submit" >검색</button></a>
+				</p>
+			</form>
 	   		
 				
 	  		<%-- 댓글이 있을 경우 페이지네이션 --%>

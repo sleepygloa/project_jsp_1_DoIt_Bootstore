@@ -40,7 +40,7 @@
 				<ul class="sort_top">
 					<li><a class="busw1">관심상품(직)</a></li>
 					<li><a class="busw2">낙찰 리스트 [ 경매내역 ]</a></li>
-					<li><a class="busw3">입찰 리스트 [ 경매내역 ]</a></li>
+					<li><a class="busw3" >입찰 리스트 [ 경매내역 ]</a></li>
 				</ul>
 				
 					<%-- 제목 div --%>
@@ -177,10 +177,135 @@
 						
 						<%-- 입찰리스트 끝 --%>
 						<div class="ddas3">
-							내용없음 삽입 요망
+						
+							<!-------------------- 게시판리스트 ------------------------------------ -->
+							<%-- <p>입찰목록(갯수:${count2})</p> --%>
+						
+							<c:if test="${count2 == 0}">
+								<table cellspacing="0">
+									<tr>
+										<td align="center">
+											입찰기록이 없습니다.
+										</td>
+									</tr>
+								</table>
+							</c:if>
+								
+							<%-- 게시글이 있을 경우 --%>
+							<c:if test="${count2 > 0}">
+							<c:forEach var="article2" items="${articleList2}">
+							<div class="border_land"><%-- 외부선 --%>
+								
+								<%-- 파트 제목 --%>
+								<div class="list_taa_2">
+									<p class="fl_le">오늘 날짜 : <span class="bold">${ SimpleDate }</span> | </p>
+									<p class="fl_le">마지막 입찰자 : <span class="co_red">${article2.bid_last_id }</span>님</p>
+								</div>
+								
+								
+								<%-- 파트 내용 --%>
+								<table cellspacing="0" class="ban_list">
+									<colgroup>
+										<col width="10%"><col width="40%"><col width="20%"><col width="30%">
+									</colgroup>
+									<tbody>
+										<tr>
+											<%-- 번호 --%>
+											<td>
+												<p class="bold">
+													<c:out value="${number2}"/>
+								    				<c:set var="number" value="${number2-1}"/>
+												</p>
+											</td>
+											
+											<%-- 제목 내용 --%>
+											<td>
+												<p class="bold">
+													<a href="/DoIt/d_bid/bidContent.do?bid_no=${article2.bid_no}&bid_finish_date=${article2.bid_finish_date}&pageNum2=${currentPage2}">
+									    				${article2.bid_subject}
+									    			</a>
+												</p>
+												<p class="font_s1"> [ (책)${article2.bid_name} ]</p>
+												<p class="font_s1">등록일 : ${article2.bid_reg_date} </p>
+											</td>
+											
+											<%-- 이미지 --%>
+											<td class="text_center">
+												<p>
+													<c:if test="${article2.bid_pic == null}">
+							   							<img src="/DoIt/images/ma_img.png" />
+									    			</c:if>
+									    			<c:if test="${article2.bid_pic != null }">
+							   							<a href="/DoIt/d_bid/bidContent.do?bid_no=${article2.bid_no }&pageNum2=${currentPage2}">
+							   							<img src="/DoIt/bid_pic/${article2.bid_pic}" /></a>
+									    			</c:if>
+												</p>
+											</td>
+											
+											<%--  --%>
+											<td>
+												<p class="bold">판매자 : ${article2.bid_id}</p>
+							  					<p>시작가 : ${article2.bid_price1} 원</p>
+							  					<p class="">현재진행가 : <span class="co_red">${article2.bid_price2}</span> 원</p>
+							  					<p>
+							  						<c:if test="${article2.bid_finish == 0}">
+														<span>판매중</span>
+													</c:if>
+													<c:if test="${article2.bid_finish == 1}">
+														<span>판매완료</span>
+													</c:if>
+							  					</p>
+											</td>
+										</tr>
+									</tbody>
+									
+								</table>
+								</div>
+								</c:forEach>
+										
+					  		</c:if>
+								
+								    
+								
+						   		<form action="/DoIt/d_login/myList.do?cols=dr_resell" id="reList_search" class="search_bar">
+						   			<p>
+							   			<input type="text" name="search2" placeholder="책 제목을 검색하시오."/>
+							   			<button type="submit" >검색</button>
+						   			</p>
+						   		</form>
+						   		
+						  		
+							  	<c:if test="${count > 0}">
+							  	<p class="num_tag"> 
+								   <c:set var="pageCount2" value="${count2 / pageSize2 + ( count2 % pageSize2 == 0 ? 0 : 1)}"/>
+								   <c:set var="pageBlock2" value="${10}"/>
+								   <fmt:parseNumber var="result2" value="${currentPage2 / 10}" integerOnly="true" />
+								   <c:set var="startPage2" value="${result2 * 10 + 1}" />
+								   <c:set var="endPage2" value="${startPage2 + pageBlock2 -1}"/>
+								   <c:if test="${endPage2 > pageCount2}">
+								        <c:set var="endPage2" value="${pageCount2}"/>
+								   </c:if> 
+								   
+								         
+								   	<c:if test="${startPage2 > 10}"> 
+								        <a href="/DoIt/d_bid/bidList.do?pageNum2=${startPage2 - 10 }">[ 이전 ]</a>
+								   	</c:if>
+								   
+									<c:forEach var="i" begin="${startPage2}" end="${endPage2}">
+										<a href="/DoIt/d_bid/bidList.do?pageNum2=${i}">[ ${i} ]</a>
+									</c:forEach>
+									
+								   	<c:if test="${endPage < pageCount}">
+								        <a href="/DoIt/d_bid/bidList.do?pageNum2=${startPage2 + 10}">[ 다음 ]</a>
+								   	</c:if> 
+								</p>
+								</c:if>
+						  		
 							
 						</div>
 						<%-- 입찰리스트 끝 --%>
+						
+						
 						
 						
 					</div><%-- 반복되는 내용 끝 --%>

@@ -19,6 +19,11 @@ public class ReListAction implements SuperAction{
 	public String execute(HttpServletRequest request,HttpServletResponse response)throws Exception{
 		request.setCharacterEncoding("utf-8");
 		
+		String rbook_sell_check = request.getParameter("rbook_sell_check");
+		if(rbook_sell_check == null){
+			rbook_sell_check = "";
+		}
+		
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("memId");
 		
@@ -42,18 +47,19 @@ public class ReListAction implements SuperAction{
 	
 		
 		//검색
+		String searchTitle = request.getParameter("searchTitle");
 		String search = request.getParameter("search");
 		if(search == null){
 			//전체내용
 			count = article.getResellCount();
 			if(count > 0){ //글이 있을때 resellList호출
 				
-				articleList = article.getResellList(startRow, endRow);
+				articleList = article.getResellList(startRow, endRow,rbook_sell_check);
 			}
 		}else{
-			count = article.getResellSearchCount(search);
+			count = article.getResellSearchCount(searchTitle,search);
 			if(count >0){
-				articleList = article.getResellSearch(search);
+				articleList = article.getResellSearch(startRow,endRow,searchTitle,search);
 			}
 		}
 		
@@ -77,6 +83,9 @@ public class ReListAction implements SuperAction{
 		request.setAttribute("dto", dto);
 		request.setAttribute("finish", finish);
 		request.setAttribute("sellerCount", sellerCount);
+		request.setAttribute("searchTitle", searchTitle);
+		request.setAttribute("search", search);
+		
 		return "/d_resell/reList.jsp";
 	}
 }

@@ -4,7 +4,7 @@
 
 /* 마이페이지 - mypage.jsp */
 #mypage_wrap{ max-width:1100px; min-width:1050px; margin:0 auto; overflow:hidden; position:relative; z-index:2 }
-.my_cont_wrap{ min-width:860px; max-width:67%; float:right; overflow:hidden; }
+.my_cont_wrap{ min-width:860px; max-width:67%; float:right; overflow:hidden; margin-bottom:120px;}
 .my_title{ font-size:2em;  }
 .my_sub_title{ font-size:1em; margin-top:25px; border-top:2px solid #283444; padding-top:10px;}
 .my_sub_title span{ display:block; font-size:0.9em; line-height:20px; color:#737373}

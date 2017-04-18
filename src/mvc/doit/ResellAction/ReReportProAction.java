@@ -20,6 +20,7 @@ public class ReReportProAction implements SuperAction{
 		report.setRbook_no(Integer.parseInt(request.getParameter("rbook_no")));
 		report.setReport_id(request.getParameter("report_id"));
 		report.setD_id(request.getParameter("report_id2"));
+		report.setReport_content(request.getParameter("report_content"));
 		
 		HttpSession session = request.getSession();
 		String id =(String)session.getAttribute("memId");

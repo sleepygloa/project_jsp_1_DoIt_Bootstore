@@ -15,120 +15,133 @@ function sellCanCountCheck(){
 }
 </script>
 
-<form action ="/DoIt/d_online/onPurchaseInfo.do?d_bcode=${article.d_bcode}" method="post">
-	<table class="table-border" width="1000px">
-		<tr>
-			<td  colspan="2" width="1000px" height="80px" style="background-color:#e5e5e5; ">
-				<span class="big-font35 d-bold d-left20" >
-					&nbsp;&nbsp;${article.d_bname}
-				</span>
-			</td>
-		</tr>		
-		<tr>
-			<td width="300px">
-				<img src="\DoIt\d_bpic/${article.d_bpic}" width="300px" />
-			</td>
-			<td>
-				<table class="d-margin"  width="80%" style="top:0px">
+<%----------- 상세보기 시작 --------------------%>
+	<article class="my_cont_wrap2">
+		<p class="my_title">
+			온라인 중고서점
+		</p>
+		<p class="my_sub_title">
+			<span>도서를 구매하거나 판매하실 수 있습니다.</span>
+		</p>
+
+
+			<form action ="/DoIt/d_online/onPurchaseInfo.do?d_bcode=${article.d_bcode}" method="post">
+				<table class="table-border" width="1100px">
 					<tr>
-						<td>	
-						<span class="big-font20">			
-				작가 : ${article.d_bauthor}<br />
-				출판사 : ${article.d_bpublisher}<br />
-				장르 : ${article.d_bgenre}<br />
-				종류 : ${article.d_bgenre2}<br />
-				국내외 : ${article.d_blocation}<br />
-				정가  :  ${article.d_bvalue} 원<br />
-						</span>
+						<td  colspan="2" width="1000px" height="80px" style="background-color:#e5e5e5; ">
+							<span class="big-font35 d-bold d-left20" >
+								&nbsp;&nbsp;${article.d_bname}
+							</span>
 						</td>
-					</tr>										
-				</table>				
-				
-				<div class="d-space20"></div>
+					</tr>		
+					<tr>
+						<td width="300px">
+							<img src="\DoIt\d_bpic/${article.d_bpic}" width="300px" />
+						</td>
+						<td>
+							<table class="d-margin"  width="80%" style="top:0px">
+								<tr>
+									<td>	
+									<span class="big-font20">			
+										작가 : ${article.d_bauthor}<br />
+										출판사 : ${article.d_bpublisher}<br />
+										장르 : ${article.d_bgenre}<br />
+										종류 : ${article.d_bgenre2}<br />
+										국내외 : ${article.d_blocation}<br />
+										정가  :  ${article.d_bvalue} 원<br />
+									</span>
+									</td>
+								</tr>										
+							</table>				
+							
+							<div class="d-space20"></div>
+						
+							
+							<table class="d-center big-font20" width="80%" style="border:1px solid gray">
+								<tr >
+									<td colspan="3"  class=" big-font30" style="background-color:#e5e5e5; ">
+										<code>DoIT</code><small>에 팔기 예상가</small>
+									</td>
+								</tr>
+								<tr>
+									<td width="30%">최상</td>
+									<td width="30%">상</td>
+									<td width="30%">중</td>
+								</tr>
+								<tr>
+									<td><span class="co_red">${d_bpurchasevalueS}</span> 원</td>
+									<td>${d_bpurchasevalueA} 원</td>
+									<td>${d_bpurchasevalueB} 원	</td>
+								</tr>
+							</table>
+							
+							<div class="d-space20"></div>
+							
+							<table class="d-center" width="100%">
+								<tr>
+									<td class="d-w-33 d-margin" style="bottom:0px;">				
+										<input class="btn btn-default d-w-100" type="button" value="책  판매"
+											onclick="window.location='/DoIt/d_online/onSellForm.do?d_bno=${d_bno}'" /></td>
 			
-
-				<table class="d-center big-font20" width="80%" style="border:1px solid gray">
-					<tr >
-						<td colspan="3"  class=" big-font30" style="background-color:#e5e5e5; ">
-							<code>DoIT</code><small>에 팔기 예상가</small>
+									<td class="d-w-33 d-margin" style="bottom:0px;">
+										<c:if test="${sellCanCount == 0}">
+											<input class="btn btn-default d-w-100" type="submit" value="구매하기(${sellCanCount})"
+												onclick="javascript:sellCanCountCheck()" />
+										</c:if>
+										<c:if test="${sellCanCount != 0}">
+											<input class="btn btn-default d-w-100" type="submit" value="구매하기(${sellCanCount})" />
+										</c:if>
+			
+									</td>
+									<td class="d-w-33 d-margin" style="bottom:0px;"><input class="btn btn-default d-w-100" type="button" value="취소"
+											onclick="window.location='/DoIt/d_online/onSellBook.do'" /> </td>
+								</tr>
+							</table>				
+					
 						</td>
 					</tr>
 					<tr>
-						<td width="30%">최상</td>
-						<td width="30%">상</td>
-						<td width="30%">중</td>
-					</tr>
-					<tr>
-						<td>${d_bpurchasevalueS} 원</td>
-						<td>${d_bpurchasevalueA} 원</td>
-						<td>${d_bpurchasevalueB} 원	</td>
-					</tr>
-				</table>
-				
-				<div class="d-space20"></div>
-				
-				<table class="d-center" width="100%">
-					<tr>
-						<td class="d-w-33 d-margin" style="bottom:0px;">				
-							<input class="btn btn-default d-w-100" type="button" value="책  판매"
-								onclick="window.location='/DoIt/d_online/onSellForm.do?d_bno=${d_bno}'" /></td>
-
-						<td class="d-w-33 d-margin" style="bottom:0px;">
-							<c:if test="${sellCanCount == 0}">
-								<input class="btn btn-default d-w-100" type="submit" value="구매하기(${sellCanCount})"
-									onclick="javascript:sellCanCountCheck()" />
-							</c:if>
-							<c:if test="${sellCanCount != 0}">
-								<input class="btn btn-default d-w-100" type="submit" value="구매하기(${sellCanCount})" />
-							</c:if>
-
+						<td>
+							<div class="d-space20"></div>
 						</td>
-						<td class="d-w-33 d-margin" style="bottom:0px;"><input class="btn btn-default d-w-100" type="button" value="취소"
-								onclick="window.location='/DoIt/d_online/onSellBook.do'" /> </td>
 					</tr>
-				</table>				
-		
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<div class="d-space20"></div>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2"  style="background-color:#e5e5e5"><p class="big-font30 d-left20">목차</p>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<table width="90%" class="d-margin">
-					<tr><td>${obiDto.d_norder}</td></tr>
+					<tr>
+						<td colspan="2"  style="background-color:#e5e5e5"><p class="big-font30 d-left20">목차</p>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<table width="90%" class="d-margin">
+								<tr><td>${obiDto.d_norder}</td></tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2"  style="background-color:#e5e5e5"><p class="big-font30 d-left20">내용</p>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<table width="90%" class="d-margin">
+								<tr><td>${obiDto.d_nintro}</td></tr>
+							</table>
+						</td>
+					</tr>		
+			
+			
+					
+					
 				</table>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2"  style="background-color:#e5e5e5"><p class="big-font30 d-left20">내용</p>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<table width="90%" class="d-margin">
-					<tr><td>${obiDto.d_nintro}</td></tr>
-				</table>
-			</td>
-		</tr>		
+			
+			
+			
+			</form>
+			
+	</article>
 
 
-		
-		
-	</table>
-
-
-
-</form>
-
-
-
+<!-- header import -->
+<jsp:include page="/footer.jsp"  /> 
 
 
 

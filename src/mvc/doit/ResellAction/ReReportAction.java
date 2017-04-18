@@ -16,6 +16,7 @@ public class ReReportAction implements SuperAction{
 		int rbook_no = Integer.parseInt(request.getParameter("rbook_no"));
 		String pageNum = request.getParameter("pageNum");
 		String report_id2 = request.getParameter("report_id2");
+		String report_content= request.getParameter("report_content");
 		
 		ResellbookDao article = ResellbookDao.getInstance();
 		boolean check = article.reReport(id,rbook_no);
@@ -25,6 +26,9 @@ public class ReReportAction implements SuperAction{
 		request.setAttribute("check", check);
 		request.setAttribute("report_id", id);
 		request.setAttribute("report_id2", report_id2);
+		request.setAttribute("report_content", report_content);
+		
+		
 		return "/d_resell/reReport.jsp";
 		
 	}

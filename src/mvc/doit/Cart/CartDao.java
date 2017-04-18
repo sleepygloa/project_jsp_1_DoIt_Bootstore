@@ -1037,37 +1037,10 @@ public class CartDao implements SuperAction{
 					if(rs.next()){
 						sumdealmoney = acDto.getD_ldealmoney();
 					}
+					}
 				}
 
-				//회원이 관리자에게 돈 지불
-				pstmt = conn.prepareStatement(
-"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, "+acDto.getD_ldealmoney()+",sysdate)");
-				pstmt.setInt(1, acDto.getD_lsender());
-				pstmt.setInt(2, acDto.getD_lreceiver());
-				pstmt.setInt(3, acDto.getD_lbno());
-				pstmt.setString(4, acDto.getD_lbcode());
-				pstmt.setInt(5, 1);
-				pstmt.setInt(6, 3);		 // 송금						
-				pstmt.setInt(7, 1);
-				//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
 
-				pstmt.executeUpdate();
-			
-
-				//회원이 관리자아게 돈 지불하여 회원자신의돈 차감
-				pstmt = conn.prepareStatement(
-"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, -"+acDto.getD_ldealmoney()+",sysdate)");
-				pstmt.setInt(1, acDto.getD_lsender());
-				pstmt.setInt(2, acDto.getD_lsender());
-				pstmt.setInt(3, acDto.getD_lbno());
-				pstmt.setString(4, acDto.getD_lbcode());
-				pstmt.setInt(5, 1);
-				pstmt.setInt(6, 4);		//송금시 차감				
-				pstmt.setInt(7, 1);
-				//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
-
-				pstmt.executeUpdate();
-			}
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -1296,6 +1269,11 @@ public class CartDao implements SuperAction{
 			//----------------------------------------------- 장바구니 이용, d_onBook 온라인서점 에서 회원이 책구매 시 DoIT 전체 수익 table 업뎃 끝 -------------------//
 
 				
+			
+			
+			
+			
+			
 			
 			
 	

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import mvc.doit.Account.AcDao;
 import mvc.doit.Account.AcDto;
 import mvc.doit.Cart.CartDao;
 import mvc.doit.Delivery.DeliveryDto;
@@ -81,6 +82,7 @@ public class CartPayAction implements SuperAction{
 		 	LogDto.setUser_phone3(request.getParameter("user_phone3"));
 		 	
 		 	AcDto acDto = new AcDto(); //아래의 주석코드는 신규 table을 보기 쉽게 모든 column을 다 나열한것이니 우선 적응될 때까지 지우지 맙시다
+		 	AcDao adao = AcDao.getInstance();
 		 	//d_lno seq
 		 	acDto.setD_lsender(br_no); 			//보내는 사람
 		 	acDto.setD_lreceiver(261);		//받는사람
@@ -95,6 +97,7 @@ public class CartPayAction implements SuperAction{
 		 	
 		 	if(buy.equals("cart")){
 		 		int sumdealmoney = cdo.moveCart_delivery(br_no, Ddto, LogDto,acDto, d_id); //결제 관련 코드 포함.
+			 	adao.insertAccountLogB(acDto);
 		 		cdo.D_onBookCartValueAdminToUser(sumdealmoney,br_no,acDto); //doit전체 수익 table 코드
 		 		
 		 	}else if(buy.equals("buy")){
@@ -104,7 +107,10 @@ public class CartPayAction implements SuperAction{
 		 		
 		 		OnDao dao = OnDao.getInstance();
 			 	dao.User_onBuyBook_insert(Ddto, LogDto,acDto, d_bcode, d_id);
-			 	cdo.D_onBookValueUserToAdmin(br_no, acDto); //doit전체 수익 table 코드
+			 	adao.insertAccountLogB(acDto);
+			 	cdo.D_onBookCartValueAdminToUser(acDto.getD_ldealmoney(),br_no,acDto); //doit전체 수익 table 코드
+			 	
+			 	
 		 	}
 			session.removeAttribute("CartP");
 			List CartP = cdo.getHeadCart(br_no, col);

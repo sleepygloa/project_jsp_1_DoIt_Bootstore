@@ -8,9 +8,19 @@
 <%-- <jsp:include page="/d_online/onBookSide.jsp"></jsp:include> --%>
 
 
+<article class="my_cont_wrap2">
+		<p class="my_title">
+			온라인 중고서점
+		</p>
+		<p class="my_sub_title">
+			<span>도서를 구매하거나 판매하실 수 있습니다.</span>
+		</p>
+
+
+
 <!-- 1. 선택된 책에 대한 상세 내용이 이 페이지에서 해결된다. -->
 <form action ="/DoIt/d_cart/headCartList.do?cols=d_sell&buy=buy&d_bcode=${article.d_bcode}" method="post">
-	<table  style="width:1000px; border:1px solid gray" class="d-center">
+	<table  style="width:1100px; border:1px solid gray" class="d-center">
 		<tr>
 			<td colspan="2" width="1000px" height="80px" style="background-color:#e5e5e5">
 				<span class="big-font35 d-bold d-left20">
@@ -26,12 +36,12 @@
 				<table  class="d-margin"  width="80%">
 					<tr>
 						<td class="d-left big-font20">
-				작가&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;${article.d_bauthor}<br />
-				출판사&nbsp;&nbsp;:&nbsp;&nbsp;${article.d_bpublisher}<br />
-				장르&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;${article.d_bgenre}<br />
-				종류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;${article.d_bgenre2}<br />
-				국내외&nbsp;&nbsp;:&nbsp;&nbsp;${article.d_blocation}<br />
-				책등급&nbsp;&nbsp;:&nbsp;&nbsp;${article.d_bgrade}<br />
+							작가&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;${article.d_bauthor}<br />
+							출판사&nbsp;&nbsp;:&nbsp;&nbsp;${article.d_bpublisher}<br />
+							장르&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;${article.d_bgenre}<br />
+							종류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;${article.d_bgenre2}<br />
+							국내외&nbsp;&nbsp;:&nbsp;&nbsp;${article.d_blocation}<br />
+							책등급&nbsp;&nbsp;:&nbsp;&nbsp;${article.d_bgrade}<br />
 						</td>
 					</tr>
 				</table>
@@ -41,7 +51,7 @@
 		</tr>
 		<tr>
 			<td>
-				<table  class="d-margin"  width="80%">
+				<table  class="d-margin"  width="100%">
 					<tr>
 						<td class="d-left">
 						<span class="big-font20">
@@ -94,7 +104,7 @@
 <div class="d-space20"></div>
 			
 <!-- 2. 이 페이지의 책과 관련된 책의 list가 정렬된다. -->
-<table style="width:1000px; background-color:#e5e5e5;border:1px solid gray" class="d-center">	
+<table style="width:1100px; background-color:#e5e5e5;border:1px solid gray" class="d-center">	
 		<tr>
 			<td colspan="2" width="600px">상품정보</td>
 			<td class="d-center">등급</td>
@@ -104,7 +114,7 @@
 </table>
 <!-- -------등록된 책이 없을 때----------------------------- -->		
 <c:if test="${count==0}" >
-<table style="width:1000px;border:1px solid gray;" class="d-center">	
+<table style="width:1100px;border:1px solid gray;" class="d-center">	
 	<tr>
 		<td colspan="6">
 			<div class="d-center">
@@ -117,7 +127,7 @@
 <!-- -------등록된 책이 있을 때----------------------------- -->
 <c:if test="${count!=0}">
 	<c:forEach var="articleList"  items="${articleList}">
-		<table style="width:1000px;border:1px solid gray" class="d-center">			
+		<table style="width:1100px;border:1px solid gray" class="d-center">			
 			<tr>
 				<td width="100px"  height="160px">
 	 				<c:if test="${articleList.getD_bpic() == null}">
@@ -155,4 +165,7 @@
 
 </c:if>	
 
+</article>
 
+<!-- header import -->
+<jsp:include page="/footer.jsp"/> 

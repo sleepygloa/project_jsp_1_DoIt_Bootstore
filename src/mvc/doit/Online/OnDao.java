@@ -834,6 +834,7 @@ public String findSelectToBookFullName(String select) throws Exception{
 
 //-------------사용자 구매-----------사용자 구매-----------사용자 구매-----------사용자 구매----------사용자 구매-----------사용자 구매----------사용자 구매   
  public void User_onBuyBook_insert(DeliveryDto Ddto, LoginDto LogDto, AcDto acDto, int d_bcode, String d_id){
+		int userD_cash = 0;
   		try{
   			conn = getConnection();
   			
@@ -860,35 +861,7 @@ public String findSelectToBookFullName(String select) throws Exception{
   			pstmt.setInt(1, d_bcode);	
   			pstmt.executeUpdate();
   			
-  		//회원이 관리자에게 돈 지불(X장바구니이용)
-			pstmt = conn.prepareStatement(
-"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, "+acDto.getD_ldealmoney()+",sysdate)");
-			pstmt.setInt(1, acDto.getD_lsender()); //회원(책구매자)
-			pstmt.setInt(2, acDto.getD_lreceiver()); //관리자
-			pstmt.setInt(3, acDto.getD_lbno()); //0
-			pstmt.setString(4, acDto.getD_lbcode()); //책코드
-			pstmt.setInt(5, 1); //d_onBook
-			pstmt.setInt(6, 3);	//송금이체							
-			pstmt.setInt(7, 1); //거래완료
-			//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
-
-			pstmt.executeUpdate();
 		
-
-			//회원이 관리자아게 돈 지불하여 회원자신의돈 차감(X장바구니이용)
-			pstmt = conn.prepareStatement(
-"insert into d_log values(account_log.NEXTVAL,?,?,?,?,?,?,?, -"+acDto.getD_ldealmoney()+",sysdate)");
-			pstmt.setInt(1, acDto.getD_lsender());
-			pstmt.setInt(2, acDto.getD_lsender());
-			pstmt.setInt(3, acDto.getD_lbno());
-			pstmt.setString(4, acDto.getD_lbcode());
-			pstmt.setInt(5, 1);
-			pstmt.setInt(6, 4);								
-			pstmt.setInt(7, 1);
-			//관리자에게 회원이 책을 사기때문에 회원->관리자 돈지불
-			
-			pstmt.executeUpdate();
-			
   		}catch(Exception e){
   			e.printStackTrace();
   		}finally{
@@ -904,7 +877,7 @@ public String findSelectToBookFullName(String select) throws Exception{
    int x = 0;
    try{
       conn = getConnection();
-      pstmt = conn.prepareStatement("select count(*) from  d_bdelivery  where d_bbuyer = ? ");
+      pstmt = conn.prepareStatement("select count(*) from  d_bdelivery  where d_bdelibery BETWEEN 20 AND 23 and d_bbuyer = ? ");
       
       pstmt.setString(1, d_id);
       rs = pstmt.executeQuery();
@@ -922,73 +895,74 @@ public String findSelectToBookFullName(String select) throws Exception{
 }       
  
 //-----------사용자 구매 list-----------사용자 구매 list-----------사용자 구매 list ----------사용자 구매 list-----------
- public List User_BuyBookList(int start, int end, String id) throws Exception{
+public List User_BuyBookList(int start, int end, String id) throws Exception{
 
-     List articleList = null;
-     
-     try {
-        conn = getConnection();
-        pstmt = conn.prepareStatement("SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher, d_bauthor, d_bgenre,d_bgenre2, d_blocation,"
-        		+ "d_bregistdate,d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, d_icode, d_id, d_bgradevalue, d_bdate,"
-        		+ "d_bdeliverycode,d_bdelibery, d_bbuyer,d_brecipient,d_brequested ,d_bdeldate, r FROM"
-        		+ "(SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher, d_bauthor, d_bgenre, d_bgenre2, d_blocation,"
-        		+ "d_bregistdate, d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, d_icode, d_id, d_bgradevalue, d_bdate,"
-        		+ "d_bdeliverycode, d_bdelibery, d_bbuyer,d_brecipient,d_brequested ,d_bdeldate , rownum r FROM "
-        		+ "(SELECT b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation,"
-        		+ "b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.d_icode, b.d_id, b.d_bgradevalue, b.d_bdate,"
-        		+ "deli.d_bdeliverycode, deli.d_bdelibery, deli.d_bbuyer, deli.d_brecipient, deli.d_brequested ,deli.d_bdeldate FROM "
-        		+ "d_bdelivery deli, d_onBook b where deli.d_bcode = b.d_bcode and  deli.d_bdelibery BETWEEN 20 AND 23)"
-        		+ "order by d_bdeldate desc) where r >= ? and r <=?");
+    List articleList = null;
+    
+    try {
+       conn = getConnection();
+       pstmt = conn.prepareStatement("SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher, d_bauthor, d_bgenre,d_bgenre2, d_blocation,"
+       		+ "d_bregistdate,d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, d_icode, d_id, d_bgradevalue, d_bdate,"
+       		+ "d_bdeliverycode,d_bdelibery, d_bbuyer,d_brecipient,d_brequested ,d_bdeldate, r FROM"
+       		+ "(SELECT d_bno, d_bcode, d_bname, d_bgrade, d_bpublisher, d_bauthor, d_bgenre, d_bgenre2, d_blocation,"
+       		+ "d_bregistdate, d_bpic, d_bcount, d_bvalue, d_bsellvalue, d_bpurchasevalue, d_icode, d_id, d_bgradevalue, d_bdate,"
+       		+ "d_bdeliverycode, d_bdelibery, d_bbuyer,d_brecipient,d_brequested ,d_bdeldate , rownum r FROM "
+       		+ "(SELECT b.d_bno, b.d_bcode, b.d_bname, b.d_bgrade, b.d_bpublisher, b.d_bauthor, b.d_bgenre, b.d_bgenre2, b.d_blocation,"
+       		+ "b.d_bregistdate, b.d_bpic, b.d_bcount, b.d_bvalue, b.d_bsellvalue, b.d_bpurchasevalue, b.d_icode, b.d_id, b.d_bgradevalue, b.d_bdate,"
+       		+ "deli.d_bdeliverycode, deli.d_bdelibery, deli.d_bbuyer, deli.d_brecipient, deli.d_brequested ,deli.d_bdeldate FROM "
+       		+ "d_bdelivery deli, d_onBook b where deli.d_bcode = b.d_bcode and  deli.d_bdelibery BETWEEN 20 AND 23 and deli.d_bbuyer= ?)"
+       		+ "order by d_bdeldate desc) where r >= ? and r <=?");
 
-        
-//        pstmt.setString(1, id);
-        pstmt.setInt(1, start);
-        pstmt.setInt(2, end);
-        
-        rs = pstmt.executeQuery();
-        
-        if(rs.next()){
-           articleList = new ArrayList();
-           do{
-         	  OnBookDto dto = new OnBookDto();
-         	  dto.setD_bno(rs.getInt("d_bno"));
-               dto.setD_bcode(rs.getInt("d_bcode"));
-               dto.setD_bname(rs.getString("d_bname"));
-               dto.setD_bpublisher(rs.getString("d_bpublisher"));
-               dto.setD_bauthor(rs.getString("d_bauthor"));
-               dto.setD_bgenre(rs.getString("d_bgenre"));
-               dto.setD_bgenre2(rs.getString("d_bgenre2"));
-               dto.setD_blocation(rs.getString("d_blocation"));
-               dto.setD_bregistdate(rs.getString("d_bregistdate"));
-               dto.setD_bpic(rs.getString("d_bpic"));
-               dto.setD_bcount(rs.getInt("d_bcount"));
-               dto.setD_bvalue(rs.getInt("d_bvalue"));
-               dto.setD_id(rs.getString("d_id"));                
-               dto.setD_bgradevalue(rs.getInt("d_bgradevalue"));
-               dto.setD_bdate(rs.getTimestamp("d_bdate"));
+       
+       pstmt.setString(1, id);
+       pstmt.setInt(2, start);
+       pstmt.setInt(3, end);
+       
+       rs = pstmt.executeQuery();
+       
+       if(rs.next()){
+          articleList = new ArrayList();
+          do{
+        	  OnBookDto dto = new OnBookDto();
+        	  dto.setD_bno(rs.getInt("d_bno"));
+              dto.setD_bcode(rs.getInt("d_bcode"));
+              dto.setD_bname(rs.getString("d_bname"));
+              dto.setD_bpublisher(rs.getString("d_bpublisher"));
+              dto.setD_bauthor(rs.getString("d_bauthor"));
+              dto.setD_bgenre(rs.getString("d_bgenre"));
+              dto.setD_bgenre2(rs.getString("d_bgenre2"));
+              dto.setD_blocation(rs.getString("d_blocation"));
+              dto.setD_bregistdate(rs.getString("d_bregistdate"));
+              dto.setD_bpic(rs.getString("d_bpic"));
+              dto.setD_bcount(rs.getInt("d_bcount"));
+              dto.setD_bvalue(rs.getInt("d_bvalue"));
+              dto.setD_id(rs.getString("d_id"));                
+              dto.setD_bgradevalue(rs.getInt("d_bgradevalue"));
+              dto.setD_bdate(rs.getTimestamp("d_bdate"));
 
-               dto.setD_bdeliverycode(rs.getInt("d_bdeliverycode"));
+              dto.setD_bdeliverycode(rs.getInt("d_bdeliverycode"));
 	           dto.setD_bdelibery(rs.getInt("d_bdelibery"));
 	           dto.setD_bbuyer(rs.getString("d_bbuyer"));
 	           dto.setD_brecipient(rs.getString("d_brecipient"));
 	           dto.setD_brequested(rs.getString("d_brequested"));
 	           dto.setD_bdeldate(rs.getTimestamp("d_bdeldate"));
 	           
-              articleList.add(dto);
-           
-                          
-           }while(rs.next());
-        }
-        
-     }catch(Exception e){
-        e.printStackTrace();
-     }finally{
-        if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
-        if( pstmt != null){ try{ pstmt.close(); }catch(SQLException se){} };
-        if( conn != null){ try{ conn.close(); }catch(SQLException se){} };
-     }
-     return articleList;
-  }
+             articleList.add(dto);
+          
+                         
+          }while(rs.next());
+       }
+       
+    }catch(Exception e){
+       e.printStackTrace();
+    }finally{
+       if( rs != null){ try{ rs.close(); }catch(SQLException se){} };
+       if( pstmt != null){ try{ pstmt.close(); }catch(SQLException se){} };
+       if( conn != null){ try{ conn.close(); }catch(SQLException se){} };
+    }
+    return articleList;
+ }
+
  
 //-------------사용자 구매내역리스트 상세페이지----------사용자 구매내역리스트 상세페이지-----------사용자 구매내역리스트 상세페이지-----------사용자 구매내역리스트 상세페이지-----------사용자 구매내역리스트 상세페이지
  public DeliveryDto User_onBuyBookList_detail(int d_bcode) throws Exception{
@@ -1032,7 +1006,7 @@ public int User_BuyBook_CancelFinish_Count(String d_id) throws Exception{
 	 int x = 0;
 	 try{
 	    conn = getConnection();
-	    pstmt = conn.prepareStatement("select  count(*) from d_bdelivery where d_bbuyer = ?");
+	    pstmt = conn.prepareStatement("select  count(*) from d_bdelivery where d_bdelibery=24 and d_bbuyer = ?");
 	    
 	    pstmt.setString(1, d_id);
 	    rs = pstmt.executeQuery();

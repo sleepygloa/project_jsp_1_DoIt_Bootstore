@@ -96,15 +96,15 @@
 			          
 			    
 				<c:if test="${startPage > 10}">
-					<a href="/DoIt/d_login/user_BuyBookList.do?pageNum=${startPage - 10 }">[이전]</a>
+					<a href="/DoIt/d_login/myList.do?cols=dr_cencel&pageNum=${startPage - 10 }">[이전]</a>
 				</c:if>
 			
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<a href="/DoIt/d_login/user_BuyBookList.do?pageNum=${i}">[${i}]</a>
+					<a href="/DoIt/d_login/myList.do?cols=dr_cencel&pageNum=${i}">[${i}]</a>
 				</c:forEach>
 			
 				<c:if test="${endPage < pageCount}">
-					<a href="/DoIt/d_login/user_BuyBookList.do?pageNum=${startPage + 10}">[다음]</a>
+					<a href="/DoIt/d_login/myList.do?cols=dr_cencel&pageNum=${startPage + 10}">[다음]</a>
 				</c:if>
 			</c:if>
 		</div>
