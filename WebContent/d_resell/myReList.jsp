@@ -84,16 +84,16 @@
 							    		</span>
 									</p>
 									<p>판매자 : ${article.rbook_id} [  
-							    		<c:if test="${0<= article.rbook_finish_check  && article.rbook_finish_check <=3}">
+							    		<c:if test="${0<= article.rbook_finish_count  && article.rbook_finish_count <=3}">
 							    		 	씨앗등급
 							    		</c:if>
-							    		<c:if test="${4<= article.rbook_finish_check  && article.rbook_finish_check <=7}">
+							    		<c:if test="${4<= article.rbook_finish_count  && article.rbook_finish_count <=7}">
 							    		 	새싹등급
 							    		</c:if>
-							    		<c:if test="${8<= article.rbook_finish_check  && article.rbook_finish_check <=11}">
+							    		<c:if test="${8<= article.rbook_finish_count  && article.rbook_finish_count <=11}">
 							    		 	실버등급
 							    		</c:if>
-							    		<c:if test="${12<= article.rbook_finish_check  && article.rbook_finish_check <=15}">
+							    		<c:if test="${12<= article.rbook_finish_count }">
 							    		 	골드등급
 							    		</c:if>
 							    		 ]
@@ -145,7 +145,7 @@
 			    					<input type="button" onclick="document.location.href='/DoIt/d_resell/reWriteForm.do'"  value="글쓰기"/>
 			    				</c:if>
 			    			</c:if>
-			    			<c:if test="${4<= article.rbook_finish_check  && article.rbook_finish_check <=7}">
+			    			<c:if test="${4<= article.rbook_finish_count  && article.rbook_finish_count <=7}">
 				    		 	<c:if test="${7<sellerCount }">
 			    					<input type="button" onclick="reList_WriterClick()"  value="글쓰기"/>
 			    				</c:if>
@@ -161,7 +161,7 @@
 			    					<input type="button" onclick="document.location.href='/DoIt/d_resell/reWriteForm.do'"  value="글쓰기"/>
 			    				</c:if>
 			    			</c:if>
-			    			<c:if test="${12<= article.rbook_finish_check  && article.rbook_finish_check <=15}">
+			    			<c:if test="${12<= article.rbook_finish_count  && article.rbook_finish_count <=15}">
 				    		 	<c:if test="${16<sellerCount }">
 			    					<input type="button" onclick="reList_WriterClick()"  value="글쓰기"/>
 			    				</c:if>

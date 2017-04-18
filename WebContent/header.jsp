@@ -21,7 +21,7 @@
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/join.css">
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/Login.css">
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/side_menu.css">
-		<link rel="stylesheet" type="text/css"  href="/DoIt/css/my_page.css?ver=2">
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/my_page.css">
 		
 		<%-- 직접판매 css삽입 --%>
 		
@@ -32,7 +32,7 @@
 		
 		<%-- 직거래 css 삽입 --%>
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/resell.css">
-		<link rel="stylesheet" type="text/css"  href="/DoIt/css/bootstrap-ko.css">
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/bootstrap-ko.css?ver=1">
 			
 		<%-- 고객센터 css 삽입 --%>
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/customer.css">

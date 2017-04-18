@@ -336,9 +336,13 @@
 .auc_cont_sec{ overflow:hidden; margin-top:60px; }
 
 
+/*-----------bid-------------------------------------------------------------------*/
 
-
-
+.bidText{
+	padding: 180px 40px;
+    font-size: 24px;
+    font-weight: 600;
+}
 
 
 

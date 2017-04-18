@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<link rel="stylesheet" type="text/css"  href="/DoIt/css/resell.css?ver=22">
+<link rel="stylesheet" type="text/css"  href="/DoIt/css/resell.css?ver=2323">
 <script type="text/javascript" src="/DoIt/js/script.js"></script>
 
 <%--------------- header include --------------%>
@@ -21,7 +21,8 @@
 	
 		<p style="height:412px; overflow:hidden; border:solid 1px #eaeaea; box-sizing:border-box">
 		<c:if test="${article.bid_pic == null}">
-	   		<img src="/DoIt/images/ex_do.jpg">
+			<img src="/DoIt/images/null.PNG">
+	   		
 		</c:if>
 		<c:if test="${article.bid_pic != null }">
 	   		<img src="/DoIt/bid_pic/${article.bid_pic}">
@@ -120,7 +121,7 @@
 			<c:if test="${0== article1.rbook_finish_count  && article1.rbook_finish_count <=3}">씨앗등급</c:if>
 			<c:if test="${4<= article1.rbook_finish_count  && article1.rbook_finish_count <=7}">새싹등급</c:if>
 			<c:if test="${8<= article1.rbook_finish_count  && article1.rbook_finish_count <=11}">실버등급</c:if>
-			<c:if test="${12<= article1.rbook_finish_count  && article1.rbook_finish_count <=15}">골드등급</c:if>
+			<c:if test="${12<= article1.rbook_finish_count }">골드등급</c:if>
 			<br/>(등급은 직거래판매자 등급과 동일합니다.)</p></li>
 		</ul>
 		
@@ -140,7 +141,7 @@
 	<%-- 상세보기 내용 --%>
 		<section class="auc_cont_sec">
 		
-			<p><img src="/DoIt/images/sang_gu.jpg" style="width:100%;"/>
+			<p><img src="/DoIt/images/sang_gu.JPG" style="width:100%;"/>
 			${article.bid_content}</p>
 		
 		</section>

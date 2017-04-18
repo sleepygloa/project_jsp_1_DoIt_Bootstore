@@ -260,13 +260,13 @@
 										<td>
 										<c:if test="${user_check == null}">
 											<input type="text" name="user_phone1" maxlength="3" class="input_033_2" value="010"/> - 
-											<input type="text" name="user_phone2" maxlength="4" class="input_033_2" /> -
-											<input type="text" name="user_phone3" maxlength="4" class="input_033_2"/>
+											<input type="text" name="user_phone2" maxlength="4" class="input_033_2" value="1111" /> -
+											<input type="text" name="user_phone3" maxlength="4" class="input_033_2" value="1111"/>
 										</c:if>
 										<c:if test="${user_check != null}">
-											<input type="text" name="user_phone1" maxlength="3" value="${LogDto.getUser_phone1()}" class="input_033_2"/> - 
-											<input type="text" name="user_phone2" maxlength="4" value="${LogDto.getUser_phone2()}" class="input_033_2"/> -
-											<input type="text" name="user_phone3" maxlength="4" value="${LogDto.getUser_phone3()}" class="input_033_2" />
+											<input type="text" name="user_phone1" maxlength="3" value="${LogDto.getUser_phone1()}" class="input_033_2"  value="010" /> - 
+											<input type="text" name="user_phone2" maxlength="4" value="${LogDto.getUser_phone2()}" class="input_033_2"  value="1111"/> -
+											<input type="text" name="user_phone3" maxlength="4" value="${LogDto.getUser_phone3()}" class="input_033_2" value="1111" />
 										</c:if>
 										</td>
 									</tr>

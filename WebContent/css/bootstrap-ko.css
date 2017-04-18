@@ -465,9 +465,6 @@ a.text-success:hover,a.text-success:focus {color: #356635;}
 .grid-w2-btn{width:88.7%;}
 
 
-/* fillter hover */
-.my_side_ul > li {width:100%;}
-.my_side_ul > li > a:hover{font-size:0.95em;background-color:#fff0f5;}
 
 .red{color:red};
 

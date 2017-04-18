@@ -58,11 +58,12 @@
 							<c:if test="${article.bid_pic == null}">
 		   						<p>
 		   							<a href="/DoIt/d_bid/bidContent.do?bid_no=${article.bid_no }&pageNum=${currentPage}">
-		   							<img src="/DoIt/images/ex_do.jpg"></a></p>
+		   							
+		   							<img src="/DoIt/images/null.PNG"></a></p>
 				    		</c:if>
 				    		<c:if test="${article.bid_pic != null }">
 		   						<p><a href="/DoIt/d_bid/bidContent.do?bid_no=${article.bid_no }&pageNum=${currentPage}">
-		   						<%-- <img src="/DoIt/bid_pic/${article.bid_pic}">--%><img src="/DoIt/images/ex_do.jpg"></a></p>
+		   						<img src="/DoIt/bid_pic/${article.bid_pic}"></a></p>
 				    		</c:if>
 				    		<%-- 경매 상태 확인 --%>
 				    		<p class="abso_2">

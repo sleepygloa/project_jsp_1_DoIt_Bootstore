@@ -105,9 +105,12 @@ public class ResellbookDao {
 				if(!rbook_sell_check.equals("")){
 				int sellcheck = Integer.parseInt(rbook_sell_check);
 				pstmt = conn.prepareStatement(
-						"select rbook_no,rbook_num,rbook_id,rbook_name,rbook_writer,rbook_company,rbook_price,rbook_content,rbook_pic,rbook_reg_date,rbook_readcount,rbook_sell_check,rbook_subject,rbook_bgread,rbook_price2,rbook_finish_count,r " +
-								"from(select rbook_no,rbook_num,rbook_id,rbook_name,rbook_writer,rbook_company,rbook_price,rbook_content,rbook_pic,rbook_reg_date,rbook_readcount,rbook_sell_check,rbook_subject,rbook_bgread,rbook_price2,rbook_finish_count,rownum r " +
-								"from(select a.rbook_no,a.rbook_num,a.rbook_id,a.rbook_name,a.rbook_writer,a.rbook_company,a.rbook_price,a.rbook_content,a.rbook_pic,a.rbook_reg_date,a.rbook_readcount,a.rbook_sell_check,a.rbook_subject,a.rbook_bgread,a.rbook_price2,b.rbook_finish_count " +
+						"select rbook_no,rbook_num,rbook_id,rbook_name,rbook_writer,rbook_company,rbook_price,rbook_content,rbook_pic,rbook_reg_date,rbook_readcount,"
+						+ "rbook_sell_check,rbook_subject,rbook_bgread,rbook_price2,rbook_finish_count,r " +
+								"from(select rbook_no,rbook_num,rbook_id,rbook_name,rbook_writer,rbook_company,rbook_price,rbook_content,rbook_pic,rbook_reg_date,"
+								+ "rbook_readcount,rbook_sell_check,rbook_subject,rbook_bgread,rbook_price2,rbook_finish_count,rownum r " +
+								"from(select a.rbook_no,a.rbook_num,a.rbook_id,a.rbook_name,a.rbook_writer,a.rbook_company,a.rbook_price,a.rbook_content,a.rbook_pic,"
+								+ "a.rbook_reg_date,a.rbook_readcount,a.rbook_sell_check,a.rbook_subject,a.rbook_bgread,a.rbook_price2,b.rbook_finish_count " +
 								"from resellbook a, resellintro b where a.rbook_id = b.d_id) order by rbook_no  desc  ) where r >= ? and r <= ? and rbook_sell_check = ? ");
 				
 				pstmt.setInt(1, start);
@@ -115,9 +118,12 @@ public class ResellbookDao {
 				pstmt.setInt(3, sellcheck);
 				}else {
 					pstmt = conn.prepareStatement(
-							"select rbook_no,rbook_num,rbook_id,rbook_name,rbook_writer,rbook_company,rbook_price,rbook_content,rbook_pic,rbook_reg_date,rbook_readcount,rbook_sell_check,rbook_subject,rbook_bgread,rbook_price2,rbook_finish_count,r " +
-									"from(select rbook_no,rbook_num,rbook_id,rbook_name,rbook_writer,rbook_company,rbook_price,rbook_content,rbook_pic,rbook_reg_date,rbook_readcount,rbook_sell_check,rbook_subject,rbook_bgread,rbook_price2,rbook_finish_count,rownum r " +
-									"from(select a.rbook_no,a.rbook_num,a.rbook_id,a.rbook_name,a.rbook_writer,a.rbook_company,a.rbook_price,a.rbook_content,a.rbook_pic,a.rbook_reg_date,a.rbook_readcount,a.rbook_sell_check,a.rbook_subject,a.rbook_bgread,a.rbook_price2,b.rbook_finish_count " +
+							"select rbook_no,rbook_num,rbook_id,rbook_name,rbook_writer,rbook_company,rbook_price,rbook_content,rbook_pic,rbook_reg_date,rbook_readcount,"
+							+ "rbook_sell_check,rbook_subject,rbook_bgread,rbook_price2,rbook_finish_count,r " +
+									"from(select rbook_no,rbook_num,rbook_id,rbook_name,rbook_writer,rbook_company,rbook_price,rbook_content,rbook_pic,rbook_reg_date,"
+									+ "rbook_readcount,rbook_sell_check,rbook_subject,rbook_bgread,rbook_price2,rbook_finish_count,rownum r " +
+									"from(select a.rbook_no,a.rbook_num,a.rbook_id,a.rbook_name,a.rbook_writer,a.rbook_company,a.rbook_price,a.rbook_content,a.rbook_pic,"
+									+ "a.rbook_reg_date,a.rbook_readcount,a.rbook_sell_check,a.rbook_subject,a.rbook_bgread,a.rbook_price2,b.rbook_finish_count " +
 									"from resellbook a, resellintro b where a.rbook_id = b.d_id) order by rbook_no  desc  ) where r >= ? and r <= ? ");
 					
 					pstmt.setInt(1, start);
@@ -144,7 +150,7 @@ public class ResellbookDao {
 						dto.setRbook_subject(rs.getString("rbook_subject"));
 						dto.setRbook_bgread(rs.getInt("rbook_bgread"));
 						dto.setRbook_price2(rs.getInt("rbook_price2"));
-						dto.setRbook_finish_check(rs.getInt("rbook_finish_count"));
+						dto.setRbook_finish_count(rs.getInt("rbook_finish_count"));
 						
 						articleList.add(dto);
 					} while (rs.next());
@@ -637,33 +643,35 @@ public class ResellbookDao {
 			}
 			return articleList;
 		}
-//------판매완료 변경-------------------------------------------------------------------------------------------------		
-		public boolean resellFinish(int rbook_no) {
-			Connection conn =null;
-			PreparedStatement pstmt =null;
-			ResultSet rs= null;
-			boolean check = false;	//판매완료전
-			       try{
-			          conn = getConnection();
-			          pstmt = conn.prepareStatement(
-			                "update resellbook set rbook_sell_check = 1 where rbook_no=? ");
-			          pstmt.setInt(1, rbook_no);
-			          pstmt.executeUpdate(); 
-			     
-			          pstmt = conn.prepareStatement(
-			        		  "update /*+ bypass_ujvc */ (select b.rbook_id, b.rbook_no,a.rbook_finish_count, b.rbook_sell_check from resellintro a, resellbook b where a.d_id=b.rbook_id) set rbook_finish_count = rbook_finish_count+1 where rbook_no =?");
-			          pstmt.setInt(1, rbook_no);
-			          pstmt.executeUpdate(); 
-			          check = true; //판매완료
-			          
-			          }catch(Exception e){
-			             e.printStackTrace();
-			          }finally{
-			             if(rs != null){try{rs.close();}catch(SQLException s){}}
-			             if(pstmt != null){try{pstmt.close();}catch(SQLException s){}}
-			             if(conn != null){try{conn.close();}catch(SQLException s){}}
-			          }
-			          return check;
+		//------판매완료 변경-------------------------------------------------------------------------------------------------      
+	      public boolean resellFinish(int rbook_no) {
+	         Connection conn =null;
+	         PreparedStatement pstmt =null;
+	         ResultSet rs= null;
+	         boolean check = false;   //판매완료전
+	                try{
+	                   conn = getConnection();
+	                   pstmt = conn.prepareStatement(
+	                         "update resellbook set rbook_sell_check = 1 where rbook_no=? ");
+	                   pstmt.setInt(1, rbook_no);
+	                   pstmt.executeUpdate(); 
+	              
+	                   pstmt = conn.prepareStatement(
+	                         "merge into resellintro a using(select  b.rbook_id, b.rbook_no,a.rbook_finish_count,"
+	                         + " b.rbook_sell_check from resellintro a, resellbook b where a.d_id=b.rbook_id and "
+	                         + "rbook_no =?)b on(a.d_id = b.rbook_id) when matched then update set rbook_finish_count = rbook_finish_count+1");
+	                   pstmt.setInt(1, rbook_no);
+	                   pstmt.executeUpdate(); 
+	                   check = true; //판매완료
+	                   
+	                   }catch(Exception e){
+	                      e.printStackTrace();
+	                   }finally{
+	                      if(rs != null){try{rs.close();}catch(SQLException s){}}
+	                      if(pstmt != null){try{pstmt.close();}catch(SQLException s){}}
+	                      if(conn != null){try{conn.close();}catch(SQLException s){}}
+	                   }
+	                   return check;
 			      }
 
 		
@@ -715,6 +723,27 @@ public class ResellbookDao {
 				          pstmt.setString(2, report.getReport_id());
 				          pstmt.setString(3, report.getD_id());
 				          pstmt.setString(4, report.getReport_content());
+				          //pstmt.setTimestamp(4, report.getReport_reg_date());
+				          pstmt.executeUpdate();
+				          
+							
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+						if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+						if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+					}
+				}
+//---------신고카운트-----------------------------------------------------------------------------
+				public void reReporCount(String d_id){
+					Connection conn =null;
+					PreparedStatement pstmt =null;
+					ResultSet rs= null;
+					try {
+						 conn = getConnection();
+				          pstmt =conn.prepareStatement("update resellintro set REPORT_COUNT = REPORT_COUNT+1 where d_id=?");
+				          pstmt.setString(1, d_id);
 				          //pstmt.setTimestamp(4, report.getReport_reg_date());
 				          pstmt.executeUpdate();
 				          
@@ -881,7 +910,7 @@ public class ResellbookDao {
 			
 			}
 
-			//---------------------전체글개수----------------------------------------------
+			//---------------------나의 작성개수(판매중)----------------------------------------------
 		      public int getSellerCount(String rbook_id) throws Exception{
 		            Connection conn = null;
 		            PreparedStatement pstmt = null;
@@ -1245,7 +1274,7 @@ public class ResellbookDao {
 						dto.setRbook_subject(rs.getString("rbook_subject"));
 						dto.setRbook_bgread(rs.getInt("rbook_bgread"));
 						dto.setRbook_price2(rs.getInt("rbook_price2"));
-						dto.setRbook_finish_check(rs.getInt("rbook_finish_count"));
+						dto.setRbook_finish_count(rs.getInt("rbook_finish_count"));
 						
 						
 						articleList.add(dto);
@@ -1331,7 +1360,7 @@ public class ResellbookDao {
 							dto.setRbook_subject(rs.getString("rbook_subject"));
 							dto.setRbook_bgread(rs.getInt("rbook_bgread"));
 							dto.setRbook_price2(rs.getInt("rbook_price2"));
-							dto.setRbook_finish_check(rs.getInt("rbook_finish_count"));
+							dto.setRbook_finish_count(rs.getInt("rbook_finish_count"));
 	  						articleList.add(dto);
 	  					} while (rs.next());
 	  				}

@@ -26,7 +26,7 @@ public class ResellbookDto {
 	private Timestamp report_reg_date;	//신고한 시간
 	private String report_content;		//신고내용
 //--join(resellintro)----------------------------------------------
-	private int rbook_finish_check;		//판매완료 개수 
+	private int rbook_finish_count;		//판매완료 개수 
 //--join(resellscrap)-------------------------------------------------------
 	private int scrap_no;		//스크랩 번호	
 	private String d_id;		//회원 아이디
@@ -67,11 +67,11 @@ public class ResellbookDto {
 	public void setScrap_no(int scrap_no) {
 		this.scrap_no = scrap_no;
 	}
-	public int getRbook_finish_check() {
-		return rbook_finish_check;
+	public int getRbook_finish_count() {
+		return rbook_finish_count;
 	}
-	public void setRbook_finish_check(int rbook_finish_check) {
-		this.rbook_finish_check = rbook_finish_check;
+	public void setRbook_finish_count(int rbook_finish_count) {
+		this.rbook_finish_count = rbook_finish_count;
 	}
 	public int getReport_no() {
 		return report_no;

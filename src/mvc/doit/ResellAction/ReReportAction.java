@@ -9,7 +9,7 @@ import mvc.doit.SuperAction.SuperAction;
 
 public class ReReportAction implements SuperAction{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String id= (String)session.getAttribute("memId");
 		

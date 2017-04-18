@@ -10,7 +10,7 @@ import mvc.doit.SuperAction.SuperAction;
 
 public class ReReportProAction implements SuperAction{
 	public String execute(HttpServletRequest request,HttpServletResponse response)throws Exception{
-		
+		request.setCharacterEncoding("utf-8");
 		
 		String pageNum = request.getParameter("pageNum");
 		String report_id2 =request.getParameter("report_id2");
@@ -28,6 +28,7 @@ public class ReReportProAction implements SuperAction{
 
 		ResellbookDao article =ResellbookDao.getInstance();
 		article.reReportInsert(report);
+		article.reReporCount(report_id2);
 		
 		request.setAttribute("rbook_no", report.getRbook_no());
 		request.setAttribute("pageNum", pageNum);
