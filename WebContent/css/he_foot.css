@@ -1,0 +1,93 @@
+@CHARSET "UTF-8";
+
+/* header, footer .css */
+
+/* footer */
+#footer{width:100%; height:250px; background:#202126; clear:both; }
+.fo_lo{padding:35px 0px 35px 0px; width:1100px; border-bottom:solid 2px #363636; margin:0 auto;}
+.ga_in{margin-top:5px; margin:0 auto; width:1100px;}
+.ga_in a{margin-top:15px; display:block;}
+.ga_in a span{color:#908f90; font-size:12px; padding-left:10px; border-left:solid 1px #908f90;}
+.ga_inn{color:white; font-size:14px;}
+.bo_non{padding:0px; border:none;}
+
+/* header.css */
+#common_header{ width:100%; margin-bottom:30px; background:white; position:fixed; background:white; z-index:15}
+
+
+.top_gnb{width:100%; background:black;}
+.gnb_con{ max-width:1100px; min-width:880px; margin:0 auto; overflow:hidden; padding:7px 0px; }
+.top_div{ max-width:600px; overflow:hidden; }
+.top_div li{ float:left; overflow:hidden; color:white; }
+.top_div li a{color:white; padding-left:20px; font-size:0.8em; }
+
+/* 대메뉴 */
+.l_list{ width:100%; min-width:1100px; overflow:hidden; border-bottom:solid 2px black}
+.l_list_ma{ margin:0 auto; width:1100px; overflow:hidden; }
+.l_list_ma li{ float:left; overflow:hidden; margin-right:45px; }
+.l_list_ma li a{ font-size:1.3em; color:black; font-weight:bold; padding:27px 0px; display:inline-block }
+
+/* 카테고리-소메뉴 */
+.s_list_con{ margin:0 auto; width:1100px; overflow:hidden;  padding:33px 0px; }
+.s_list_con ul{ float:left; overflow:hidden; margin-right:50px; }
+.s_list_con ul:nth-child(2){ width:120px; margin-right:12px}
+.s_list_con ul:nth-child(3){ width:145px; }
+.s_list_con ul:nth-child(4){ width:120px; }
+.s_list_con ul:nth-child(5){ width:130px; margin-right:45px; }
+.s_list_con ul:nth-child(6){ width:120px; margin-right:0px; }
+.s_list_con ul li{ margin-bottom:20px; font-size:1em; }
+.s_list_con ul li a{ color:#999999; }
+.s_list_con ul li a:hover{ color:black }
+.gong_back{ border:solid 1px red; width:220px; height:80px; margin-right:50px; float:left; overflow:hidden;}
+
+/* 글쓰기 버튼 */
+.write_bu{ float:right; overflow:hidden; }
+.write_bu button{ background:white; border:solid 1px #283442; font-size:13px; color:#283442; padding:6px 12px; margin:12px 0px;}
+.write_bu button:hover{ background:#283442; color:white; }
+
+/* 리스트 검색바 */
+.search_bar{ text-align:center; margin:35px 0px; clear:both; }
+.search_bar p a{ vertical-align:middle; height:36px; display:inline-block }
+.search_bar p input{ width:220px; height:25px; text-indent:10px; border:solid 2px #bbbbbb;  }
+.search_bar p button{ background:#283442; border:solid 2px #283442; color:white; font-size:1em; width:65px; height:31px; font-size:13px; }
+
+/* 리스트 번호 셋팅 */
+.num_tag{ text-align:center; padding-bottom:30px; width:40%; margin:0 auto; overflow:hidden;}
+.num_tag a{ font-size:14px; display:inline-block; margin:0px 7px; }
+
+
+/* 장바구니 */
+#cart_wrap{ width:100%;  position:fixed; margin-top:68px; z-index:0}
+.cart_start{ width:1380px;  margin:0 auto; }
+.ri_wrap{ background:white; width:110px; float:right;  border:solid 1px #eaeaea; box-sizing:border-box}
+
+.cart_title{ background:#001054; color:white;  font-size:12px; text-align:center; padding:10px 0px; border-bottom:solid 1px #123478}
+.cart_title:hover{ cursor:pointer }
+.cart_title_cont li{ height:20px; list-style-type:square; list-style-position:inside;  padding-left:5px; margin:12px 0px;}
+.cart_title_cont li a{ font-size:11px; }
+.cart_title_cont li a:hover{ cursor:pointer; color:red }
+
+.cart_link{ background:#24468A; height:25px;  padding-left:10px;}
+.cart_link a{ color:white; font-size:12px; }
+
+.cart_lib_list{ padding-bottom:30px; }
+.cart_lib_list li a{ width:76px; height:76px; font-size:12px; display:block; position:relative; margin:0 auto; margin-top:18px; border:solid 1px #eaeaea }
+.cart_lib_list li a:hover{ border:solid 2px black;}
+.cart_lib_list li a span img{ width:76px; height:120px; }
+.cart_lib_list li a span:nth-child(1){ width:76px; height:76px; overflow:hidden; display:inline-block }
+.cart_lib_list li a span:nth-child(2){ width:150px; height:66px; overflow:hidden; line-height:17px; border:solid 2px black; border-left:none;
+background:#E6E6E6;  color:black; position:absolute; top:-2px; left:76px; padding-left:15px; padding-top:10px; }
+.jang_cona{ display:none; }
+
+
+
+
+
+
+
+
+
+
+
+
+

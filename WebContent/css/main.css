@@ -1,0 +1,106 @@
+@CHARSET "UTF-8";
+
+/* 메인페이지 스타일 */
+.main_section{ width:100%; overflow:hidden;  } 
+
+/* 비주얼 */ 
+.visu_wrap_wrap{ width:100%; height:600px; overflow:hidden; position:relative; }
+.visu_wrap{ width:300%; height:600px; overflow:hidden; position:absolute; top:0; left:0 }
+.visu_wrap li{ width:33.33%; float:left; overflow:hidden; background-image:url('/DoIt/images/visu_back.png'); background-size:cover; }
+.visu_wrap li:nth-child(3){ background-image:url('/DoIt/images/visu_back2.png'); }
+.visu_wrap li a{ display:block; width:1100px; height:600px; margin:0 auto; }
+.visu_wrap li a img{ height:600px; }
+
+.visu_but_wrap{ width:100%; position:absolute; left:0px; bottom:0px;}
+.visu_but{ width:1100px; margin:0 auto; overflow:hidden; padding:0px 0px 50px 80px; }
+.visu_but li{ float:left; overflow:hidden; margin-right:10px; }
+.visu_but p{ width:11px; height:11px; border:solid 3px #777; border-radius:15px 15px; }
+.visu_but p:hover, .visu_but a:hover{ cursor:pointer; }
+.visu_but a{ display:block; }
+.visu_but a img{ height:15px;  }
+
+/* 온라인 상위 추천도서 4가지 */
+.online_chuchu{ width:100%; overflow:hidden; background:#F2F2F2; padding:30px 0px 60px 0px; }
+.mar_au{ width:1100px; margin:0 auto; overflow:hidden; }
+.sl_titl{ font-size:18px; font-weight:bold; color:#333; }
+.left_online{ width:800px; overflow:hidden; }
+.left_online header, .left_online section{ width:100%; overflow:hidden; }
+.left_online header{ margin:20px 0px; }
+.ssll_titl li{ float:left; overflow:hidden; }
+.ssll_titl li a{ padding:0px 10px; font-size:13px; color:#666666; font-weight:400; }
+.ssll_titl li a:hover{ color:black; cursor:pointer; font-weight:bold; }
+.ssll_titl li span{font-size:13px; color:#666666; font-weight:400;  }
+
+.chu_part1{ float:left; width:24%; height:280px; overflow:hidden; position:relative; margin-left:1%; }
+.chu_part1_img{ width:100%; overflow:hidden; text-align:center; }
+.chu_part1_img img{ width:100%;  }
+.chu_part1_cont{ border-top:solid 1px #eaeaea; background:white; position:absolute; bottom:-75px; padding:20px; width:78%}
+.chu_part1_cont li p{ max-width:100%; height:20px; overflow:hidden; }
+.chu_part1_cont li:nth-child(1){ font-size: 16px; color: black; font-weight: bold; }
+.chu_part1_cont li:nth-child(2){ font-size: 14px; }
+.chu_part1_cont li:nth-child(3){  font-size: 15px; margin-top: 12px;}
+
+.sang_button{ text-align:center; margin:30px 0px 20px 0px; }
+.sang_button a{ font-size:0.9em; padding:8px 40px; border:solid 2px #e85581; color:#e85581; }
+.sang_button a:hover{ background:#e85581; color:white;}
+.Top_banner{ background:#e85581; position:absolute; top:0; right:12px; width:40px; height:35px; padding-top:5px; }
+.Top_banner li{ color:white; text-align:center; font-size:0.7em; font-weight:bold;}
+
+/* 온라인 판매 상위4권 배너 */
+.right_online{ width:270px; height:324px; margin-top:20px; overflow:hidden; }
+.chu_part1_1_wrap{ width:100%; height:280px; overflow:hidden; position:relative; }
+.chu_part1_1{ overflow:hidden; width:200%; height:100%; position:absolute; left:0; top:0 }
+.chu_part1_1 p{ width:50%; height:100%; }
+.chu_part1_1 p img{ width:100%; }
+
+.chu_part1_1_wrap p:hover{ cursor:pointer }
+.part1_1_pre{width:29px; height:39px; background-image:url('/DoIt/images/btn_set.png'); background-position:0% 0%; position:absolute; left:0; top:120px; opacity:0.7; display:none; }
+.part1_1_nex{width:29px; height:39px; background-image:url('/DoIt/images/btn_set.png'); background-position:100% 0%; position:absolute; right:0%; top:120px; opacity:0.7; display:none; }
+  
+  
+/* 직거래 소개 */
+.bid_wrap{ width:100%; overflow:hidden; height:280px; border-top:solid 1px #e4e4e4; border-bottom:solid 1px #e4e4e4; position:relative; }
+.llllkj1{ width:60%; height:100%; background:#7f7665; position:absolute; top:0; left:0; z-index:-2 }
+.llllkj2{ width:40%; height:100%; background:#f8f8f8; position:absolute; top:0; right:0; z-index:-2}
+.bid_con_wrap{ width:1100px; height:100%; margin:0 auto; overflow:hidden; }
+
+.left_bid{ width:800px; height:100%; float:left; overflow:hidden;  }
+.left_bid_title{ width:200px; height:100%; float:left; overflow:hidden;}
+.left_bid_title li{ margin:25px 0px 35px 20px; color:white; font-size:0.75em; opacity:0.6 }
+.left_bid_title li:hover{ cursor:pointer; opacity:1 }
+.left_bid_c{ float:left; overflow:hidden; width:600px; height:100%; position:relative;}
+.left_bid_c p{ width:100%; height:200px; position:absolute; top:0; left:0;}
+.left_bid_c p img{ width:100%; height:560px; }
+
+.right_bid_wrap{ width:300px; height:100%; float:right; overflow:hidden; }
+
+
+/* 도서관 서비스 파트 */  
+.lib_all_wrap{ width:1100px; margin:0 auto; overflow:hidden; margin-top:60px; }
+.lib_left1{ width:600px; overflow:hidden; }
+.lib_left_title{ font-size:30px; font-weight:bold; color:#333; text-align:center; margin-bottom:15px; margin-bottom:10px;}
+.left_title_img{ text-align:center; width:100%; overflow:hidden; }
+.left_title_img span{ padding-bottom:10px; font-size:1.1em;  }
+.mockup{ width:85%; margin:0 auto; padding:20px 0px; height:315px; overflow:hidden;}
+.mockup img{ width:100%;  }
+.lib_right1{ width:500px; height:600px; overflow:hidden; }
+
+
+/* 고객센터 안내 */
+.doit_go{ width:100%; height:150px; background-image:url('/DoIt/images/go_back.png'); background-size:cover;}
+.doit_go p{ width:1100px; height:100%; margin:0 auto; background-image:url('/DoIt/images/go_back22.png'); background-size:cover; }
+.doit_go p a{ display:block; width:100%; height:100%; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

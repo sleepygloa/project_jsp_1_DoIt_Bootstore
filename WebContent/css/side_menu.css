@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+/* 마이페이지 - side_my */
+	#my_side{ min-width:185px; max-width:30%; float:left; overflow:hidden;}
+	.my_side_ul{ width:100%; overflow:hidden; border-top:2px solid #283444 }
+	.side_top{ background:url(images/back_left.jpg); height:43px; padding-top:25px; font-size:22px; color:#333333; font-weight:bold; padding-left:10px; }
+	.my_side_ul li{ border-bottom:1px solid #e5e5e5; height:37px; line-height:37px; padding-left:10px;}
+	.my_side_ul li a{ font-size:13px; color:#737373; }
+	.my_side_ul li a:hover{ color:black; }
+
+

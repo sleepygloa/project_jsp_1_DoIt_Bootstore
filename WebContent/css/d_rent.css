@@ -1,0 +1,214 @@
+@CHARSET "UTF-8";
+/* 제목 태그 */
+.mid_title{ margin-bottom:20px; }
+.mid_title a{ font-size:17px; font-weight:bold; padding-right:18px }
+.mid_title span{ font-size:13px; color:#3DB7CC }
+
+.so_title{ font-size:14px; font-weight:bold; color:#777; margin:10px 0px; }
+
+.write_tit{ margin:25px 0px; font-size:20px; font-weight:bold }
+.write_tit a{ display:block; font-size:13px; color:#666; margin-top:15px; font-weight:100}
+.write_tit a span{ color:red;  }
+
+/* 상단 정렬 태그 */
+.sort_top{ border-top:solid 1px #ededed; border-bottom:solid 1px #ededed; overflow:hidden; margin:25px 0px;}
+.sort_top li{ float:left; overflow:hidden; margin-right:20px; padding:7px 0px; }
+.sort_top li a{ font-size:13px; color:#444444 }
+.sort_top li a:hover{ color:black; font-weight:bold }
+.rig1{ float:right !important; overflow:hidden; }
+.rig1 p{ float:left; overflow:hidden; margin-left:10px; margin-top:3px}
+
+
+
+/* list 스타일 목록 */ 
+.rent_list{ width:100%; }
+.rent_list td{ padding:10px 0px; border-bottom:solid 1px #ededed}
+.rent_list td:nth-child(1){  width:6%; text-align:center }
+.rent_list td:nth-child(2){ width:14%; padding-left:10px }
+.rent_list td:nth-child(2) p img{ width:110px; height:170px; border:none}
+
+.rent_list td:nth-child(3){ width:65%; padding-left:20px; overflow:hidden; }
+.rent_list td:nth-child(3) p{ width:100%; font-size:14px; padding-bottom:5px; color:#444444; overflow:hidden;  }
+.rent_list td:nth-child(3) p:nth-child(1){ color:#3774B1; font-size:14px }
+.rent_list td:nth-child(3) p:nth-child(2){ font-size:20px; font-weight:bold; color:#3DB7CC }
+.rent_list td:nth-child(3) p:nth-child(5){ width:539px; overflow:hidden; }
+.rent_list td:nth-child(3) p:nth-child(6){ color:#999999; padding-top:40px; }
+
+.rent_list td:nth-child(4){ width:15%; text-align:center;}
+
+.rent_list td:nth-child(4) a{ display:block; border:solid 2px #005E75; padding:7px 0px; width:80%;  font-size:12px; color:#005E75; float:right; overflow:hidden; }
+.rent_list td:nth-child(4) a:hover{ background:#005E75; color:white;  }
+.rent_list td:nth-child(4) a:nth-child(2){ margin-top:15px; }
+
+
+
+/* 썸네일 스타일 목록 */
+.rent_thum{ width:100%; overflow:hidden; }
+.rent_thum div{ overflow:hidden; }
+.thum_li{ width:23%; height:580px; float:left; overflow:hidden; padding:30px 1% 0px 1%; border-bottom:solid 1px #eaeaea;}
+.thum_li p img{ width:100%; height:260px; }
+.rent_thum div p{ font-size:14px; line-height:25px; margin:0 auto;}
+.rent_thum div p:nth-child(2){ margin-top:20px; }
+.rent_thum div p:nth-child(3){ font-weight:bold; font-size:22px; color:#3DB7CC }
+.rent_thum div p:nth-child(6){ width:539px; overflow:hidden; }
+.rent_thum div p:nth-child(7){ font-size:12px; color:#777; margin-top:25px; }
+
+.thum_bu{ width:100%; overflow:hidden; margin-top:15px; }
+.thum_bu a{ display:block; border:solid 2px #005E75; font-size:13px;   padding:8px 20px;}
+.thum_bu a:nth-child(1){ float:left; overflow:hidden; background: #005E75; color:white}
+.thum_bu a:nth-child(2){ float:right; overflow:hidden; color:#005E75;}
+
+/* 상세보기 새창 스타일 */
+.my_cont_wrap2{ width:100%; overflow:hidden; margin:0 auto; padding-bottom:150px;}
+.det_top_ri,.det_top_le{ margin-top:20px; }
+
+/* 도서 상세보기 - 교보문고 벤치마킹  */
+.det_top{ width:100%; overflow:hidden;}
+/* 도서 상세보기 - 좌측 내용*/
+.det_top_le{ width:25%;  float:left; overflow:hidden;}
+.det_top_le li a,.det_top_le li p{display:inline-block; width:100%; }
+.det_top_le li:nth-child(1) a img{ width:100%; }
+.det_top_le li:nth-child(2) a{ margin:11px 0px; }
+.det_top_le li:nth-child(3) a{ padding:8px 0px; border:solid 1px #888; text-align:center; color:#f84450; font-size:13px; box-sizing:border-box; margin:15px 0px; }
+.det_top_le li:nth-child(4) p{ color:#555; font-size:13px; padding:10px 0px; border:1px solid #ddd; text-align:center; box-sizing:border-box}
+.det_top_le li:nth-child(4) p:nth-child(1){ font-weight:bold; font-size:13px; padding:14px 0px;}
+/* 도서 상세보기 - 우측 내용 */
+.det_top_ri{ width:71%;  float:right; overflow:hidden; }
+.det_top_ri li{ padding:35px 0px; border-bottom:solid 1px #eaeaea; overflow:hidden; }
+.det_top_ri li p{ font-size:14px; color:#777; margin:10px 0px; }
+.det_top_ri li p span{ color:red }
+
+.det_top_ri li:nth-child(1){ padding-top:0px; }
+.det_top_ri li:nth-child(1) p:nth-child(1){ color:#3774B1; font-size:13px; margin-top:0px;}
+.det_top_ri li:nth-child(1) p:nth-child(2){ font-size:28px; font-weight:bold; color:#3DB7CC;  }
+
+.title_f{ font-weight:bold; color:black; font-size:16px !important; }
+.ri_cont_c1{ width:60%;  float:left; overflow:hidden; border-right:solid 1px #eaeaea; box-sizing:border-box; }
+.det_top_ri li:nth-child(2) .ri_cont_c1 p:nth-child(2){ font-size:15px; }
+.det_top_ri li:nth-child(2) .ri_cont_c1 p:nth-child(2) span{ font-size:20px; font-weight:bold }
+
+.det_top_ri li:nth-child(2) .ri_cont_c2{ width:35%;  float:right; overflow:hidden; }
+.c2_ri{ float:right; overflow:hidden; width:68%; }
+.det_top_ri li:nth-child(2) .ri_cont_c2 .c2_le{ width:28%; height:100px; overflow:hidden; float:left;}
+.det_top_ri li:nth-child(2) .ri_cont_c2 p:nth-child(2) img{ width:100%; height:100%; }
+
+.basong .basong2{ overflow:hidden; }
+.basong .basong2 a{ display:block; float:left; overflow:hidden; margin-right:10px; }
+.basong .basong2 a:nth-child(2) span{ display:block; color:black; line-height:18px; }
+
+.gu_bu{ clear:both; width:71%; float:right; overflow:hidden; margin:25px 0px; }
+.gu_bu li{ float:left; overflow:hidden;  margin-right:10px; }
+.gu_bu li a{ color:#005E75; font-size:1em; border:solid 2px #3DB7CC; padding:15px 40px; display:block }
+.gu_bu li:nth-child(1) a{ background:#3DB7CC; color:white; }
+.gu_bu li:nth-child(2) a{ color:#3DB7CC }
+.gu_bu li a:hover{ color:white; background:#005E75;  border:solid 2px #005E75;}
+
+/* 도서 상세보기 - 중단 내용 */
+/* 도서 상세보기 - 중단 구분 이미지 */
+.sang_gu{ width:100%; overflow:hidden; margin:30px 0px;  }
+.sang_gu img{ width:100%;  }
+/* 도서 상세보기 - 기부자의 다른 책 리스트 */ 
+.title_cc{ font-size:17px; font-weight:bold; margin-top:10px; }
+.gi_list_book{ width:100%; height:260px; overflow:hidden; margin-top:25px; padding-bottom:25px; }
+.gi_prev,.gi_next,.list_book_wrap{ float:left; overflow:hidden; }
+.gi_prev,.gi_next{ width:7%; text-align:center;  padding-top:10%;}
+
+.list_book_wrap{ width:86%; margin:0 auto; height:100%; overflow:hidden; position:relative }
+.list_book_cont{ width:1000%; height:100%; position:absolute; top:0px; left:0px; }
+.list_book_cont ul{ float:left; width:133px; height:100%; margin-right:30px;}
+.book_cont_ul li{ text-align:center; font-size:13px;}
+.book_cont_ul li:nth-child(1){ width:100%; height:180px; }
+.book_cont_ul li:nth-child(1) img{ width:100%; height:100%; }
+.book_cont_ul li:nth-child(2){ margin:15px 0px; }
+.book_cont_ul li:nth-child(3){ color:#3774B1; font-size:bold }
+
+/* 도서 상세보기 - 책 소개, 내용 출력 */
+.book_cont_wrap{ width:100%; overflow:hidden; }
+.title_cc2{ color:black; font-size:17px; font-weight:bold }
+
+/* 도서상세보기 - 책 소개 내용 파트 */
+
+/* 책내용 파트 상단 탭 */
+.top_tab{ width:100%; border:solid 1px #eaeaea; overflow:hidden;  box-sizing:border-box}
+.top_tab li{ float:left; overflow:hidden; }
+.top_tab li a{ display:block; font-size:14px; color:#777; padding:12px 40px; border-right:solid 1px #eaeaea; box-sizing:border-box }
+.top_tab li a:hover{ color:#3774B1; cursor:pointer; }
+
+.book_cont1{ float:left; overflow:hidden; width:80%; }
+
+/* 간략한 책 구성 요소 */
+.sim_tab{ width:95%; margin:0 auto; overflow:hidden; box-sizing:border-box; border-top:solid 1px #eaeaea; margin:30px 0px;}
+.sim_tab td{ box-sizing:border-box; border-bottom:solid 1px #eaeaea; font-size:13px; height:40px;}
+.sim_tab td:nth-child(1){ width:30%; border-right:solid 1px #eaeaea; text-align:center; }
+.sim_tab td:nth-child(2){ width:70%; padding-left:20px;}
+
+.so_cont li{ font-size:13px; color:black; margin-bottom:10px; }
+.so_part{ margin:30px 0px; }
+.writer_con{ width:88%; padding:10px 30px; font-size:14px; font-weight:bold; border:solid 1px #eaeaea }
+
+/* 도서 상세보기 이벤트 파트 */
+.b_event{ width:100%; overflow:hidden; padding:10px 0px;}
+.b_event li{ float:left; overflow:hidden; width:23%; box-sizing:border-box }
+.b_event li a{ display:block;}
+.b_event li a img{  box-sizing:borer-box; border:solid 1px #eaeaea }
+.b_event li a img:hover{ border:solid 1px #777 }
+.b_event li p:nth-child(1){ margin-top:7px; margin-bottom:25px; }
+.b_event li p:nth-child(2){ margin-bottom:7px; }
+.b_event li p{ font-size:13px;  }
+
+/* 도서상세보기 - 우측 추천 */
+.book_cont2{ float:right; overflow:hidfden; width:20%; }
+.book_ri_1,.book_ri_2,.book_ri_he{ border:solid 1px #eaeaea; box-sizing:border-box }
+.book_ri_1,.book_ri_2{ padding:20px 10px; overflow:hidden; }
+.book_ri_1 ul,.book_ri_2 ul{ overflow:hidden; margin:20px 0px; }
+.book_ri_1 ul li,.book_ri_2 ul li{ margin-bottom:11px; font-size:13px; }
+.book_ri_he{ width:100%; height:300px; overflow:hidden; background:black;  }
+.book_ri_he img{ width:100%;  }
+
+.book1 li:nth-child(1){ width:40%; float:left; overflow:hidden; margin-right:10px;}
+.book1 li:nth-child(1) img{ width:95%; height:82px}
+.book1 p{ width:45%; float:right; overflow:hidden;  }
+.book1 li:nth-child(4){ color:#777 }
+.book1 li:nth-child(5){ color:red; font-weight:bold }
+
+
+/* 도서 상세보기 - 리플 */
+.title_but{ overflow:hidden; width:98%; margin-bottom:20px;}
+.title_but p{ vertical-align:middle }
+
+#re_table{ width:98%; padding:30px 5%; overflow:hidden; background:#f8f8f8; border:solid 1px #eaeaea; box-sizing:border-box; margin-bottom:30px; display:none; }
+.input_r{ width:100%; height:30px; text-indent:10px; }
+#re_table td{ font-size:13px; color:#777}
+#re_table td:nth-child(2){ text-align:right; }
+.write_bu2 button{ border:solid 2px #3DB7CC; color:#3db7cc; background:white; width:90%; height:80px;}
+.write_bu2 button:hover{ background:#3db7cc; color:white; }
+
+.le_ti{ margin:30px 0px 20px 0px; font-weight:bold; font-size:17px; }
+.ri_ti{ border:solid 2px #283442; color:#283442; padding:5px 30px; font-size:15px; margin-top:30px;}
+.ri_ti:hover{ background:#283442; color:white; }
+
+.review_list{ width:98%; overflow:hidden; border-top:solid 2px black}
+.review_list td{ border-bottom:solid 1px #eaeaea; padding:30px 0px; height:90px;}
+.review_list td:nth-child(1) img{ width:70px; height:90px; }
+.review_list td:nth-child(2){ padding-left:20px; }
+.review_cont li{ padding-bottom:10px; font-size:13px; }
+.review_cont li:nth-child(3){ padding-top:10px; }
+.review_cont li span{ color:#3DB7CC }
+
+.det_bot2,.det_bot3{ display:none; }
+
+/* select_box */
+.select_box select{ width:100px; height:31px; }
+
+/* 검색 결과 제목 */
+.sear_title{ padding:10px; margin-bottom:10px; color:#777; font-size:13px; border-top:solid 1px #eaeaea; border-left:solid 1px #eaeaea}
+.sear_title a{ color:red; font-weight:bold; font-size:14px; }
+.sear_title span{ color:red }
+
+
+
+
+
+
+
+

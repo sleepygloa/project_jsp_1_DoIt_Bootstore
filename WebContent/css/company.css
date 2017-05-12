@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+#map{
+	margin:30px;
+}
+
+.addr_title{
+	    margin-top: 45px;
+    padding-bottom: 10px;
+    border-bottom: solid 2px #3db7cc;
+}
+.map_addr{
+	float:left;
+	margin-top:30px;
+}
+.map_addr2{
+	float:right;
+}
+
+.map_addr span {
+    width: 70px;
+    display: inline-block;
+    background: #000;
+    color: white;
+    padding: 2px 10px;
+    margin-right: 10px;
+}

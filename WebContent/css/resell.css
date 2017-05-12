@@ -1,0 +1,353 @@
+@CHARSET "UTF-8";
+
+/*--------------reWriteForm-----------------------------------------*/
+#reWrite_title , #reList_title,#admin_reReportList_title{
+	font-size:26px;
+	text-align:center;
+	font-weight:bold;
+	margin:0 0 34px 0;
+}
+#reWrite_line , #reList_line,#admin_reReportList_line{
+	width:850px;
+	box-sizing: border-box;
+	border:1px solid #000;
+	margin:0 auto;
+}
+#reWrite_wrap{
+	width:850px;
+	margin:0 auto;
+}
+#reWrite_con{
+	font-size:18px;
+}
+#reWrite_con td{
+	height:70px;
+}
+
+#reWrite_con .reWrite_left{
+	width:250px;
+	box-sizing: border-box;
+	padding-left:60px;
+	background-color:#f4f4f4;
+	
+}
+#reWrite_con .reWrite_right{
+	box-sizing: border-box;
+	padding-left:30px;
+}
+
+#reWrite_con .reWrite .input_box{
+	width:400px;
+	height:40px;
+	border:1px solid #C9C9C9;
+}
+
+#reWrite_con .reWrite_right select{
+	width:400px;
+	height:40px;
+	border:1px solid #C9C9C9;
+}
+
+#reWrite_wrap .reWrite_btn{
+	width:150px;
+	height:40px;
+	
+
+}
+
+/*--------------reContent-----------------------------------------*/
+.cont_title_wrap{ width:100%; overflow:hidden; }
+
+/* 신고하기 버튼 */
+.top_res{ width:100%; text-align:right; margin:10px 0px; }
+.top_res input{ font-size:12px; width:80px; height:30px; border:solid 1px black; background:white; box-sizing:border-box }
+.top_res input:hover{ cursor:pointer; color:red; border:solid 1px red }
+
+/* 왼쪽 사진 박스 정렬 */
+#reContent_boxleft{ width:30%; float:left; overflow:hidden; }
+#reContent_boxleft img{ width:100%; }
+
+/* 오른쪽 간단한 글 박스 정렬 */
+#reContent_boxright{ width:65%; float:right; overflow:hidden; padding-bottom:15px; }
+/* 오른쪽 글 상단 1 */
+.reContent_sell{ color:white; background:#FF5E00; display:block; padding:4px 0px; width:60px; text-align:center; font-size:12px;}
+.top_con1 li{ margin-bottom:5px; }
+.top_con1 li:nth-child(2) a{ font-size:14px; width:150px; }
+.top_con1 li a{ display:inline-block; width:70px; }
+.top_con1 li p{ font-weight:bold; font-size:24px; margin:15px 0px;}
+.reCoon{ width:100%; overflow:hidden; margin-top:10px;}
+.reCoon img{ width:100%;  }
+/* 오른쪽 글 상단 2 */
+#reContent_boxright2{ width:65%; float:right; overflow:hidden; padding-top:15px; padding-bottom:30px; border-bottom:solid 2px #BDBDBD }
+.cont_top2 li{ width:100%; margin-bottom:7px;}
+.cont_top2 li a{ display:inline-block; width:100px; font-size:15px; color:black }
+.cont_top2 li span{ font-size:15px; }
+.content_price{ font-size:26px !important;  color:red; }
+
+.warning{ width:100%; font-size:14px; margin-top:30px; font-weight:bold; }
+.admin_butt{ width:65%;  float:right; overflow:hidden; }
+.admin_butt p:nth-child(1){ font-size:15px; color:#EDA900; margin:15px 0px 8px 0px; }
+.admin_butt p{ font-size:13px;  }
+
+#reContent_boxbottom{ width:100%; margin:30px 0px;  }
+#reContent_boxbottom p{ font-size:16px; line-height:24px;  }
+.center{ margin:15px 0px; }
+
+.reply_textarea{
+	width: 700px;
+    height: 60px;
+    vertical-align: bottom;
+}
+.reply_btn{
+	width:135px;
+	height:60px;
+	background: #999;
+    color: #fff;
+}
+/*--------reList--------------------------------------------------------------------*/
+#relist_wrap{
+	width:850px;
+	height:250px;
+	margin-bottom:15px;
+	border-bottom: 1px solid #999;
+}
+#relist_box1, #relist_box2 ,.relist_box2_img{
+	float: left;
+}
+#relist_box3{
+	float:right;
+}
+#relist_box1{
+	
+}
+.relist_box2_img img{
+	width:150px;
+	height:220px;
+	padding:16px 20px 0 20px;
+}
+.relist_box2_text{
+	padding-top:16px;
+	width:700px;
+}
+#reList_paging{
+	text-align: center;
+	padding: 60px 0 30px 0;
+	clear:both;
+}
+#reList_search{
+	text-align: center;
+	padding: 30px;
+}
+#reList_wbtn{
+	float:right;
+	padding: 10px 20px 0 0;
+}
+#finish_box{
+	    position: absolute;
+	    top:2px;
+}
+.finish_box2{
+	position: relative;
+    width: 860px;
+    height: 204px;
+    background-color: rgba(0,0,0,0.15);
+}
+.finish_text{
+	position: relative;
+    top: 100px;
+    left: 52px;
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    display: inline-block;
+    border: 3px solid #fff;
+}
+.rerest {
+    color: #3774B1;
+    font-size: 20px;
+    font-weight: bold;
+}
+.rerest1 {
+    font-size: 14px;
+    /* font-weight: bold; */
+    color: #3DB7CC;
+}
+
+.finish_text a{
+    color: #fff;
+    
+}
+#relist_box3{
+	 text-align: left;
+}
+
+/*--------sellerList---------------------------------------------------------------*/
+.sellerWrap{
+	width:250px;
+	height:400px;
+	border:1px solid #000;
+	margin-right:20px;
+	float:left;
+	text-align: center;
+}
+.sellerPic{
+	width:150px;
+}
+.sellerPage{
+	clear:both;
+	text-align: center;
+}
+.rent_thum .seller_id{
+	font-size:18px;
+	    font-weight: 600;
+}
+.search_bar{
+	text-align: center;
+	padding:30px;
+}
+.num_tag{
+	padding: 20px 0 20px 0;
+	text-align: center;
+}
+.thum_bu{
+	padding-top:30px;
+}
+.seller_text{
+	font-size:14px;
+	margin-top:20px;
+}
+/*--------admin_rereportList------------------------------------------------------------------------*/
+#report_list_wrap{ width:100%; border-bottom:solid 1px black; padding:20px 0px;}
+.wid_he{ display:block; border-right:solid 1px black;  border-left:solid 1px black; padding:4px 15px; font-size:12px; }
+.wid_he:hover{ color:red;  border-right:solid 1px red;  border-left:solid 1px red; }
+.subs_tit{ font-size:14px; margin-bottom:15px; }
+.subs_tit span{ color:red }
+.report_tab{ width:100%;  }
+.report_tab th{ background:#f4f4f4; height:34px; font-size:14px; }
+.report_tab td{ text-align:center; height:34px; border-right:solid 1px #eaeaea; font-size:13px; }
+.report_tab td:nth-child(2), .report_tab th:nth-child(2){ text-align:left; padding-left:40px; }
+
+
+
+/*----------------------sellerContent------------------------------*/
+.seller_cont_wrap{ width:100%; height:350px; overflow:scroll; margin-top:15px; padding-top:15px; border-top:solid 2px #eaeaea}
+.seller_cont_wrap ul{ width:15%; height:330px; float:left; margin-right:1.5%;  }
+.seller_cont_wrap ul li{ margin-bottom:8px; }
+.seller_cont_wrap ul li img{ width:100%; }
+.seller_cont_wrap ul li p{ font-size:12px;  }
+.seller_cont_wrap ul li:nth-child(2) p{ font-size:15px; color:#3DB7CC; font-weight:bold; }
+
+
+
+
+/*--------scrap----------------------------------------------------------------------------*/
+.scrap_text1,.scrap_text2,.scrap_text5{
+	width:100px;
+	text-align: center;
+}
+.scrap_text3{
+	width:180px;
+	text-align: center;
+}
+.scrap_text4,.scrap_text6{
+	width:150px;
+	text-align: center;
+}
+.scrap_btn{
+	
+}
+
+
+
+
+/* 경매 페이지 */
+.auction_wrap{ overflow:hidden; width:100%; }
+.auction_cont{ width:22%; height:420px; float:left; overflow:hidden; padding-right:24px; margin-top:15px; border-bottom:solid 1px #eaeaea; position:relative; }
+.auction_cont li:nth-child(1){ position:relative; }/*사진*/
+.abso_1{ position:absolute; top:10px; left:10px; color:blue; }
+.abso_2{ position:absolute; top:10px; right:10px; background:#FF5E00; padding:6px 12px; }
+.abso_2 span{ color:white; font-size:0.7em;  }
+.auc_part1{ margin-top:20px; overflow:hidden; width:160px; line-height:17px;}
+.auc_part1 p{ font-size:13px; }
+.auc_part2{ margin-top:22px; line-height:19px; }
+.auc_part2 p{ color:#000000; font-size:12px; }
+.auc_part2 a{ color:#666666 }
+.auc_part2 strong{ font-size:18px; color:red; }
+.auc_part2 span{ font-size:12px; color:#a9a9a9; padding-right:10px; }
+.auc_part3{ font-size:14px; color:#333; position:absolute; bottom:10px; left:0px; }
+.s_imag{ width:13px; height:13px; padding-right:4px;}
+.auction_cont li:nth-child(1) img{ width:160px; height:200px; }
+
+/* 경매도서 상세보기 */
+.auc_cont_he{ width:100%; overflow:hidden; }
+.left_auc_img{ width:27%; margin-right:3%; }
+.left_auc_img img{ width:100%; height:100%; }
+
+.right_auc_cont{ width:47%;}
+.auc_con_title1{ width:100%; border-bottom:solid 2px #333; padding-bottom:20px; line-height:29px; }
+.auc_con_title1 li:nth-child(1){ font-size:25px; font-weight:bold; }
+.auc_con_title1 li:nth-child(2){ font-size:12px; color:#999; }
+
+.auc_con_title2{ width:100%; font-size:18px; margin-top:20px; }
+.auc_con_title2 li:nth-child(1){ font-size:16px;  }
+.auc_con_title2 li:nth-child(2){ font-size:15px;  }
+.auc_con_title2 li:nth-child(2) strong{ font-size:18px;  }
+.auc_con_title2 li:nth-child(3){ margin-top:8px; font-size:15px; }
+.auc_con_title2 li:nth-child(3) strong{ font-size:30px;; color:red; }
+
+.auc_con_time{ width:100%; font-size:16px;  }
+.auc_con_time a{ color:#3774B1; font-weight:500; }
+
+.auc_con_deli a{ color:#777; font-size:14px }
+.span_width{ line-height:25px; margin-top:20px; padding-bottom:15px; border-bottom:solid 1px #eaeaea; }
+.span_width span{ display:inline-block; width:130px; font-size:14px; color:#333 }
+
+.auc_con_but1{ width:100%;  overflow:hidden; margin-top:15px; }
+.auc_con_but1 li{  float:left; overflow:hidden;; }
+.auc_con_but1 li:nth-child(1) a{ background:#3DB7CC; color:white;}
+
+
+.Bid_button{ display:block;  padding:10px 40px; margin-right:15px; border:solid 2px #3DB7CC  }
+
+
+.Bid_button{ background:#3DB7CC; color:white; width:148px; height:45px; }
+.auc_con_but1 li a{ display:block; color:#3DB7CC; padding:10px 40px; margin-right:15px; border:solid 2px #3DB7CC  }
+.auc_con_but1 li a:hover, .Bid_button:hover{ background:#005E75; border:solid 2px #005E75; color:white }
+
+.auc_con_but2{ width:100%; overflow:hidden; margin-top:15px; }
+.auc_con_but2 li{ float:left; overflow:hidden; }
+.auc_con_but2 li a{ font-size:12px; display:block; padding:10px 25px; border:solid 1px #333; margin-right:10px; color:#333}
+.auc_con_but2 li a:hover{ color:white; background:#333 }
+
+.right_auc_pan{ width:20%; border:solid 1px #eaeaea; border-right:none; overflow:hidden; }
+.pan_title1{ border-bottom:solid 1px #cfcfcf; color:#333; padding:10px 0px; width:90%; float:right; overflow:hidden; font-size:14px; font-weight:bold }
+.pan_ul{ width:80%; margin:25px 0px; }
+.pan_pan1{ background:#f6f6f6; padding:20px 11px;}
+.pan_pan1 li{ height:80px; padding:0px 10px; float:left; overflow:hidden; }   
+/*--------이 위가 판매자 정보오른쪽---------------------------------------------------------------*/
+.pan_pan1 li:nth-child(1){ border-right:solid 1px #eaeaea; }
+.pan_pan1 li p{ font-size:13px; line-height:20px;}
+.pan_pan2 img{ width:80px; border:solid 1px #eaeaea; }
+.pan_pan2 img:hover{ border:solid 1px red; }
+.pan_pan2 li p{ font-size:13px;}
+.pan_pan2 li p:nth-child(1){ margin-bottom:16px; }
+.pan_pan2 li p select{ width:100%; padding:5px 10px; font-size:12px; margin-top:18px;}
+
+.auc_cont_sec{ overflow:hidden; margin-top:60px; }
+
+
+/*-----------bid-------------------------------------------------------------------*/
+
+.bidText{
+	padding: 180px 40px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+
+
+
+
+
+
+
