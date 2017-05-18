@@ -54,7 +54,13 @@ public class Rent_detailAction implements SuperAction {
 		}
 		request.setAttribute("login_dto", login_dto);
 		
+<<<<<<< HEAD
 
+=======
+		
+		
+		
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 		//기부자가 기부한 다른 도서 출력
 		//List gibuList = rdo.getGibu(login_dto.getD_no());
 		List gibuList = null;

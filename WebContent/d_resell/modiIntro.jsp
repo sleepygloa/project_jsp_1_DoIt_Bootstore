@@ -12,7 +12,11 @@ history.go(-1);
 <%--------------- header include --------------%>
 <jsp:include page="/header.jsp"></jsp:include>
 <%--------------- 사이드 메뉴 include --------------%>
+<<<<<<< HEAD
 <jsp:include page="/d_login/side_my.jsp"></jsp:include>
+=======
+<jsp:include page="/d_resell/side_resell.jsp"></jsp:include>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 
 <article class="my_cont_wrap">
 <p class="my_title">판매자 소개글 변경</p>

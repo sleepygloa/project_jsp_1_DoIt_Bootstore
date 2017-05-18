@@ -45,6 +45,7 @@
 								<td>${ lto.getD_nom_grade() }</td>
 							</tr>
 							<tr>
+<<<<<<< HEAD
                         <td>판매자 권한</td>
                         
                         <c:if test="${ lto.getD_mech_grade() == 0 }">
@@ -71,6 +72,27 @@
                            <td >관리자 권한이 있습니다.</td>
                         </c:if>
                      </tr>
+=======
+								<td>판매자 권한</td>
+								<c:if test="${ lto.getD_mech_grade() == 0  && lto.getD_mech_grade() != 10 }">
+									<td>판매자가 아닙니다.</td>
+								</c:if>
+								<c:if test="${ lto.getD_mech_grade() == 1 }">
+									<td>판매자 승인을 받았습니다.</td>
+								</c:if>
+								<c:if test="${ lto.getD_mech_grade() == 10 }">
+									<td>예외 : [ 관리자 ]</td>
+								</c:if>
+								
+								<td>관리자 등급</td>
+								<c:if test="${ lto.getD_mech_grade() != 10 }">
+									<td >관리자 권한이 없습니다.</td>
+								</c:if>
+								<c:if test="${ lto.getD_mech_grade() == 10 }">
+									<td >관리자 권한이 있습니다.</td>
+								</c:if>
+							</tr>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 							<tr>
 								<td>가입일자</td>
 								<td colspan="3">${ lto.getD_date() }</td>

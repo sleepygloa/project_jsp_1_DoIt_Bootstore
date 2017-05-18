@@ -47,7 +47,11 @@
 						<%-- 직접판매 장바구니 --%>
 		                  <article class="cart_pan" style="display:none">
 		                     <p class="cart_title">직접판매도서</p>
+<<<<<<< HEAD
 		                     <p class="cart_link"><a href="/DoIt/d_online/onSellBook.do">직접판매 List ▶</a></p>
+=======
+		                     <p class="cart_link"><a href="#">직접판매 List ▶</a></p>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 		                     <ul class="cart_lib_list">
 		                        <li>
 		                           

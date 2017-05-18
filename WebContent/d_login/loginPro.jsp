@@ -2,7 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+<<<<<<< HEAD
 <%-- ${d_id}${d_pass}${check}--%>
+=======
+${d_id}${d_pass}${check}
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 
 <!-- ------------------------------controller-------------------------------------- -->
 
@@ -33,5 +37,9 @@
 
 
 <!-- ----check == true 로그인 성공 ------------------------- -->
+<<<<<<< HEAD
 <%-- <meta http-equiv="Refresh" content="0;url=/DoIt/d_login/login.do" >--%>
 <meta http-equiv="Refresh" content="0;url=/DoIt/main.do" >
+=======
+<meta http-equiv="Refresh" content="1;url=/DoIt/d_login/login.do" >
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1

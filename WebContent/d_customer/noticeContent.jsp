@@ -7,6 +7,7 @@
 	
 
 <!-- header import -->
+<<<<<<< HEAD
 <jsp:include page="/header.jsp"></jsp:include>
 
 <%--------------- 사이드 메뉴 include --------------%>
@@ -15,6 +16,15 @@
 
 		<p class="my_title">공지사항 상세보기</p>
 		<p class="my_sub_title"></p>
+=======
+<%@include file="/header.jsp" %>
+<%--------------- 사이드 메뉴 include --------------%>
+	<jsp:include page="/d_customer/side_customer.jsp"></jsp:include>
+	<article class="my_cont_wrap">	
+
+		<p id="reWrite_title">공지사항 상세보기</p>
+		<p id="reWrite_line"></p>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 			<!-- 폼태그 내용이 다넘어감 -->
 						
 			<table id="reWrite_con">
@@ -56,7 +66,11 @@
    
 		 
 		<!-- footer import  -->
+<<<<<<< HEAD
 		<jsp:include page="/footer.jsp"></jsp:include>
+=======
+
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 
 
 

@@ -95,6 +95,7 @@
 			$(this).css("background-position","100% 0%");
 		})
 		
+<<<<<<< HEAD
 		//온라인 판매 추천 도서
 		$(".part1_1_pre").on("click",function(){
 			li1();
@@ -145,6 +146,28 @@
 		setInterval(function(){
 			li4();
 		},10000)
+=======
+		$(".part1_1_pre").on("click",function(){
+			$(".chu_part1_1").css("transition","all 1.2s ease 0s");
+			$(".chu_part1_1").css("left","0px");
+		})
+		$(".part1_1_nex").on("click",function(){
+			$(".chu_part1_1").css("transition","all 1.2s ease 0s");
+			$(".chu_part1_1").css("left","-100%");
+		})
+		
+		//직거래 타이틀 이동
+		$(".left_bid_ti1").on("mouseenter",function(){
+			$(".left_bid_c p").css("transition","all 1.2s ease 0s");
+			$(".left_bid_c p").css("top","0");
+			$(".llllkj1").css("background","#7f7665");
+		})
+		$(".left_bid_ti2").on("mouseenter",function(){
+			$(".left_bid_c p").css("transition","all 1.2s ease 0s");
+			$(".left_bid_c p").css("top","-100%");
+			$(".llllkj1").css("background","#5d0008");
+		})
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 		
 	})
 	
@@ -432,9 +455,13 @@
 	
 	<%-- 도서관 서비스 안내 이미지 --%>
 	<div class="lib_right1 fl_le">
+<<<<<<< HEAD
 		<p style="width:100%; height:280px"><iframe width="100%" height="280px" src="https://www.youtube.com/embed/16iiNF23Z_0?ecver=1&amp;autoplay=1&version=3&loop=1&playlist=AaBbCcDd123
 		&controls=0&showinfo=0&rel=0" frameborder="0" ></iframe></p>
 		<p><img src="/DoIt/images/bimil.PNG" style="width:100%; height:320px;"/></p>
+=======
+		
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 	</div>
 
 </article>

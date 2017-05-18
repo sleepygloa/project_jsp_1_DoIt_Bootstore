@@ -63,6 +63,10 @@
 
 .cart_title{ background:#001054; color:white;  font-size:12px; text-align:center; padding:10px 0px; border-bottom:solid 1px #123478}
 .cart_title:hover{ cursor:pointer }
+<<<<<<< HEAD
+=======
+.cart_title_cont { display:none }
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 .cart_title_cont li{ height:20px; list-style-type:square; list-style-position:inside;  padding-left:5px; margin:12px 0px;}
 .cart_title_cont li a{ font-size:11px; }
 .cart_title_cont li a:hover{ cursor:pointer; color:red }

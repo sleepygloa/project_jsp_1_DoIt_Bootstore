@@ -22,7 +22,11 @@
 											<span>Navigation Bar Link</span>
 											<img src="/DoIt/images/mess_x.png" style="width:30px; height:30px; cursor:pointer"/>
 										</a>
+<<<<<<< HEAD
 										<a href="/DoIt/main.do">User Web Main</a>
+=======
+										<a href="/DoIt/d_login/login.do">User Web Main</a>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 									</p>
 							</article><!--dash_nav-->
 

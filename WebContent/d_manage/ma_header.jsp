@@ -44,11 +44,19 @@
 			
 			//메세지창 제어
 			$(".mess_but").click(function(){
+<<<<<<< HEAD
 				$(".mess_cont").toggle();
 			})
 			
 			$(".x_but").click(function(){
 				$(".mess_cont").toggle();
+=======
+				$(".mess_cont").css("display","block");
+			})
+			
+			$(".x_but").click(function(){
+				$(".mess_cont").css("display","none");
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 			})
 			
 			//이동 링크 제어

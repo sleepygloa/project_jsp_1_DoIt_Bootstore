@@ -114,6 +114,7 @@
 				</table>
   		</c:if>
   		
+<<<<<<< HEAD
   		<%-- 검색 입력 창 --%>
    		<form action="/DoIt/d_bid/myBidBidList.do" class="search_bar">
    			<p>
@@ -121,6 +122,9 @@
 	   			<a><button type="submit" >검색</button></a>
    			</p>
    		</form>
+=======
+  		
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
    		
   			
 		    
@@ -137,6 +141,7 @@
 		   
 		  <p class="num_tag">          
 		   <c:if test="${startPage > 10}">
+<<<<<<< HEAD
 		        <a href="/DoIt/d_bid/bidList.do?pageNum=${startPage - 10 }">[ 이전 ]</a>
 		   </c:if>
 		   
@@ -146,10 +151,31 @@
 			
 		   <c:if test="${endPage < pageCount}">
 		        <a href="/DoIt/d_bid/bidList.do?pageNum=${startPage + 10}">[ 다음 ]</a>
+=======
+		        <a href="/DoIt/d_bid/bidList.do?pageNum=${startPage - 10 }">[이전]</a>
+		   </c:if>
+		   
+			
+			
+			   <c:forEach var="i" begin="${startPage}" end="${endPage}">
+			       <a href="/DoIt/d_bid/bidList.do?pageNum=${i}">[${i}]</a>
+			   </c:forEach>
+			
+		   <c:if test="${endPage < pageCount}">
+		        <a href="/DoIt/d_bid/bidList.do?pageNum=${startPage + 10}">[다음]</a>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 		   </c:if>
 		   </p>
 		</c:if>
   		
+<<<<<<< HEAD
   		
+=======
+  		<%-- 검색 입력 창 --%>
+   		<form action="/DoIt/d_bid/myBidBidList.do" id="reList_search">
+   			<input type="text" name="search" placeholder="책 제목을 검색하시오."/>
+   			<input type="submit" value="검색"/>
+   		</form>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 
 	</article>

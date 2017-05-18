@@ -118,7 +118,11 @@
 			<c:if test="${article1.d_person==1 }">기업회원</c:if>
 			</p>
 			<p>등급 : 
+<<<<<<< HEAD
 			<c:if test="${article1.rbook_finish_count <=3}">씨앗등급</c:if>
+=======
+			<c:if test="${0== article1.rbook_finish_count  && article1.rbook_finish_count <=3}">씨앗등급</c:if>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 			<c:if test="${4<= article1.rbook_finish_count  && article1.rbook_finish_count <=7}">새싹등급</c:if>
 			<c:if test="${8<= article1.rbook_finish_count  && article1.rbook_finish_count <=11}">실버등급</c:if>
 			<c:if test="${12<= article1.rbook_finish_count }">골드등급</c:if>

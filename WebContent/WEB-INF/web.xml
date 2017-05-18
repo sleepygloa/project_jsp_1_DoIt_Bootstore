@@ -5,7 +5,11 @@
 		<servlet-class>mvc.doit.SuperAction.SuperController</servlet-class>
 		<init-param>
 			<param-name>do</param-name>
+<<<<<<< HEAD
 			<param-value>C:\Users\sleep\Documents\workspace\DoIt\WebContent\WEB-INF\properties\do.properties</param-value>
+=======
+			<param-value>C:\Users\seonhokim\Documents\workspace\DoIt\WebContent\WEB-INF\properties\do.properties</param-value>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 		</init-param>
 	</servlet>
 	<servlet-mapping>

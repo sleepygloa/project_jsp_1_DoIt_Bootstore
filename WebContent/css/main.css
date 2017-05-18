@@ -83,7 +83,11 @@
 .left_title_img span{ padding-bottom:10px; font-size:1.1em;  }
 .mockup{ width:85%; margin:0 auto; padding:20px 0px; height:315px; overflow:hidden;}
 .mockup img{ width:100%;  }
+<<<<<<< HEAD
 .lib_right1{ width:500px; height:600px; overflow:hidden; }
+=======
+.lib_right1{ width:500px; height:600px; overflow:hidden; border:solid 1px red; box-sizing:border-box }
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 
 
 /* 고객센터 안내 */

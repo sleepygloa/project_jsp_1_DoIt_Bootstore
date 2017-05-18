@@ -100,7 +100,11 @@
 							    		</span>
 									</p>
 									<p>판매자 : ${article.rbook_id} [  
+<<<<<<< HEAD
 							    		<c:if test="${article.rbook_finish_count <=3}">
+=======
+							    		<c:if test="${0<= article.rbook_finish_count  && article.rbook_finish_count <=3}">
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 							    		 	씨앗등급
 							    		</c:if>
 							    		<c:if test="${4<= article.rbook_finish_count  && article.rbook_finish_count <=7}">
@@ -170,7 +174,11 @@
 			    	<c:if test="${sessionScope.memId != null}">
 			    		<c:if test="${dto.d_mech_grade == 2 }">
 			    			<c:if test="${0<= finish.rbook_finish_count  && finish.rbook_finish_count <=3}">
+<<<<<<< HEAD
 			    				<c:if test="${4<=sellerCount }">
+=======
+			    				<c:if test="${4<sellerCount }">
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 			    					<input type="button" onclick="reList_WriterClick()"  value="글쓰기"/>
 			    				</c:if>
 			    				<c:if test="${sellerCount<=3 }">

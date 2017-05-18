@@ -6,10 +6,14 @@ import javax.servlet.http.HttpSession;
 
 import mvc.doit.Manager.ManDao;
 import mvc.doit.Manager.ManDto;
+<<<<<<< HEAD
 import mvc.doit.Online.OnDao;
 import mvc.doit.Rent.RentDao;
 import mvc.doit.ResellBean.BidbookDao;
 import mvc.doit.ResellBean.ResellbookDao;
+=======
+import mvc.doit.Rent.RentDao;
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 import mvc.doit.SuperAction.SuperAction;
 
 public class ManagerDash implements SuperAction {
@@ -30,9 +34,13 @@ public class ManagerDash implements SuperAction {
 		//session.setAttribute("dashM", mdto);
 		
 		//직접판매물
+<<<<<<< HEAD
 		OnDao odao = OnDao.getInstance();
 		int onlinePa = odao.getD_BSellCount();
 		request.setAttribute("onlinePa", onlinePa);
+=======
+		
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 		
 		//도서관 내용
 		RentDao rdao = RentDao.getInstance();
@@ -43,11 +51,15 @@ public class ManagerDash implements SuperAction {
 		
 		
 		//직거래 / 경매 게시판
+<<<<<<< HEAD
 		ResellbookDao rbdao = ResellbookDao.getInstance();
 		BidbookDao biddao = BidbookDao.getInstance();
 		int resell = rbdao.getResellCount();
 		int resell2 = biddao.getBidCount();
 		request.setAttribute("resellPa", resell + resell2);
+=======
+		
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 		
 		return "/d_manage/manage_dash.jsp";
 	}

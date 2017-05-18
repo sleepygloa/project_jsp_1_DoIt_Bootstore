@@ -32,7 +32,11 @@
 		
 		<%-- 직거래 css 삽입 --%>
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/resell.css">
+<<<<<<< HEAD
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/bootstrap-ko.css">
+=======
+		<link rel="stylesheet" type="text/css"  href="/DoIt/css/bootstrap-ko.css?ver=1">
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 			
 		<%-- 고객센터 css 삽입 --%>
 		<link rel="stylesheet" type="text/css"  href="/DoIt/css/customer.css">
@@ -112,6 +116,7 @@
 				
 				//카테고리 제어
 				$(".l_list").on("mouseenter",function(){
+<<<<<<< HEAD
 					//$(".l_list").stop(true,false);
 					$(".s_list_con").toggle();
 				})
@@ -122,6 +127,16 @@
 				})
 				
 				
+=======
+					$(".l_list").stop(true,false);
+					$(".s_list_con").slideDown();
+				})
+				
+				$(".l_list").on("mouseleave",function(){
+					$(".l_list").stop(true,false);
+					$(".s_list_con").slideUp();
+				})
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 
 				
 			});
@@ -210,11 +225,15 @@
 
 			<section class="l_list" >
 					<ul class="l_list_ma">
+<<<<<<< HEAD
 						<li>
 							<p style="width:220px;">
 								<a href="/DoIt/main.do" style="padding:20px 0px;"><img src="/DoIt/images/logo.png" style="width:200px;"/></a>
 							</p>
 						</li>
+=======
+						<li><p style="border:solid 1px red; width:220px; height:80px;">로고 삽입</p></li>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 						<li><a href="#">회사소개</a></li>
 						<li><a href="/DoIt/d_online/onSellBook.do">온라인중고서점</a></li>
 						<li><a href="/DoIt/d_rent/list_cont.do?view_type=list_cont">DOIT 도서관</a></li>
@@ -223,6 +242,7 @@
 					</ul>
 					
 					<div class="s_list_con" style="display:none">
+<<<<<<< HEAD
 						<p class="gong_back"><img src="/DoIt/images/pat2.jpg" style="width:100%;"/></p>
 						<ul>
 							<li><a href="#">인사말</a></li>
@@ -230,6 +250,15 @@
 							<li><a href="#">C.I 소개</a></li>
 							<li><a href="#">시설현황</a></li>
 							<li><a href="/DoIt/d_company/directions.do">찾아오시는 길</a></li>
+=======
+						<p class="gong_back"></p>
+						<ul>
+							<li><a href="#">인사말</a></li>
+							<li><a href="#">조직도</a></li>
+							<li><a href="#">C.I 소개</a></li>
+							<li><a href="#">시설현황</a></li>
+							<li><a href="#">찾아오시는 길</a></li>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 						</ul>
 						<ul>
 							<!--
@@ -263,6 +292,10 @@
 			</section> <%-- 대메뉴 끝 --%>
 			
 			
+<<<<<<< HEAD
+=======
+			
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 		</header>
 		
 		<div style="height:160px; width:100%;" class="wa"></div>

@@ -4,7 +4,11 @@
 		
 		<footer id="footer">
 				<h1>footer</h1>
+<<<<<<< HEAD
 					<p class="fo_lo"><a href="/DoIt/main.do"><img src="/DoIt/images/logo.png" style="width:20%;"/></a></p>
+=======
+					<p class="fo_lo"><a href="./main.php"><img src="./images/foot_logo.png"/></a></p>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 					
 					<p class="ga_in">
 						<a>

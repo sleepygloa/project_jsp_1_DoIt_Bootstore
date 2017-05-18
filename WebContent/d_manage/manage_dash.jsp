@@ -113,9 +113,15 @@
 					<p class="mana_Stitle" style="width:100%;">보유 도서수</p>
 					<div id="chart044" class="fl_le"></div>
 					<ul class="chart0444 fl_ri" style="text-align:right;">
+<<<<<<< HEAD
 						<li><a>${ onlinePa } 권</a></li>
 						<li><a>${ r_bookCount } 권</a></li>
 						<li><a>${ resellPa } 개</a></li>
+=======
+						<li><a> 권</a></li>
+						<li><a>${ r_bookCount } 권</a></li>
+						<li><a> 권</a></li>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 					</ul>
 					<script>
 						var options = {

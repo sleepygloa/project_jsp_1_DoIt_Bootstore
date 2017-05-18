@@ -9,9 +9,15 @@
 	<article class="mana_side">
 		
 		<%------- 사이드 메뉴 상단 로고 ----%>
+<<<<<<< HEAD
 		<header style="padding-left:10px; padding-top:5px; background:#202126">
 			<p style="width:100%; "><a style="font-size:2em"><span style="font-size:1.8em; color:#fdcd21">Do</span> Doit Book</a></p>
 			<p style="width:100%; "><img src="/DoIt/images/24hour.png"/></p>
+=======
+		<header>
+			<p>로고자리</p>
+			<p>로고2 자리</p>
+>>>>>>> 06e83cdc0212d155692e1e75dda189dd861591c1
 		</header>
 		
 		
